@@ -44,10 +44,10 @@ namespace Swashbuckle.Tests.Swagger
             Assert.IsNotNull(info);
 
             var expected = JObject.FromObject(new
-                {
-                    version = "v1",
-                    title = "Test API",
-                });
+            {
+                version = "v1",
+                title = "Test API",
+            });
             Assert.AreEqual(expected.ToString(), info.ToString());
         }
 
@@ -77,7 +77,7 @@ namespace Swashbuckle.Tests.Swagger
             var basePath = swagger["basePath"];
             Assert.AreEqual("/foobar", basePath.ToString());
         }
-        
+
         [Test]
         public void It_provides_a_description_for_each_path_in_the_api()
         {
@@ -314,18 +314,18 @@ namespace Swashbuckle.Tests.Swagger
         public void It_exposes_config_to_include_additional_info_properties()
         {
             SetUpHandler(c =>
-                {
-                    c.SingleApiVersion("v1", "Test API")
-                        .Description("A test API")
-                        .TermsOfService("Test terms")
-                        .Contact(cc => cc
-                            .Name("Joe Test")
-                            .Url("http://tempuri.org/contact")
-                            .Email("joe.test@tempuri.org"))
-                        .License(lc => lc
-                            .Name("Test License")
-                            .Url("http://tempuri.org/license"));
-                });
+            {
+                c.SingleApiVersion("v1", "Test API")
+                    .Description("A test API")
+                    .TermsOfService("Test terms")
+                    .Contact(cc => cc
+                        .Name("Joe Test")
+                        .Url("http://tempuri.org/contact")
+                        .Email("joe.test@tempuri.org"))
+                    .License(lc => lc
+                        .Name("Test License")
+                        .Url("http://tempuri.org/license"));
+            });
 
             var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
 
@@ -333,23 +333,23 @@ namespace Swashbuckle.Tests.Swagger
             Assert.IsNotNull(info);
 
             var expected = JObject.FromObject(new
+            {
+                version = "v1",
+                title = "Test API",
+                description = "A test API",
+                termsOfService = "Test terms",
+                contact = new
                 {
-                    version = "v1",
-                    title = "Test API",
-                    description = "A test API",
-                    termsOfService = "Test terms",
-                    contact = new
-                    {
-                        name = "Joe Test",
-                        url = "http://tempuri.org/contact",
-                        email = "joe.test@tempuri.org"
-                    },
-                    license = new
-                    {
-                        name = "Test License",
-                        url = "http://tempuri.org/license"
-                    }
-                });
+                    name = "Joe Test",
+                    url = "http://tempuri.org/contact",
+                    email = "joe.test@tempuri.org"
+                },
+                license = new
+                {
+                    name = "Test License",
+                    url = "http://tempuri.org/license"
+                }
+            });
             Assert.AreEqual(expected.ToString(), info.ToString());
         }
 
@@ -420,7 +420,7 @@ namespace Swashbuckle.Tests.Swagger
                 .Select(prop => prop.Name);
 
             CollectionAssert.AreEqual(new[] { "/products", "/products/{id}", "/customers", "/customers/{id}" }, paths);
-       }
+        }
 
         [Test]
         public void It_exposes_config_to_post_modify_the_document()
@@ -453,36 +453,36 @@ namespace Swashbuckle.Tests.Swagger
         {
             SetUpAttributeRoutesFrom(typeof(MultipleApiVersionsController).Assembly);
             SetUpHandler(c =>
-                {
-                    c.MultipleApiVersions(
-                        (apiDesc, targetApiVersion) => SwaggerConfig.ResolveVersionSupportByRouteConstraint(apiDesc, targetApiVersion),
-                        (vc) =>
-                        {
-                            vc.Version("v2", "Test API V2");
-                            vc.Version("v1", "Test API V1");
-                        });
-                });
-            
+            {
+                c.MultipleApiVersions(
+                    (apiDesc, targetApiVersion) => SwaggerConfig.ResolveVersionSupportByRouteConstraint(apiDesc, targetApiVersion),
+                    (vc) =>
+                    {
+                        vc.Version("v2", "Test API V2");
+                        vc.Version("v1", "Test API V1");
+                    });
+            });
+
             // 2.0
             var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v2");
             var info = swagger["info"];
             var expected = JObject.FromObject(new
-                {
-                    version = "v2",
-                    title = "Test API V2",
-                });
+            {
+                version = "v2",
+                title = "Test API V2",
+            });
             Assert.AreEqual(expected.ToString(), info.ToString());
             Assert.IsNotNull(swagger["paths"]["/{apiVersion}/todos"]);
             Assert.IsNotNull(swagger["paths"]["/{apiVersion}/todos/{id}"]);
-            
+
             // 1.0
             swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
             info = swagger["info"];
             expected = JObject.FromObject(new
-                {
-                    version = "v1",
-                    title = "Test API V1",
-                });
+            {
+                version = "v1",
+                title = "Test API V1",
+            });
             Assert.AreEqual(expected.ToString(), info.ToString());
             Assert.IsNotNull(swagger["paths"]["/{apiVersion}/todos"]);
             Assert.IsNull(swagger["paths"]["/{apiVersion}/todos/{id}"]);
@@ -540,6 +540,20 @@ namespace Swashbuckle.Tests.Swagger
             var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
             var path = swagger["paths"]["/subscriptions/{id}/cancel"];
             Assert.IsNotNull(path);
+        }
+
+        [Test]
+        public void It_handles_overloaded_attribute_routes()
+        {
+            SetUpAttributeRoutesFrom(typeof(OverloadedAttributeRoutesController).Assembly);
+
+            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var firstGetOperation = swagger["paths"]["/subscriptions"]["get"];
+            var secondGetOperation = swagger["paths"]["/users"]["get"];
+            var thirdGetOperation = swagger["paths"]["/organisations"]["get"];
+            Assert.AreEqual("OverloadedAttributeRoutes_GetAll", firstGetOperation["operationId"].ToString());
+            Assert.AreEqual("OverloadedAttributeRoutes_GetAll_1", secondGetOperation["operationId"].ToString());
+            Assert.AreEqual("OverloadedAttributeRoutes_GetAll_2", thirdGetOperation["operationId"].ToString());
         }
 
         [Test]
