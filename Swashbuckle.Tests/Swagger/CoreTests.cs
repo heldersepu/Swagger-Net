@@ -548,12 +548,12 @@ namespace Swashbuckle.Tests.Swagger
             SetUpAttributeRoutesFrom(typeof(OverloadedAttributeRoutesController).Assembly);
 
             var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
-            var firstGetOperation = swagger["paths"]["/subscriptions"]["get"];
-            var secondGetOperation = swagger["paths"]["/users"]["get"];
-            var thirdGetOperation = swagger["paths"]["/organisations"]["get"];
-            Assert.AreEqual("OverloadedAttributeRoutes_GetAll", firstGetOperation["operationId"].ToString());
-            Assert.AreEqual("OverloadedAttributeRoutes_GetAll_1", secondGetOperation["operationId"].ToString());
-            Assert.AreEqual("OverloadedAttributeRoutes_GetAll_2", thirdGetOperation["operationId"].ToString());
+            var opIds = new List<string>();
+            foreach (var path in swagger["paths"])
+                foreach (var action in path)
+                    foreach (var op in action)
+                        opIds.Add(op.First()["operationId"].ToString());            
+            Assert.AreEqual(opIds.Count(), opIds.GroupBy(x => x).Count());
         }
 
         [Test]
