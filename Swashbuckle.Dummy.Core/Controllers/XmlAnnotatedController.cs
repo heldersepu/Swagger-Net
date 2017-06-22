@@ -90,6 +90,13 @@ namespace Swashbuckle.Dummy.Controllers
         {
             throw new NotImplementedException();
         }
+
+        [HttpGet]
+        [Route("GetById")]
+        public void GetById(string id = "123456")
+        {
+            throw new NotImplementedException();
+        }
     }
 
     public class Page

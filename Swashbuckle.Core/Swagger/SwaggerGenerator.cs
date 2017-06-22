@@ -208,7 +208,7 @@ namespace Swashbuckle.Swagger
             }
 
             parameter.required = location == "path" || !paramDesc.ParameterDescriptor.IsOptional;
-            parameter.@default = paramDesc.ParameterDescriptor.DefaultValue;
+            parameter.description = paramDesc.Documentation;
 
             var schema = schemaRegistry.GetOrRegister(paramDesc.ParameterDescriptor.ParameterType);
             if (parameter.@in == "body")
@@ -216,6 +216,8 @@ namespace Swashbuckle.Swagger
             else
                 parameter.PopulateFrom(schema);
 
+            if (paramDesc.ParameterDescriptor.DefaultValue != null)
+                parameter.@default = paramDesc.ParameterDescriptor.DefaultValue;
             return parameter;
         }
     }
