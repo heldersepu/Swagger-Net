@@ -22,7 +22,7 @@ namespace Swashbuckle.Tests
 
         private string _routeTemplate;
 
-        protected HttpMessageHandlerTestBase(string routeTemplate) 
+        protected HttpMessageHandlerTestBase(string routeTemplate)
         {
             _routeTemplate = routeTemplate;
         }
@@ -54,7 +54,7 @@ namespace Swashbuckle.Tests
         {
             SetUpDefaultRoutesFor(new[] { typeof(TController) });
         }
-        
+
         protected void SetUpCustomRouteFor<TController>(string routeTemplate)
             where TController : ApiController
         {
@@ -67,7 +67,7 @@ namespace Swashbuckle.Tests
 
         protected void SetUpAttributeRoutesFrom(Assembly assembly)
         {
-            // assembly isn't used but requiring it ensures that it's loaded and, therefore, scanned for attribute routes 
+            // assembly isn't used but requiring it ensures that it's loaded and, therefore, scanned for attribute routes
             Configuration.MapHttpAttributeRoutes();
             Configuration.EnsureInitialized();
         }

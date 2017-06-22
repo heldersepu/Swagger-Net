@@ -26,7 +26,6 @@ namespace Swashbuckle.Tests.SwaggerUi
         {
             var content = GetContentAsString(TEMP_URI.INDEX);
 
-            StringAssert.Contains("rootUrl: 'http://tempuri.org:80'", content);
             StringAssert.Contains("discoveryPaths: arrayFrom('swagger/docs/v1')", content);
             StringAssert.Contains("swagger-ui-container", content);
         }
@@ -34,7 +33,7 @@ namespace Swashbuckle.Tests.SwaggerUi
         [Test]
         public void It_serves_the_embedded_swagger_ui_with_ending_slash()
         {
-            var content = GetContentAsString("http://tempuri.org/swagger/ui/index/");
+            var content = GetContentAsString(TEMP_URI.INDEX);
 
             StringAssert.Contains("swagger-ui-container", content);
         }
@@ -70,7 +69,7 @@ namespace Swashbuckle.Tests.SwaggerUi
             string customTitle = string.Format("TEST_TITLE_{0}", Guid.NewGuid());
             SetUpHandler(c => { c.DocumentTitle(customTitle); });
 
-            var content = GetContentAsString("http://tempuri.org/swagger/ui/index");
+            var content = GetContentAsString(TEMP_URI.INDEX);
             StringAssert.Contains(customTitle, content);
         }
 

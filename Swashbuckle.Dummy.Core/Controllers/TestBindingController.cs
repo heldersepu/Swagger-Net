@@ -6,10 +6,11 @@ using System.Web.Http.Metadata;
 
 namespace Swashbuckle.Dummy.Controllers
 {
+
     public class TestBindingController : ApiController
     {
         [Route("{id}")]
-        public string Get([Bind]string id)
+        public string Get([FromUri]string id)
         {
             return "abc";
         }

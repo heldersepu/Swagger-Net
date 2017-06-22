@@ -498,7 +498,7 @@ namespace Swashbuckle.Tests.Swagger
         public void It_handles_huge_class()
         {
             SetUpDefaultRouteFor<ProductsController>();
-            SetUpHandler(c => c.DocumentFilter<HugeClassDocumentFilter>());
+            //SetUpHandler(c => c.DocumentFilter<HugeClassDocumentFilter>());
 
             var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
 
