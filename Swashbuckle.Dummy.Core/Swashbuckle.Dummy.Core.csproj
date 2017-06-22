@@ -104,6 +104,7 @@
     <Compile Include="SwaggerExtensions\AssignOAuth2SecurityRequirements.cs" />
     <Compile Include="SwaggerExtensions\DescendingAlphabeticComparer.cs" />
     <Compile Include="SwaggerExtensions\AddGetMessageExamples.cs" />
+    <Compile Include="SwaggerExtensions\HugeClassDocumentFilter.cs" />
     <Compile Include="SwaggerExtensions\InternalServerErrorResponseOperationFilter.cs" />
     <Compile Include="SwaggerExtensions\RecursiveCallSchemaFilter.cs" />
     <Compile Include="SwaggerExtensions\SupportFlaggedEnums.cs" />

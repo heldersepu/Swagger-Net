@@ -495,6 +495,17 @@ namespace Swashbuckle.Tests.Swagger
         }
 
         [Test]
+        public void It_handles_huge_class()
+        {
+            SetUpDefaultRouteFor<ProductsController>();
+            SetUpHandler(c => c.DocumentFilter<HugeClassDocumentFilter>());
+
+            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+
+            Assert.IsNotNull(swagger);
+        }
+
+        [Test]
         public void It_handles_additional_route_parameters()
         {
             // i.e. route params that are not included in the action signature
