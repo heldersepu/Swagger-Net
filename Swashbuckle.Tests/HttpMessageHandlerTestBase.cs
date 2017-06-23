@@ -98,8 +98,15 @@ namespace Swashbuckle.Tests
 
         protected string GetContentAsString(string uri)
         {
-            var responseMessage = Get(uri);
-            return responseMessage.Content.ReadAsStringAsync().Result;
+            try
+            {
+                var responseMessage = Get(uri);
+                return responseMessage.Content.ReadAsStringAsync().Result;
+            }
+            catch (Exception e)
+            {
+                return e.ToString();
+            }
         }
     }
 }
