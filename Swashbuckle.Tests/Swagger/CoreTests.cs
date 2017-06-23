@@ -578,10 +578,9 @@ namespace Swashbuckle.Tests.Swagger
         {
             SetUpAttributeRoutesFrom(typeof(TestBindingController).Assembly);
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             Assert.IsNotNull(swagger["paths"]["/NoBind"]);
             Assert.IsNotNull(swagger["paths"]["/{id}"]);
         }
-
     }
 }

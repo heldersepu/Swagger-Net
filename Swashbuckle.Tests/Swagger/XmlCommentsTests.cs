@@ -84,7 +84,7 @@ namespace Swashbuckle.Tests.Swagger
         public void It_documents_controllers()
         {
             var key = "XmlAnnotated";
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
 
             var tag = swagger.SelectToken($"$.tags[?(@.name == '{key}')]");
             Assert.IsNotNull(tag);
@@ -130,7 +130,7 @@ namespace Swashbuckle.Tests.Swagger
         [Test]
         public void It_documents_schema_default_parameters()
         {
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
 
             var parameters = swagger["paths"]["/xmlannotated/GetById"]["get"]["parameters"];
             Assert.IsNotNull(parameters);
@@ -271,7 +271,7 @@ namespace Swashbuckle.Tests.Swagger
                 c.DocumentFilter<ApplyDocumentVendorExtensions>();
             });
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var definitions = swagger["definitions"];
             Assert.IsNotNull(definitions["SubAccount"]["description"]);
             Assert.IsNotNull(definitions["MockSequence"]["description"]);
