@@ -498,6 +498,7 @@ namespace Swashbuckle.Tests.Swagger
         public void It_handles_huge_class()
         {
             SetUpDefaultRouteFor<ProductsController>();
+            //  TODO: enable bug is fix in Newtonsoft.Json
             //SetUpHandler(c => c.DocumentFilter<HugeClassDocumentFilter>());
 
             var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
@@ -567,8 +568,6 @@ namespace Swashbuckle.Tests.Swagger
         [Test]
         public void It_errors_on_multiple_actions_with_same_path_and_method()
         {
-            //TODO: Assert.Throws  NotSupportedException
-
             SetUpDefaultRouteFor<ConflictingActionsController>();
 
             Assert.Throws<NotSupportedException>(() => GetContent<JObject>(TEMP_URI.DOCS));
