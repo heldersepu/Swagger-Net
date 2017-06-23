@@ -41,12 +41,13 @@ namespace Swashbuckle.Application
             };
             _rootUrlResolver = rootUrlResolver;
 
+            _thisAssembly = GetType().Assembly;
             MapPathsForSwaggerUiAssets();
 
             // Use some custom versions to support config and extensionless paths
-            CustomAsset("index", _thisAssembly, "Swashbuckle.SwaggerUi.CustomAssets.index.html", isTemplate: true);
-            CustomAsset("css/screen-css",_thisAssembly, "Swashbuckle.SwaggerUi.CustomAssets.screen.css");
-            CustomAsset("css/typography-css", _thisAssembly, "Swashbuckle.SwaggerUi.CustomAssets.typography.css");
+            CustomAsset("index", "Swashbuckle.SwaggerUi.CustomAssets.index.html", isTemplate: true);
+            CustomAsset("css/screen-css", "Swashbuckle.SwaggerUi.CustomAssets.screen.css");
+            CustomAsset("css/typography-css", "Swashbuckle.SwaggerUi.CustomAssets.typography.css");
         }
 
         public void InjectStylesheet(string resourceName, string media = "screen", bool isTemplate = false)
@@ -171,8 +172,7 @@ namespace Swashbuckle.Application
 
         private void MapPathsForSwaggerUiAssets()
         {
-            var thisAssembly = GetType().Assembly;
-            foreach (var resourceName in thisAssembly.GetManifestResourceNames())
+            foreach (var resourceName in _thisAssembly.GetManifestResourceNames())
             {
                 if (resourceName.Contains("Swashbuckle.SwaggerUi.CustomAssets")) continue; // original assets only
 
@@ -180,7 +180,7 @@ namespace Swashbuckle.Application
                     .Replace("\\", "/")
                     .Replace(".", "-"); // extensionless to avoid RUMMFAR
 
-                _pathToAssetMap[path] = new EmbeddedAssetDescriptor(thisAssembly, resourceName, path == "index");
+                _pathToAssetMap[path] = new EmbeddedAssetDescriptor(_thisAssembly, resourceName, path == "index");
             }
         }
     }
