@@ -97,12 +97,15 @@ namespace $rootnamespace$
                         //
                         //c.OrderActionGroupsBy(new DescendingAlphabeticComparer());
 
-                        // If you annotate Controllers and API Types with
-                        // Xml comments (http://msdn.microsoft.com/en-us/library/b2s063f7(v=vs.110).aspx), you can incorporate
-                        // those comments into the generated docs and UI. You can enable this by providing the path to one or
+                        // If you annotate Controllers and API Types with Xml comments:
+                        // http://msdn.microsoft.com/en-us/library/b2s063f7(v=vs.110).aspx
+                        // those comments will be incorporated into the generated docs and UI.
+                        // Just make sure your comment file(s) have extension .XML
+                        // You can add individual files by providing the path to one or
                         // more Xml comment files.
                         //
-                        //c.IncludeXmlComments(GetXmlCommentsPath());
+                        //c.IncludeXmlComments(AppDomain.CurrentDomain.BaseDirectory + "file.ext");
+						c.IncludeAllXmlComments(thisAssembly, AppDomain.CurrentDomain.BaseDirectory);
 
                         // Swashbuckle makes a best attempt at generating Swagger compliant JSON schemas for the various types
                         // exposed in your API. However, there may be occasions when more control of the output is needed.
