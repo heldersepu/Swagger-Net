@@ -351,7 +351,6 @@ namespace Swashbuckle.Tests.Swagger
             {
                 c.MapType<Guid>(() => new Schema { type = "string", format = "guid" }); // map format to guid instead of uuid
                 c.SchemaFilter<ApplySchemaVendorExtensions>();
-                c.ApplyFiltersToAllSchemas();
             });
 
             var swagger = GetContent<JObject>(TEMP_URI.DOCS);
@@ -435,7 +434,6 @@ namespace Swashbuckle.Tests.Swagger
                     c.DescribeAllEnumsAsStrings();
                 }
                 c.SchemaFilter<ApplySchemaVendorExtensions>();
-                c.ApplyFiltersToAllSchemas();
             });
 
             var swagger = GetContent<JObject>(TEMP_URI.DOCS);
@@ -536,7 +534,6 @@ namespace Swashbuckle.Tests.Swagger
                     c.DescribeAllEnumsAsStrings();
                 }
                 c.SchemaFilter<ApplySchemaVendorExtensions>();
-                c.ApplyFiltersToAllSchemas();
             });
 
             var swagger = GetContent<JObject>(TEMP_URI.DOCS);
