@@ -12,6 +12,7 @@ using Swashbuckle.Swagger;
 using Swashbuckle.Swagger.Annotations;
 using Swashbuckle.Swagger.FromUriParams;
 using Swashbuckle.Swagger.XmlComments;
+using System.Reflection;
 
 namespace Swashbuckle.Application
 {
@@ -217,6 +218,11 @@ namespace Swashbuckle.Application
             _xmlDocFactories.Add(xmlDocFactory);
         }
 
+        public void IncludeXmlComments(Stream xmlStream)
+        {
+            _xmlDocFactories.Add(() => new XPathDocument(xmlStream));
+        }
+
         public void IncludeXmlComments(string filePath)
         {
             if (File.Exists(filePath))
@@ -230,6 +236,22 @@ namespace Swashbuckle.Application
             foreach (var filePath in filePaths)
             {
                 IncludeXmlComments(filePath);
+            }
+        }
+
+        public void IncludeAllXmlComments(Assembly thisAssembly, string directory)
+        {
+            foreach (var name in thisAssembly.GetManifestResourceNames())
+            {
+                if (name.ToUpper().EndsWith(".XML"))
+                {
+                    IncludeXmlComments(thisAssembly.GetManifestResourceStream(name));
+                }
+            }
+
+            foreach (var name in Directory.GetFiles(directory, "*.XML", SearchOption.AllDirectories))
+            {
+                IncludeXmlComments(filePath: name);
             }
         }
 
