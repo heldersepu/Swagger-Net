@@ -241,17 +241,23 @@ namespace Swashbuckle.Application
 
         public void IncludeAllXmlComments(Assembly thisAssembly, string directory)
         {
-            foreach (var name in thisAssembly.GetManifestResourceNames())
+            if (thisAssembly != null)
             {
-                if (name.ToUpper().EndsWith(".XML"))
+                foreach (var name in thisAssembly.GetManifestResourceNames())
                 {
-                    IncludeXmlComments(thisAssembly.GetManifestResourceStream(name));
+                    if (name.ToUpper().EndsWith(".XML"))
+                    {
+                        IncludeXmlComments(thisAssembly.GetManifestResourceStream(name));
+                    }
                 }
             }
 
-            foreach (var name in Directory.GetFiles(directory, "*.XML", SearchOption.AllDirectories))
+            if (!String.IsNullOrEmpty(directory))
             {
-                IncludeXmlComments(filePath: name);
+                foreach (var name in Directory.GetFiles(directory, "*.XML", SearchOption.AllDirectories))
+                {
+                    IncludeXmlComments(filePath: name);
+                }
             }
         }
 
