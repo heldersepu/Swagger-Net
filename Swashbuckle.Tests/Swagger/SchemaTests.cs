@@ -144,7 +144,7 @@ namespace Swashbuckle.Tests.Swagger
         public void It_provides_validation_properties_for_annotated_types()
         {
             SetUpDefaultRouteFor<AnnotatedTypesController>();
-            
+
             var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var definitions = swagger["definitions"];
             Assert.IsNotNull(definitions);
@@ -271,7 +271,7 @@ namespace Swashbuckle.Tests.Swagger
             SetUpDefaultRouteFor<JsonAnnotatedTypesController>();
 
             var swagger = GetContent<JObject>(TEMP_URI.DOCS);
-            
+
             var definitions = swagger["definitions"];
             Assert.IsNotNull(definitions);
 
@@ -476,6 +476,11 @@ namespace Swashbuckle.Tests.Swagger
                 expectedResponse.Add("enum", type == "string" ? underlyingDotNetType.GetEnumNames() : underlyingDotNetType.GetEnumValues());
             }
             expectedResponse.Add("type", type);
+            if (response?["example"] != null)
+            {
+                response["example"] = "";
+                expectedResponse.Add("example", "");
+            }
             expectedResponse.Add("x-type-dotnet", xtypeDotNet);
             expectedResponse.Add("x-nullable", xnullable);
             Assert.AreEqual(JObject.FromObject(expectedResponse).ToString(), response.ToString());
@@ -538,6 +543,12 @@ namespace Swashbuckle.Tests.Swagger
             var operation = swagger["paths"]["/PrimitiveArrayTypes/" + action]["post"];
             var parameter = operation["parameters"][0];
             var response = operation["responses"]["200"]["schema"];
+            var hasExample = parameter?["schema"]?["items"]?["example"] != null;
+            if (hasExample)
+            {
+                parameter["schema"]["items"]["example"] = "";
+                response["items"]["example"] = "";
+            }
 
             var method = typeof(PrimitiveArrayTypesController).GetMethod(action);
             Assert.AreEqual(dotNetType.MakeArrayType(), method.GetParameters()[0].ParameterType);
@@ -553,6 +564,8 @@ namespace Swashbuckle.Tests.Swagger
                 expectedParameterItems.Add("enum", type == "string" ? underlyingDotNetType.GetEnumNames() : underlyingDotNetType.GetEnumValues());
             }
             expectedParameterItems.Add("type", type);
+            if (hasExample)
+                expectedParameterItems.Add("example", "");
             expectedParameterItems.Add("x-type-dotnet", xtypeDotNet);
             expectedParameterItems.Add("x-nullable", xnullable);
             var expectedParameter = (format == "byte") // Special case
@@ -586,6 +599,8 @@ namespace Swashbuckle.Tests.Swagger
                 expectedResponseItems.Add("enum", type == "string" ? underlyingDotNetType.GetEnumNames() : underlyingDotNetType.GetEnumValues());
             }
             expectedResponseItems.Add("type", type);
+            if (hasExample)
+                expectedResponseItems.Add("example", "");
             expectedResponseItems.Add("x-type-dotnet", xtypeDotNet);
             expectedResponseItems.Add("x-nullable", xnullable);
             var expectedResponse = (format == "byte") // Special case
@@ -730,12 +745,12 @@ namespace Swashbuckle.Tests.Swagger
                     //ListOfSelf = new
                     //{
                     //    type = "array",
-                    //    items = JObject.Parse("{ $ref: \"ListOfSelf\" }") 
+                    //    items = JObject.Parse("{ $ref: \"ListOfSelf\" }")
                     //},
                     DictionaryOfSelf = new
                     {
                         type = "object",
-                        additionalProperties = JObject.Parse("{ $ref: \"#/definitions/DictionaryOfSelf\" }") 
+                        additionalProperties = JObject.Parse("{ $ref: \"#/definitions/DictionaryOfSelf\" }")
                     }
                 });
             Assert.AreEqual(expected.ToString(), definitions.ToString());
@@ -752,7 +767,7 @@ namespace Swashbuckle.Tests.Swagger
             var expected = JObject.FromObject(new
                 {
                     type = "array",
-                    items = new 
+                    items = new
                     {
                         type = "array",
                         items = new
@@ -784,8 +799,8 @@ namespace Swashbuckle.Tests.Swagger
                             {
                                 Name = new
                                 {
-                                    type = "string" 
-                                } 
+                                    type = "string"
+                                }
                             }
                         }
                     }
