@@ -69,7 +69,7 @@ namespace Swashbuckle.Swagger
                 {
                     var model = new Schema();
                     filter.Apply(model, c.context);
-                    if (!string.IsNullOrEmpty(model.description))
+                    if (!string.IsNullOrEmpty(model.description) && !tags.Any(t => t.name.Equals(c.name)))
                         tags.Add(new Tag() { name = c.name, description = model.description });
                 }
             }
