@@ -13,6 +13,7 @@ namespace Swashbuckle.Application
         private readonly Dictionary<string, EmbeddedAssetDescriptor> _pathToAssetMap;
         private readonly Dictionary<string, string> _templateParams;
         private readonly Func<HttpRequestMessage, string> _rootUrlResolver;
+        private readonly Assembly _thisAssembly;
 
         public SwaggerUiConfig(IEnumerable<string> discoveryPaths, Func<HttpRequestMessage, string> rootUrlResolver)
         {
@@ -43,10 +44,14 @@ namespace Swashbuckle.Application
             MapPathsForSwaggerUiAssets();
 
             // Use some custom versions to support config and extensionless paths
-            var thisAssembly = GetType().Assembly;
-            CustomAsset("index", thisAssembly, "Swashbuckle.SwaggerUi.CustomAssets.index.html", isTemplate: true);
-            CustomAsset("css/screen-css", thisAssembly, "Swashbuckle.SwaggerUi.CustomAssets.screen.css");
-            CustomAsset("css/typography-css", thisAssembly, "Swashbuckle.SwaggerUi.CustomAssets.typography.css");
+            CustomAsset("index", _thisAssembly, "Swashbuckle.SwaggerUi.CustomAssets.index.html", isTemplate: true);
+            CustomAsset("css/screen-css",_thisAssembly, "Swashbuckle.SwaggerUi.CustomAssets.screen.css");
+            CustomAsset("css/typography-css", _thisAssembly, "Swashbuckle.SwaggerUi.CustomAssets.typography.css");
+        }
+
+        public void InjectStylesheet(string resourceName, string media = "screen", bool isTemplate = false)
+        {
+            InjectStylesheet(_thisAssembly, resourceName, media, isTemplate);
         }
 
         public void InjectStylesheet(Assembly resourceAssembly, string resourceName, string media = "screen", bool isTemplate = false)
@@ -80,6 +85,11 @@ namespace Swashbuckle.Application
             _templateParams["%(ValidatorUrl)"] = "null";
         }
 
+        public void InjectJavaScript(string resourceName, bool isTemplate = false)
+        {
+            InjectJavaScript(_thisAssembly, resourceName, isTemplate);
+        }
+
         public void InjectJavaScript(Assembly resourceAssembly, string resourceName, bool isTemplate = false)
         {
             var path = "ext/" + resourceName.Replace(".", "-");
@@ -102,6 +112,11 @@ namespace Swashbuckle.Application
         public void SupportedSubmitMethods(params string[] methods)
         {
             _templateParams["%(SupportedSubmitMethods)"] = String.Join("|", methods).ToLower();
+        }
+
+        public void CustomAsset(string path, string resourceName, bool isTemplate = false)
+        {
+            CustomAsset(path, _thisAssembly, resourceName, isTemplate);
         }
 
         public void CustomAsset(string path, Assembly resourceAssembly, string resourceName, bool isTemplate = false)
