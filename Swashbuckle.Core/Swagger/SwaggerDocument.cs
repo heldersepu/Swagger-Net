@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using Newtonsoft.Json;
 
 namespace Swashbuckle.Swagger
@@ -229,7 +228,7 @@ namespace Swashbuckle.Swagger
     {
         public string type;
 
-        public string format; 
+        public string format;
 
         public PartialSchema items;
 
