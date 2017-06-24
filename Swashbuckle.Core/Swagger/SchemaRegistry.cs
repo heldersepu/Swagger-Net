@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Dynamic;
-using System.Linq;
-using System.Net.Http;
-using System.Reflection;
-using System.Runtime.Serialization;
-using System.Text;
-using System.Web.Http;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
-using System.Net.Http.Formatting;
+using Newtonsoft.Json.Serialization;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Swashbuckle.Swagger
 {
@@ -164,7 +155,7 @@ namespace Swashbuckle.Swagger
                 case "System.DateTimeOffset":
                     return new Schema { type = "string", format = "date-time" };
                 case "System.Guid":
-                    return new Schema { type = "string", format = "uuid" };
+                    return new Schema { type = "string", format = "uuid", example = Guid.Empty };
                 default:
                     return new Schema { type = "string" };
             }
@@ -188,7 +179,7 @@ namespace Swashbuckle.Swagger
                         : type.GetEnumNamesForSerialization()
                 };
             }
-            
+
             return new Schema
             {
                 type = "integer",
@@ -208,7 +199,7 @@ namespace Swashbuckle.Swagger
                 {
                     type = "object",
                     properties = Enum.GetNames(keyType).ToDictionary(
-                        (name) => dictionaryContract.PropertyNameResolver(name),
+                        (name) => dictionaryContract.DictionaryKeyResolver(name),
                         (name) => CreateInlineSchema(valueType)
                     )
                 };
@@ -269,7 +260,7 @@ namespace Swashbuckle.Swagger
         {
             if (!_workItems.ContainsKey(type))
             {
-                var schemaId = _schemaIdSelector(type); 
+                var schemaId = _schemaIdSelector(type);
                 if (_workItems.Any(entry => entry.Value.SchemaId == schemaId))
                 {
                     var conflictingType = _workItems.First(entry => entry.Value.SchemaId == schemaId).Key;

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using System.Net.Http;
 using System.Collections.Generic;
 using System.Reflection;
@@ -14,6 +13,7 @@ namespace Swashbuckle.Application
         private readonly Dictionary<string, EmbeddedAssetDescriptor> _pathToAssetMap;
         private readonly Dictionary<string, string> _templateParams;
         private readonly Func<HttpRequestMessage, string> _rootUrlResolver;
+        private readonly Assembly _thisAssembly;
 
         public SwaggerUiConfig(IEnumerable<string> discoveryPaths, Func<HttpRequestMessage, string> rootUrlResolver)
         {
@@ -21,6 +21,7 @@ namespace Swashbuckle.Application
 
             _templateParams = new Dictionary<string, string>
             {
+                { "%(DocumentTitle)", "Swagger UI" },
                 { "%(StylesheetIncludes)", "" },
                 { "%(DiscoveryPaths)", String.Join("|", discoveryPaths) },
                 { "%(BooleanValues)", "true|false" },
@@ -40,13 +41,18 @@ namespace Swashbuckle.Application
             };
             _rootUrlResolver = rootUrlResolver;
 
+            _thisAssembly = GetType().Assembly;
             MapPathsForSwaggerUiAssets();
 
             // Use some custom versions to support config and extensionless paths
-            var thisAssembly = GetType().Assembly;
-            CustomAsset("index", thisAssembly, "Swashbuckle.SwaggerUi.CustomAssets.index.html", isTemplate: true);
-            CustomAsset("css/screen-css", thisAssembly, "Swashbuckle.SwaggerUi.CustomAssets.screen.css");
-            CustomAsset("css/typography-css", thisAssembly, "Swashbuckle.SwaggerUi.CustomAssets.typography.css");
+            CustomAsset("index", "Swashbuckle.SwaggerUi.CustomAssets.index.html", isTemplate: true);
+            CustomAsset("css/screen-css", "Swashbuckle.SwaggerUi.CustomAssets.screen.css");
+            CustomAsset("css/typography-css", "Swashbuckle.SwaggerUi.CustomAssets.typography.css");
+        }
+
+        public void InjectStylesheet(string resourceName, string media = "screen", bool isTemplate = false)
+        {
+            InjectStylesheet(_thisAssembly, resourceName, media, isTemplate);
         }
 
         public void InjectStylesheet(Assembly resourceAssembly, string resourceName, string media = "screen", bool isTemplate = false)
@@ -59,10 +65,15 @@ namespace Swashbuckle.Application
 
             CustomAsset(path, resourceAssembly, resourceName, isTemplate);
         }
-        
+
         public void BooleanValues(IEnumerable<string> values)
         {
             _templateParams["%(BooleanValues)"] = String.Join("|", values);
+        }
+
+        public void DocumentTitle(string title)
+        {
+            _templateParams["%(DocumentTitle)"] = title;
         }
 
         public void SetValidatorUrl(string url)
@@ -73,6 +84,11 @@ namespace Swashbuckle.Application
         public void DisableValidator()
         {
             _templateParams["%(ValidatorUrl)"] = "null";
+        }
+
+        public void InjectJavaScript(string resourceName, bool isTemplate = false)
+        {
+            InjectJavaScript(_thisAssembly, resourceName, isTemplate);
         }
 
         public void InjectJavaScript(Assembly resourceAssembly, string resourceName, bool isTemplate = false)
@@ -97,6 +113,11 @@ namespace Swashbuckle.Application
         public void SupportedSubmitMethods(params string[] methods)
         {
             _templateParams["%(SupportedSubmitMethods)"] = String.Join("|", methods).ToLower();
+        }
+
+        public void CustomAsset(string path, string resourceName, bool isTemplate = false)
+        {
+            CustomAsset(path, _thisAssembly, resourceName, isTemplate);
         }
 
         public void CustomAsset(string path, Assembly resourceAssembly, string resourceName, bool isTemplate = false)
@@ -151,8 +172,7 @@ namespace Swashbuckle.Application
 
         private void MapPathsForSwaggerUiAssets()
         {
-            var thisAssembly = GetType().Assembly;
-            foreach (var resourceName in thisAssembly.GetManifestResourceNames())
+            foreach (var resourceName in _thisAssembly.GetManifestResourceNames())
             {
                 if (resourceName.Contains("Swashbuckle.SwaggerUi.CustomAssets")) continue; // original assets only
 
@@ -160,7 +180,7 @@ namespace Swashbuckle.Application
                     .Replace("\\", "/")
                     .Replace(".", "-"); // extensionless to avoid RUMMFAR
 
-                _pathToAssetMap[path] = new EmbeddedAssetDescriptor(thisAssembly, resourceName, path == "index");
+                _pathToAssetMap[path] = new EmbeddedAssetDescriptor(_thisAssembly, resourceName, path == "index");
             }
         }
     }
