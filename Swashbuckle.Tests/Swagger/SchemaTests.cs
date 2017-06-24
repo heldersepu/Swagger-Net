@@ -627,7 +627,6 @@ namespace Swashbuckle.Tests.Swagger
                     c.DescribeAllEnumsAsStrings();
                 }
                 c.SchemaFilter<ApplySchemaVendorExtensions>();
-                c.ApplyFiltersToAllSchemas();
             } );
 
             var swagger = GetContent<JObject>( "http://tempuri.org/swagger/docs/v1" );
