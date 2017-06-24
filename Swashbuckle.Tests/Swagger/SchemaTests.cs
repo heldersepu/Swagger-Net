@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Linq;
-using NUnit.Framework;
+﻿using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Converters;
+using NUnit.Framework;
 using Swashbuckle.Dummy.Controllers;
-using Swashbuckle.Application;
-using Swashbuckle.Swagger;
 using Swashbuckle.Dummy.SwaggerExtensions;
 using Swashbuckle.Dummy.Types;
+using Swashbuckle.Swagger;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Swashbuckle.Tests.Swagger
 {
@@ -32,7 +30,7 @@ namespace Swashbuckle.Tests.Swagger
         {
             SetUpDefaultRouteFor<ProductsController>();
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var definitions = swagger["definitions"];
             Assert.IsNotNull(definitions);
 
@@ -76,7 +74,7 @@ namespace Swashbuckle.Tests.Swagger
         {
             SetUpCustomRouteFor<DictionaryTypesController>("term-definitions");
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var schema = swagger["paths"]["/term-definitions"]["get"]["responses"]["200"]["schema"];
 
             var expected = JObject.FromObject(new
@@ -103,7 +101,7 @@ namespace Swashbuckle.Tests.Swagger
         public void It_provides_validation_properties_for_metadata_annotated_types() {
             SetUpDefaultRouteFor<MetadataAnnotatedTypesController>();
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var definitions = swagger["definitions"];
             Assert.IsNotNull(definitions);
 
@@ -148,8 +146,8 @@ namespace Swashbuckle.Tests.Swagger
         public void It_provides_validation_properties_for_annotated_types()
         {
             SetUpDefaultRouteFor<AnnotatedTypesController>();
-            
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var definitions = swagger["definitions"];
             Assert.IsNotNull(definitions);
 
@@ -203,7 +201,7 @@ namespace Swashbuckle.Tests.Swagger
         {
             SetUpDefaultRouteFor<PolymorphicTypesController>();
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var definitions = swagger["definitions"];
             Assert.IsNotNull(definitions);
 
@@ -251,7 +249,7 @@ namespace Swashbuckle.Tests.Swagger
         {
             SetUpDefaultRouteFor<IndexerTypesController>();
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var definitions = swagger["definitions"];
 
             var expected = JObject.FromObject(new
@@ -278,8 +276,8 @@ namespace Swashbuckle.Tests.Swagger
         {
             SetUpDefaultRouteFor<JsonAnnotatedTypesController>();
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
-            
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
+
             var definitions = swagger["definitions"];
             Assert.IsNotNull(definitions);
 
@@ -313,7 +311,7 @@ namespace Swashbuckle.Tests.Swagger
                 new StringEnumConverter { CamelCaseText = true });
             SetUpDefaultRouteFor<ProductsController>();
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var typeSchema = swagger["definitions"]["Product"]["properties"]["Type"];
 
             var expected = JObject.FromObject(new
@@ -336,7 +334,7 @@ namespace Swashbuckle.Tests.Swagger
                     minimum = 1
                 }));
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var parameter = swagger["paths"]["/products"]["get"]["parameters"][0];
 
             var expected = JObject.FromObject(new
@@ -360,10 +358,9 @@ namespace Swashbuckle.Tests.Swagger
             {
                 c.MapType<Guid>(() => new Schema { type = "string", format = "guid" }); // map format to guid instead of uuid
                 c.SchemaFilter<ApplySchemaVendorExtensions>();
-                c.ApplyFiltersToAllSchemas();
             });
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var operation = swagger["paths"]["/PrimitiveTypes/EchoGuid"]["post"];
             var parameter = operation["parameters"][0];
             var response = operation["responses"]["200"]["schema"];
@@ -444,10 +441,9 @@ namespace Swashbuckle.Tests.Swagger
                     c.DescribeAllEnumsAsStrings();
                 }
                 c.SchemaFilter<ApplySchemaVendorExtensions>();
-                c.ApplyFiltersToAllSchemas();
             });
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var operation = swagger["paths"]["/PrimitiveTypes/" + action]["post"];
             var parameter = operation["parameters"][0];
             var response = operation["responses"]["200"]["schema"];
@@ -485,6 +481,11 @@ namespace Swashbuckle.Tests.Swagger
                 expectedResponse.Add("enum", type == "string" ? underlyingDotNetType.GetEnumNames() : underlyingDotNetType.GetEnumValues());
             }
             expectedResponse.Add("type", type);
+            if (response?["example"] != null)
+            {
+                response["example"] = "";
+                expectedResponse.Add("example", "");
+            }
             expectedResponse.Add("x-type-dotnet", xtypeDotNet);
             expectedResponse.Add("x-nullable", xnullable);
             Assert.AreEqual(JObject.FromObject(expectedResponse).ToString(), response.ToString());
@@ -538,13 +539,18 @@ namespace Swashbuckle.Tests.Swagger
                     c.DescribeAllEnumsAsStrings();
                 }
                 c.SchemaFilter<ApplySchemaVendorExtensions>();
-                c.ApplyFiltersToAllSchemas();
             });
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var operation = swagger["paths"]["/PrimitiveArrayTypes/" + action]["post"];
             var parameter = operation["parameters"][0];
             var response = operation["responses"]["200"]["schema"];
+            var hasExample = parameter?["schema"]?["items"]?["example"] != null;
+            if (hasExample)
+            {
+                parameter["schema"]["items"]["example"] = "";
+                response["items"]["example"] = "";
+            }
 
             var method = typeof(PrimitiveArrayTypesController).GetMethod(action);
             Assert.AreEqual(dotNetType.MakeArrayType(), method.GetParameters()[0].ParameterType);
@@ -560,6 +566,8 @@ namespace Swashbuckle.Tests.Swagger
                 expectedParameterItems.Add("enum", type == "string" ? underlyingDotNetType.GetEnumNames() : underlyingDotNetType.GetEnumValues());
             }
             expectedParameterItems.Add("type", type);
+            if (hasExample)
+                expectedParameterItems.Add("example", "");
             expectedParameterItems.Add("x-type-dotnet", xtypeDotNet);
             expectedParameterItems.Add("x-nullable", xnullable);
             var expectedParameter = (format == "byte") // Special case
@@ -593,6 +601,8 @@ namespace Swashbuckle.Tests.Swagger
                 expectedResponseItems.Add("enum", type == "string" ? underlyingDotNetType.GetEnumNames() : underlyingDotNetType.GetEnumValues());
             }
             expectedResponseItems.Add("type", type);
+            if (hasExample)
+                expectedResponseItems.Add("example", "");
             expectedResponseItems.Add("x-type-dotnet", xtypeDotNet);
             expectedResponseItems.Add("x-nullable", xnullable);
             var expectedResponse = (format == "byte") // Special case
@@ -692,7 +702,7 @@ namespace Swashbuckle.Tests.Swagger
             SetUpDefaultRouteFor<ObsoletePropertiesController>();
             SetUpHandler(c => c.IgnoreObsoleteProperties());
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var calendarProps = swagger["definitions"]["Event"]["properties"];
             var expectedProps = JObject.FromObject(new Dictionary<string, object>
                 {
@@ -710,7 +720,7 @@ namespace Swashbuckle.Tests.Swagger
             SetUpDefaultRouteFor<ConflictingTypesController>();
             SetUpHandler(c => c.UseFullTypeNameInSchemaIds());
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var defintitions = swagger["definitions"];
 
             Assert.AreEqual(2, defintitions.Count());
@@ -722,7 +732,7 @@ namespace Swashbuckle.Tests.Swagger
             SetUpDefaultRouteFor<ProductsController>();
             SetUpHandler(c => c.SchemaId(t => "my custom name"));
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var defintitions = swagger["definitions"];
 
             Assert.IsNotNull(defintitions["my custom name"]);
@@ -735,7 +745,7 @@ namespace Swashbuckle.Tests.Swagger
             // We have to know the default implementation of FriendlyId before we can modify it's output.
             SetUpHandler(c => { c.SchemaId(t => t.FriendlyId(true).Replace("Swashbuckle.Dummy.Controllers.", String.Empty)); });
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var defintitions = swagger["definitions"];
 
             Assert.IsNotNull(defintitions["Requests.Blog"]);
@@ -746,7 +756,7 @@ namespace Swashbuckle.Tests.Swagger
         {
             SetUpDefaultRouteFor<NestedTypesController>();
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
 
             var definitions = swagger["definitions"];
             Assert.IsNotNull(definitions);
@@ -794,7 +804,7 @@ namespace Swashbuckle.Tests.Swagger
         {
             SetUpDefaultRouteFor<SelfReferencingTypesController>();
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
 
             var definitions = swagger["definitions"];
             Assert.IsNotNull(definitions);
@@ -823,12 +833,12 @@ namespace Swashbuckle.Tests.Swagger
                     //ListOfSelf = new
                     //{
                     //    type = "array",
-                    //    items = JObject.Parse("{ $ref: \"ListOfSelf\" }") 
+                    //    items = JObject.Parse("{ $ref: \"ListOfSelf\" }")
                     //},
                     DictionaryOfSelf = new
                     {
                         type = "object",
-                        additionalProperties = JObject.Parse("{ $ref: \"#/definitions/DictionaryOfSelf\" }") 
+                        additionalProperties = JObject.Parse("{ $ref: \"#/definitions/DictionaryOfSelf\" }")
                     }
                 });
             Assert.AreEqual(expected.ToString(), definitions.ToString());
@@ -839,13 +849,13 @@ namespace Swashbuckle.Tests.Swagger
         {
             SetUpDefaultRouteFor<TwoDimensionalArraysController>();
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var schema = swagger["paths"]["/twodimensionalarrays"]["post"]["parameters"][0]["schema"];
 
             var expected = JObject.FromObject(new
                 {
                     type = "array",
-                    items = new 
+                    items = new
                     {
                         type = "array",
                         items = new
@@ -863,7 +873,7 @@ namespace Swashbuckle.Tests.Swagger
         {
             SetUpDefaultRouteFor<DynamicTypesController>();
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var definitions = swagger["definitions"];
             Assert.IsNotNull(definitions);
 
@@ -877,7 +887,7 @@ namespace Swashbuckle.Tests.Swagger
                             {
                                 Name = new
                                 {
-                                    type = "string" 
+                                    type = "string"
                                 }
                             },
                             xml = JObject.Parse("{ \"name\": \"DynamicObjectSubType\" }")
@@ -892,7 +902,7 @@ namespace Swashbuckle.Tests.Swagger
         {
             SetUpDefaultRouteFor<NullableTypesController>();
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var definitions = swagger["definitions"];
 
             var expected = JObject.FromObject(new Dictionary<string, object>
@@ -929,16 +939,15 @@ namespace Swashbuckle.Tests.Swagger
                 c.SchemaFilter<RecursiveCallSchemaFilter>();
             });
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
         }
 
         [Test]
-        [ExpectedException(typeof(InvalidOperationException))]
         public void It_errors_on_multiple_types_with_the_same_class_name()
         {
             SetUpDefaultRouteFor<ConflictingTypesController>();
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            Assert.Throws<InvalidOperationException>(() => GetContent<JObject>(TEMP_URI.DOCS));
         }
 
         [Test]
@@ -946,7 +955,7 @@ namespace Swashbuckle.Tests.Swagger
         {
             SetUpDefaultRouteFor<PathRequiredController>();
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var required = (bool)swagger["paths"]["/pathrequired/{id}"]["get"]["parameters"][0]["required"];
 
             Assert.IsTrue(required);
