@@ -77,16 +77,19 @@
             <summary>
             The ID for Accounts is 5 digits long.
             </summary>
+            <example>78312</example>
         </member>
         <member name="P:Swashbuckle.Dummy.Controllers.Account.Username">
             <summary>
             Uniquely identifies the account
             </summary>
+            <example>TestUser</example>
         </member>
         <member name="P:Swashbuckle.Dummy.Controllers.Account.Password">
             <summary>
             For authentication
             </summary>
+            <example>TestPassword</example>
         </member>
         <member name="P:Swashbuckle.Dummy.Controllers.Account.AccountPreferences.DisplayName">
             <summary>
