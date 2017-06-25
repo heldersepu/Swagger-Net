@@ -2,6 +2,7 @@
 using WebActivatorEx;
 using $rootnamespace$;
 using Swashbuckle.Application;
+using Swashbuckle.Swagger;
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 
@@ -96,12 +97,15 @@ namespace $rootnamespace$
                         //
                         //c.OrderActionGroupsBy(new DescendingAlphabeticComparer());
 
-                        // If you annotate Controllers and API Types with
-                        // Xml comments (http://msdn.microsoft.com/en-us/library/b2s063f7(v=vs.110).aspx), you can incorporate
-                        // those comments into the generated docs and UI. You can enable this by providing the path to one or
+                        // If you annotate Controllers and API Types with Xml comments:
+                        // http://msdn.microsoft.com/en-us/library/b2s063f7(v=vs.110).aspx
+                        // those comments will be incorporated into the generated docs and UI.
+                        // Just make sure your comment file(s) have extension .XML
+                        // You can add individual files by providing the path to one or
                         // more Xml comment files.
                         //
-                        //c.IncludeXmlComments(GetXmlCommentsPath());
+                        //c.IncludeXmlComments(AppDomain.CurrentDomain.BaseDirectory + "file.ext");
+						c.IncludeAllXmlComments(thisAssembly, AppDomain.CurrentDomain.BaseDirectory);
 
                         // Swashbuckle makes a best attempt at generating Swagger compliant JSON schemas for the various types
                         // exposed in your API. However, there may be occasions when more control of the output is needed.
@@ -188,7 +192,7 @@ namespace $rootnamespace$
                         // The file must be included in your project as an "Embedded Resource", and then the resource's
                         // "Logical Name" is passed to the method as shown below.
                         //
-                        //c.InjectStylesheet(containingAssembly, "Swashbuckle.Dummy.SwaggerExtensions.testStyles1.css");
+                        //c.InjectStylesheet(thisAssembly, "Swashbuckle.Dummy.SwaggerExtensions.testStyles1.css");
 
                         // Use the "InjectJavaScript" option to invoke one or more custom JavaScripts after the swagger-ui
                         // has loaded. The file must be included in your project as an "Embedded Resource", and then the resource's
@@ -225,7 +229,7 @@ namespace $rootnamespace$
                         // in your project as an "Embedded Resource", and then the resource's "Logical Name" is passed to
                         // the method as shown below.
                         //
-                        //c.CustomAsset("index", containingAssembly, "YourWebApiProject.SwaggerExtensions.index.html");
+                        //c.CustomAsset("index", thisAssembly, "YourWebApiProject.SwaggerExtensions.index.html");
 
                         // If your API has multiple versions and you've applied the MultipleApiVersions setting
                         // as described above, you can also enable a select box in the swagger-ui, that displays
@@ -250,6 +254,40 @@ namespace $rootnamespace$
                         //
                         //c.EnableApiKeySupport("apiKey", "header");
                     });
+        }
+
+        private class ApplyDocumentVendorExtensions : IDocumentFilter
+        {
+            public void Apply(SwaggerDocument swaggerDoc, SchemaRegistry schemaRegistry, IApiExplorer apiExplorer)
+            {
+                // Include the given data type in the final SwaggerDocument
+                //
+                //schemaRegistry.GetOrRegister(typeof(ExtraType));
+            }
+        }
+
+        private class ApplySchemaVendorExtensions : ISchemaFilter
+        {
+            public void Apply(Schema schema, SchemaRegistry schemaRegistry, Type type)
+            {
+                // Modify the example values in the final SwaggerDocument
+                //
+                if (schema.properties != null)
+                {
+                    foreach (var p in schema.properties)
+                    {
+                        switch (p.Value.format)
+                        {
+                            case "int32":
+                                p.Value.example = 123;
+                                break;
+                            case "double":
+                                p.Value.example = 9858.216;
+                                break;
+                        }
+                    }
+                }
+            }
         }
     }
 }

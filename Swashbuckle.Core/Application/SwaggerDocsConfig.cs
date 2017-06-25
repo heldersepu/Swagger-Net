@@ -219,7 +219,7 @@ namespace Swashbuckle.Application
         public void IncludeXmlComments(string filePath)
         {
             if (File.Exists(filePath))
-            _xmlDocFactories.Add(() => new XPathDocument(filePath));
+                _xmlDocFactories.Add(() => new XPathDocument(filePath));
             else
                 throw new FileNotFoundException("XML Comment file not found!");
         }
@@ -343,9 +343,7 @@ namespace Swashbuckle.Application
 
             var httpConfiguration = request.GetConfiguration();
             var virtualPathRoot = httpConfiguration.VirtualPathRoot;
-
             var urb = new UriBuilder(scheme, host, int.Parse(port), prefix + virtualPathRoot);
-
             return urb.Uri.AbsoluteUri.TrimEnd('/');
         }
 
