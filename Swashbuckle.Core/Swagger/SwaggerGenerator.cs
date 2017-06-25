@@ -1,11 +1,9 @@
-﻿using System.Linq;
-using System.Collections.Generic;
-using System.Web.Http.Description;
+﻿using Newtonsoft.Json;
 using System;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
-using System.Net.Http.Formatting;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
+using System.Web.Http.Description;
 
 namespace Swashbuckle.Swagger
 {
@@ -47,8 +45,10 @@ namespace Swashbuckle.Swagger
                 throw new UnknownApiVersion(apiVersion);
 
             HashSet<string> operationNames = new HashSet<string>();
-            var paths = GetApiDescriptionsFor(apiVersion)
-                .Where(apiDesc => !(_options.IgnoreObsoleteActions && apiDesc.IsObsolete()))
+            var apiDescriptions = GetApiDescriptionsFor(apiVersion)
+                .Where(apiDesc => !(_options.IgnoreObsoleteActions && apiDesc.IsObsolete()));
+
+            var paths = apiDescriptions
                 .OrderBy(_options.GroupingKeySelector, _options.GroupingKeyComparer)
                 .GroupBy(apiDesc => apiDesc.RelativePathSansQueryString())
                 .ToDictionary(group => "/" + group.Key, group => CreatePathItem(group, schemaRegistry, operationNames));
@@ -56,18 +56,38 @@ namespace Swashbuckle.Swagger
             var rootUri = new Uri(rootUrl);
             var port = (!rootUri.IsDefaultPort) ? ":" + rootUri.Port : string.Empty;
 
+            var controllers = apiDescriptions
+                .GroupBy(x => x.ActionDescriptor.ControllerDescriptor)
+                .Select(x => new {
+                    name = x.Key.ControllerName,
+                    context = new ModelFilterContext(x.Key.ControllerType, null, null)
+                });
+
+            var tags = new List<Tag>();
+            foreach (var filter in _options.ModelFilters)
+            {
+                foreach (var c in controllers)
+                {
+                    var model = new Schema();
+                    filter.Apply(model, c.context);
+                    if (!string.IsNullOrEmpty(model.description) && !tags.Any(t => t.name.Equals(c.name)))
+                        tags.Add(new Tag() { name = c.name, description = model.description });
+                }
+            }
+
             var swaggerDoc = new SwaggerDocument
             {
                 info = info,
                 host = rootUri.Host + port,
                 basePath = (rootUri.AbsolutePath != "/") ? rootUri.AbsolutePath : null,
+                tags = (tags.Count > 0) ? tags : null,
                 schemes = (_options.Schemes != null) ? _options.Schemes.ToList() : new[] { rootUri.Scheme }.ToList(),
                 paths = paths,
                 definitions = schemaRegistry.Definitions,
                 securityDefinitions = _options.SecurityDefinitions
             };
 
-            foreach(var filter in _options.DocumentFilters)
+            foreach (var filter in _options.DocumentFilters)
             {
                 filter.Apply(swaggerDoc, schemaRegistry, _apiExplorer);
             }
@@ -131,10 +151,10 @@ namespace Swashbuckle.Swagger
         {
             var parameters = apiDesc.ParameterDescriptions
                 .Select(paramDesc =>
-                    {
-                        string location = GetParameterLocation(apiDesc, paramDesc);
-                        return CreateParameter(location, paramDesc, schemaRegistry);
-                    })
+                {
+                    string location = GetParameterLocation(apiDesc, paramDesc);
+                    return CreateParameter(location, paramDesc, schemaRegistry);
+                })
                  .ToList();
 
             var responses = new Dictionary<string, Response>();
@@ -152,7 +172,7 @@ namespace Swashbuckle.Swagger
                 consumes = apiDesc.Consumes().ToList(),
                 parameters = parameters.Any() ? parameters : null, // parameters can be null but not empty
                 responses = responses,
-                deprecated = apiDesc.IsObsolete() ? true : (bool?) null
+                deprecated = apiDesc.IsObsolete() ? true : (bool?)null
             };
 
             foreach (var filter in _options.OperationFilters)
@@ -198,11 +218,11 @@ namespace Swashbuckle.Swagger
             {
                 parameter.type = "string";
                 parameter.required = true;
-                return parameter; 
+                return parameter;
             }
 
             parameter.required = location == "path" || !paramDesc.ParameterDescriptor.IsOptional;
-            parameter.@default = paramDesc.ParameterDescriptor.DefaultValue;
+            parameter.description = paramDesc.Documentation;
 
             var schema = schemaRegistry.GetOrRegister(paramDesc.ParameterDescriptor.ParameterType);
             if (parameter.@in == "body")
@@ -210,6 +230,8 @@ namespace Swashbuckle.Swagger
             else
                 parameter.PopulateFrom(schema);
 
+            if (paramDesc.ParameterDescriptor.DefaultValue != null)
+                parameter.@default = paramDesc.ParameterDescriptor.DefaultValue;
             return parameter;
         }
     }
