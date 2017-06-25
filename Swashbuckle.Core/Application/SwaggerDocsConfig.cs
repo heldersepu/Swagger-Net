@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -11,6 +12,7 @@ using Swashbuckle.Swagger;
 using Swashbuckle.Swagger.Annotations;
 using Swashbuckle.Swagger.FromUriParams;
 using Swashbuckle.Swagger.XmlComments;
+using System.Reflection;
 
 namespace Swashbuckle.Application
 {
@@ -31,7 +33,7 @@ namespace Swashbuckle.Application
         private bool _ignoreObsoleteProperties;
         private bool _describeAllEnumsAsStrings;
         private bool _describeStringEnumsInCamelCase;
-        private bool _applyFiltersToAllSchemas;
+        private bool _applyFiltersToAllSchemas = true;
         private readonly IList<Func<IOperationFilter>> _operationFilters;
         private readonly IList<Func<IDocumentFilter>> _documentFilters;
         private readonly IList<Func<XPathDocument>> _xmlDocFactories;
@@ -52,7 +54,6 @@ namespace Swashbuckle.Application
             _ignoreObsoleteProperties = false;
             _describeAllEnumsAsStrings = false;
             _describeStringEnumsInCamelCase = false;
-            _applyFiltersToAllSchemas = false;
             _operationFilters = new List<Func<IOperationFilter>>();
             _documentFilters = new List<Func<IDocumentFilter>>();
             _xmlDocFactories = new List<Func<XPathDocument>>();
@@ -183,12 +184,6 @@ namespace Swashbuckle.Application
             _ignoreObsoleteProperties = true;
         }
 
-        [Obsolete("This will be removed in 6.0.0; it will always be true.")]
-        public void ApplyFiltersToAllSchemas()
-        {
-            _applyFiltersToAllSchemas = true;
-        }
-
         public void OperationFilter<TFilter>()
             where TFilter : IOperationFilter, new()
         {
@@ -216,9 +211,47 @@ namespace Swashbuckle.Application
             _xmlDocFactories.Add(xmlDocFactory);
         }
 
+        public void IncludeXmlComments(Stream xmlStream)
+        {
+            _xmlDocFactories.Add(() => new XPathDocument(xmlStream));
+        }
+
         public void IncludeXmlComments(string filePath)
         {
+            if (File.Exists(filePath))
             _xmlDocFactories.Add(() => new XPathDocument(filePath));
+            else
+                throw new FileNotFoundException("XML Comment file not found!");
+        }
+
+        public void IncludeXmlComments(string[] filePaths)
+        {
+            foreach (var filePath in filePaths)
+            {
+                IncludeXmlComments(filePath);
+            }
+        }
+
+        public void IncludeAllXmlComments(Assembly thisAssembly, string directory)
+        {
+            if (thisAssembly != null)
+            {
+                foreach (var name in thisAssembly.GetManifestResourceNames())
+                {
+                    if (name.ToUpper().EndsWith(".XML"))
+                    {
+                        IncludeXmlComments(thisAssembly.GetManifestResourceStream(name));
+                    }
+                }
+            }
+
+            if (!String.IsNullOrEmpty(directory))
+            {
+                foreach (var name in Directory.GetFiles(directory, "*.XML", SearchOption.AllDirectories))
+                {
+                    IncludeXmlComments(filePath: name);
+                }
+            }
         }
 
         public void ResolveConflictingActions(Func<IEnumerable<ApiDescription>, ApiDescription> conflictingActionsResolver)
