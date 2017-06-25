@@ -554,13 +554,13 @@ namespace Swashbuckle.Tests.Swagger
         {
             SetUpAttributeRoutesFrom(typeof(OverloadedAttributeRoutesController).Assembly);
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
-            
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
+
             var opIds = swagger["paths"]
                 .SelectMany(path => path)
                 .SelectMany(action => action)
                 .Select(action => action.First()["operationId"].ToString());
-            
+
             Assert.AreEqual(opIds.Count(), opIds.GroupBy(x => x).Count());
         }
 
@@ -576,7 +576,7 @@ namespace Swashbuckle.Tests.Swagger
         [Test]
         public void It_errors_on_unknown_api_version_and_returns_status_not_found()
         {
-            var response = Get("http://tempuri.org/swagger/docs/1.1");
+            var response = Get(TEMP_URI.DOCS+ "1.1");
 
             Assert.AreEqual(HttpStatusCode.NotFound, response.StatusCode);
         }

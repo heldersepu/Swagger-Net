@@ -186,6 +186,12 @@ namespace Swashbuckle.Swagger
         private string GetUniqueFriendlyId(ApiDescription apiDesc, HashSet<string> operationNames)
         {
             string friendlyId = apiDesc.FriendlyId();
+
+            if (operationNames.Contains(friendlyId))
+            {
+                friendlyId = apiDesc.FriendlyId2();
+            }
+
             int nextFriendlyIdPostfix = 1;
             while (operationNames.Contains(friendlyId))
             {

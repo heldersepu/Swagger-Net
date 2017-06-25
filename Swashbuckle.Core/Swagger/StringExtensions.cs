@@ -7,5 +7,11 @@
             if (string.IsNullOrEmpty(value)) return value;
             return value.Substring(0, 1).ToLowerInvariant() + value.Substring(1);
         }
+
+        internal static string ToTitleCase(this string value)
+        {
+            if (string.IsNullOrEmpty(value)) return value;
+            return char.ToUpperInvariant(value[0]) + value.Substring(1);
+        }
     }
 }

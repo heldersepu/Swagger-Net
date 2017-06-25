@@ -2,16 +2,42 @@
 using System.Linq;
 using System.Collections.Generic;
 using System.Web.Http.Description;
+using System.Text;
 
 namespace Swashbuckle.Swagger
 {
     public static class ApiDescriptionExtensions
     {
+        public static string ControllerName(this ApiDescription apiDescription)
+        {
+            return apiDescription.ActionDescriptor.ControllerDescriptor.ControllerName;
+        }
+
         public static string FriendlyId(this ApiDescription apiDescription)
         {
             return String.Format("{0}_{1}",
-                apiDescription.ActionDescriptor.ControllerDescriptor.ControllerName,
+                apiDescription.ControllerName(),
                 apiDescription.ActionDescriptor.ActionName);
+        }
+
+        public static string FriendlyId2(this ApiDescription apiDescription)
+        {
+            var parts = (apiDescription.HttpMethod.ToString().ToLower() + "/" +
+                         apiDescription.RelativePathSansQueryString())
+                        .Split('/');
+
+            var builder = new StringBuilder();
+            builder.Append(apiDescription.ControllerName() + "_");
+            foreach (var part in parts)
+            {
+                var trimmed = part.Trim('{', '}');
+                builder.AppendFormat("{0}{1}",
+                    (part.StartsWith("{") ? "By" : string.Empty),
+                    trimmed.ToTitleCase()
+                );
+            }
+
+            return builder.ToString();
         }
 
         public static IEnumerable<string> Consumes(this ApiDescription apiDescription)
@@ -68,7 +94,7 @@ namespace Swashbuckle.Swagger
         }
 
         public static IEnumerable<TAttribute> GetControllerAndActionAttributes<TAttribute>(this ApiDescription apiDesc)
-            where TAttribute : class 
+            where TAttribute : class
         {
             var controllerAttributes = apiDesc.ActionDescriptor.ControllerDescriptor
                 .GetCustomAttributes<TAttribute>();
