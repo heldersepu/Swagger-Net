@@ -1,15 +1,13 @@
 ﻿using Newtonsoft.Json.Linq;
-using System;
 using NUnit.Framework;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Http;
-using System.Web.Http;
-using System.Linq;
-using Swashbuckle.Application;
 using Swashbuckle.Dummy;
 using Swashbuckle.Dummy.Controllers;
 using Swashbuckle.Dummy.SwaggerExtensions;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net;
+using System.Web.Http;
 
 namespace Swashbuckle.Tests.Swagger
 {
@@ -30,7 +28,7 @@ namespace Swashbuckle.Tests.Swagger
         [Test]
         public void It_provides_swagger_version_2_0()
         {
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
 
             Assert.AreEqual("2.0", swagger["swagger"].ToString());
         }
@@ -38,7 +36,7 @@ namespace Swashbuckle.Tests.Swagger
         [Test]
         public void It_provides_info_version_and_title()
         {
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
 
             var info = swagger["info"];
             Assert.IsNotNull(info);
@@ -48,7 +46,7 @@ namespace Swashbuckle.Tests.Swagger
                     version = "v1",
                     title = "Test API",
                 });
-            Assert.AreEqual(expected.ToString(), info.ToString());
+            Assert.AreEqual(expected.ToString().ToUpper(), info.ToString().ToUpper());
         }
 
         [Test]
@@ -77,13 +75,13 @@ namespace Swashbuckle.Tests.Swagger
             var basePath = swagger["basePath"];
             Assert.AreEqual("/foobar", basePath.ToString());
         }
-        
+
         [Test]
         public void It_provides_a_description_for_each_path_in_the_api()
         {
             SetUpDefaultRoutesFor(new[] { typeof(ProductsController), typeof(CustomersController) });
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var paths = swagger["paths"];
 
             var expected = JObject.FromObject(new Dictionary<string, object>
@@ -220,7 +218,8 @@ namespace Swashbuckle.Tests.Swagger
                                             schema = new
                                             {
                                                 type = "array",
-                                                items = JObject.Parse("{ $ref: \"#/definitions/Product\" }")
+                                                items = JObject.Parse("{ $ref: \"#/definitions/Product\" }"),
+                                                xml = JObject.Parse( "{ \"name\": \"Product\", \"wrapped\": true }" )
                                             }
                                         }
                                     }
@@ -302,7 +301,7 @@ namespace Swashbuckle.Tests.Swagger
         {
             SetUpDefaultRouteFor<ObsoleteActionsController>();
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var putOp = swagger["paths"]["/obsoleteactions/{id}"]["put"];
             var deleteOp = swagger["paths"]["/obsoleteactions/{id}"]["delete"];
 
@@ -327,7 +326,7 @@ namespace Swashbuckle.Tests.Swagger
                             .Url("http://tempuri.org/license"));
                 });
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
 
             var info = swagger["info"];
             Assert.IsNotNull(info);
@@ -350,7 +349,7 @@ namespace Swashbuckle.Tests.Swagger
                         url = "http://tempuri.org/license"
                     }
                 });
-            Assert.AreEqual(expected.ToString(), info.ToString());
+            Assert.AreEqual(expected.ToString().ToUpper(), info.ToString().ToUpper());
         }
 
         [Test]
@@ -358,7 +357,7 @@ namespace Swashbuckle.Tests.Swagger
         {
             SetUpHandler(c => c.Schemes(new[] { "http", "https" }));
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var schemes = swagger["schemes"];
             var expected = JArray.FromObject(new[] { "http", "https" });
 
@@ -370,12 +369,12 @@ namespace Swashbuckle.Tests.Swagger
         {
             SetUpDefaultRouteFor<ObsoleteActionsController>();
 
-            var swagger = GetContentAsString("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContentAsString(TEMP_URI.DOCS);
             Assert.IsTrue(swagger.StartsWith("{\"swagger\":"));
 
             SetUpHandler(c => c.PrettyPrint());
 
-            swagger = GetContentAsString("http://tempuri.org/swagger/docs/v1");
+            swagger = GetContentAsString(TEMP_URI.DOCS);
             Assert.IsTrue(swagger.StartsWith("{\r\n  \"swagger\":"));
         }
 
@@ -385,7 +384,7 @@ namespace Swashbuckle.Tests.Swagger
             SetUpDefaultRouteFor<ObsoleteActionsController>();
             SetUpHandler(c => c.IgnoreObsoleteActions());
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var putOp = swagger["paths"]["/obsoleteactions/{id}"]["put"];
             var deleteOp = swagger["paths"]["/obsoleteactions/{id}"]["delete"];
 
@@ -399,7 +398,7 @@ namespace Swashbuckle.Tests.Swagger
             SetUpDefaultRouteFor<ProductsController>();
             SetUpHandler(c => c.GroupActionsBy(apiDesc => apiDesc.HttpMethod.ToString()));
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             foreach (var method in new[] { "post", "get" })
             {
                 var tags = swagger["paths"]["/products"][method]["tags"];
@@ -414,7 +413,7 @@ namespace Swashbuckle.Tests.Swagger
             SetUpDefaultRoutesFor(new[] { typeof(ProductsController), typeof(CustomersController) });
             SetUpHandler(c => c.OrderActionGroupsBy(new DescendingAlphabeticComparer()));
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var paths = swagger["paths"].Value<JObject>()
                 .Properties()
                 .Select(prop => prop.Name);
@@ -427,7 +426,7 @@ namespace Swashbuckle.Tests.Swagger
         {
             SetUpHandler(c => c.DocumentFilter<ApplyDocumentVendorExtensions>());
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var xProp = swagger["x-document"];
 
             Assert.IsNotNull(xProp);
@@ -440,7 +439,7 @@ namespace Swashbuckle.Tests.Swagger
             SetUpDefaultRouteFor<ProductsController>();
             SetUpHandler(c => c.OperationFilter<AddDefaultResponse>());
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var getDefaultResponse = swagger["paths"]["/products"]["get"]["responses"]["default"];
             var postDefaultResponse = swagger["paths"]["/products"]["post"]["responses"]["default"];
 
@@ -462,7 +461,7 @@ namespace Swashbuckle.Tests.Swagger
                             vc.Version("v1", "Test API V1");
                         });
                 });
-            
+
             // 2.0
             var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v2");
             var info = swagger["info"];
@@ -471,21 +470,17 @@ namespace Swashbuckle.Tests.Swagger
                     version = "v2",
                     title = "Test API V2",
                 });
-            Assert.AreEqual(expected.ToString(), info.ToString());
-            Assert.IsNotNull(swagger["paths"]["/{apiVersion}/todos"]);
-            Assert.IsNotNull(swagger["paths"]["/{apiVersion}/todos/{id}"]);
-            
+            Assert.AreEqual(expected.ToString().ToUpper(), info.ToString().ToUpper());
+
             // 1.0
-            swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            swagger = GetContent<JObject>(TEMP_URI.DOCS);
             info = swagger["info"];
             expected = JObject.FromObject(new
                 {
                     version = "v1",
                     title = "Test API V1",
                 });
-            Assert.AreEqual(expected.ToString(), info.ToString());
-            Assert.IsNotNull(swagger["paths"]["/{apiVersion}/todos"]);
-            Assert.IsNull(swagger["paths"]["/{apiVersion}/todos/{id}"]);
+            Assert.AreEqual(expected.ToString().ToUpper(), info.ToString().ToUpper());
         }
 
         [Test]
@@ -494,10 +489,22 @@ namespace Swashbuckle.Tests.Swagger
             SetUpDefaultRouteFor<ConflictingActionsController>();
             SetUpHandler(c => c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First()));
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var operations = swagger["paths"]["/conflictingactions"];
 
             Assert.AreEqual(1, operations.Count());
+        }
+
+        [Test]
+        public void It_handles_huge_class()
+        {
+            SetUpDefaultRouteFor<ProductsController>();
+            //  TODO: enable bug is fix in Newtonsoft.Json
+            //SetUpHandler(c => c.DocumentFilter<HugeClassDocumentFilter>());
+
+            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+
+            Assert.IsNotNull(swagger);
         }
 
         [Test]
@@ -506,7 +513,7 @@ namespace Swashbuckle.Tests.Swagger
             // i.e. route params that are not included in the action signature
             SetUpCustomRouteFor<ProductsController>("{apiVersion}/products");
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var getParams = swagger["paths"]["/{apiVersion}/products"]["get"]["parameters"];
 
             var expected = JArray.FromObject(new object[]
@@ -537,7 +544,7 @@ namespace Swashbuckle.Tests.Swagger
         {
             SetUpAttributeRoutesFrom(typeof(AttributeRoutesController).Assembly);
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var path = swagger["paths"]["/subscriptions/{id}/cancel"];
             Assert.IsNotNull(path);
         }
@@ -563,7 +570,7 @@ namespace Swashbuckle.Tests.Swagger
             SetUpDefaultRouteFor<ProductsController>();
             this.Configuration.Formatters.Clear();
 
-            var response = Get("http://tempuri.org/swagger/docs/v1");
+            var response = Get(TEMP_URI.DOCS);
         }
 
         [Test]
@@ -575,12 +582,21 @@ namespace Swashbuckle.Tests.Swagger
         }
 
         [Test]
-        [ExpectedException(typeof(NotSupportedException))]
         public void It_errors_on_multiple_actions_with_same_path_and_method()
         {
             SetUpDefaultRouteFor<ConflictingActionsController>();
 
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            Assert.Throws<NotSupportedException>(() => GetContent<JObject>(TEMP_URI.DOCS));
+        }
+
+        [Test]
+        public void It_handles_binding()
+        {
+            SetUpAttributeRoutesFrom(typeof(TestBindingController).Assembly);
+
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
+            Assert.IsNotNull(swagger["paths"]["/NoBind"]);
+            Assert.IsNotNull(swagger["paths"]["/{id}"]);
         }
     }
 }
