@@ -12,13 +12,14 @@ namespace Swashbuckle.Swagger
             IEnumerable<string> schemes = null,
             IDictionary<string, SecurityScheme> securityDefinitions = null,
             bool ignoreObsoleteActions = false,
+            string accessControlAllowOrigin = null,
             Func<ApiDescription, string> groupingKeySelector = null,
             IComparer<string> groupingKeyComparer = null,
             IDictionary<Type, Func<Schema>> customSchemaMappings = null,
             IEnumerable<ISchemaFilter> schemaFilters = null,
             IEnumerable<IModelFilter> modelFilters = null,
             bool ignoreObsoleteProperties = false,
-            Func<Type, string> schemaIdSelector = null, 
+            Func<Type, string> schemaIdSelector = null,
             bool describeAllEnumsAsStrings = false,
             bool describeStringEnumsInCamelCase = false,
             bool applyFiltersToAllSchemas = false,
@@ -31,6 +32,7 @@ namespace Swashbuckle.Swagger
             Schemes = schemes;
             SecurityDefinitions = securityDefinitions;
             IgnoreObsoleteActions = ignoreObsoleteActions;
+            AccessControlAllowOrigin = accessControlAllowOrigin;
             GroupingKeySelector = groupingKeySelector ?? DefaultGroupingKeySelector;
             GroupingKeyComparer = groupingKeyComparer ?? Comparer<string>.Default;
             CustomSchemaMappings = customSchemaMappings ?? new Dictionary<Type, Func<Schema>>();
@@ -53,6 +55,8 @@ namespace Swashbuckle.Swagger
         public IDictionary<string, SecurityScheme> SecurityDefinitions { get; private set; }
 
         public bool IgnoreObsoleteActions { get; private set; }
+
+        public string AccessControlAllowOrigin { get; private set; }
 
         public Func<ApiDescription, string> GroupingKeySelector { get; private set; }
 

@@ -24,6 +24,7 @@ namespace Swashbuckle.Application
         private IDictionary<string, SecuritySchemeBuilder> _securitySchemeBuilders;
         private bool _prettyPrint;
         private bool _ignoreObsoleteActions;
+        private string _accessControlAllowOrigin;
         private Func<ApiDescription, string> _groupingKeySelector;
         private IComparer<string> _groupingKeyComparer;
         private readonly IDictionary<Type, Func<Schema>> _customSchemaMappings;
@@ -48,6 +49,7 @@ namespace Swashbuckle.Application
             _securitySchemeBuilders = new Dictionary<string, SecuritySchemeBuilder>();
             _prettyPrint = false;
             _ignoreObsoleteActions = false;
+            _accessControlAllowOrigin = null;
             _customSchemaMappings = new Dictionary<Type, Func<Schema>>();
             _schemaFilters = new List<Func<ISchemaFilter>>();
             _modelFilters = new List<Func<IModelFilter>>();
@@ -117,6 +119,11 @@ namespace Swashbuckle.Application
         public void IgnoreObsoleteActions()
         {
             _ignoreObsoleteActions = true;
+        }
+
+        public void AccessControlAllowOrigin(string value)
+        {
+            _accessControlAllowOrigin = value;
         }
 
         public void GroupActionsBy(Func<ApiDescription, string> keySelector)
@@ -293,6 +300,7 @@ namespace Swashbuckle.Application
                 schemes: _schemes,
                 securityDefinitions: securityDefintitions,
                 ignoreObsoleteActions: _ignoreObsoleteActions,
+                accessControlAllowOrigin: _accessControlAllowOrigin,
                 groupingKeySelector: _groupingKeySelector,
                 groupingKeyComparer: _groupingKeyComparer,
                 customSchemaMappings: _customSchemaMappings,

@@ -82,6 +82,9 @@ namespace $rootnamespace$
                         // Set this flag to omit descriptions for any actions decorated with the Obsolete attribute
                         //c.IgnoreObsoleteActions();
 
+						// Comment this setting to disable Access-Control-Allow-Origin
+                        c.AccessControlAllowOrigin("*");
+
                         // Each operation be assigned one or more tags which are then used by consumers for various reasons.
                         // For example, the swagger-ui groups operations according to the first tag of each operation.
                         // By default, this will be controller name but you can use the "GroupActionsBy" option to
