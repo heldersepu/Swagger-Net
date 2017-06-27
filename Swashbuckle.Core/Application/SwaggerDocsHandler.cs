@@ -1,11 +1,9 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Net.Http.Formatting;
 using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 using System.Collections.Generic;
 using Swashbuckle.Swagger;
 using System.Net;
@@ -31,7 +29,13 @@ namespace Swashbuckle.Application
             {
                 var swaggerDoc = swaggerProvider.GetSwagger(rootUrl, apiVersion.ToUpper());
                 var content = ContentFor(request, swaggerDoc);
-                return TaskFor(new HttpResponseMessage { Content = content });
+                var response = new HttpResponseMessage { Content = content };
+                string accessControlAllowOrigin = _config.GetAccessControlAllowOrigin();
+                if (!string.IsNullOrEmpty(accessControlAllowOrigin))
+                {
+                    response.Headers.Add("Access-Control-Allow-Origin", accessControlAllowOrigin);
+                }
+                return TaskFor(response);
             }
             catch (UnknownApiVersion ex)
             {

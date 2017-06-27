@@ -14,9 +14,7 @@ namespace Swashbuckle.Tests.Swagger
     [TestFixture]
     public class CoreTests : SwaggerTestBase
     {
-        public CoreTests()
-            : base("swagger/docs/{apiVersion}")
-        { }
+        public CoreTests() : base("swagger/docs/{apiVersion}") { }
 
         [SetUp]
         public void SetUp()
@@ -31,6 +29,15 @@ namespace Swashbuckle.Tests.Swagger
             var swagger = GetContent<JObject>(TEMP_URI.DOCS);
 
             Assert.AreEqual("2.0", swagger["swagger"].ToString());
+        }
+
+        [Test]
+        public void It_provides_headers_access_control_allow_origin()
+        {
+            SetUpHandler(c => c.AccessControlAllowOrigin("*"));
+            var headers = GetHeaders(TEMP_URI.DOCS);
+
+            Assert.IsTrue(headers.Contains("Access-Control-Allow-Origin"));
         }
 
         [Test]

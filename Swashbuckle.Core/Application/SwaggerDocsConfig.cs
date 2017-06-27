@@ -332,6 +332,11 @@ namespace Swashbuckle.Application
             return _rootUrlResolver(swaggerRequest);
         }
 
+        internal string GetAccessControlAllowOrigin()
+        {
+            return _accessControlAllowOrigin;
+        }
+
         internal IEnumerable<string> GetApiVersions()
         {
             return _versionInfoBuilder.Build().Select(entry => entry.Key);

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Reflection;
 using System.Threading;
 using System.Web.Http;
@@ -94,6 +95,12 @@ namespace Swashbuckle.Tests
         {
             var responseMessage = Get(uri);
             return responseMessage.Content.ReadAsAsync<TContent>().Result;
+        }
+
+        protected HttpResponseHeaders GetHeaders(string uri)
+        {
+            var responseMessage = Get(uri);
+            return responseMessage.Headers;
         }
 
         protected string GetContentAsString(string uri)
