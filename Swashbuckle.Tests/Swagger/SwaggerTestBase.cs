@@ -3,7 +3,7 @@ using System;
 
 namespace Swashbuckle.Tests.Swagger
 {
-    public class SwaggerTestBase : HttpMessageHandlerTestBase<SwaggerDocsHandler>
+    public abstract class SwaggerTestBase : HttpMessageHandlerTestBase<SwaggerDocsHandler>
     {
         protected SwaggerTestBase(string routeTemplate) : base(routeTemplate) {}
 
