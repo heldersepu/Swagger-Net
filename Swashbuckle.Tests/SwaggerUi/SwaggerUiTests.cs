@@ -2,6 +2,7 @@
 using Swashbuckle.Application;
 using Swashbuckle.Dummy;
 using System;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System.Net;
 
@@ -211,12 +212,12 @@ namespace Swashbuckle.Tests.SwaggerUi
         public void It_returns_correct_asset_mime_type(string resourceUri, string mediaType)
         {
             var response = Get(resourceUri);
+            var resMediaType = response.Content.Headers.ContentType.MediaType;
 
-            System.Diagnostics.Debug.WriteLine(string.Format("[{0}] {1} => {2}", response.StatusCode, resourceUri, response.Content.Headers.ContentType.MediaType));
+            Debug.WriteLine(string.Format("[{0}] {1} => {2}", response.StatusCode, resourceUri, resMediaType));
 
-            Assert.Pass();
-            //Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
-            //Assert.AreEqual(mediaType, response.Content.Headers.ContentType.MediaType);
+            Assert.AreEqual(HttpStatusCode.OK, response.StatusCode);
+            Assert.AreEqual(mediaType, resMediaType);
         }
 
         private void SetUpHandler(Action<SwaggerUiConfig> configure = null)
