@@ -368,6 +368,7 @@ The above is a sample code block";
         internal static string StripLineEndings(this string value)
         {
             if (string.IsNullOrEmpty(value)) return value;
+            return value.Replace("\n", "").Replace("\r", "");
         }
     }
 }
