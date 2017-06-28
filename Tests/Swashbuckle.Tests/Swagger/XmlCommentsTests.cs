@@ -120,7 +120,7 @@ namespace Swashbuckle.Tests.Swagger
         [Test]
         public void It_documents_schema_properties_from_property_example_tags()
         {
-            var swagger = GetContent<JObject>( "http://tempuri.org/swagger/docs/v1" );
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
 
             var passwordAccountId = swagger[ "definitions" ][ "Account" ][ "properties" ][ "AccountID" ];
             Assert.IsNotNull( passwordAccountId[ "example" ] );
