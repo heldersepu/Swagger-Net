@@ -84,7 +84,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\Swashbuckle.Core\Swashbuckle.Core.csproj">
+    <ProjectReference Include="..\..\Swashbuckle.Core\Swashbuckle.Core.csproj">
       <Project>{d50a26ff-02c6-4c16-ba94-4cd7d43efbb3}</Project>
       <Name>Swashbuckle.Core</Name>
     </ProjectReference>

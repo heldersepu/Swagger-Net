@@ -28,18 +28,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swashbuckle.Core", "Swashbu
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6A2C69FA-6824-44F3-A1A5-1313050FA567}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swashbuckle.Tests", "Swashbuckle.Tests\Swashbuckle.Tests.csproj", "{2F5D233D-F779-473E-9EEC-ACC58AC266ED}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swashbuckle.Dummy.WebHost", "Swashbuckle.Dummy.WebHost\Swashbuckle.Dummy.WebHost.csproj", "{E51BDA79-1942-490E-A1D4-E37235736D8A}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swashbuckle.Dummy.Core", "Swashbuckle.Dummy.Core\Swashbuckle.Dummy.Core.csproj", "{2DFE3931-747F-48C6-8530-B74710988095}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swashbuckle.Dummy.SelfHost", "Swashbuckle.Dummy.SelfHost\Swashbuckle.Dummy.SelfHost.csproj", "{2D1F2F73-5828-413C-9FD0-6F81A964C82D}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{C63363AF-2303-4489-8287-95D94C414663}"
 	ProjectSection(SolutionItems) = preProject
 		README.md = README.md
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swashbuckle.Tests", "Tests\Swashbuckle.Tests\Swashbuckle.Tests.csproj", "{2F5D233D-F779-473E-9EEC-ACC58AC266ED}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swashbuckle.Dummy.WebHost", "Tests\Swashbuckle.Dummy.WebHost\Swashbuckle.Dummy.WebHost.csproj", "{E51BDA79-1942-490E-A1D4-E37235736D8A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swashbuckle.Dummy.SelfHost", "Tests\Swashbuckle.Dummy.SelfHost\Swashbuckle.Dummy.SelfHost.csproj", "{2D1F2F73-5828-413C-9FD0-6F81A964C82D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swashbuckle.Dummy.Core", "Tests\Swashbuckle.Dummy.Core\Swashbuckle.Dummy.Core.csproj", "{2DFE3931-747F-48C6-8530-B74710988095}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -62,14 +62,14 @@ Global
 		{E51BDA79-1942-490E-A1D4-E37235736D8A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E51BDA79-1942-490E-A1D4-E37235736D8A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E51BDA79-1942-490E-A1D4-E37235736D8A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2DFE3931-747F-48C6-8530-B74710988095}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2DFE3931-747F-48C6-8530-B74710988095}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2DFE3931-747F-48C6-8530-B74710988095}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2DFE3931-747F-48C6-8530-B74710988095}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2D1F2F73-5828-413C-9FD0-6F81A964C82D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2D1F2F73-5828-413C-9FD0-6F81A964C82D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D1F2F73-5828-413C-9FD0-6F81A964C82D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D1F2F73-5828-413C-9FD0-6F81A964C82D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2DFE3931-747F-48C6-8530-B74710988095}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2DFE3931-747F-48C6-8530-B74710988095}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2DFE3931-747F-48C6-8530-B74710988095}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2DFE3931-747F-48C6-8530-B74710988095}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -77,7 +77,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{2F5D233D-F779-473E-9EEC-ACC58AC266ED} = {6A2C69FA-6824-44F3-A1A5-1313050FA567}
 		{E51BDA79-1942-490E-A1D4-E37235736D8A} = {6A2C69FA-6824-44F3-A1A5-1313050FA567}
-		{2DFE3931-747F-48C6-8530-B74710988095} = {6A2C69FA-6824-44F3-A1A5-1313050FA567}
 		{2D1F2F73-5828-413C-9FD0-6F81A964C82D} = {6A2C69FA-6824-44F3-A1A5-1313050FA567}
+		{2DFE3931-747F-48C6-8530-B74710988095} = {6A2C69FA-6824-44F3-A1A5-1313050FA567}
 	EndGlobalSection
 EndGlobal
