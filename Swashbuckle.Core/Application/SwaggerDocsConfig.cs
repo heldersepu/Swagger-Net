@@ -218,11 +218,6 @@ namespace Swashbuckle.Application
             _xmlDocFactories.Add(xmlDocFactory);
         }
 
-        public void IncludeXmlComments(Stream xmlStream)
-        {
-            _xmlDocFactories.Add(() => new XPathDocument(xmlStream));
-        }
-
         public void IncludeXmlComments(string filePath)
         {
             if (File.Exists(filePath))
@@ -247,7 +242,11 @@ namespace Swashbuckle.Application
                 {
                     if (name.ToUpper().EndsWith(".XML"))
                     {
-                        IncludeXmlComments(thisAssembly.GetManifestResourceStream(name));
+                        IncludeXmlComments(
+                            () => new XPathDocument(
+                                thisAssembly.GetManifestResourceStream(name)
+                            )
+                        );
                     }
                 }
             }

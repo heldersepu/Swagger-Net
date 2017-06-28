@@ -282,6 +282,17 @@ namespace Swashbuckle.Tests.Swagger
         }
 
         [Test]
+        public void It_does_not_error_on_multiple_calls()
+        {
+            JObject swagger;
+            for (int i = 0; i < 10; i++)
+            {
+                swagger = GetContent<JObject>(TEMP_URI.DOCS);
+                Assert.IsNotNull(swagger);
+            }
+        }
+
+        [Test]
         public void It_loads_multiple_xml_comments()
         {
             SetUpHandler(c =>
