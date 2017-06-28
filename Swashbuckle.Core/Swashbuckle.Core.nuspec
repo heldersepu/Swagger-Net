@@ -14,6 +14,12 @@
     <tags>Swagger SwaggerUi Documentation Discovery Help WebApi AspNet AspNetWebApi Docs SelfHost OWIN</tags>
     <dependencies>
       <dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.3" />
+      <dependency id="Microsoft.AspNet.WebApi.WebHost" version="5.2.3" />
+      <dependency id="WebActivatorEx" />
+      <dependency id="Swashbuckle.Core" version="7.0.1" />
     </dependencies>
   </metadata>
+  <files>
+    <file src="Nuget\Content\App_Start\SwaggerConfig.cs.pp" target="Content\App_Start" />
+  </files>
 </package>

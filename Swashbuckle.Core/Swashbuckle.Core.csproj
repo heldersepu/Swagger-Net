@@ -134,6 +134,7 @@
       <SubType>Designer</SubType>
     </Content>
     <None Include="app.config" />
+    <None Include="Nuget\Content\App_Start\SwaggerConfig.cs.pp" />
     <None Include="packages.config" />
     <None Include="Swashbuckle.Core.snk" />
   </ItemGroup>

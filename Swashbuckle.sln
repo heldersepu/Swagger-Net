@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.23107.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "swagger-ui", "http://localhost:55139", "{DDE07B02-DD45-4ABF-96D3-A4FBB144BBA1}"
 	ProjectSection(WebsiteProperties) = preProject
@@ -35,8 +35,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swashbuckle.Core", "Swashbu
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6A2C69FA-6824-44F3-A1A5-1313050FA567}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swashbuckle.WebHost", "Swashbuckle.WebHost\Swashbuckle.WebHost.csproj", "{FE974ABE-021C-415C-BF57-041A42136AA1}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swashbuckle.Tests", "Swashbuckle.Tests\Swashbuckle.Tests.csproj", "{2F5D233D-F779-473E-9EEC-ACC58AC266ED}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swashbuckle.Dummy.WebHost", "Swashbuckle.Dummy.WebHost\Swashbuckle.Dummy.WebHost.csproj", "{E51BDA79-1942-490E-A1D4-E37235736D8A}"
@@ -63,10 +61,6 @@ Global
 		{D50A26FF-02C6-4C16-BA94-4CD7D43EFBB3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D50A26FF-02C6-4C16-BA94-4CD7D43EFBB3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D50A26FF-02C6-4C16-BA94-4CD7D43EFBB3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{FE974ABE-021C-415C-BF57-041A42136AA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FE974ABE-021C-415C-BF57-041A42136AA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FE974ABE-021C-415C-BF57-041A42136AA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FE974ABE-021C-415C-BF57-041A42136AA1}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2F5D233D-F779-473E-9EEC-ACC58AC266ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2F5D233D-F779-473E-9EEC-ACC58AC266ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F5D233D-F779-473E-9EEC-ACC58AC266ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
