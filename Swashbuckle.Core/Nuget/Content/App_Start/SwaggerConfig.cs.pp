@@ -67,7 +67,7 @@ namespace $rootnamespace$
                         //c.BasicAuth("basic")
                         //    .Description("Basic HTTP Authentication");
                         //
-						// NOTE: You must also configure 'EnableApiKeySupport' below in the SwaggerUI section
+                        // NOTE: You must also configure 'EnableApiKeySupport' below in the SwaggerUI section
                         //c.ApiKey("apiKey")
                         //    .Description("API Key Authentication")
                         //    .Name("apiKey")
@@ -87,7 +87,7 @@ namespace $rootnamespace$
                         // Set this flag to omit descriptions for any actions decorated with the Obsolete attribute
                         //c.IgnoreObsoleteActions();
 
-						// Comment this setting to disable Access-Control-Allow-Origin
+                        // Comment this setting to disable Access-Control-Allow-Origin
                         c.AccessControlAllowOrigin("*");
 
                         // Each operation be assigned one or more tags which are then used by consumers for various reasons.
@@ -113,7 +113,7 @@ namespace $rootnamespace$
                         // more Xml comment files.
                         //
                         //c.IncludeXmlComments(AppDomain.CurrentDomain.BaseDirectory + "file.ext");
-						c.IncludeAllXmlComments(thisAssembly, AppDomain.CurrentDomain.BaseDirectory);
+                        c.IncludeAllXmlComments(thisAssembly, AppDomain.CurrentDomain.BaseDirectory);
 
                         // Swashbuckle makes a best attempt at generating Swagger compliant JSON schemas for the various types
                         // exposed in your API. However, there may be occasions when more control of the output is needed.
