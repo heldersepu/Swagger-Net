@@ -10,7 +10,7 @@ namespace Swashbuckle.Dummy.Controllers
         public int Create(JsonRequest request)
         {
             throw new NotImplementedException();
-        } 
+        }
     }
 
     public class JsonRequest
@@ -28,6 +28,6 @@ namespace Swashbuckle.Dummy.Controllers
     public enum Category
     {
         A = 2,
-        B = 4 
+        B = 4
     }
 }

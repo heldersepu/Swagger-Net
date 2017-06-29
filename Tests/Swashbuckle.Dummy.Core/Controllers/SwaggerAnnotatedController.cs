@@ -13,7 +13,7 @@ namespace Swashbuckle.Dummy.Controllers
     {
         [SwaggerResponseRemoveDefaults]
         [SwaggerResponse(HttpStatusCode.Created, Type = typeof(int))]
-        [SwaggerResponse(HttpStatusCode.BadRequest, "Invalid message", typeof(HttpError))] 
+        [SwaggerResponse(HttpStatusCode.BadRequest, "Invalid message", typeof(HttpError))]
         public int Create(Message message)
         {
             throw new NotImplementedException();

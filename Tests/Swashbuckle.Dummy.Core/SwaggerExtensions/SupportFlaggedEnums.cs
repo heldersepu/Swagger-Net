@@ -20,6 +20,6 @@ namespace Swashbuckle.Dummy.SwaggerExtensions
                 param.type = "array";
                 param.collectionFormat = "csv";
             }
-        } 
+        }
     }
 }

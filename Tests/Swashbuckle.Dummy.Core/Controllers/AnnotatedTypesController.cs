@@ -17,7 +17,7 @@ namespace Swashbuckle.Dummy.Controllers
             throw new NotImplementedException();
         }
     }
-    
+
     public class Payment
     {
         [Required]

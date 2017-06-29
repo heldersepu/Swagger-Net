@@ -11,7 +11,7 @@ namespace Swashbuckle.Dummy.Controllers
             throw new NotImplementedException();
         }
     }
-    
+
     public class Order
     {
         public IEnumerable<LineItem> LineItems { get; set; }
