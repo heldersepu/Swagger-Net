@@ -284,7 +284,7 @@ namespace Swashbuckle.Tests.Swagger
         [Test]
         public void It_does_not_error_on_multiple_calls()
         {
-            //SetUpHandler(c => { c.AllowCachingSwaggerDoc(); });
+            SetUpHandler(c => { c.AllowCachingSwaggerDoc(); });
             JObject swagger;
             for (int i = 0; i < 100; i++)
             {
