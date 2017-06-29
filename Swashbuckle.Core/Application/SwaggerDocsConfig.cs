@@ -25,6 +25,7 @@ namespace Swashbuckle.Application
         private bool _prettyPrint;
         private bool _ignoreObsoleteActions;
         private string _accessControlAllowOrigin;
+        private bool _cachingSwaggerDoc;
         private Func<ApiDescription, string> _groupingKeySelector;
         private IComparer<string> _groupingKeyComparer;
         private readonly IDictionary<Type, Func<Schema>> _customSchemaMappings;
@@ -50,6 +51,7 @@ namespace Swashbuckle.Application
             _prettyPrint = false;
             _ignoreObsoleteActions = false;
             _accessControlAllowOrigin = null;
+            _cachingSwaggerDoc = false;
             _customSchemaMappings = new Dictionary<Type, Func<Schema>>();
             _schemaFilters = new List<Func<ISchemaFilter>>();
             _modelFilters = new List<Func<IModelFilter>>();
@@ -124,6 +126,11 @@ namespace Swashbuckle.Application
         public void AccessControlAllowOrigin(string value)
         {
             _accessControlAllowOrigin = value;
+        }
+
+        public void AllowCachingSwaggerDoc()
+        {
+            _cachingSwaggerDoc = true;
         }
 
         public void GroupActionsBy(Func<ApiDescription, string> keySelector)
@@ -334,6 +341,11 @@ namespace Swashbuckle.Application
         internal string GetAccessControlAllowOrigin()
         {
             return _accessControlAllowOrigin;
+        }
+
+        internal bool NoCachingSwaggerDoc()
+        {
+            return !_cachingSwaggerDoc;
         }
 
         internal IEnumerable<string> GetApiVersions()

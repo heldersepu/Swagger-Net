@@ -12,6 +12,7 @@ namespace Swashbuckle.Application
 {
     public class SwaggerDocsHandler : HttpMessageHandler
     {
+        private static SwaggerDocument swaggerDoc = null;
         private readonly SwaggerDocsConfig _config;
 
         public SwaggerDocsHandler(SwaggerDocsConfig config)
@@ -21,15 +22,9 @@ namespace Swashbuckle.Application
 
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
         {
-            var swaggerProvider = _config.GetSwaggerProvider(request);
-            var rootUrl = _config.GetRootUrl(request);
-            var apiVersion = request.GetRouteData().Values["apiVersion"].ToString();
-
             try
             {
-                var swaggerDoc = swaggerProvider.GetSwagger(rootUrl, apiVersion.ToUpper());
-                var content = ContentFor(request, swaggerDoc);
-                var response = new HttpResponseMessage { Content = content };
+                var response = new HttpResponseMessage { Content = GetContent(request) };
                 string accessControlAllowOrigin = _config.GetAccessControlAllowOrigin();
                 if (!string.IsNullOrEmpty(accessControlAllowOrigin))
                 {
@@ -41,6 +36,19 @@ namespace Swashbuckle.Application
             {
                 return TaskFor(request.CreateErrorResponse(HttpStatusCode.NotFound, ex));
             }
+        }
+
+        private HttpContent GetContent(HttpRequestMessage request)
+        {
+            if (_config.NoCachingSwaggerDoc() || swaggerDoc == null)
+            {
+                var swaggerProvider = _config.GetSwaggerProvider(request);
+                var rootUrl = _config.GetRootUrl(request);
+                var apiVersion = request.GetRouteData().Values["apiVersion"].ToString();
+
+                swaggerDoc = swaggerProvider.GetSwagger(rootUrl, apiVersion.ToUpper());
+            }
+            return ContentFor(request, swaggerDoc);
         }
 
         private HttpContent ContentFor(HttpRequestMessage request, SwaggerDocument swaggerDoc)
