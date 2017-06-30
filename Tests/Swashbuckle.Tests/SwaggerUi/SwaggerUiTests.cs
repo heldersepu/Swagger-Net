@@ -28,7 +28,7 @@ namespace Swashbuckle.Tests.SwaggerUi
             var content = GetContentAsString(TEMP_URI.INDEX);
 
             StringAssert.Contains("discoveryPaths: arrayFrom('swagger/docs/v1')", content);
-            StringAssert.Contains("swagger-ui-container", content);
+            StringAssert.Contains("swagger-ui-bundle", content);
         }
 
         [Test]
@@ -36,7 +36,7 @@ namespace Swashbuckle.Tests.SwaggerUi
         {
             var content = GetContentAsString(TEMP_URI.INDEX);
 
-            StringAssert.Contains("swagger-ui-container", content);
+            StringAssert.Contains("swagger-ui-bundle", content);
         }
 
         [Test]
