@@ -79,6 +79,22 @@
             return (configString !== "null") ? configString : null;
         }
 
+        function getScript(source) {
+            var script = document.createElement('script');
+            var prior = document.getElementsByTagName('script')[0];
+            script.async = 1;
+
+            script.onload = script.onreadystatechange = function (_, isAbort) {
+                if (isAbort || !script.readyState || /loaded|complete/.test(script.readyState)) {
+                    script.onload = script.onreadystatechange = null;
+                    script = undefined;
+                }
+            };
+
+            script.src = source;
+            prior.parentNode.insertBefore(script, prior);
+        }
+
         window.swashbuckleConfig = {
             rootUrl: '%(RootUrl)',
             discoveryPaths: arrayFrom('%(DiscoveryPaths)'),
@@ -106,7 +122,14 @@
             plugins: [ SwaggerUIBundle.plugins.DownloadUrl ],
             layout: "StandaloneLayout",
             docExpansion: swashbuckleConfig.docExpansion,
-            validatorUrl: swashbuckleConfig.validatorUrl
+            validatorUrl: swashbuckleConfig.validatorUrl,
+            oauth2RedirectUrl: window.location.href.replace('index', 'oauth2-redirect-html').split('#')[0],
+            onComplete: function (swaggerApi, swaggerUi) {
+                window.swaggerApi = swaggerApi;
+                swashbuckleConfig.customScripts.forEach(function (script) {
+                    getScript(script);
+                });
+            }
         })
 
         window.ui = ui
