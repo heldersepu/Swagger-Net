@@ -104,7 +104,9 @@
             dom_id: '#swagger-ui',
             presets: [ SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset ],
             plugins: [ SwaggerUIBundle.plugins.DownloadUrl ],
-            layout: "StandaloneLayout"
+            layout: "StandaloneLayout",
+            docExpansion: swashbuckleConfig.docExpansion,
+            validatorUrl: swashbuckleConfig.validatorUrl
         })
 
         window.ui = ui
