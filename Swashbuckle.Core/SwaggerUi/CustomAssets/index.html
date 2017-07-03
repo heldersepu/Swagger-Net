@@ -69,51 +69,52 @@
 <script src="swagger-ui-bundle-js"> </script>
 <script src="swagger-ui-standalone-preset-js"> </script>
 <script>
-    window.onload = function () {
-        // Get Swashbuckle config into JavaScript
-        function arrayFrom(configString) {
-            return (configString !== "") ? configString.split('|') : [];
-        }
+    // Get Swashbuckle config into JavaScript
+    function arrayFrom(configString) {
+        return (configString !== "") ? configString.split('|') : [];
+    }
 
-        function stringOrNullFrom(configString) {
-            return (configString !== "null") ? configString : null;
-        }
+    function stringOrNullFrom(configString) {
+        return (configString !== "null") ? configString : null;
+    }
 
-        function getScript(source) {
-            var script = document.createElement('script');
-            var prior = document.getElementsByTagName('script')[0];
-            script.async = 1;
+    function getScript(source) {
+        var script = document.createElement('script');
+        var prior = document.getElementsByTagName('script')[0];
+        script.async = 1;
 
-            script.onload = script.onreadystatechange = function (_, isAbort) {
-                if (isAbort || !script.readyState || /loaded|complete/.test(script.readyState)) {
-                    script.onload = script.onreadystatechange = null;
-                    script = undefined;
-                }
-            };
-
-            script.src = source;
-            prior.parentNode.insertBefore(script, prior);
-        }
-
-        window.swashbuckleConfig = {
-            rootUrl: '%(RootUrl)',
-            discoveryPaths: arrayFrom('%(DiscoveryPaths)'),
-            booleanValues: arrayFrom('%(BooleanValues)'),
-            validatorUrl: stringOrNullFrom('%(ValidatorUrl)'),
-            customScripts: arrayFrom('%(CustomScripts)'),
-            docExpansion: '%(DocExpansion)',
-            supportedSubmitMethods: arrayFrom('%(SupportedSubmitMethods)'),
-            oAuth2Enabled: ('%(OAuth2Enabled)' == 'true'),
-            oAuth2ClientId: '%(OAuth2ClientId)',
-            oAuth2ClientSecret: '%(OAuth2ClientSecret)',
-            oAuth2Realm: '%(OAuth2Realm)',
-            oAuth2AppName: '%(OAuth2AppName)',
-            oAuth2ScopeSeperator: '%(OAuth2ScopeSeperator)',
-            oAuth2AdditionalQueryStringParams: JSON.parse('%(OAuth2AdditionalQueryStringParams)'),
-            apiKeyName: '%(ApiKeyName)',
-            apiKeyIn: '%(ApiKeyIn)'
+        script.onload = script.onreadystatechange = function (_, isAbort) {
+            if (isAbort || !script.readyState || /loaded|complete/.test(script.readyState)) {
+                script.onload = script.onreadystatechange = null;
+                script = undefined;
+            }
         };
 
+        script.src = source;
+        prior.parentNode.insertBefore(script, prior);
+    }
+
+    window.swashbuckleConfig = {
+        rootUrl: '%(RootUrl)',
+        discoveryPaths: arrayFrom('%(DiscoveryPaths)'),
+        booleanValues: arrayFrom('%(BooleanValues)'),
+        validatorUrl: stringOrNullFrom('%(ValidatorUrl)'),
+        customScripts: arrayFrom('%(CustomScripts)'),
+        docExpansion: '%(DocExpansion)',
+        supportedSubmitMethods: arrayFrom('%(SupportedSubmitMethods)'),
+        oAuth2Enabled: ('%(OAuth2Enabled)' == 'true'),
+        oAuth2ClientId: '%(OAuth2ClientId)',
+        oAuth2ClientSecret: '%(OAuth2ClientSecret)',
+        oAuth2Realm: '%(OAuth2Realm)',
+        oAuth2AppName: '%(OAuth2AppName)',
+        oAuth2ScopeSeperator: '%(OAuth2ScopeSeperator)',
+        oAuth2AdditionalQueryStringParams: JSON.parse('%(OAuth2AdditionalQueryStringParams)'),
+        apiKeyName: '%(ApiKeyName)',
+        apiKeyIn: '%(ApiKeyIn)'
+    };
+</script>
+<script>
+    window.onload = function () {
         // Build a system
         const ui = SwaggerUIBundle({
             url: swashbuckleConfig.rootUrl + "/" + swashbuckleConfig.discoveryPaths[0],
@@ -146,5 +147,6 @@
         }
     }
 </script>
+%(DiscoveryUrlSelector)
 </body>
 </html>

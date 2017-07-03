@@ -23,6 +23,7 @@ namespace Swashbuckle.Application
             {
                 { "%(DocumentTitle)", "Swagger UI" },
                 { "%(StylesheetIncludes)", "" },
+                { "%(DiscoveryUrlSelector)", "" },
                 { "%(DiscoveryPaths)", String.Join("|", discoveryPaths) },
                 { "%(BooleanValues)", "true|false" },
                 { "%(ValidatorUrl)", "" },
@@ -128,7 +129,7 @@ namespace Swashbuckle.Application
 
         public void EnableDiscoveryUrlSelector()
         {
-            InjectJavaScript(GetType().Assembly, "Swashbuckle.SwaggerUi.CustomAssets.discoveryUrlSelector.js");
+            _templateParams["%(DiscoveryUrlSelector)"] = "<script src=\"ext/Swashbuckle-SwaggerUi-CustomAssets-discoveryUrlSelector-js\" > </script> ";
         }
 
         public void EnableOAuth2Support(string clientId, string realm, string appName)
