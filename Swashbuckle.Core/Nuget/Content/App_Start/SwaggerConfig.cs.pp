@@ -266,13 +266,7 @@ namespace $rootnamespace$
 
 		public static bool ResolveVersionSupportByRouteConstraint(ApiDescription apiDesc, string targetApiVersion)
         {
-            var versionConstraint = (apiDesc.Route.Constraints.ContainsKey("apiVersion"))
-                ? apiDesc.Route.Constraints["apiVersion"] as RegexRouteConstraint
-                : null;
-
-            return (versionConstraint == null)
-                ? false
-                : versionConstraint.Pattern.Split('|').Contains(targetApiVersion);
+            return (apiDesc.Route.RouteTemplate.ToLower().Contains(targetApiVersion.ToLower()));
         }
 
         private class ApplyDocumentVendorExtensions : IDocumentFilter
