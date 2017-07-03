@@ -264,6 +264,17 @@ namespace $rootnamespace$
                     });
         }
 
+		public static bool ResolveVersionSupportByRouteConstraint(ApiDescription apiDesc, string targetApiVersion)
+        {
+            var versionConstraint = (apiDesc.Route.Constraints.ContainsKey("apiVersion"))
+                ? apiDesc.Route.Constraints["apiVersion"] as RegexRouteConstraint
+                : null;
+
+            return (versionConstraint == null)
+                ? false
+                : versionConstraint.Pattern.Split('|').Contains(targetApiVersion);
+        }
+
         private class ApplyDocumentVendorExtensions : IDocumentFilter
         {
             public void Apply(SwaggerDocument swaggerDoc, SchemaRegistry schemaRegistry, IApiExplorer apiExplorer)
