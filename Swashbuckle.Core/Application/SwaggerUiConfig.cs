@@ -129,7 +129,11 @@ namespace Swashbuckle.Application
 
         public void EnableDiscoveryUrlSelector()
         {
-            _templateParams["%(DiscoveryUrlSelector)"] = "<script src=\"ext/Swashbuckle-SwaggerUi-CustomAssets-discoveryUrlSelector-js\" > </script> ";
+            string resourceName = "Swashbuckle.SwaggerUi.CustomAssets.discoveryUrlSelector.js";
+            var path = "ext/" + resourceName.Replace(".", "-");
+
+            _templateParams["%(DiscoveryUrlSelector)"] = "<script src=\"" + path + "\" > </script> ";
+            CustomAsset(path, GetType().Assembly, resourceName);
         }
 
         public void EnableOAuth2Support(string clientId, string realm, string appName)
