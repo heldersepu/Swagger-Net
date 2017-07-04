@@ -48,7 +48,7 @@ namespace Swashbuckle.SwaggerUi
             return stream;
         }
 
-        private static string InferMediaTypeFrom(string path)
+        public static string InferMediaTypeFrom(string path)
         {
             var extension = path.Split('.').Last();
 
