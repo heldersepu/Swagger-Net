@@ -29,10 +29,7 @@ namespace Swashbuckle.Tests.CoreUnitTests
         [TestCase("file.unkown", "text/html")]
         public void InferMediaTypeFrom(string file, string mediaType)
         {
-            EmbeddedAssetProvider prov = new EmbeddedAssetProvider(
-                new Dictionary<string, EmbeddedAssetDescriptor>(),
-                new Dictionary<string, string>());
-            Assert.Throws<AssetNotFound>(() => prov.GetAsset("", ""));
+            Assert.AreEqual(mediaType, EmbeddedAssetProvider.InferMediaTypeFrom(file));
         }
     }
 }
