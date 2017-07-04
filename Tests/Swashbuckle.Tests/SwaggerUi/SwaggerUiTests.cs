@@ -117,26 +117,6 @@ namespace Swashbuckle.Tests.SwaggerUi
         }
 
         [Test]
-        public void It_exposes_discovery_url_selector()
-        {
-            SetUpHandler(c => c.EnableDiscoveryUrlSelector());
-
-            var content = GetContentAsString("http://tempuri.org/swagger/ui/index/ext/Swashbuckle-SwaggerUi-CustomAssets-discoveryUrlSelector-js");
-
-            Assert.IsNotNull(content);
-        }
-
-        [Test]
-        public void It_exposes_config_to_enable_a_discovery_url_selector()
-        {
-            SetUpHandler(c => c.EnableDiscoveryUrlSelector());
-
-            var content = GetContentAsString(TEMP_URI.INDEX);
-
-            StringAssert.Contains("Swashbuckle-SwaggerUi-CustomAssets-discoveryUrlSelector-js", content);
-        }
-
-        [Test]
         public void It_exposes_config_to_inject_custom_javascripts()
         {
             SetUpHandler(c =>
