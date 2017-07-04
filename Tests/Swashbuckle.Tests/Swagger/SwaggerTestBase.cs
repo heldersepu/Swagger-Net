@@ -11,7 +11,7 @@ namespace Swashbuckle.Tests.Swagger
         {
             var swaggerDocsConfig = new SwaggerDocsConfig();
             swaggerDocsConfig.SingleApiVersion("v1", "Test API");
-            swaggerDocsConfig.IncludeAllXmlComments(null, AppDomain.CurrentDomain.BaseDirectory);
+            swaggerDocsConfig.IncludeAllXmlComments(typeof(SwaggerTestBase).Assembly, AppDomain.CurrentDomain.BaseDirectory);
 
             configure?.Invoke(swaggerDocsConfig);
 
