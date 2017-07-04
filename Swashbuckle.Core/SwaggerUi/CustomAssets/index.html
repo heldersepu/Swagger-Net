@@ -97,12 +97,12 @@
     function DiscoveryUrlSelector(url, discoveryPaths) {
         var input = document.querySelectorAll('input.download-url-input');
         if (input.length > 0) {
-            var style = 'style="width:100%;border:2px solid #547f00;font-weight:normal;font-family:Arial;"';
-            var select = '<select class="download-url-input" ' + style + ' >';
+            var style = 'style="width:100%;border:2px solid #547f00;font-weight:normal;font-family:Arial;height:36px;box-shadow:none;border-radius: 4px 0 0 4px;"';
+            var select = '<select ' + style + ' onchange="this.nextElementSibling.value=this.value">';
             discoveryPaths.forEach(function (path) {
                 select += '<option>' + url + "/" + path + '</option>';
             });
-            select += '</select>';
+            select += '</select><input type="text" class="download-url-input" value="' + url + "/" + discoveryPaths[0] + '" style="display: none;">';
             input[0].outerHTML = select;
         }
     }
