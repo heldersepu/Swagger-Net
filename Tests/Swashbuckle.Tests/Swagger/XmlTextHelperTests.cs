@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Swashbuckle.Swagger.XmlComments;
+using System;
 
 namespace Swashbuckle.Tests.Swagger
 {
@@ -17,6 +18,21 @@ namespace Swashbuckle.Tests.Swagger
     [TestFixture]
     public class XmlTextHelperTests
     {
+        [Test]
+        public void NormalizeIndentation_null()
+        {
+            string xmlText = null;
+            Assert.Throws<ArgumentNullException>(() => XmlTextHelper.NormalizeIndentation(xmlText));
+        }
+
+        [Test]
+        public void NormalizeIndentation_empty()
+        {
+            string xmlText = "";
+            string content = XmlTextHelper.NormalizeIndentation(xmlText);
+            Assert.AreEqual(string.Empty, content);
+        }
+
         [Test]
         public void XmlComment_returns_verbatim_from_single_line_input()
         {
