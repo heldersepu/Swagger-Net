@@ -1,9 +1,6 @@
 ﻿using NUnit.Framework;
 using Swashbuckle.Application;
-using Swashbuckle.Swagger.XmlComments;
-using System.IO;
 using System.Web.Http.Routing;
-using System.Xml.XPath;
 
 namespace Swashbuckle.Tests.CoreUnitTests
 {

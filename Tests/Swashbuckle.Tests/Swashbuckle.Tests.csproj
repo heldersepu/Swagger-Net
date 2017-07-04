@@ -91,6 +91,7 @@
   <ItemGroup>
     <Compile Include="CoreUnitTests\EmbeddedAssetProviderTests.cs" />
     <Compile Include="CoreUnitTests\HttpRouteDirectionConstraintTests.cs" />
+    <Compile Include="CoreUnitTests\StringExtensionsTests.cs" />
     <Compile Include="CoreUnitTests\XPathNavigatorExtensionsTests.cs" />
     <Compile Include="HttpMessageHandlerTestBase.cs" />
     <Compile Include="Owin\BaseInMemoryOwinSwaggerTest.cs" />
