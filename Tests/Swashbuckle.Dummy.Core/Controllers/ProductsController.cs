@@ -23,6 +23,18 @@ namespace Swashbuckle.Dummy.Controllers
         {
             throw new NotImplementedException();
         }
+
+        [HttpOptions]
+        public int Options()
+        {
+            return 0;
+        }
+
+        [HttpPatch]
+        public int Patch()
+        {
+            return 0;
+        }
     }
 
     public class Product

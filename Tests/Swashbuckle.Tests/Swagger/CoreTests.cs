@@ -265,6 +265,48 @@ namespace Swashbuckle.Tests.Swagger
                                         }
                                     }
                                 }
+                            },
+                            options = new
+                            {
+                                tags = new [] { "Products" },
+                                operationId = "Products_Options",
+                                consumes = new object[]{},
+                                produces = new []{ "application/json", "text/json", "application/xml", "text/xml" },
+                                responses = new Dictionary<string, object>
+                                {
+                                    {
+                                        "200", new
+                                        {
+                                            description = "OK",
+                                            schema = new
+                                            {
+                                                format = "int32",
+                                                type = "integer"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
+                            patch = new
+                            {
+                                tags = new [] { "Products" },
+                                operationId = "Products_Patch",
+                                consumes = new object[]{},
+                                produces = new []{ "application/json", "text/json", "application/xml", "text/xml" },
+                                responses = new Dictionary<string, object>
+                                {
+                                    {
+                                        "200", new
+                                        {
+                                            description = "OK",
+                                            schema = new
+                                            {
+                                                format = "int32",
+                                                type = "integer"
+                                            }
+                                        }
+                                    }
+                                }
                             }
                         }
                     },
