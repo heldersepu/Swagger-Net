@@ -1,6 +1,7 @@
 ﻿using Moq;
 using NUnit.Framework;
 using Swashbuckle.Swagger;
+using System;
 using System.Net.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
@@ -29,6 +30,12 @@ namespace Swashbuckle.Tests.CoreUnitTests
         public void FriendlyId2_Test(string expected, string path, string method)
         {
             Assert.AreEqual(expected, apiDescription(path, method).FriendlyId2());
+        }
+
+        [Test]
+        public void ResponseType_Test()
+        {
+            Assert.IsNull(apiDescription(null, "POST").ResponseType());
         }
     }
 }
