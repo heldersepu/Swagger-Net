@@ -291,7 +291,6 @@ namespace Swashbuckle.Tests.Swagger
         {
             string directory = AppDomain.CurrentDomain.BaseDirectory;
             SetUpHandler(c => { c.IncludeXmlComments(Directory.GetFiles(directory, "*.XML", SearchOption.AllDirectories)); });
-
             var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             Assert.IsNotNull(swagger);
         }

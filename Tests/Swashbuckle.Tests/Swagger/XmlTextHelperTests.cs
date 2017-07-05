@@ -34,6 +34,19 @@ namespace Swashbuckle.Tests.Swagger
         }
 
         [Test]
+        public void GetCommonLeadingWhitespace_null()
+        {
+            Assert.Throws<ArgumentException>(() => XmlTextHelper.GetCommonLeadingWhitespace(null));            
+        }
+
+        [Test]
+        public void GetCommonLeadingWhitespace_empty()
+        {
+            string[] lines = { };
+            Assert.IsNull(XmlTextHelper.GetCommonLeadingWhitespace(lines));
+        }
+
+        [Test]
         public void XmlComment_returns_verbatim_from_single_line_input()
         {
             string input = @"My single line comment";

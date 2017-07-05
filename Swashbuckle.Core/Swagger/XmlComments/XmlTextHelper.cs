@@ -41,7 +41,7 @@ namespace Swashbuckle.Swagger.XmlComments
         /// </summary>
         /// <param name="lines"></param>
         /// <returns>The common padding found on all non-blank lines - returns null when no common prefix is found</returns>
-        static string GetCommonLeadingWhitespace(string[] lines)
+        public static string GetCommonLeadingWhitespace(string[] lines)
         {
             if (null == lines)
                 throw new ArgumentException("lines");
