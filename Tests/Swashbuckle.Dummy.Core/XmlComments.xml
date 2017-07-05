@@ -4,6 +4,14 @@
         <name>Swashbuckle.Dummy.Core</name>
     </assembly>
     <members>
+        <member name="P:Swashbuckle.Dummy.Controllers.Payment.ExpMonth">
+            <summary>Credit card expiration Month</summary>
+            <example>6</example>
+        </member>
+        <member name="P:Swashbuckle.Dummy.Controllers.Payment.ExpYear">
+            <summary>Credit card expiration Year</summary>
+            <example>96</example>
+        </member>
         <member name="T:Swashbuckle.Dummy.Controllers.XmlAnnotatedController">
             <summary>
             XmlAnnotatedController
