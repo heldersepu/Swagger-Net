@@ -6,6 +6,7 @@ using Swashbuckle.Dummy.Controllers;
 using Swashbuckle.Dummy.SwaggerExtensions;
 using Swashbuckle.Swagger;
 using System.Web.Http.Description;
+using System.IO;
 
 namespace Swashbuckle.Tests.Swagger
 {
@@ -283,6 +284,16 @@ namespace Swashbuckle.Tests.Swagger
             Assert.IsNotNull(ex);
             // The exception message should contain something related to XML
             Assert.IsTrue(ex.Message.Contains("XML"));
+        }
+
+        [Test]
+        public void It_loads_multiple_xml()
+        {
+            string directory = AppDomain.CurrentDomain.BaseDirectory;
+            SetUpHandler(c => { c.IncludeXmlComments(Directory.GetFiles(directory, "*.XML", SearchOption.AllDirectories)); });
+
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
+            Assert.IsNotNull(swagger);
         }
 
         [Test]
