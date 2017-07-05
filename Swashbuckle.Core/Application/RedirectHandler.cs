@@ -28,5 +28,10 @@ namespace Swashbuckle.Application
             tsc.SetResult(response);
             return tsc.Task;
         }
+
+        public Task<HttpResponseMessage> SendAsync(HttpRequestMessage request)
+        {
+            return SendAsync(request, new CancellationToken());
+        }
     }
 }
