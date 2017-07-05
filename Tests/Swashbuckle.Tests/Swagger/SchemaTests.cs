@@ -172,16 +172,20 @@ namespace Swashbuckle.Tests.Swagger
                             ExpMonth = new
                             {
                                 format = "int32",
+                                description = "Credit card expiration Month",
                                 maximum = 12,
                                 minimum = 1,
                                 type = "integer",
+                                example = "6"
                             },
                             ExpYear = new
                             {
                                 format = "int32",
+                                description = "Credit card expiration Year",
                                 maximum = 99,
                                 minimum = 14,
                                 type = "integer",
+                                example = "96"
                             },
                             Note = new
                             {
