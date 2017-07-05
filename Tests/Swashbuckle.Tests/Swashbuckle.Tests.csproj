@@ -91,6 +91,7 @@
   <ItemGroup>
     <Compile Include="CoreUnitTests\ApiDescriptionExtensionsTests.cs" />
     <Compile Include="CoreUnitTests\ApplySwaggerOperationAttributesTests.cs" />
+    <Compile Include="CoreUnitTests\ApplySwaggerResponseAttributesTests.cs" />
     <Compile Include="CoreUnitTests\ApplyXmlTypeCommentsTests.cs" />
     <Compile Include="CoreUnitTests\EmbeddedAssetProviderTests.cs" />
     <Compile Include="CoreUnitTests\HttpRouteDirectionConstraintTests.cs" />

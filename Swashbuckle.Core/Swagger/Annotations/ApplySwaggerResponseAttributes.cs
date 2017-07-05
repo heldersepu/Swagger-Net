@@ -28,7 +28,7 @@ namespace Swashbuckle.Swagger.Annotations
             }
         }
 
-        private string InferDescriptionFrom(string statusCode)
+        public string InferDescriptionFrom(string statusCode)
         {
             HttpStatusCode enumValue;
             if (Enum.TryParse(statusCode, true, out enumValue))
