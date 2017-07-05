@@ -379,7 +379,10 @@ namespace Swashbuckle.Tests.Swagger
             var swagger = GetContentAsString(TEMP_URI.DOCS);
             Assert.IsTrue(swagger.StartsWith("{\"swagger\":"));
 
-            SetUpHandler(c => c.PrettyPrint());
+            SetUpHandler(c => {
+                c.PrettyPrint();
+                c.IncludeAllXmlComments(null, string.Empty);
+            });
 
             swagger = GetContentAsString(TEMP_URI.DOCS);
             Assert.IsTrue(swagger.StartsWith("{\r\n  \"swagger\":"));
