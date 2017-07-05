@@ -45,6 +45,7 @@ namespace Swashbuckle.Tests.SwaggerUi
             SetUpHandler(c =>
                 {
                     var assembly = typeof(SwaggerConfig).Assembly;
+                    c.EnableDiscoveryUrlSelector();
                     c.InjectStylesheet(assembly, "Swashbuckle.Dummy.SwaggerExtensions.testStyles1.css");
                     c.InjectStylesheet(assembly, "Swashbuckle.Dummy.SwaggerExtensions.testStyles2.css", "print");
                 });
@@ -82,6 +83,7 @@ namespace Swashbuckle.Tests.SwaggerUi
                     c.DocExpansion(DocExpansion.Full);
                     c.BooleanValues(new[] { "1", "0" });
                     c.SupportedSubmitMethods("GET", "HEAD");
+                    c.EnableOAuth2Support("test-client-id", "test-realm", "Swagger UI");
                 });
 
             var content = GetContentAsString(TEMP_URI.INDEX);
