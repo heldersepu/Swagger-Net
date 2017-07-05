@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Http;
 using System.Net.Http;
@@ -26,9 +25,13 @@ namespace Swashbuckle.Dummy.Controllers
         [Required, RegularExpression("^[3-6]?\\d{12,15}$")]
         public string CardNumber { get; set; }
 
+        /// <summary>Credit card expiration Month</summary>
+        /// <example>6</example>
         [Required, Range(1, 12)]
         public int ExpMonth { get; set; }
 
+        /// <summary>Credit card expiration Year</summary>
+        /// <example>96</example>
         [Required, Range(14, 99)]
         public int ExpYear { get; set; }
 

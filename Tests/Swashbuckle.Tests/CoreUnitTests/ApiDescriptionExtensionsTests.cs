@@ -1,7 +1,6 @@
 ﻿using Moq;
 using NUnit.Framework;
 using Swashbuckle.Swagger;
-using System;
 using System.Net.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
