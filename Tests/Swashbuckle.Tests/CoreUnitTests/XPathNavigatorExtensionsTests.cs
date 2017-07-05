@@ -1,6 +1,7 @@
 ﻿using NUnit.Framework;
 using Swashbuckle.Swagger.XmlComments;
 using System.IO;
+using System.Text.RegularExpressions;
 using System.Xml.XPath;
 
 namespace Swashbuckle.Tests.CoreUnitTests
@@ -44,18 +45,26 @@ namespace Swashbuckle.Tests.CoreUnitTests
             Assert.AreEqual(xml.Replace("<c>", "").Replace("</c>", ""), content.Strip());
         }
 
-        [Test]
-        public void GetConstRefName_null()
+        [TestCase(null, "")]
+        [TestCase(null, "asdf")]
+        [TestCase("<display>abc</display>", "<c><display>abc</display></c>")]
+        public void GetConstRefName(string expected, string input)
         {
-            string content = XPathNavigatorExtensions.ConstPattern.Replace("", XPathNavigatorExtensions.GetConstRefName);
-            Assert.IsEmpty(content);
+            Regex rx = XPathNavigatorExtensions.ConstPattern;
+            Match m = rx.Match(input);
+            string content = XPathNavigatorExtensions.GetConstRefName(m);
+            Assert.AreEqual(expected, content);
         }
 
-        [Test]
-        public void GetParamRefName_null()
+        [TestCase(null, "")]
+        [TestCase(null, "asdf")]
+        [TestCase("{<display>abc</display>}", @"<see cref=""T:<display>abc</display>"" />")]
+        public void GetParamRefName(string expected, string input)
         {
-            string content = XPathNavigatorExtensions.ParamPattern.Replace("", XPathNavigatorExtensions.GetParamRefName);
-            Assert.IsEmpty(content);
+            Regex rx = XPathNavigatorExtensions.ParamPattern;
+            Match m = rx.Match(input);
+            string content = XPathNavigatorExtensions.GetParamRefName(m);
+            Assert.AreEqual(expected, content);
         }
 
     }
