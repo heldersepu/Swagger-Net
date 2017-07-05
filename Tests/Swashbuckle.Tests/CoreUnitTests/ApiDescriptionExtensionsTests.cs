@@ -1,6 +1,7 @@
 ﻿using Moq;
 using NUnit.Framework;
 using Swashbuckle.Swagger;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
@@ -35,6 +36,20 @@ namespace Swashbuckle.Tests.CoreUnitTests
         public void ResponseType_Test()
         {
             Assert.IsNull(apiDescription(null, "POST").ResponseType());
+        }
+
+        [Test]
+        public void GetUniqueFriendlyId_Test()
+        {
+            var apiDesc = apiDescription("asdf", "POST");
+            string friendlyId = apiDesc.FriendlyId();
+            string friendlyId2 = apiDesc.FriendlyId2();
+            Assert.AreNotEqual(friendlyId, friendlyId2);
+
+            var operationNames = new HashSet<string> { friendlyId, friendlyId2 };
+            var swaggerGenerator = new SwaggerGenerator(null, null, null);
+            string uniqueFriendlyId = swaggerGenerator.GetUniqueFriendlyId(apiDesc, operationNames);
+            Assert.AreNotEqual(friendlyId2, uniqueFriendlyId);
         }
     }
 }

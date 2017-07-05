@@ -183,7 +183,7 @@ namespace Swashbuckle.Swagger
             return operation;
         }
 
-        private string GetUniqueFriendlyId(ApiDescription apiDesc, HashSet<string> operationNames)
+        public string GetUniqueFriendlyId(ApiDescription apiDesc, HashSet<string> operationNames)
         {
             string friendlyId = apiDesc.FriendlyId();
 
@@ -195,7 +195,7 @@ namespace Swashbuckle.Swagger
             int nextFriendlyIdPostfix = 1;
             while (operationNames.Contains(friendlyId))
             {
-                friendlyId = string.Format("{0}_{1}", apiDesc.FriendlyId(), nextFriendlyIdPostfix);
+                friendlyId = string.Format("{0}_{1}", apiDesc.FriendlyId2(), nextFriendlyIdPostfix);
                 nextFriendlyIdPostfix++;
             }
             operationNames.Add(friendlyId);
