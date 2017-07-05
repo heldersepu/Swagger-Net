@@ -2,14 +2,7 @@
 using NUnit.Framework;
 using Swashbuckle.Swagger.Annotations;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Net.Http;
-using System.Web.Http;
 using System.Web.Http.Controllers;
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Web.Http.Description;
 
 namespace Swashbuckle.Tests.CoreUnitTests
