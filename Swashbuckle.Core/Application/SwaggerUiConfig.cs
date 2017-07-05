@@ -51,11 +51,6 @@ namespace Swashbuckle.Application
             CustomAsset("css/typography-css", "Swashbuckle.SwaggerUi.CustomAssets.typography.css");
         }
 
-        public void InjectStylesheet(string resourceName, string media = "screen", bool isTemplate = false)
-        {
-            InjectStylesheet(_thisAssembly, resourceName, media, isTemplate);
-        }
-
         public void InjectStylesheet(Assembly resourceAssembly, string resourceName, string media = "screen", bool isTemplate = false)
         {
             var path = "ext/" + resourceName.Replace(".", "-");
@@ -85,11 +80,6 @@ namespace Swashbuckle.Application
         public void DisableValidator()
         {
             _templateParams["%(ValidatorUrl)"] = "null";
-        }
-
-        public void InjectJavaScript(string resourceName, bool isTemplate = false)
-        {
-            InjectJavaScript(_thisAssembly, resourceName, isTemplate);
         }
 
         public void InjectJavaScript(Assembly resourceAssembly, string resourceName, bool isTemplate = false)
