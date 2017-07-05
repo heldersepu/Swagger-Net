@@ -140,6 +140,9 @@
       <Name>Swashbuckle.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="XmlComments.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(TargetDir)XmlComments.xml" "$(SolutionDir)/Tests/Swashbuckle.Dummy.WebHost" /Y

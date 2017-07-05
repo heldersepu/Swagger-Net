@@ -34,7 +34,10 @@ namespace Swashbuckle.Tests.Swagger
         [Test]
         public void It_provides_headers_access_control_allow_origin()
         {
-            SetUpHandler(c => c.AccessControlAllowOrigin("*"));
+            SetUpHandler(c => {
+                c.AccessControlAllowOrigin("*");
+                c.IncludeAllXmlComments(typeof(SwaggerConfig).Assembly, string.Empty);
+            });
             var headers = GetHeaders(TEMP_URI.DOCS);
 
             Assert.IsTrue(headers.Contains("Access-Control-Allow-Origin"));
