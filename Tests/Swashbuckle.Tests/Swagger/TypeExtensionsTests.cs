@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Moq;
+using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using NUnit.Framework;
@@ -33,6 +34,14 @@ namespace Swashbuckle.Swagger
         {
             var enumNames = typeof(EnumWithMemberAttributes).GetEnumNamesForSerialization();
             CollectionAssert.AreEqual(new[] { "value-1", "value-2" }, enumNames);
+        }
+
+        [Test]
+        public void FullNameSansTypeParameters_Test()
+        {
+            var mock = new Mock<Type>();
+            mock.Setup(x => x.Name).Returns("");
+            Assert.AreEqual("", mock.Object.FullNameSansTypeParameters());
         }
 
         private class InnerType
