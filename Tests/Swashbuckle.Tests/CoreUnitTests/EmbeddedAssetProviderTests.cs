@@ -10,10 +10,20 @@ namespace Swashbuckle.Tests.CoreUnitTests
         [Test]
         public void GetAsset_null()
         {
-            EmbeddedAssetProvider prov = new EmbeddedAssetProvider(
+            var prov = new EmbeddedAssetProvider(
                 new Dictionary<string, EmbeddedAssetDescriptor>(),
                 new Dictionary<string, string>());
             Assert.Throws<AssetNotFound>(() => prov.GetAsset("",""));
+        }
+
+        [Test]
+        public void GetEmbeddedResourceStreamFor_null()
+        {
+            var prov = new EmbeddedAssetProvider(
+                new Dictionary<string, EmbeddedAssetDescriptor>(),
+                new Dictionary<string, string>());
+            var ad = new EmbeddedAssetDescriptor(typeof(EmbeddedAssetProviderTests).Assembly, "123", false);
+            Assert.Throws<AssetNotFound>(() => prov.GetEmbeddedResourceStreamFor(ad, ""));
         }
 
         [TestCase("file.css", "text/css")]

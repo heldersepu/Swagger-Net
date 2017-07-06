@@ -30,7 +30,7 @@ namespace Swashbuckle.SwaggerUi
             );
         }
 
-        private Stream GetEmbeddedResourceStreamFor(EmbeddedAssetDescriptor resourceDescriptor, string rootUrl)
+        public Stream GetEmbeddedResourceStreamFor(EmbeddedAssetDescriptor resourceDescriptor, string rootUrl)
         {
             var stream = resourceDescriptor.Assembly.GetManifestResourceStream(resourceDescriptor.Name);
             if (stream == null)
