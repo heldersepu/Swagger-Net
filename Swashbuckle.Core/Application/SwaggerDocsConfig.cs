@@ -165,14 +165,13 @@ namespace Swashbuckle.Application
         }
 
         // NOTE: In next major version, ModelFilter will completely replace SchemaFilter
-        internal void ModelFilter<TFilter>()
-            where TFilter : IModelFilter, new()
+        public void ModelFilter<TFilter>() where TFilter : IModelFilter, new()
         {
             ModelFilter(() => new TFilter());
         }
 
         // NOTE: In next major version, ModelFilter will completely replace SchemaFilter
-        internal void ModelFilter(Func<IModelFilter> factory)
+        public void ModelFilter(Func<IModelFilter> factory)
         {
             _modelFilters.Add(factory);
         }
