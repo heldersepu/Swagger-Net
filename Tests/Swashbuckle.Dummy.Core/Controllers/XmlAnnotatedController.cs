@@ -166,6 +166,7 @@ namespace Swashbuckle.Dummy.Controllers
     /// <summary>
     /// A redeemable reward
     /// </summary>
+    /// <example>{"value":0, "RewardType":{}}</example>
     /// <typeparam name="T"></typeparam>
     public class Reward<T>
     {

@@ -123,6 +123,7 @@
             <summary>
             A redeemable reward
             </summary>
+            <example>{"value":0, "RewardType":{}}</example>
             <typeparam name="T"></typeparam>
         </member>
         <member name="F:Swashbuckle.Dummy.Controllers.Reward`1.value">
