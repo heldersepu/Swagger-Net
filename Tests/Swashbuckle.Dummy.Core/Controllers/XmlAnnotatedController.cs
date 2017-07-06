@@ -93,10 +93,18 @@ namespace Swashbuckle.Dummy.Controllers
 
         [HttpGet]
         [Route("GetById")]
-        public void GetById(string id = "123456")
+        public NoSummary GetById(string id = "123456")
         {
-            throw new NotImplementedException();
+            return new NoSummary();
         }
+    }
+
+    /// <example>
+    /// {"id":0}
+    /// </example>
+    public class NoSummary
+    {
+        public int id { get; set; }
     }
 
     public class Page
