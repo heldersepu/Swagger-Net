@@ -4,7 +4,6 @@ using Newtonsoft.Json.Serialization;
 using NUnit.Framework;
 using Swashbuckle.Swagger;
 using System;
-using System.Collections.Generic;
 
 namespace Swashbuckle.Tests.CoreUnitTests
 {
