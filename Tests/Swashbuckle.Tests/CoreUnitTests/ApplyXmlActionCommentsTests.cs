@@ -1,8 +1,11 @@
-﻿using NUnit.Framework;
+﻿using Moq;
+using NUnit.Framework;
+using Swashbuckle.Swagger;
 using Swashbuckle.Swagger.XmlComments;
 using System;
 using System.IO;
 using System.Linq;
+using System.Web.Http.Description;
 
 namespace Swashbuckle.Tests.CoreUnitTests
 {
@@ -28,6 +31,24 @@ namespace Swashbuckle.Tests.CoreUnitTests
             {
                 Assert.DoesNotThrow(() => new ApplyXmlActionComments(xmlFile));
             }
+        }
+
+        [Test]
+        public void reflectedActionDescriptor_Test()
+        {
+            string directory = AppDomain.CurrentDomain.BaseDirectory;
+            string xmlFile = Directory.GetFiles(directory, "*.XML", SearchOption.AllDirectories).FirstOrDefault();
+            var action = new ApplyXmlActionComments(xmlFile);
+
+            var mock = new Mock<ApiDescription>();
+            Assert.DoesNotThrow(() => action.Apply(null, null, mock.Object));
+        }
+
+        [Test]
+        public void ApplyParamComments_Test()
+        {
+            var mock = new Mock<Operation>();
+            Assert.DoesNotThrow(() => ApplyXmlActionComments.ApplyParamComments(mock.Object, null, null));
         }
     }
 }

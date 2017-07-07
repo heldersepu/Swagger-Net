@@ -53,7 +53,7 @@ namespace Swashbuckle.Swagger.XmlComments
             ApplyResponseComments(operation, methodNode);
         }
 
-        private static void ApplyParamComments(Operation operation, XPathNavigator methodNode, MethodInfo method)
+        public static void ApplyParamComments(Operation operation, XPathNavigator methodNode, MethodInfo method)
         {
             if (operation.parameters == null) return;
 
