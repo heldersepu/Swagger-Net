@@ -106,10 +106,15 @@ namespace Swashbuckle.Swagger
             return FilterSchema(new Schema { type = "object" }, jsonContract);
         }
 
-        private Schema CreateDefinitionSchema(Type type)
+        public Schema CreateDefinitionSchema(Type type)
         {
             var jsonContract = _contractResolver.ResolveContract(type);
 
+            return CreateDefinitionSchema(jsonContract);
+        }
+
+        public Schema CreateDefinitionSchema(JsonContract jsonContract)
+        {
             if (jsonContract is JsonDictionaryContract)
                 return FilterSchema(CreateDictionarySchema((JsonDictionaryContract)jsonContract), jsonContract);
 
@@ -119,11 +124,10 @@ namespace Swashbuckle.Swagger
             if (jsonContract is JsonObjectContract)
                 return FilterSchema(CreateObjectSchema((JsonObjectContract)jsonContract, true), jsonContract);
 
-            throw new InvalidOperationException(
-                String.Format("Unsupported type - {0} for Defintitions. Must be Dictionary, Array or Object", type));
+            throw new InvalidOperationException("Unsupported type for Defintitions. Must be Dictionary, Array or Object");
         }
 
-        private Schema CreatePrimitiveSchema(JsonPrimitiveContract primitiveContract)
+        public Schema CreatePrimitiveSchema(JsonPrimitiveContract primitiveContract)
         {
             var type = Nullable.GetUnderlyingType(primitiveContract.UnderlyingType) ?? primitiveContract.UnderlyingType;
 
@@ -161,7 +165,7 @@ namespace Swashbuckle.Swagger
             }
         }
 
-        private Schema CreateEnumSchema(JsonPrimitiveContract primitiveContract, Type type)
+        public Schema CreateEnumSchema(JsonPrimitiveContract primitiveContract, Type type)
         {
             var stringEnumConverter = primitiveContract.Converter as StringEnumConverter
                 ?? _jsonSerializerSettings.Converters.OfType<StringEnumConverter>().FirstOrDefault();
@@ -188,7 +192,7 @@ namespace Swashbuckle.Swagger
             };
         }
 
-        private Schema CreateDictionarySchema(JsonDictionaryContract dictionaryContract)
+        public Schema CreateDictionarySchema(JsonDictionaryContract dictionaryContract)
         {
             var keyType = dictionaryContract.DictionaryKeyType ?? typeof(object);
             var valueType = dictionaryContract.DictionaryValueType ?? typeof(object);
@@ -214,7 +218,7 @@ namespace Swashbuckle.Swagger
             }
         }
 
-        private Schema CreateArraySchema(JsonArrayContract arrayContract, bool isWrapped = false, string typeName = null)
+        public Schema CreateArraySchema(JsonArrayContract arrayContract, bool isWrapped = false, string typeName = null)
         {
             var itemType = arrayContract.CollectionItemType ?? typeof(object);
             var s = new Schema
@@ -229,7 +233,7 @@ namespace Swashbuckle.Swagger
             return s;
         }
 
-        private Schema CreateObjectSchema(JsonObjectContract jsonContract, bool addXmlName = false )
+        public Schema CreateObjectSchema(JsonObjectContract jsonContract, bool addXmlName = false )
         {
             var properties = jsonContract.Properties
                 .Where(p => !p.Ignored)
