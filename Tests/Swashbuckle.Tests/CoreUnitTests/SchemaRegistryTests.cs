@@ -4,6 +4,7 @@ using Newtonsoft.Json.Serialization;
 using NUnit.Framework;
 using Swashbuckle.Swagger;
 using System;
+using System.Collections.Generic;
 
 namespace Swashbuckle.Tests.CoreUnitTests
 {
@@ -19,6 +20,20 @@ namespace Swashbuckle.Tests.CoreUnitTests
 
             var schema = new SchemaRegistry(mock.Object, null, null, null, true, null, true, true, true);
             Assert.Throws<InvalidOperationException>(() => schema.CreateDefinitionSchema(contract));
+        }
+
+        [Test]
+        public void CreateDefinitionSchema_JsonArrayContract()
+        {
+            var contract = new JsonArrayContract(typeof(int));
+            var mock = new Mock<JsonSerializerSettings>();
+
+            var schema = new SchemaRegistry(mock.Object,
+                new Dictionary<Type, Func<Schema>>(),
+                new List<ISchemaFilter>(),
+                new List<IModelFilter>(),
+                true, null, true, true, true);
+            Assert.IsNotNull(schema.CreateDefinitionSchema(contract));
         }
     }
 }
