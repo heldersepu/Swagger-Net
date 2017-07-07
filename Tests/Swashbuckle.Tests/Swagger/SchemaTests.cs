@@ -888,6 +888,11 @@ namespace Swashbuckle.Tests.Swagger
                             type = "object",
                             properties = new
                             {
+                                Id = new
+                                {
+                                    format = "double",
+                                    type = "number"
+                                },
                                 Name = new
                                 {
                                     type = "string"
