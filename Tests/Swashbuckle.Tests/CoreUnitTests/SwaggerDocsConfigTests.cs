@@ -1,12 +1,6 @@
-﻿using Moq;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using Swashbuckle.Application;
 using Swashbuckle.Swagger;
-using Swashbuckle.Swagger.XmlComments;
-using System.Collections.Generic;
-using System.Net.Http;
-using System.Web.Http.Controllers;
-using System.Web.Http.Description;
 using System;
 
 namespace Swashbuckle.Tests.CoreUnitTests
