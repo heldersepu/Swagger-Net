@@ -45,6 +45,7 @@ namespace Swashbuckle.Dummy.Controllers
     [JsonObject]
     public class DynamicObjectSubType : DynamicObject
     {
+        [Range(1.1, 9.9)]
         public double Id { get; set; }
 
         public string Name { get; set; }
