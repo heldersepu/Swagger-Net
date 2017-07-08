@@ -101,6 +101,7 @@
     <Compile Include="CoreUnitTests\SchemaRegistryTests.cs" />
     <Compile Include="CoreUnitTests\StringExtensionsTests.cs" />
     <Compile Include="CoreUnitTests\SwaggerDocsConfigTests.cs" />
+    <Compile Include="CoreUnitTests\SwaggerEnabledConfigurationTests.cs" />
     <Compile Include="CoreUnitTests\XPathNavigatorExtensionsTests.cs" />
     <Compile Include="HttpMessageHandlerTestBase.cs" />
     <Compile Include="Owin\BaseInMemoryOwinSwaggerTest.cs" />

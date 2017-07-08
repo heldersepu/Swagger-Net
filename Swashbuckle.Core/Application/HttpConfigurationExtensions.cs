@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Linq;
 using System.Web.Http;
-using Newtonsoft.Json.Serialization;
-using Swashbuckle.Application;
 using System.Net.Http;
 using System.Collections.Generic;
 using System.Web.Http.Routing;
@@ -76,9 +74,7 @@ namespace Swashbuckle.Application
             EnableSwaggerUi(DefaultRouteTemplate, configure);
         }
 
-        public void EnableSwaggerUi(
-            string routeTemplate,
-            Action<SwaggerUiConfig> configure = null)
+        public void EnableSwaggerUi(string routeTemplate, Action<SwaggerUiConfig> configure = null)
         {
             var config = new SwaggerUiConfig(_discoveryPaths, _rootUrlResolver);
             if (configure != null) configure(config);
