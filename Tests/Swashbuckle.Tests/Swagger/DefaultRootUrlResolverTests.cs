@@ -1,10 +1,10 @@
 ﻿namespace Swashbuckle.Tests.Swagger
 {
-    using System.Net.Http;
     using NUnit.Framework;
     using Swashbuckle.Application;
-    using System.Web.Http.Hosting;
+    using System.Net.Http;
     using System.Web.Http;
+    using System.Web.Http.Hosting;
 
     [TestFixture]
     public class DefaultRootUrlResolverTests

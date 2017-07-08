@@ -2,7 +2,6 @@
 using Newtonsoft.Json.Serialization;
 using System.Web.Http;
 using System.Web.Http.Cors;
-using Swashbuckle.Dummy.App_Start;
 
 namespace Swashbuckle.Dummy
 {

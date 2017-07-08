@@ -1,6 +1,6 @@
-﻿using System.Web.Http.Description;
-using Swashbuckle.Swagger;
+﻿using Swashbuckle.Swagger;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace Swashbuckle.Dummy.SwaggerExtensions
 {

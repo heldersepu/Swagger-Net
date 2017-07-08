@@ -1,10 +1,10 @@
-﻿using System;
-using System.Net.Http;
+﻿using Newtonsoft.Json;
+using Swashbuckle.SwaggerUi;
+using System;
 using System.Collections.Generic;
+using System.Net.Http;
 using System.Reflection;
 using System.Text;
-using Newtonsoft.Json;
-using Swashbuckle.SwaggerUi;
 
 namespace Swashbuckle.Application
 {

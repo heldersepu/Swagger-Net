@@ -2,8 +2,8 @@
 using Swashbuckle.Application;
 using Swashbuckle.Dummy;
 using System;
-using System.Diagnostics;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
 
 namespace Swashbuckle.Tests.SwaggerUi

@@ -1,10 +1,10 @@
-using System;
-using System.Net.Http;
-using System.Threading.Tasks;
 using Microsoft.Owin.Testing;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
 using Owin;
+using System;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Swashbuckle.Tests.Owin
 {

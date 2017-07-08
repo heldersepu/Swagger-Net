@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Web.Http;
-using System.Net.Http;
 using System.Net;
+using System.Net.Http;
+using System.Web.Http;
 
 namespace Swashbuckle.Dummy.Controllers
 {

@@ -1,10 +1,10 @@
+using Owin;
+using Swashbuckle.Application;
 using System;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Dispatcher;
 using System.Web.Http.Routing;
-using Owin;
-using Swashbuckle.Application;
 
 namespace Swashbuckle.Tests.Owin
 {

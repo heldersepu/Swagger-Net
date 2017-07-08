@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Swashbuckle.Swagger;
+using System.Collections.Generic;
 using System.Web.Http.Description;
-using Swashbuckle.Swagger;
 
 namespace Swashbuckle.Dummy.SwaggerExtensions
 {

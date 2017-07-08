@@ -1,5 +1,5 @@
-﻿using System;
-using Swashbuckle.Swagger;
+﻿using Swashbuckle.Swagger;
+using System;
 
 namespace Swashbuckle.Dummy.SwaggerExtensions
 {

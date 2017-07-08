@@ -1,10 +1,9 @@
-﻿using System.Net.Http;
-using System.Threading;
-using System;
-using System.Threading.Tasks;
+﻿using Swashbuckle.SwaggerUi;
 using System.Net;
+using System.Net.Http;
 using System.Net.Http.Headers;
-using Swashbuckle.SwaggerUi;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Swashbuckle.Application
 {

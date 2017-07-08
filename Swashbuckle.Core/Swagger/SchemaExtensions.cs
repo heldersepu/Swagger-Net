@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Newtonsoft.Json.Serialization;
+using System;
 using System.ComponentModel.DataAnnotations;
-using Newtonsoft.Json.Serialization;
 
 namespace Swashbuckle.Swagger
 {

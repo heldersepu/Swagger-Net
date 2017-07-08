@@ -1,8 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Collections.Generic;
-using System.Web.Http.Description;
+using System.Linq;
 using System.Text;
+using System.Web.Http.Description;
 
 namespace Swashbuckle.Swagger
 {

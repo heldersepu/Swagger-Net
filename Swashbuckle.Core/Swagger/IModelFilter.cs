@@ -1,5 +1,5 @@
-﻿using System;
-using Newtonsoft.Json.Serialization;
+﻿using Newtonsoft.Json.Serialization;
+using System;
 
 namespace Swashbuckle.Swagger
 {

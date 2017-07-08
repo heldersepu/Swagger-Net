@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Swashbuckle.Dummy.Types;
+using System;
 using System.Web.Http;
-using Swashbuckle.Dummy.Types;
 
 namespace Swashbuckle.Dummy.Controllers
 {

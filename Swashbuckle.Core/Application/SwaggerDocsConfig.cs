@@ -1,18 +1,18 @@
-﻿using System;
-using System.IO;
-using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Net.Http;
-using System.Web.Http;
-using System.Web.Http.Description;
-using System.Xml.XPath;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Swashbuckle.Swagger;
 using Swashbuckle.Swagger.Annotations;
 using Swashbuckle.Swagger.FromUriParams;
 using Swashbuckle.Swagger.XmlComments;
+using System;
+using System.Collections.Generic;
+using System.Globalization;
+using System.IO;
+using System.Linq;
+using System.Net.Http;
 using System.Reflection;
+using System.Web.Http;
+using System.Web.Http.Description;
+using System.Xml.XPath;
 
 namespace Swashbuckle.Application
 {

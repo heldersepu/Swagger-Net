@@ -1,7 +1,7 @@
-﻿using System;
-using System.Web.Http;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
+using System;
+using System.Web.Http;
 
 namespace Swashbuckle.Dummy.Controllers
 {

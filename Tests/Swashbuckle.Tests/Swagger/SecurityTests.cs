@@ -1,9 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
 using NUnit.Framework;
-using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
-using System.Net.Http;
-using Swashbuckle.Application;
 using Swashbuckle.Dummy.Controllers;
 using Swashbuckle.Tests.Swagger;
 

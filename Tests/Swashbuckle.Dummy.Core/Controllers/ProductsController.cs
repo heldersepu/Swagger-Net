@@ -1,5 +1,4 @@
-﻿using Swashbuckle.Dummy.SwaggerExtensions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Web.Http;

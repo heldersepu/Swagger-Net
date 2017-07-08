@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
 using NUnit.Framework;
-using Newtonsoft.Json.Linq;
-using System.Collections.Generic;
 using Swashbuckle.Dummy.Controllers;
 using Swashbuckle.Dummy.SwaggerExtensions;
 using Swashbuckle.Swagger;
-using System.Web.Http.Description;
+using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Web.Http.Description;
 
 namespace Swashbuckle.Tests.Swagger
 {

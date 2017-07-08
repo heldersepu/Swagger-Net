@@ -1,7 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Swashbuckle.Dummy.Controllers;
 using Swashbuckle.Swagger;
-using Swashbuckle.Dummy.Controllers;
+using System;
+using System.Collections.Generic;
 
 namespace Swashbuckle.Dummy.SwaggerExtensions
 {

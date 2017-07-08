@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json.Serialization;
+using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Serialization;
 
 namespace Swashbuckle.Swagger
 {

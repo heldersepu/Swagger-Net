@@ -1,6 +1,6 @@
+using Swashbuckle.Application;
 using System;
 using System.Web.Http;
-using Swashbuckle.Application;
 
 namespace Swashbuckle.Tests.Owin
 {
