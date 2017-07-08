@@ -69,7 +69,7 @@
 <script src="swagger-ui-bundle-js"> </script>
 <script src="swagger-ui-standalone-preset-js"> </script>
 <script>
-    // Get Swashbuckle config into JavaScript
+    // Get Swagger-Net config into JavaScript
     function arrayFrom(configString) {
         return (configString !== "") ? configString.split('|') : [];
     }
@@ -94,7 +94,7 @@
         prior.parentNode.insertBefore(script, prior);
     }
 
-    window.swashbuckleConfig = {
+    window.swaggerNetConfig = {
         rootUrl: '%(RootUrl)',
         discoveryPaths: arrayFrom('%(DiscoveryPaths)'),
         booleanValues: arrayFrom('%(BooleanValues)'),
@@ -116,44 +116,44 @@
 </script>
 <script>
     var multiUrls = null;
-    if (swashbuckleConfig.discoveryPaths.length > 1) {
+    if (swaggerNetConfig.discoveryPaths.length > 1) {
         multiUrls = [];
-        swashbuckleConfig.discoveryPaths.forEach(function (path) {
+        swaggerNetConfig.discoveryPaths.forEach(function (path) {
             multiUrls.push({
                 name: path,
-                url: swashbuckleConfig.rootUrl + "/" + path
+                url: swaggerNetConfig.rootUrl + "/" + path
             });
         });
     }
     window.onload = function () {
         // Build a system
         const ui = SwaggerUIBundle({
-            url: swashbuckleConfig.rootUrl + "/" + swashbuckleConfig.discoveryPaths[0],
+            url: swaggerNetConfig.rootUrl + "/" + swaggerNetConfig.discoveryPaths[0],
             urls: multiUrls,
             dom_id: '#swagger-ui',
             presets: [ SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset ],
             plugins: [ SwaggerUIBundle.plugins.DownloadUrl ],
             layout: "StandaloneLayout",
-            docExpansion: swashbuckleConfig.docExpansion,
-            validatorUrl: swashbuckleConfig.validatorUrl,
+            docExpansion: swaggerNetConfig.docExpansion,
+            validatorUrl: swaggerNetConfig.validatorUrl,
             oauth2RedirectUrl: window.location.href.replace('index', 'oauth2-redirect-html').split('#')[0],
             onComplete: function (swaggerApi, swaggerUi) {
                 window.swaggerApi = swaggerApi;
-                swashbuckleConfig.customScripts.forEach(function (script) {
+                swaggerNetConfig.customScripts.forEach(function (script) {
                     getScript(script);
                 });
             }
         })
         window.ui = ui;
 
-        if (swashbuckleConfig.oAuth2Enabled) {
+        if (swaggerNetConfig.oAuth2Enabled) {
             ui.initOAuth({
-                clientId: swashbuckleConfig.oAuth2ClientId,
-                clientSecret: swashbuckleConfig.oAuth2ClientSecret,
-                realm: swashbuckleConfig.oAuth2Realm,
-                appName: swashbuckleConfig.oAuth2AppName,
-                scopeSeparator: swashbuckleConfig.oAuth2ScopeSeperator,
-                additionalQueryStringParams: swashbuckleConfig.oAuth2AdditionalQueryStringParams
+                clientId: swaggerNetConfig.oAuth2ClientId,
+                clientSecret: swaggerNetConfig.oAuth2ClientSecret,
+                realm: swaggerNetConfig.oAuth2Realm,
+                appName: swaggerNetConfig.oAuth2AppName,
+                scopeSeparator: swaggerNetConfig.oAuth2ScopeSeperator,
+                additionalQueryStringParams: swaggerNetConfig.oAuth2AdditionalQueryStringParams
             })
         }
     }

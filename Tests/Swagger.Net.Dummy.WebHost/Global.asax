@@ -1,1 +1,1 @@
-﻿<%@ Application Codebehind="Global.asax.cs" Inherits="Swashbuckle.Dummy.WebHost.WebApiApplication" Language="C#" %>
+﻿<%@ Application Codebehind="Global.asax.cs" Inherits="Swagger.Net.Dummy.WebHost.WebApiApplication" Language="C#" %>
