@@ -145,9 +145,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>xcopy "$(TargetDir)XmlComments.xml" "$(SolutionDir)/Tests/Swashbuckle.Dummy.WebHost" /Y
-xcopy "$(TargetDir)XmlComments.xml" "$(SolutionDir)/Tests/Swashbuckle.Dummy.SelfHost\bin\$(ConfigurationName)" /Y
-xcopy "$(TargetDir)XmlComments.xml" "$(SolutionDir)/Tests/Swashbuckle.Tests\bin\$(ConfigurationName)" /Y</PostBuildEvent>
+    <PostBuildEvent>xcopy "$(TargetDir)XmlComments.xml" "$(SolutionDir)Tests\Swagger.Net.Dummy.WebHost" /Y
+xcopy "$(TargetDir)XmlComments.xml" "$(SolutionDir)Tests\Swagger.Net.Dummy.SelfHost\bin\$(ConfigurationName)" /Y
+xcopy "$(TargetDir)XmlComments.xml" "$(SolutionDir)Tests\Swagger.Net.Tests\bin\$(ConfigurationName)" /Y</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -133,7 +133,7 @@
       <Project>{d50a26ff-02c6-4c16-ba94-4cd7d43efbb3}</Project>
       <Name>Swagger.Net</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Swashbuckle.Dummy.Core\Swagger.Net.Dummy.Core.csproj">
+    <ProjectReference Include="..\Swagger.Net.Dummy.Core\Swagger.Net.Dummy.Core.csproj">
       <Project>{2dfe3931-747f-48c6-8530-b74710988095}</Project>
       <Name>Swagger.Net.Dummy.Core</Name>
     </ProjectReference>

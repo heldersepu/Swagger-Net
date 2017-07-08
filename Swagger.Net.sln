@@ -33,13 +33,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swagger.Net.Tests", "Tests\Swashbuckle.Tests\Swagger.Net.Tests.csproj", "{2F5D233D-F779-473E-9EEC-ACC58AC266ED}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swagger.Net.Tests", "Tests\Swagger.Net.Tests\Swagger.Net.Tests.csproj", "{2F5D233D-F779-473E-9EEC-ACC58AC266ED}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swagger.Net.Dummy.WebHost", "Tests\Swashbuckle.Dummy.WebHost\Swagger.Net.Dummy.WebHost.csproj", "{E51BDA79-1942-490E-A1D4-E37235736D8A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swagger.Net.Dummy.WebHost", "Tests\Swagger.Net.Dummy.WebHost\Swagger.Net.Dummy.WebHost.csproj", "{E51BDA79-1942-490E-A1D4-E37235736D8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swagger.Net.Dummy.SelfHost", "Tests\Swashbuckle.Dummy.SelfHost\Swagger.Net.Dummy.SelfHost.csproj", "{2D1F2F73-5828-413C-9FD0-6F81A964C82D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swagger.Net.Dummy.SelfHost", "Tests\Swagger.Net.Dummy.SelfHost\Swagger.Net.Dummy.SelfHost.csproj", "{2D1F2F73-5828-413C-9FD0-6F81A964C82D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swagger.Net.Dummy.Core", "Tests\Swashbuckle.Dummy.Core\Swagger.Net.Dummy.Core.csproj", "{2DFE3931-747F-48C6-8530-B74710988095}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Swagger.Net.Dummy.Core", "Tests\Swagger.Net.Dummy.Core\Swagger.Net.Dummy.Core.csproj", "{2DFE3931-747F-48C6-8530-B74710988095}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
