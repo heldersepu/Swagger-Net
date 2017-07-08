@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Swashbuckle.Dummy.WebHost")]
+[assembly: AssemblyTitle("Swagger.Net.Dummy.WebHost")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Swashbuckle.Dummy.WebHost")]
+[assembly: AssemblyProduct("Swagger.Net.Dummy.WebHost")]
 [assembly: AssemblyCopyright("CopyLeft ©  2017")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

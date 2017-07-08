@@ -1,7 +1,7 @@
 ﻿using System.Text.RegularExpressions;
 using System.Xml.XPath;
 
-namespace Swashbuckle.Swagger.XmlComments
+namespace Swagger.Net.Swagger.XmlComments
 {
     public static class XPathNavigatorExtensions
     {

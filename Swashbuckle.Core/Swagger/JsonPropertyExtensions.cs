@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 
-namespace Swashbuckle.Swagger
+namespace Swagger.Net.Swagger
 {
     public static class JsonPropertyExtensions
     {

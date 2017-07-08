@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Swashbuckle.Dummy.SwaggerExtensions
+namespace Swagger.Net.Dummy.SwaggerExtensions
 {
     public class DescendingAlphabeticComparer : IComparer<string>
     {

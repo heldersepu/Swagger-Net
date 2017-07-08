@@ -9,7 +9,7 @@ using System.Web.Http;
 using System.Web.Http.Hosting;
 using System.Web.Http.Routing;
 
-namespace Swashbuckle.Tests
+namespace Swagger.Net.Tests
 {
     [TestFixture]
     public abstract class HttpMessageHandlerTestBase<THandler>

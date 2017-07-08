@@ -2,11 +2,11 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using NUnit.Framework;
-using Swashbuckle.Swagger;
+using Swagger.Net.Swagger;
 using System;
 using System.Collections.Generic;
 
-namespace Swashbuckle.Tests.CoreUnitTests
+namespace Swagger.Net.Tests.CoreUnitTests
 {
     [TestFixture]
     class SchemaRegistryTests

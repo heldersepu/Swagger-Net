@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Http;
 
-namespace Swashbuckle.Dummy.WebHost
+namespace Swagger.Net.Dummy.WebHost
 {
     public class WebApiApplication : HttpApplication
     {

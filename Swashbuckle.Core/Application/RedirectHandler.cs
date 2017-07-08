@@ -4,7 +4,7 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Swashbuckle.Application
+namespace Swagger.Net.Application
 {
     public class RedirectHandler : HttpMessageHandler
     {

@@ -1,5 +1,5 @@
 ﻿using Newtonsoft.Json;
-using Swashbuckle.Swagger;
+using Swagger.Net.Swagger;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -8,7 +8,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Web.Http;
 
-namespace Swashbuckle.Application
+namespace Swagger.Net.Application
 {
     public class SwaggerDocsHandler : HttpMessageHandler
     {

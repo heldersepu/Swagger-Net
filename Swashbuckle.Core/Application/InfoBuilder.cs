@@ -1,7 +1,7 @@
-﻿using Swashbuckle.Swagger;
+﻿using Swagger.Net.Swagger;
 using System;
 
-namespace Swashbuckle.Application
+namespace Swagger.Net.Application
 {
     public class InfoBuilder
     {

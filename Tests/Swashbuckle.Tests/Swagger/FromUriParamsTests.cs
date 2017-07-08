@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json.Linq;
 using NUnit.Framework;
-using Swashbuckle.Dummy.Controllers;
+using Swagger.Net.Dummy.Controllers;
 
-namespace Swashbuckle.Tests.Swagger
+namespace Swagger.Net.Tests.Swagger
 {
     [TestFixture]
     public class FromUriParamsTests : SwaggerTestBase

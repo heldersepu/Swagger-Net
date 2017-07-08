@@ -1,13 +1,13 @@
 ﻿using Moq;
 using NUnit.Framework;
-using Swashbuckle.Swagger;
-using Swashbuckle.Swagger.XmlComments;
+using Swagger.Net.Swagger;
+using Swagger.Net.Swagger.XmlComments;
 using System;
 using System.IO;
 using System.Linq;
 using System.Web.Http.Description;
 
-namespace Swashbuckle.Tests.CoreUnitTests
+namespace Swagger.Net.Tests.CoreUnitTests
 {
     [TestFixture]
     class ApplyXmlActionCommentsTests

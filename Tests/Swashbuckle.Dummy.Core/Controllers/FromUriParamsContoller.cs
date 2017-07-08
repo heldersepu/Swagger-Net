@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Web.Http;
 
-namespace Swashbuckle.Dummy.Controllers
+namespace Swagger.Net.Dummy.Controllers
 {
     public class FromUriParamsController : ApiController
     {

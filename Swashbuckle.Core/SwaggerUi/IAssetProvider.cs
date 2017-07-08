@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
 
-namespace Swashbuckle.SwaggerUi
+namespace Swagger.Net.SwaggerUi
 {
     public interface IAssetProvider
     {

@@ -6,7 +6,7 @@ using System;
 using System.Net.Http;
 using System.Threading.Tasks;
 
-namespace Swashbuckle.Tests.Owin
+namespace Swagger.Net.Tests.Owin
 {
     [TestFixture]
     public abstract class BaseInMemoryOwinSwaggerTest

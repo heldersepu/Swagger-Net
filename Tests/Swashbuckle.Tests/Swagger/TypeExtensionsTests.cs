@@ -4,7 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 
-namespace Swashbuckle.Swagger
+namespace Swagger.Net.Swagger
 {
     public class TypeExtensionsTests
     {
@@ -21,7 +21,7 @@ namespace Swashbuckle.Swagger
         [TestCase(typeof(DateTime), "System.DateTime")]
         [TestCase(typeof(IEnumerable<string>), "System.Collections.Generic.IEnumerable[System.String]")]
         [TestCase(typeof(IDictionary<string, decimal>), "System.Collections.Generic.IDictionary[System.String,System.Decimal]")]
-        [TestCase(typeof(TypeExtensionsTests.InnerType), "Swashbuckle.Swagger.TypeExtensionsTests.InnerType")]
+        [TestCase(typeof(TypeExtensionsTests.InnerType), "Swagger.Net.Swagger.TypeExtensionsTests.InnerType")]
         public void FriendlyId_ReturnsFullQualifiedFriendlyId_IfFullyQualifiedFlagIsSet(
             Type systemType,
             string expectedReturnValue)

@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
-using Swashbuckle.Swagger.XmlComments;
+using Swagger.Net.Swagger.XmlComments;
 using System;
 
-namespace Swashbuckle.Tests.Swagger
+namespace Swagger.Net.Tests.Swagger
 {
     /// <summary>
     /// Tests for XmlUtility

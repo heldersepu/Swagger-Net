@@ -3,7 +3,7 @@ using Newtonsoft.Json.Converters;
 using System;
 using System.Web.Http;
 
-namespace Swashbuckle.Dummy.Controllers
+namespace Swagger.Net.Dummy.Controllers
 {
     public class JsonAnnotatedTypesController : ApiController
     {

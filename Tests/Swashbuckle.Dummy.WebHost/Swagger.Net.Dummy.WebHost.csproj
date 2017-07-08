@@ -11,8 +11,8 @@
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Swashbuckle.Dummy.WebHost</RootNamespace>
-    <AssemblyName>Swashbuckle.Dummy.WebHost</AssemblyName>
+    <RootNamespace>Swagger.Net.Dummy.WebHost</RootNamespace>
+    <AssemblyName>Swagger.Net.Dummy.WebHost</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort>44300</IISExpressSSLPort>
@@ -84,13 +84,13 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <ProjectReference Include="..\..\Swashbuckle.Core\Swashbuckle.Core.csproj">
+    <ProjectReference Include="..\..\Swashbuckle.Core\Swagger.Net.csproj">
       <Project>{d50a26ff-02c6-4c16-ba94-4cd7d43efbb3}</Project>
-      <Name>Swashbuckle.Core</Name>
+      <Name>Swagger.Net</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Swashbuckle.Dummy.Core\Swashbuckle.Dummy.Core.csproj">
+    <ProjectReference Include="..\Swashbuckle.Dummy.Core\Swagger.Net.Dummy.Core.csproj">
       <Project>{2DFE3931-747F-48C6-8530-B74710988095}</Project>
-      <Name>Swashbuckle.Dummy.Core</Name>
+      <Name>Swagger.Net.Dummy.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

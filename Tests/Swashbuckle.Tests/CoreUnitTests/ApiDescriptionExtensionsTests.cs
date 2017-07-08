@@ -1,12 +1,12 @@
 ﻿using Moq;
 using NUnit.Framework;
-using Swashbuckle.Swagger;
+using Swagger.Net.Swagger;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
 
-namespace Swashbuckle.Tests.CoreUnitTests
+namespace Swagger.Net.Tests.CoreUnitTests
 {
     [TestFixture]
     class ApiDescriptionExtensionsTests

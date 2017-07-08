@@ -1,7 +1,7 @@
-﻿using Swashbuckle.Swagger;
+﻿using Swagger.Net.Swagger;
 using System;
 
-namespace Swashbuckle.Dummy.SwaggerExtensions
+namespace Swagger.Net.Dummy.SwaggerExtensions
 {
     public class ApplySchemaVendorExtensions : ISchemaFilter
     {

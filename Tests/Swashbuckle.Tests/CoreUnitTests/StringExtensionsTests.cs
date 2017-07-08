@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
-using Swashbuckle.Swagger;
+using Swagger.Net.Swagger;
 
-namespace Swashbuckle.Tests.CoreUnitTests
+namespace Swagger.Net.Tests.CoreUnitTests
 {
     [TestFixture]
     class StringExtensionsTests

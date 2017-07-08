@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
-using Swashbuckle.Application;
+using Swagger.Net.Application;
 using System.Web.Http.Routing;
 
-namespace Swashbuckle.Tests.CoreUnitTests
+namespace Swagger.Net.Tests.CoreUnitTests
 {
     [TestFixture]
     class HttpRouteDirectionConstraintTests

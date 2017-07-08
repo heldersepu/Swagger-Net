@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Web.Http.Description;
 
-namespace Swashbuckle.Swagger.FromUriParams
+namespace Swagger.Net.Swagger.FromUriParams
 {
     public class HandleFromUriParams : IOperationFilter
     {

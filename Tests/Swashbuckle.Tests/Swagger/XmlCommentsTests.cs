@@ -1,14 +1,14 @@
 ﻿using Newtonsoft.Json.Linq;
 using NUnit.Framework;
-using Swashbuckle.Dummy.Controllers;
-using Swashbuckle.Dummy.SwaggerExtensions;
-using Swashbuckle.Swagger;
+using Swagger.Net.Dummy.Controllers;
+using Swagger.Net.Dummy.SwaggerExtensions;
+using Swagger.Net.Swagger;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Web.Http.Description;
 
-namespace Swashbuckle.Tests.Swagger
+namespace Swagger.Net.Tests.Swagger
 {
     [TestFixture]
     public class XmlCommentsTests : SwaggerTestBase
@@ -34,7 +34,7 @@ namespace Swashbuckle.Tests.Swagger
             Assert.AreEqual("Registers a new Account based on {account}.", postOp["summary"].ToString());
 
             Assert.IsNotNull(postOp["description"]);
-            Assert.AreEqual("Create an {Swashbuckle.Dummy.Controllers.Account} to access restricted resources", postOp["description"].ToString());
+            Assert.AreEqual("Create an {Swagger.Net.Dummy.Controllers.Account} to access restricted resources", postOp["description"].ToString());
         }
 
         [Test]

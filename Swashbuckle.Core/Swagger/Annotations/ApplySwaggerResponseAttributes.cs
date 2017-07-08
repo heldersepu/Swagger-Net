@@ -3,7 +3,7 @@ using System.Linq;
 using System.Net;
 using System.Web.Http.Description;
 
-namespace Swashbuckle.Swagger.Annotations
+namespace Swagger.Net.Swagger.Annotations
 {
     public class ApplySwaggerResponseAttributes : IOperationFilter
     {

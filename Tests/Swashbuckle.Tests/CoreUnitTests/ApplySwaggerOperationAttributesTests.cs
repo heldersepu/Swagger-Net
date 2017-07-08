@@ -1,11 +1,11 @@
 ﻿using Moq;
 using NUnit.Framework;
-using Swashbuckle.Swagger.Annotations;
+using Swagger.Net.Swagger.Annotations;
 using System.Collections.ObjectModel;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;
 
-namespace Swashbuckle.Tests.CoreUnitTests
+namespace Swagger.Net.Tests.CoreUnitTests
 {
     [TestFixture]
     class ApplySwaggerOperationAttributesTests

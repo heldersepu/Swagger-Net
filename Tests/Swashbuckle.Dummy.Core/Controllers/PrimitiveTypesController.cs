@@ -1,8 +1,8 @@
-﻿using Swashbuckle.Dummy.Types;
+﻿using Swagger.Net.Dummy.Types;
 using System;
 using System.Web.Http;
 
-namespace Swashbuckle.Dummy.Controllers
+namespace Swagger.Net.Dummy.Controllers
 {
     public class PrimitiveTypesController : ApiController
     {

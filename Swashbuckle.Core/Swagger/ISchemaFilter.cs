@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Swashbuckle.Swagger
+namespace Swagger.Net.Swagger
 {
     public interface ISchemaFilter
     {

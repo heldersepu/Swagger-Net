@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Web.Http;
 
-namespace Swashbuckle.Dummy.Controllers
+namespace Swagger.Net.Dummy.Controllers
 {
     /// <summary>
     /// XmlAnnotatedController

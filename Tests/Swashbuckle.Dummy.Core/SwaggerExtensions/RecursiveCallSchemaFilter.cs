@@ -1,9 +1,9 @@
-﻿using Swashbuckle.Dummy.Controllers;
-using Swashbuckle.Swagger;
+﻿using Swagger.Net.Dummy.Controllers;
+using Swagger.Net.Swagger;
 using System;
 using System.Collections.Generic;
 
-namespace Swashbuckle.Dummy.SwaggerExtensions
+namespace Swagger.Net.Dummy.SwaggerExtensions
 {
     public class RecursiveCallSchemaFilter : ISchemaFilter
     {

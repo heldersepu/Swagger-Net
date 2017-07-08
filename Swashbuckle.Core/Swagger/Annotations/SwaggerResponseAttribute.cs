@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Net;
 
-namespace Swashbuckle.Swagger.Annotations
+namespace Swagger.Net.Swagger.Annotations
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
     public class SwaggerResponseAttribute : Attribute

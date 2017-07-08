@@ -4,7 +4,7 @@ using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Metadata;
 
-namespace Swashbuckle.Dummy.Controllers
+namespace Swagger.Net.Dummy.Controllers
 {
 
     public class TestBindingController : ApiController

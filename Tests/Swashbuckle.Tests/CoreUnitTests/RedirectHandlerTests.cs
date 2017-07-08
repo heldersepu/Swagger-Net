@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
-using Swashbuckle.Application;
+using Swagger.Net.Application;
 using System.Net.Http;
 
-namespace Swashbuckle.Tests.CoreUnitTests
+namespace Swagger.Net.Tests.CoreUnitTests
 {
     [TestFixture]
     class RedirectHandlerTests

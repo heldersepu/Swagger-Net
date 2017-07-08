@@ -3,7 +3,7 @@ using Newtonsoft.Json.Serialization;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
-namespace Swashbuckle.Dummy
+namespace Swagger.Net.Dummy
 {
     public static class WebApiConfig
     {

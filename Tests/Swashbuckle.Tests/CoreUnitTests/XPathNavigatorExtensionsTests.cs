@@ -1,10 +1,10 @@
 ﻿using NUnit.Framework;
-using Swashbuckle.Swagger.XmlComments;
+using Swagger.Net.Swagger.XmlComments;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Xml.XPath;
 
-namespace Swashbuckle.Tests.CoreUnitTests
+namespace Swagger.Net.Tests.CoreUnitTests
 {
     [TestFixture]
     class XPathNavigatorExtensionsTests

@@ -1,10 +1,10 @@
 ﻿using NUnit.Framework;
-using Swashbuckle.Swagger.XmlComments;
+using Swagger.Net.Swagger.XmlComments;
 using System;
 using System.IO;
 using System.Linq;
 
-namespace Swashbuckle.Tests.CoreUnitTests
+namespace Swagger.Net.Tests.CoreUnitTests
 {
     [TestFixture]
     class ApplyXmlTypeCommentsTests

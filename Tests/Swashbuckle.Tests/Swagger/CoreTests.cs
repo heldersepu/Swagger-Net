@@ -1,15 +1,15 @@
 ﻿using Newtonsoft.Json.Linq;
 using NUnit.Framework;
-using Swashbuckle.Dummy;
-using Swashbuckle.Dummy.Controllers;
-using Swashbuckle.Dummy.SwaggerExtensions;
+using Swagger.Net.Dummy;
+using Swagger.Net.Dummy.Controllers;
+using Swagger.Net.Dummy.SwaggerExtensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 using System.Web.Http;
 
-namespace Swashbuckle.Tests.Swagger
+namespace Swagger.Net.Tests.Swagger
 {
     [TestFixture]
     public class CoreTests : SwaggerTestBase

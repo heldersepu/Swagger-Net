@@ -1,4 +1,4 @@
-﻿namespace Swashbuckle.Dummy.Types
+﻿namespace Swagger.Net.Dummy.Types
 {
     public enum PrimitiveEnum
     {

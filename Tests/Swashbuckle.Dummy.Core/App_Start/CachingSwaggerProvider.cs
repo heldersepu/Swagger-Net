@@ -1,7 +1,7 @@
-﻿using Swashbuckle.Swagger;
+﻿using Swagger.Net.Swagger;
 using System.Collections.Concurrent;
 
-namespace Swashbuckle.Dummy.App_Start
+namespace Swagger.Net.Dummy.App_Start
 {
     public class CachingSwaggerProvider : ISwaggerProvider
     {

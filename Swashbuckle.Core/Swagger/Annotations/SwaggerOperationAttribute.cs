@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Swashbuckle.Swagger.Annotations
+namespace Swagger.Net.Swagger.Annotations
 {
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     public class SwaggerOperationAttribute : Attribute

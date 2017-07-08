@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Swashbuckle.Swagger.Annotations
+namespace Swagger.Net.Swagger.Annotations
 {
     public class ApplySwaggerSchemaFilterAttributes : ISchemaFilter
     {

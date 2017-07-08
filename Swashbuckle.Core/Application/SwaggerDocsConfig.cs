@@ -1,8 +1,8 @@
 ﻿using Newtonsoft.Json;
-using Swashbuckle.Swagger;
-using Swashbuckle.Swagger.Annotations;
-using Swashbuckle.Swagger.FromUriParams;
-using Swashbuckle.Swagger.XmlComments;
+using Swagger.Net.Swagger;
+using Swagger.Net.Swagger.Annotations;
+using Swagger.Net.Swagger.FromUriParams;
+using Swagger.Net.Swagger.XmlComments;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -14,7 +14,7 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using System.Xml.XPath;
 
-namespace Swashbuckle.Application
+namespace Swagger.Net.Application
 {
     public class SwaggerDocsConfig
     {

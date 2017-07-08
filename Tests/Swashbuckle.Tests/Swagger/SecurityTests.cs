@@ -1,9 +1,9 @@
 ﻿using Newtonsoft.Json.Linq;
 using NUnit.Framework;
-using Swashbuckle.Dummy.Controllers;
-using Swashbuckle.Tests.Swagger;
+using Swagger.Net.Dummy.Controllers;
+using Swagger.Net.Tests.Swagger;
 
-namespace Swashbuckle.Tests.SwaggerFilters
+namespace Swagger.Net.Tests.SwaggerFilters
 {
     [TestFixture]
     public class SecurityTests : SwaggerTestBase

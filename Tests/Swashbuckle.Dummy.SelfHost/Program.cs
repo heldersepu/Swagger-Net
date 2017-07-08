@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Web.Http.SelfHost;
 
-namespace Swashbuckle.Dummy.SelfHost
+namespace Swagger.Net.Dummy.SelfHost
 {
     class Program
     {

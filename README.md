@@ -14,14 +14,9 @@ Once you have a Web API that can describe itself in Swagger, you've opened the t
 * Auto-generated [Swagger 2.0](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md)
 * Seamless integration of swagger-ui
 * Reflection-based Schema generation for describing API types
-* Extensibility hooks for customizing the generated Swagger doc
-* Extensibility hooks for customizing the swagger-ui
-* Out-of-the-box support for leveraging Xml comments
-* Support for describing ApiKey, Basic Auth and OAuth2 schemes ... including UI support for the Implicit OAuth2 flow
+* Extensibility hooks for customizing the generated Swagger doc and the swagger-ui
+* Out-of-the-box support for Xml comments
 
-**Swashbuckle 5.0**
-
-Swashbuckle 5.0 makes the transition to Swagger 2.0. The 2.0 schema is significantly different to its predecessor (1.2) and, as a result, the Swashbuckle config interface has undergone yet another overhaul. Checkout the [transition guide](#transitioning-to-swashbuckle-50) if you're upgrading from a prior version.
 
 
 ## [Getting Started](https://github.com/domaindrivendev/Swashbuckle/wiki/1-Getting-Started) ##

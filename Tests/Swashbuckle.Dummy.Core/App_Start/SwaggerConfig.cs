@@ -1,13 +1,13 @@
-﻿using Swashbuckle.Application;
-using Swashbuckle.Dummy.App_Start;
-using Swashbuckle.Dummy.SwaggerExtensions;
+﻿using Swagger.Net.Application;
+using Swagger.Net.Dummy.App_Start;
+using Swagger.Net.Dummy.SwaggerExtensions;
 using System;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Description;
 using System.Web.Http.Routing.Constraints;
 
-namespace Swashbuckle.Dummy
+namespace Swagger.Net.Dummy
 {
     public class SwaggerConfig
     {
@@ -34,8 +34,8 @@ namespace Swashbuckle.Dummy
                         // hold additional metadata for an API. Version and title are required but you may also provide the
                         // additional fields.
                         //
-                        c.SingleApiVersion("v1", "Swashbuckle Dummy")
-                            .Description("A sample API for testing and prototyping Swashbuckle features")
+                        c.SingleApiVersion("v1", "Swagger.Net Dummy")
+                            .Description("A sample API for testing and prototyping Swagger.Net features")
                             .TermsOfService("Some terms")
                             .Contact(cc => cc
                                 .Name("Some contact")
@@ -46,7 +46,7 @@ namespace Swashbuckle.Dummy
                                 .Url("http://tempuri.org/license"));
 
                         // If your API has multiple versions, use "MultipleApiVersions" instead of "SingleApiVersion".
-                        // In this case, you must provide a lambda that tells Swashbuckle which actions should be
+                        // In this case, you must provide a lambda that tells Swagger.Net which actions should be
                         // included in the docs for a given API version. Like "SingleApiVersion", each call to "Version"
                         // returns an "Info" builder so you can provide additional metadata per API version.
                         //
@@ -54,8 +54,8 @@ namespace Swashbuckle.Dummy
                         //    (apiDesc, targetApiVersion) => ResolveVersionSupportByRouteConstraint(apiDesc, targetApiVersion),
                         //    (vc) =>
                         //    {
-                        //        vc.Version("v2", "Swashbuckle Dummy API V2");
-                        //        vc.Version("v1", "Swashbuckle Dummy API V1");
+                        //        vc.Version("v2", "Swagger.Net Dummy API V2");
+                        //        vc.Version("v1", "Swagger.Net Dummy API V1");
                         //    });
 
                         // You can use "BasicAuth", "ApiKey" or "OAuth2" options to describe security schemes for the API.
@@ -68,21 +68,21 @@ namespace Swashbuckle.Dummy
                         //c.BasicAuth("basic")
                         //    .Description("Basic HTTP Authentication");
                         //
-						// NOTE: You must also configure 'EnableApiKeySupport' below in the SwaggerUI section
-						//c.ApiKey("apiKey")
-						//	.Description("API Key Authentication")
-						//	.Name("apiKey")
-						//	.In("header");
+                        // NOTE: You must also configure 'EnableApiKeySupport' below in the SwaggerUI section
+                        //c.ApiKey("apiKey")
+                        //	.Description("API Key Authentication")
+                        //	.Name("apiKey")
+                        //	.In("header");
 
-						c.OAuth2("oauth2")
-							.Description("OAuth2 Implicit Grant")
-							.Flow("implicit")
-							.AuthorizationUrl("http://petstore.swagger.io/oauth/dialog")
-							//.TokenUrl("https://tempuri.org/token")
-							.Scopes(scopes => {
-								scopes.Add("read", "Read access to protected resources");
-								scopes.Add("write", "Write access to protected resources");
-							});
+                        c.OAuth2("oauth2")
+                            .Description("OAuth2 Implicit Grant")
+                            .Flow("implicit")
+                            .AuthorizationUrl("http://petstore.swagger.io/oauth/dialog")
+                            //.TokenUrl("https://tempuri.org/token")
+                            .Scopes(scopes => {
+                                scopes.Add("read", "Read access to protected resources");
+                                scopes.Add("write", "Write access to protected resources");
+                            });
 
                         // Set this flag to omit descriptions for any actions decorated with the Obsolete attribute
                         //c.IgnoreObsoleteActions();
@@ -114,7 +114,7 @@ namespace Swashbuckle.Dummy
 
                         c.IncludeAllXmlComments(thisAssembly, AppDomain.CurrentDomain.BaseDirectory);
 
-                        // Swashbuckle makes a best attempt at generating Swagger compliant JSON schemas for the various types
+                        // Swagger.Net makes a best attempt at generating Swagger compliant JSON schemas for the various types
                         // exposed in your API. However, there may be occasions when more control of the output is needed.
                         // This is supported through the MapType and SchemaFilter options:
                         //
@@ -133,7 +133,7 @@ namespace Swashbuckle.Dummy
                         c.SchemaFilter<ApplySchemaVendorExtensions>();
 
                         // In a Swagger 2.0 document, complex types are typically declared globally and referenced by unique
-                        // Schema Id. By default, Swashbuckle does NOT use the full type name in Schema Ids. In most cases, this
+                        // Schema Id. By default, Swagger.Net does NOT use the full type name in Schema Ids. In most cases, this
                         // works well because it prevents the "implementation detail" of type namespaces from leaking into your
                         // Swagger docs and UI. However, if you have multiple types in your API with the same class name, you'll
                         // need to opt out of this behavior to avoid Schema Id conflicts.
@@ -149,14 +149,14 @@ namespace Swashbuckle.Dummy
                         // Obsolete attribute
                         c.IgnoreObsoleteProperties();
 
-                        // In accordance with the built in JsonSerializer, Swashbuckle will, by default, describe enums as integers.
+                        // In accordance with the built in JsonSerializer, Swagger.Net will, by default, describe enums as integers.
                         // You can change the serializer behavior by configuring the StringToEnumConverter globally or for a given
-                        // enum type. Swashbuckle will honor this change out-of-the-box. However, if you use a different
-                        // approach to serialize enums as strings, you can also force Swashbuckle to describe them as strings.
+                        // enum type. Swagger.Net will honor this change out-of-the-box. However, if you use a different
+                        // approach to serialize enums as strings, you can also force Swagger.Net to describe them as strings.
                         //
                         c.DescribeAllEnumsAsStrings();
 
-                        // Similar to Schema filters, Swashbuckle also supports Operation and Document filters:
+                        // Similar to Schema filters, Swagger.Net also supports Operation and Document filters:
                         //
                         // Post-modify Operation descriptions once they've been generated by wiring up one or more
                         // Operation filters.
@@ -182,7 +182,7 @@ namespace Swashbuckle.Dummy
                         //c.DocumentFilter<AppendVersionToBasePath>();
 
                         // In contrast to WebApi, Swagger 2.0 does not include the query string component when mapping a URL
-                        // to an action. As a result, Swashbuckle will raise an exception if it encounters multiple actions
+                        // to an action. As a result, Swagger.Net will raise an exception if it encounters multiple actions
                         // with the same path (sans query string) and HTTP method. You can workaround this by providing a
                         // custom strategy to pick a winner or merge the descriptions for the purposes of the Swagger docs
                         //
@@ -199,13 +199,13 @@ namespace Swashbuckle.Dummy
                         // The file must be included in your project as an "Embedded Resource", and then the resource's
                         // "Logical Name" is passed to the method as shown below.
                         //
-                        //c.InjectStylesheet(thisAssembly, "Swashbuckle.Dummy.SwaggerExtensions.testStyles1.css");
+                        //c.InjectStylesheet(thisAssembly, "Swagger.Net.Dummy.SwaggerExtensions.testStyles1.css");
 
                         // Use the "InjectJavaScript" option to invoke one or more custom JavaScripts after the swagger-ui
                         // has loaded. The file must be included in your project as an "Embedded Resource", and then the resource's
                         // "Logical Name" is passed to the method as shown above.
                         //
-                        //c.InjectJavaScript(thisAssembly, "Swashbuckle.Dummy.SwaggerExtensions.testScript1.js");
+                        //c.InjectJavaScript(thisAssembly, "Swagger.Net.Dummy.SwaggerExtensions.testScript1.js");
 
                         // The swagger-ui renders boolean data types as a dropdown. By default, it provides "true" and "false"
                         // strings as the possible choices. You can use this option to change these to something else,
@@ -231,7 +231,7 @@ namespace Swashbuckle.Dummy
                         //c.SupportedSubmitMethods("GET", "HEAD");
 
                         // Use the CustomAsset option to provide your own version of assets used in the swagger-ui.
-                        // It's typically used to instruct Swashbuckle to return your version instead of the default
+                        // It's typically used to instruct Swagger.Net to return your version instead of the default
                         // when a request is made for "index.html". As with all custom content, the file must be included
                         // in your project as an "Embedded Resource", and then the resource's "Logical Name" is passed to
                         // the method as shown below.

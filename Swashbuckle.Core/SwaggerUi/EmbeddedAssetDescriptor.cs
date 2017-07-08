@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace Swashbuckle.SwaggerUi
+namespace Swagger.Net.SwaggerUi
 {
     public class EmbeddedAssetDescriptor
     {

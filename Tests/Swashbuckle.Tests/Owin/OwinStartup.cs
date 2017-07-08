@@ -1,12 +1,12 @@
 using Owin;
-using Swashbuckle.Application;
+using Swagger.Net.Application;
 using System;
 using System.Linq;
 using System.Web.Http;
 using System.Web.Http.Dispatcher;
 using System.Web.Http.Routing;
 
-namespace Swashbuckle.Tests.Owin
+namespace Swagger.Net.Tests.Owin
 {
     public class OwinStartup
     {

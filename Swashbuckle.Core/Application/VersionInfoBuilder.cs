@@ -1,8 +1,8 @@
-﻿using Swashbuckle.Swagger;
+﻿using Swagger.Net.Swagger;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Swashbuckle.Application
+namespace Swagger.Net.Application
 {
     public class VersionInfoBuilder
     {

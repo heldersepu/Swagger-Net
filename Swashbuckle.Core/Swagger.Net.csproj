@@ -7,8 +7,8 @@
     <ProjectGuid>{D50A26FF-02C6-4C16-BA94-4CD7D43EFBB3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Swashbuckle</RootNamespace>
-    <AssemblyName>Swashbuckle.Core</AssemblyName>
+    <RootNamespace>Swagger.Net</RootNamespace>
+    <AssemblyName>Swagger.Net</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -39,7 +39,7 @@
     <SignAssembly>true</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
-    <AssemblyOriginatorKeyFile>Swashbuckle.Core.snk</AssemblyOriginatorKeyFile>
+    <AssemblyOriginatorKeyFile>Swagger-Net.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
   <PropertyGroup />
   <ItemGroup>
@@ -127,13 +127,13 @@
     <EmbeddedResource Include="SwaggerUi\CustomAssets\typography.css" />
     <EmbeddedResource Include="SwaggerUi\CustomAssets\index.html" />
     <EmbeddedResource Include="SwaggerUi\CustomAssets\screen.css" />
-    <Content Include="Swashbuckle.Core.nuspec">
+    <Content Include="Swagger-Net.nuspec">
       <SubType>Designer</SubType>
     </Content>
     <None Include="app.config" />
     <None Include="Nuget\Content\App_Start\SwaggerConfig.cs.pp" />
     <None Include="packages.config" />
-    <None Include="Swashbuckle.Core.snk" />
+    <None Include="Swagger-Net.snk" />
   </ItemGroup>
   <!-- Automatically embed swagger-ui files. Construct name so resource can be retrieved by swagger-ui relative path -->
   <ItemGroup>

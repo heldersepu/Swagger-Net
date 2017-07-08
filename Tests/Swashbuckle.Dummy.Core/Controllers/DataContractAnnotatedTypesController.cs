@@ -2,7 +2,7 @@
 using System.Runtime.Serialization;
 using System.Web.Http;
 
-namespace Swashbuckle.Dummy.Controllers
+namespace Swagger.Net.Dummy.Controllers
 {
     public class DataContractAnnotatedTypesController : ApiController
     {

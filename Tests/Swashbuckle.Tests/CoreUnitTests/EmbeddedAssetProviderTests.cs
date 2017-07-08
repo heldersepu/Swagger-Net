@@ -1,8 +1,8 @@
 ﻿using NUnit.Framework;
-using Swashbuckle.SwaggerUi;
+using Swagger.Net.SwaggerUi;
 using System.Collections.Generic;
 
-namespace Swashbuckle.Tests.CoreUnitTests
+namespace Swagger.Net.Tests.CoreUnitTests
 {
     [TestFixture]
     class EmbeddedAssetProviderTests

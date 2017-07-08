@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Runtime.Serialization;
 using System.Text;
 
-namespace Swashbuckle.Swagger
+namespace Swagger.Net.Swagger
 {
     public static class TypeExtensions
     {

@@ -7,8 +7,8 @@
     <ProjectGuid>{2F5D233D-F779-473E-9EEC-ACC58AC266ED}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Swashbuckle.Tests</RootNamespace>
-    <AssemblyName>Swashbuckle.Tests</AssemblyName>
+    <RootNamespace>Swagger.Net.Tests</RootNamespace>
+    <AssemblyName>Swagger.Net.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
@@ -129,13 +129,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Swashbuckle.Core\Swashbuckle.Core.csproj">
+    <ProjectReference Include="..\..\Swashbuckle.Core\Swagger.Net.csproj">
       <Project>{d50a26ff-02c6-4c16-ba94-4cd7d43efbb3}</Project>
-      <Name>Swashbuckle.Core</Name>
+      <Name>Swagger.Net</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Swashbuckle.Dummy.Core\Swashbuckle.Dummy.Core.csproj">
+    <ProjectReference Include="..\Swashbuckle.Dummy.Core\Swagger.Net.Dummy.Core.csproj">
       <Project>{2dfe3931-747f-48c6-8530-b74710988095}</Project>
-      <Name>Swashbuckle.Dummy.Core</Name>
+      <Name>Swagger.Net.Dummy.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

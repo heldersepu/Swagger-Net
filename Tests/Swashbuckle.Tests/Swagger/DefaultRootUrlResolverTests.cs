@@ -1,11 +1,11 @@
-﻿namespace Swashbuckle.Tests.Swagger
-{
-    using NUnit.Framework;
-    using Swashbuckle.Application;
-    using System.Net.Http;
-    using System.Web.Http;
-    using System.Web.Http.Hosting;
+﻿using NUnit.Framework;
+using Swagger.Net.Application;
+using System.Net.Http;
+using System.Web.Http;
+using System.Web.Http.Hosting;
 
+namespace Swagger.Net.Tests.Swagger
+{
     [TestFixture]
     public class DefaultRootUrlResolverTests
     {
@@ -21,7 +21,7 @@
 
         [Test]
         public void It_provides_scheme_host_and_port_from_x_forwarded()
-        {  
+        {
             var request = GetRequestFixtureFor(HttpMethod.Get, "http://tempuri.org:1234");
             request.Headers.Add("X-Forwarded-Proto", "https");
             request.Headers.Add("X-Forwarded-Host", "acmecorp.org");

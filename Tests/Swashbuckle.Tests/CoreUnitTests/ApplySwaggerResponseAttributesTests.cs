@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
-using Swashbuckle.Swagger.Annotations;
+using Swagger.Net.Swagger.Annotations;
 
-namespace Swashbuckle.Tests.CoreUnitTests
+namespace Swagger.Net.Tests.CoreUnitTests
 {
     [TestFixture]
     class ApplySwaggerResponseAttributesTests

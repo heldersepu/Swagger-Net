@@ -1,12 +1,12 @@
 ﻿using NUnit.Framework;
-using Swashbuckle.Application;
-using Swashbuckle.Dummy;
+using Swagger.Net.Application;
+using Swagger.Net.Dummy;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Net;
 
-namespace Swashbuckle.Tests.SwaggerUi
+namespace Swagger.Net.Tests.SwaggerUi
 {
     [TestFixture]
     public class SwaggerUiTests : HttpMessageHandlerTestBase<SwaggerUiHandler>
@@ -46,22 +46,22 @@ namespace Swashbuckle.Tests.SwaggerUi
                 {
                     var assembly = typeof(SwaggerConfig).Assembly;
                     c.EnableDiscoveryUrlSelector();
-                    c.InjectStylesheet(assembly, "Swashbuckle.Dummy.SwaggerExtensions.testStyles1.css");
-                    c.InjectStylesheet(assembly, "Swashbuckle.Dummy.SwaggerExtensions.testStyles2.css", "print");
+                    c.InjectStylesheet(assembly, "Swagger.Net.Dummy.SwaggerExtensions.testStyles1.css");
+                    c.InjectStylesheet(assembly, "Swagger.Net.Dummy.SwaggerExtensions.testStyles2.css", "print");
                 });
 
 
             var content = GetContentAsString(TEMP_URI.INDEX);
 
             StringAssert.Contains(
-                "<link href='ext/Swashbuckle-Dummy-SwaggerExtensions-testStyles1-css' media='screen' rel='stylesheet' type='text/css' />\r\n" +
-                "<link href='ext/Swashbuckle-Dummy-SwaggerExtensions-testStyles2-css' media='print' rel='stylesheet' type='text/css' />",
+                "<link href='ext/Swagger-Net-Dummy-SwaggerExtensions-testStyles1-css' media='screen' rel='stylesheet' type='text/css' />\r\n" +
+                "<link href='ext/Swagger-Net-Dummy-SwaggerExtensions-testStyles2-css' media='print' rel='stylesheet' type='text/css' />",
                 content);
 
-            content = GetContentAsString("http://tempuri.org/swagger/ui/ext/Swashbuckle-Dummy-SwaggerExtensions-testStyles1-css");
+            content = GetContentAsString("http://tempuri.org/swagger/ui/ext/Swagger-Net-Dummy-SwaggerExtensions-testStyles1-css");
             StringAssert.StartsWith("h1", content);
 
-            content = GetContentAsString("http://tempuri.org/swagger/ui/ext/Swashbuckle-Dummy-SwaggerExtensions-testStyles2-css");
+            content = GetContentAsString("http://tempuri.org/swagger/ui/ext/Swagger-Net-Dummy-SwaggerExtensions-testStyles2-css");
             StringAssert.StartsWith("h2", content);
         }
 
@@ -124,22 +124,22 @@ namespace Swashbuckle.Tests.SwaggerUi
             SetUpHandler(c =>
                 {
                     var assembly = typeof(SwaggerConfig).Assembly;
-                    c.InjectJavaScript(assembly, "Swashbuckle.Dummy.SwaggerExtensions.testScript1.js");
-                    c.InjectJavaScript(assembly, "Swashbuckle.Dummy.SwaggerExtensions.testScript2.js");
+                    c.InjectJavaScript(assembly, "Swagger.Net.Dummy.SwaggerExtensions.testScript1.js");
+                    c.InjectJavaScript(assembly, "Swagger.Net.Dummy.SwaggerExtensions.testScript2.js");
                 });
 
             var content = GetContentAsString(TEMP_URI.INDEX);
 
             StringAssert.Contains(
                 "customScripts: " +
-                "arrayFrom('ext/Swashbuckle-Dummy-SwaggerExtensions-testScript1-js|" +
-                "ext/Swashbuckle-Dummy-SwaggerExtensions-testScript2-js')",
+                "arrayFrom('ext/Swagger-Net-Dummy-SwaggerExtensions-testScript1-js|" +
+                "ext/Swagger-Net-Dummy-SwaggerExtensions-testScript2-js')",
                 content);
 
-            content = GetContentAsString("http://tempuri.org/swagger/ui/ext/Swashbuckle-Dummy-SwaggerExtensions-testScript1-js");
+            content = GetContentAsString("http://tempuri.org/swagger/ui/ext/Swagger-Net-Dummy-SwaggerExtensions-testScript1-js");
             StringAssert.StartsWith("var str1", content);
 
-            content = GetContentAsString("http://tempuri.org/swagger/ui/ext/Swashbuckle-Dummy-SwaggerExtensions-testScript2-js");
+            content = GetContentAsString("http://tempuri.org/swagger/ui/ext/Swagger-Net-Dummy-SwaggerExtensions-testScript2-js");
             StringAssert.StartsWith("var str2", content);
         }
 
@@ -149,7 +149,7 @@ namespace Swashbuckle.Tests.SwaggerUi
             SetUpHandler(c =>
                 {
                     var assembly = typeof(SwaggerConfig).Assembly;
-                    c.CustomAsset("index", assembly, "Swashbuckle.Dummy.SwaggerExtensions.myIndex.html");
+                    c.CustomAsset("index", assembly, "Swagger.Net.Dummy.SwaggerExtensions.myIndex.html");
                 });
 
             var content = GetContentAsString(TEMP_URI.INDEX);

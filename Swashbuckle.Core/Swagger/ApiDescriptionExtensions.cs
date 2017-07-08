@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Http.Description;
 
-namespace Swashbuckle.Swagger
+namespace Swagger.Net.Swagger
 {
     public static class ApiDescriptionExtensions
     {
@@ -61,7 +61,7 @@ namespace Swashbuckle.Swagger
 
         public static Type ResponseType(this ApiDescription apiDesc)
         {
-            // HACK: The ResponseDescription property was introduced in WebApi 5.0 but Swashbuckle supports >= 4.0.
+            // HACK: The ResponseDescription property was introduced in WebApi 5.0 but Swagger.Net supports >= 4.0.
             // The reflection hack below provides support for the ResponseType attribute if the application is running
             // against a version of WebApi that supports it.
             var apiDescType = typeof(ApiDescription);

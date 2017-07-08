@@ -1,12 +1,12 @@
 ﻿using Newtonsoft.Json;
-using Swashbuckle.SwaggerUi;
+using Swagger.Net.SwaggerUi;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Reflection;
 using System.Text;
 
-namespace Swashbuckle.Application
+namespace Swagger.Net.Application
 {
     public class SwaggerUiConfig
     {
@@ -46,9 +46,9 @@ namespace Swashbuckle.Application
             MapPathsForSwaggerUiAssets();
 
             // Use some custom versions to support config and extensionless paths
-            CustomAsset("index", "Swashbuckle.SwaggerUi.CustomAssets.index.html", isTemplate: true);
-            CustomAsset("css/screen-css", "Swashbuckle.SwaggerUi.CustomAssets.screen.css");
-            CustomAsset("css/typography-css", "Swashbuckle.SwaggerUi.CustomAssets.typography.css");
+            CustomAsset("index", "Swagger.Net.SwaggerUi.CustomAssets.index.html", isTemplate: true);
+            CustomAsset("css/screen-css", "Swagger.Net.SwaggerUi.CustomAssets.screen.css");
+            CustomAsset("css/typography-css", "Swagger.Net.SwaggerUi.CustomAssets.typography.css");
         }
 
         public void InjectStylesheet(Assembly resourceAssembly, string resourceName, string media = "screen", bool isTemplate = false)
@@ -165,7 +165,7 @@ namespace Swashbuckle.Application
         {
             foreach (var resourceName in _thisAssembly.GetManifestResourceNames())
             {
-                if (resourceName.Contains("Swashbuckle.SwaggerUi.CustomAssets")) continue; // original assets only
+                if (resourceName.Contains("Swagger.Net.SwaggerUi.CustomAssets")) continue; // original assets only
 
                 var path = resourceName
                     .Replace("\\", "/")

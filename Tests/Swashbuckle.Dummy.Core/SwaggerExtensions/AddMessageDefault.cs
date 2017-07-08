@@ -1,6 +1,6 @@
-﻿using Swashbuckle.Swagger;
+﻿using Swagger.Net.Swagger;
 
-namespace Swashbuckle.Dummy.SwaggerExtensions
+namespace Swagger.Net.Dummy.SwaggerExtensions
 {
     public class AddMessageDefault : ISchemaFilter
     {

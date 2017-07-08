@@ -1,11 +1,11 @@
-﻿using Swashbuckle.Dummy.SwaggerExtensions;
-using Swashbuckle.Swagger.Annotations;
+﻿using Swagger.Net.Dummy.SwaggerExtensions;
+using Swagger.Net.Swagger.Annotations;
 using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Web.Http;
 
-namespace Swashbuckle.Dummy.Controllers
+namespace Swagger.Net.Dummy.Controllers
 {
     [SwaggerResponse(400, "Bad request")]
     public class SwaggerAnnotatedController : ApiController

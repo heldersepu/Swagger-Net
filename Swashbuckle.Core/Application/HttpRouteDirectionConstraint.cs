@@ -2,7 +2,7 @@
 using System.Net.Http;
 using System.Web.Http.Routing;
 
-namespace Swashbuckle.Application
+namespace Swagger.Net.Application
 {
     public class HttpRouteDirectionConstraint : IHttpRouteConstraint
     {

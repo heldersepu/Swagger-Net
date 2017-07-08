@@ -6,7 +6,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Routing;
 
-namespace Swashbuckle.Application
+namespace Swagger.Net.Application
 {
     public static class HttpConfigurationExtensions
     {

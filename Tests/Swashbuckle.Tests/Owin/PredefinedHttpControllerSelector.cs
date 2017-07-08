@@ -5,7 +5,7 @@ using System.Web.Http;
 using System.Web.Http.Controllers;
 using System.Web.Http.Dispatcher;
 
-namespace Swashbuckle.Tests.Owin
+namespace Swagger.Net.Tests.Owin
 {
     /// <summary>
     /// Configures only selected controllers with Asp.Net.

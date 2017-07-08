@@ -5,7 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Web.Http.Description;
 
-namespace Swashbuckle.Swagger
+namespace Swagger.Net.Swagger
 {
     public class SwaggerGenerator : ISwaggerProvider
     {

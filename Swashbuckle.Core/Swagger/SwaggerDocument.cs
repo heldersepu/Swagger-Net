@@ -1,7 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System.Collections.Generic;
 
-namespace Swashbuckle.Swagger
+namespace Swagger.Net.Swagger
 {
     public class SwaggerDocument
     {

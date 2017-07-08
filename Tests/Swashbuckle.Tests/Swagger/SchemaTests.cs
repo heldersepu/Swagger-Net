@@ -1,15 +1,15 @@
 ﻿using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
-using Swashbuckle.Dummy.Controllers;
-using Swashbuckle.Dummy.SwaggerExtensions;
-using Swashbuckle.Dummy.Types;
-using Swashbuckle.Swagger;
+using Swagger.Net.Dummy.Controllers;
+using Swagger.Net.Dummy.SwaggerExtensions;
+using Swagger.Net.Dummy.Types;
+using Swagger.Net.Swagger;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Swashbuckle.Tests.Swagger
+namespace Swagger.Net.Tests.Swagger
 {
     [TestFixture]
     public class SchemaTests : SwaggerTestBase
@@ -411,8 +411,8 @@ namespace Swashbuckle.Tests.Swagger
         [TestCase("EchoDateTimeOffset", typeof(DateTimeOffset), "string", "date-time", "System.DateTimeOffset", false)]
         [TestCase("EchoTimeSpan", typeof(TimeSpan), "string", null, "System.TimeSpan", false)]
         [TestCase("EchoGuid", typeof(Guid), "string", "uuid", "System.Guid", false)]
-        [TestCase("EchoEnum", typeof(PrimitiveEnum), "integer", "int32", "Swashbuckle.Dummy.Types.PrimitiveEnum", false)]
-        [TestCase("EchoEnum", typeof(PrimitiveEnum), "string", null, "Swashbuckle.Dummy.Types.PrimitiveEnum", false)]
+        [TestCase("EchoEnum", typeof(PrimitiveEnum), "integer", "int32", "Swagger.Net.Dummy.Types.PrimitiveEnum", false)]
+        [TestCase("EchoEnum", typeof(PrimitiveEnum), "string", null, "Swagger.Net.Dummy.Types.PrimitiveEnum", false)]
         [TestCase("EchoChar", typeof(char), "string", null, "System.Char", false)]
         [TestCase("EchoNullableBoolean", typeof(bool?), "boolean", null, "System.Boolean", true)]
         [TestCase("EchoNullableByte", typeof(byte?), "integer", "int32", "System.Byte", true)]
@@ -430,8 +430,8 @@ namespace Swashbuckle.Tests.Swagger
         [TestCase("EchoNullableDateTimeOffset", typeof(DateTimeOffset?), "string", "date-time", "System.DateTimeOffset", true)]
         [TestCase("EchoNullableTimeSpan", typeof(TimeSpan?), "string", null, "System.TimeSpan", true)]
         [TestCase("EchoNullableGuid", typeof(Guid?), "string", "uuid", "System.Guid", true)]
-        [TestCase("EchoNullableEnum", typeof(PrimitiveEnum?), "integer", "int32", "Swashbuckle.Dummy.Types.PrimitiveEnum", true)]
-        [TestCase("EchoNullableEnum", typeof(PrimitiveEnum?), "string", null, "Swashbuckle.Dummy.Types.PrimitiveEnum", true)]
+        [TestCase("EchoNullableEnum", typeof(PrimitiveEnum?), "integer", "int32", "Swagger.Net.Dummy.Types.PrimitiveEnum", true)]
+        [TestCase("EchoNullableEnum", typeof(PrimitiveEnum?), "string", null, "Swagger.Net.Dummy.Types.PrimitiveEnum", true)]
         [TestCase("EchoNullableChar", typeof(char?), "string", null, "System.Char", true)]
         [TestCase("EchoString", typeof(string), "string", null, "System.String", true)]
         public void It_exposes_config_to_post_modify_schemas_for_primitives(string action, Type dotNetType, string type, string format, string xtypeDotNet, bool xnullable)
@@ -528,8 +528,8 @@ namespace Swashbuckle.Tests.Swagger
         [TestCase("EchoNullableDateTimeOffset", typeof(DateTimeOffset?), "string", "date-time", "System.DateTimeOffset", true)]
         [TestCase("EchoNullableTimeSpan", typeof(TimeSpan?), "string", null, "System.TimeSpan", true)]
         [TestCase("EchoNullableGuid", typeof(Guid?), "string", "uuid", "System.Guid", true)]
-        [TestCase("EchoNullableEnum", typeof(PrimitiveEnum?), "integer", "int32", "Swashbuckle.Dummy.Types.PrimitiveEnum", true)]
-        [TestCase("EchoNullableEnum", typeof(PrimitiveEnum?), "string", null, "Swashbuckle.Dummy.Types.PrimitiveEnum", true)]
+        [TestCase("EchoNullableEnum", typeof(PrimitiveEnum?), "integer", "int32", "Swagger.Net.Dummy.Types.PrimitiveEnum", true)]
+        [TestCase("EchoNullableEnum", typeof(PrimitiveEnum?), "string", null, "Swagger.Net.Dummy.Types.PrimitiveEnum", true)]
         [TestCase("EchoNullableChar", typeof(char?), "string", null, "System.Char", true)]
         [TestCase("EchoString", typeof(string), "string", null, "System.String", true)]
         public void It_exposes_config_to_post_modify_schemas_for_primitive_arrays(string action, Type dotNetType, string type, string format, string xtypeDotNet, bool xnullable)
@@ -619,8 +619,8 @@ namespace Swashbuckle.Tests.Swagger
             Assert.AreEqual(expectedResponse.ToString(), response.ToString());
         }
 
-        [TestCase( "EchoEnum", typeof( PrimitiveEnum ), "integer", "int32", "Swashbuckle.Dummy.Types.PrimitiveEnum", false )]
-        [TestCase( "EchoEnum", typeof( PrimitiveEnum ), "string", null, "Swashbuckle.Dummy.Types.PrimitiveEnum", false )]
+        [TestCase( "EchoEnum", typeof( PrimitiveEnum ), "integer", "int32", "Swagger.Net.Dummy.Types.PrimitiveEnum", false )]
+        [TestCase( "EchoEnum", typeof( PrimitiveEnum ), "string", null, "Swagger.Net.Dummy.Types.PrimitiveEnum", false )]
         public void It_exposes_config_to_post_modify_schemas_for_primitive_enum_arrays( string action, Type dotNetType, string type, string format, string xtypeDotNet, bool xnullable )
         {
             var underlyingDotNetType = Nullable.GetUnderlyingType( dotNetType ) ?? dotNetType;
@@ -746,7 +746,7 @@ namespace Swashbuckle.Tests.Swagger
         {
             SetUpDefaultRouteFor<ConflictingTypesController>();
             // We have to know the default implementation of FriendlyId before we can modify it's output.
-            SetUpHandler(c => { c.SchemaId(t => t.FriendlyId(true).Replace("Swashbuckle.Dummy.Controllers.", String.Empty)); });
+            SetUpHandler(c => { c.SchemaId(t => t.FriendlyId(true).Replace("Swagger.Net.Dummy.Controllers.", String.Empty)); });
 
             var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var defintitions = swagger["definitions"];

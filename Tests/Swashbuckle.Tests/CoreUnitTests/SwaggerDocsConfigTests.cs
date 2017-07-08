@@ -1,9 +1,9 @@
 ﻿using NUnit.Framework;
-using Swashbuckle.Application;
-using Swashbuckle.Swagger;
+using Swagger.Net.Application;
+using Swagger.Net.Swagger;
 using System;
 
-namespace Swashbuckle.Tests.CoreUnitTests
+namespace Swagger.Net.Tests.CoreUnitTests
 {
     [TestFixture]
     class SwaggerDocsConfigTests

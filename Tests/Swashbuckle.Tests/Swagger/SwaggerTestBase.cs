@@ -1,7 +1,7 @@
-﻿using Swashbuckle.Application;
+﻿using Swagger.Net.Application;
 using System;
 
-namespace Swashbuckle.Tests.Swagger
+namespace Swagger.Net.Tests.Swagger
 {
     public abstract class SwaggerTestBase : HttpMessageHandlerTestBase<SwaggerDocsHandler>
     {

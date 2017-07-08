@@ -1,8 +1,8 @@
-using Swashbuckle.Application;
+using Swagger.Net.Application;
 using System;
 using System.Web.Http;
 
-namespace Swashbuckle.Tests.Owin
+namespace Swagger.Net.Tests.Owin
 {
     public class MultiSwaggerOwinStartup : OwinStartup
     {

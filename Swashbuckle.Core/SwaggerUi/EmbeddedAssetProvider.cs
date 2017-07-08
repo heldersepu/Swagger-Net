@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-namespace Swashbuckle.SwaggerUi
+namespace Swagger.Net.SwaggerUi
 {
     public class EmbeddedAssetProvider : IAssetProvider
     {
