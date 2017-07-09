@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http.Description;
 
-namespace Swagger.Net.Swagger
+namespace Swagger.Net
 {
     public class SwaggerGeneratorOptions
     {

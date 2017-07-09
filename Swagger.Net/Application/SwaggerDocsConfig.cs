@@ -1,8 +1,7 @@
 ﻿using Newtonsoft.Json;
-using Swagger.Net.Swagger;
-using Swagger.Net.Swagger.Annotations;
-using Swagger.Net.Swagger.FromUriParams;
-using Swagger.Net.Swagger.XmlComments;
+using Swagger.Net.Annotations;
+using Swagger.Net.FromUriParams;
+using Swagger.Net.XmlComments;
 using System;
 using System.Collections.Generic;
 using System.Globalization;

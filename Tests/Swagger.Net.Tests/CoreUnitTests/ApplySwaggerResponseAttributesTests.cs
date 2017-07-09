@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using Swagger.Net.Swagger.Annotations;
+using Swagger.Net.Annotations;
 
 namespace Swagger.Net.Tests.CoreUnitTests
 {

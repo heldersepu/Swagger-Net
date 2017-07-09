@@ -1,6 +1,6 @@
 ﻿using Moq;
 using NUnit.Framework;
-using Swagger.Net.Swagger.Annotations;
+using Swagger.Net.Annotations;
 using System.Collections.ObjectModel;
 using System.Web.Http.Controllers;
 using System.Web.Http.Description;

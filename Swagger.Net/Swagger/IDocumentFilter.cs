@@ -1,6 +1,6 @@
 ﻿using System.Web.Http.Description;
 
-namespace Swagger.Net.Swagger
+namespace Swagger.Net
 {
     public interface IDocumentFilter
     {

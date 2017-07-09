@@ -1,4 +1,4 @@
-﻿namespace Swagger.Net.Swagger
+﻿namespace Swagger.Net
 {
     public static class StringExtensions
     {

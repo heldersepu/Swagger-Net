@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Swagger.Net.Swagger
+namespace Swagger.Net
 {
     public static class JsonContractExtensions
     {

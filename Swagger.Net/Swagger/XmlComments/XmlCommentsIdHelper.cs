@@ -2,7 +2,7 @@
 using System.Reflection;
 using System.Text;
 
-namespace Swagger.Net.Swagger.XmlComments
+namespace Swagger.Net.XmlComments
 {
     public class XmlCommentsIdHelper
     {

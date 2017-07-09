@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using Swagger.Net.Swagger.XmlComments;
+using Swagger.Net.XmlComments;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Xml.XPath;

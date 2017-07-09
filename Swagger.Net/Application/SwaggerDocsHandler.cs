@@ -1,5 +1,4 @@
 ﻿using Newtonsoft.Json;
-using Swagger.Net.Swagger;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;

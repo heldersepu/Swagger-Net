@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Web.Http.Description;
 
-namespace Swagger.Net.Swagger
+namespace Swagger.Net
 {
     public static class ApiDescriptionExtensions
     {

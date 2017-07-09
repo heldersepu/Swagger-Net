@@ -5,7 +5,7 @@ using System.Web.Http.Controllers;
 using System.Web.Http.Description;
 using System.Xml.XPath;
 
-namespace Swagger.Net.Swagger.XmlComments
+namespace Swagger.Net.XmlComments
 {
     public class ApplyXmlActionComments : IOperationFilter
     {

@@ -1,5 +1,4 @@
-﻿using Swagger.Net.Swagger;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Web.Http.Description;
 
 namespace Swagger.Net.Dummy.SwaggerExtensions

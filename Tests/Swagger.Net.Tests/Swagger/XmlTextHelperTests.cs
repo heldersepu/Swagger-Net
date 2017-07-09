@@ -1,5 +1,5 @@
 ﻿using NUnit.Framework;
-using Swagger.Net.Swagger.XmlComments;
+using Swagger.Net.XmlComments;
 using System;
 
 namespace Swagger.Net.Tests.Swagger

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Swagger.Net.Swagger.Annotations
+namespace Swagger.Net.Annotations
 {
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true)]
     public class SwaggerOperationFilterAttribute : Attribute

@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Xml.XPath;
 
-namespace Swagger.Net.Swagger.XmlComments
+namespace Swagger.Net.XmlComments
 {
     public class ApplyXmlTypeComments : IModelFilter
     {

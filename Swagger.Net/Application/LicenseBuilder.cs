@@ -1,6 +1,4 @@
-﻿using Swagger.Net.Swagger;
-
-namespace Swagger.Net.Application
+﻿namespace Swagger.Net.Application
 {
     public class LicenseBuilder
     {

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace Swagger.Net.Swagger.XmlComments
+namespace Swagger.Net.XmlComments
 {
     public static class XmlTextHelper
     {

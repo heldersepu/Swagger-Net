@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using System.Web.Http.Description;
 
-namespace Swagger.Net.Swagger.Annotations
+namespace Swagger.Net.Annotations
 {
     public class ApplySwaggerOperationAttributes : IOperationFilter
     {

@@ -1,5 +1,4 @@
-﻿using Swagger.Net.Swagger;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 
 namespace Swagger.Net.Dummy.App_Start
 {

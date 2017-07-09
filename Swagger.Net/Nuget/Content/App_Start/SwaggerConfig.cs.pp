@@ -7,7 +7,7 @@ using System.Web.Http.Routing.Constraints;
 using WebActivatorEx;
 using $rootnamespace$;
 using Swagger.Net.Application;
-using Swagger.Net.Swagger;
+using Swagger.Net;
 
 [assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 

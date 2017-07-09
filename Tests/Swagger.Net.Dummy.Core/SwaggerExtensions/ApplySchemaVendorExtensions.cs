@@ -1,5 +1,4 @@
-﻿using Swagger.Net.Swagger;
-using System;
+﻿using System;
 
 namespace Swagger.Net.Dummy.SwaggerExtensions
 {

@@ -1,5 +1,5 @@
-﻿using Swagger.Net.Dummy.SwaggerExtensions;
-using Swagger.Net.Swagger.Annotations;
+﻿using Swagger.Net.Annotations;
+using Swagger.Net.Dummy.SwaggerExtensions;
 using System;
 using System.Collections.Generic;
 using System.Net;

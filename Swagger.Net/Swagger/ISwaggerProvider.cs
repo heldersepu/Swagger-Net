@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Swagger.Net.Swagger
+namespace Swagger.Net
 {
     public interface ISwaggerProvider
     {

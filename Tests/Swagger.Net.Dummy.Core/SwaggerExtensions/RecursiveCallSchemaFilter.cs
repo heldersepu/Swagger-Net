@@ -1,5 +1,4 @@
 ﻿using Swagger.Net.Dummy.Controllers;
-using Swagger.Net.Swagger;
 using System;
 using System.Collections.Generic;
 

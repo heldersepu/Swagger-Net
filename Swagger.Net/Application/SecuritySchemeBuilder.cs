@@ -1,5 +1,4 @@
-﻿using Swagger.Net.Swagger;
-using System;
+﻿using System;
 using System.Collections.Generic;
 
 namespace Swagger.Net.Application
