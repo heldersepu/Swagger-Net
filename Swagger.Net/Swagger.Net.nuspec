@@ -3,8 +3,8 @@
   <metadata>
     <id>Swagger-Net</id>
     <version>$version$</version>
-    <title>Swagger-Net - Swagger for WebApi</title>
-    <authors>Swagger.Net Team</authors>
+    <title>Swagger-Net | Swagger for WebApi</title>
+    <authors>Swagger-Net Team</authors>
     <licenseUrl>http://opensource.org/licenses/BSD-3-Clause</licenseUrl>
     <projectUrl>https://github.com/heldersepu/Swagger-Net</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
