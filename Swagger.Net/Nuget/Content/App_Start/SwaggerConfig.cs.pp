@@ -40,6 +40,10 @@ namespace $rootnamespace$
                         //
                         c.SingleApiVersion("v1", "$rootnamespace$");
 
+                        // Taking to long to load the swagger docs? Enable this option to start caching it
+                        //
+                        //c.AllowCachingSwaggerDoc();
+
                         // If you want the output Swagger docs to be indented properly, enable the "PrettyPrint" option.
                         //
                         //c.PrettyPrint();
