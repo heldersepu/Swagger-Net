@@ -114,7 +114,7 @@ namespace Swagger.Net.Tests.SwaggerUi
             StringAssert.Contains("oAuth2ClientSecret: 'test-client-secret'", content);
             StringAssert.Contains("oAuth2Realm: 'test-realm'", content);
             StringAssert.Contains("oAuth2AppName: 'Swagger UI'", content);
-            StringAssert.Contains("oAuth2ScopeSeperator: ' '", content);
+            StringAssert.Contains("OAuth2ScopeSeparator: ' '", content);
             StringAssert.Contains("oAuth2AdditionalQueryStringParams: JSON.parse('{\"TestHeader\":\"TestValue\"}')", content);
         }
 

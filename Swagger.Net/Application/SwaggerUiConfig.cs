@@ -35,7 +35,7 @@ namespace Swagger.Net.Application
                 { "%(OAuth2ClientSecret)", "" },
                 { "%(OAuth2Realm)", "" },
                 { "%(OAuth2AppName)", "" },
-                { "%(OAuth2ScopeSeperator)", " " },
+                { "%(OAuth2ScopeSeparator)", " " },
                 { "%(OAuth2AdditionalQueryStringParams)", "{}" },
 				{ "%(ApiKeyName)", "api_key" },
 				{ "%(ApiKeyIn)", "query" }
@@ -140,7 +140,7 @@ namespace Swagger.Net.Application
             _templateParams["%(OAuth2ClientSecret)"] = clientSecret;
             _templateParams["%(OAuth2Realm)"] = realm;
             _templateParams["%(OAuth2AppName)"] = appName;
-            _templateParams["%(OAuth2ScopeSeperator)"] = scopeSeperator;
+            _templateParams["%(OAuth2ScopeSeparator)"] = scopeSeperator;
 
             if (additionalQueryStringParams != null)
                 _templateParams["%(OAuth2AdditionalQueryStringParams)"] = JsonConvert.SerializeObject(additionalQueryStringParams);
