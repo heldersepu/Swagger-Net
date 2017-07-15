@@ -224,10 +224,7 @@ namespace Swagger.Net.Tests.SwaggerUi
         [Test]
         public void It_exposes_config_for_UIfilter()
         {
-            SetUpHandler(c =>
-            {
-                c.UIfilter("'Xml'");
-            });
+            SetUpHandler(c => { c.UIfilter("'Xml'"); });
 
             var content = GetContentAsString(TEMP_URI.INDEX);
 
@@ -235,12 +232,19 @@ namespace Swagger.Net.Tests.SwaggerUi
         }
 
         [Test]
+        public void It_exposes_config_for_UIfilter_param()
+        {
+            SetUpHandler(c => { c.UIfilter("null"); });
+
+            var content = GetContentAsString(TEMP_URI.INDEX + "?filter=Xml");
+
+            StringAssert.Contains("filter: 'Xml'", content);
+        }
+
+        [Test]
         public void It_exposes_config_for_UImaxDisplayedTags()
         {
-            SetUpHandler(c =>
-            {
-                c.UImaxDisplayedTags(2);
-            });
+            SetUpHandler(c => { c.UImaxDisplayedTags(2); });
 
             var content = GetContentAsString(TEMP_URI.INDEX);
 
