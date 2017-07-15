@@ -9,7 +9,7 @@
     <projectUrl>https://github.com/heldersepu/Swagger-Net</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Seamlessly adds a Swagger to WebApi projects!</description>
-    <summary>Combines ApiExplorer and Swagger/swagger-ui to provide a rich discovery, documentation and playground experience to your API consumers</summary>
+    <summary>Combines ApiExplorer and Swagger/swagger-ui(3.x) to provide a rich documentation and playground to your API.</summary>
     <copyright>CopyLeft 2017</copyright>
     <tags>Swagger SwaggerUi Documentation Discovery Help WebApi AspNet AspNetWebApi Docs SelfHost OWIN</tags>
     <dependencies>
