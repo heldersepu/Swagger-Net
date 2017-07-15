@@ -220,5 +220,31 @@ namespace Swagger.Net.Tests.SwaggerUi
 
             Handler = new SwaggerUiHandler(swaggerUiConfig);
         }
+
+        [Test]
+        public void It_exposes_config_for_UIfilter()
+        {
+            SetUpHandler(c =>
+            {
+                c.UIfilter("'Xml'");
+            });
+
+            var content = GetContentAsString(TEMP_URI.INDEX);
+
+            StringAssert.Contains("filter: 'Xml'", content);
+        }
+
+        [Test]
+        public void It_exposes_config_for_UImaxDisplayedTags()
+        {
+            SetUpHandler(c =>
+            {
+                c.UImaxDisplayedTags(2);
+            });
+
+            var content = GetContentAsString(TEMP_URI.INDEX);
+
+            StringAssert.Contains("maxDisplayedTags: 2", content);
+        }
     }
 }

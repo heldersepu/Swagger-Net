@@ -101,6 +101,8 @@
         validatorUrl: stringOrNullFrom('%(ValidatorUrl)'),
         customScripts: arrayFrom('%(CustomScripts)'),
         docExpansion: '%(DocExpansion)',
+        maxDisplayedTags: %(UImaxDisplayedTags),
+        filter: %(UIfilter),
         supportedSubmitMethods: arrayFrom('%(SupportedSubmitMethods)'),
         discoveryUrlSelector: ('%(DiscoveryUrlSelector)' == 'true'),
         oAuth2Enabled: ('%(OAuth2Enabled)' == 'true'),
@@ -135,6 +137,8 @@
             plugins: [ SwaggerUIBundle.plugins.DownloadUrl ],
             layout: "StandaloneLayout",
             docExpansion: swaggerNetConfig.docExpansion,
+            maxDisplayedTags: swaggerNetConfig.maxDisplayedTags,
+            filter: swaggerNetConfig.filter,
             validatorUrl: swaggerNetConfig.validatorUrl,
             oauth2RedirectUrl: window.location.href.replace('index', 'oauth2-redirect-html').split('#')[0],
             onComplete: function (swaggerApi, swaggerUi) {

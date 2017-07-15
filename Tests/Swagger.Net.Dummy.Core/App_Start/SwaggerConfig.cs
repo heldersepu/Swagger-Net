@@ -225,6 +225,14 @@ namespace Swagger.Net.Dummy
                         //
                         c.DocExpansion(DocExpansion.List);
 
+                        // Limit the number of operations shown to a smaller value
+                        //
+                        c.UImaxDisplayedTags(100);
+
+                        // Filter the operations works as a search, to disable set to "null"
+                        //
+                        c.UIfilter("''");
+
                         // Specify which HTTP operations will have the 'Try it out!' option. An empty paramter list disables
                         // it for all operations.
                         //
