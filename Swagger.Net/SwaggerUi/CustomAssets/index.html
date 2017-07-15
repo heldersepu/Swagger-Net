@@ -132,6 +132,7 @@
         const ui = SwaggerUIBundle({
             url: swaggerNetConfig.rootUrl + "/" + swaggerNetConfig.discoveryPaths[0],
             urls: multiUrls,
+            deepLinking: true,
             dom_id: '#swagger-ui',
             presets: [ SwaggerUIBundle.presets.apis, SwaggerUIStandalonePreset ],
             plugins: [ SwaggerUIBundle.plugins.DownloadUrl ],
