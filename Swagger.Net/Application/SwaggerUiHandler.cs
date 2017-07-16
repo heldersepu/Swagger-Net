@@ -1,4 +1,5 @@
 ﻿using Swagger.Net.SwaggerUi;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -24,8 +25,16 @@ namespace Swagger.Net.Application
 
             foreach (var query in request.GetQueryNameValuePairs())
             {
-                if (query.Key == "filter")
-                    _config.UIfilter($"'{query.Value}'");
+
+                switch (query.Key)
+                {
+                    case "url":
+                        rootUrl = new Uri(query.Value).GetLeftPart(UriPartial.Authority);
+                        _config.SetDiscoveryPath(query.Value.Replace(rootUrl, ""));
+                        break;
+                    case "filter":
+                        _config.UIfilter($"'{query.Value}'"); break;
+                }
             }
 
             try

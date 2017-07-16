@@ -74,6 +74,11 @@ namespace Swagger.Net.Application
             _templateParams["%(DocumentTitle)"] = title;
         }
 
+        public void SetDiscoveryPath(string path)
+        {
+            _templateParams["%(DiscoveryPaths)"] = path;
+        }
+
         public void SetValidatorUrl(string url)
         {
             _templateParams["%(ValidatorUrl)"] = url;
