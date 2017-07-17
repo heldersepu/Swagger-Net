@@ -4,7 +4,6 @@ using NUnit.Framework;
 using Swagger.Net.Dummy.Controllers;
 using Swagger.Net.Dummy.SwaggerExtensions;
 using Swagger.Net.Dummy.Types;
-using Swagger.Net.Swagger;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,9 +13,7 @@ namespace Swagger.Net.Tests.Swagger
     [TestFixture]
     public class SchemaTests : SwaggerTestBase
     {
-        public SchemaTests()
-            : base("swagger/docs/{apiVersion}")
-        { }
+        public SchemaTests() : base("swagger/docs/{apiVersion}") { }
 
         [SetUp]
         public void SetUp()
@@ -967,6 +964,26 @@ namespace Swagger.Net.Tests.Swagger
             var required = (bool)swagger["paths"]["/pathrequired/{id}"]["get"]["parameters"][0]["required"];
 
             Assert.IsTrue(required);
+        }
+
+        [Test]
+        public void It_marks_required_properties_as_required()
+        {
+            SetUpDefaultRouteFor<PathRequiredController>();
+
+            var swagger = GetContent<SwaggerDocument>(TEMP_URI.DOCS);
+
+            Assert.IsNotNull(swagger.definitions["ComplexObject1"].required);
+        }
+
+        [Test]
+        public void It_marks_required_fields_as_required()
+        {
+            SetUpDefaultRouteFor<PathRequiredController>();
+
+            var swagger = GetContent<SwaggerDocument>(TEMP_URI.DOCS);
+
+            Assert.IsNotNull(swagger.definitions["ComplexObject2"].required);
         }
     }
 }

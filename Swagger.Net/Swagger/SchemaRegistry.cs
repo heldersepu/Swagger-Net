@@ -249,7 +249,7 @@ namespace Swagger.Net
 
             var s = new Schema
             {
-                required = required.Any() ? required : null, // required can be null but not empty
+                required = required.Any() ? required : null,
                 properties = properties,
                 type = "object"
             };
