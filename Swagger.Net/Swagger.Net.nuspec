@@ -8,7 +8,7 @@
     <licenseUrl>http://opensource.org/licenses/BSD-3-Clause</licenseUrl>
     <projectUrl>https://github.com/heldersepu/Swagger-Net</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Seamlessly adds a Swagger to WebApi projects!</description>
+    <description>Add a Swagger(ui 3.x) to your WebApi projects!</description>
     <summary>Combines ApiExplorer and Swagger/swagger-ui(3.x) to provide documentation and playground to your API.</summary>
     <iconUrl>https://avatars2.githubusercontent.com/u/7658037</iconUrl>
     <copyright>CopyLeft 2017</copyright>
