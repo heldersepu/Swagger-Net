@@ -50,7 +50,7 @@ namespace Swagger.Net.Tests.Swagger
         }
 
         [Test]
-        public void It_documents_responses_from_swagger_response_attributes()
+        public void It_documents_responses_from_swagger_response_attributes_post()
         {
             var swagger = GetContent<JObject>(TEMP_URI.DOCS);
 
@@ -84,9 +84,14 @@ namespace Swagger.Net.Tests.Swagger
                     }
                 });
             Assert.AreEqual(expected.ToString(), postResponses.ToString());
+        }
 
+        [Test]
+        public void It_documents_responses_from_swagger_response_attributes_get()
+        {
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var getResponses = swagger["paths"]["/swaggerannotated"]["get"]["responses"];
-            expected = JObject.FromObject(new Dictionary<string, object>()
+            var expected = JObject.FromObject(new Dictionary<string, object>()
                 {
                     {
                         "200", new
@@ -108,6 +113,14 @@ namespace Swagger.Net.Tests.Swagger
                     }
                 });
             Assert.AreEqual(expected.ToString(), getResponses.ToString());
+        }
+
+        [Test]
+        public void It_documents_responses_from_swagger_response_attributes_patch()
+        {
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
+            var patchResponses = swagger["paths"]["/swaggerannotated"]["patch"]["produces"];
+            Assert.AreEqual("[\"image/png\"]", patchResponses.ToString().Strip());
         }
 
         [Test]
