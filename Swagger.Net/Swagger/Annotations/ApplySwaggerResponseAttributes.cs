@@ -9,12 +9,12 @@ namespace Swagger.Net.Annotations
     {
         public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
         {
-            if (apiDescription.GetControllerAndActionAttributes<SwaggerResponseRemoveDefaultsAttribute>().Any()) 
+            if (apiDescription.GetControllerAndActionAttributes<SwaggerResponseRemoveDefaultsAttribute>().Any())
                 operation.responses.Clear();
 
-            var responseAttributes = apiDescription.GetControllerAndActionAttributes<SwaggerResponseAttribute>()
+            var responseAttributes = apiDescription
+                .GetControllerAndActionAttributes<SwaggerResponseAttribute>()
                 .OrderBy(attr => attr.StatusCode);
-
             foreach (var attr in responseAttributes)
             {
                 var statusCode = attr.StatusCode.ToString();
@@ -24,6 +24,14 @@ namespace Swagger.Net.Annotations
                     description = attr.Description ?? InferDescriptionFrom(statusCode),
                     schema = (attr.Type != null) ? schemaRegistry.GetOrRegister(attr.Type, attr.TypeName) : null
                 };
+            }
+
+            var mediaTypes = responseAttributes
+                .Where(x => !string.IsNullOrEmpty(x.MediaType))
+                .Select(x => x.MediaType).ToList();
+            if (mediaTypes.Count > 0)
+            {
+                operation.produces = mediaTypes;
             }
         }
 
