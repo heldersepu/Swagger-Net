@@ -36,7 +36,7 @@ namespace Swagger.Net.Tests.Swagger
         [Test]
         public void GetCommonLeadingWhitespace_null()
         {
-            Assert.Throws<ArgumentException>(() => XmlTextHelper.GetCommonLeadingWhitespace(null));            
+            Assert.Throws<ArgumentException>(() => XmlTextHelper.GetCommonLeadingWhitespace(null));
         }
 
         [Test]
@@ -52,7 +52,7 @@ namespace Swagger.Net.Tests.Swagger
             string input = @"My single line comment";
             string expected = @"My single line comment";
             string actual = XmlTextHelper.NormalizeIndentation(input);
-            Assert.AreEqual(expected.StripLineEndings(), actual.StripLineEndings());
+            Assert.AreEqual(expected.Strip(), actual.Strip());
         }
 
         [Test]
@@ -63,7 +63,7 @@ namespace Swagger.Net.Tests.Swagger
 ";
             string expected = @"My single line indented comment";
             string actual = XmlTextHelper.NormalizeIndentation(input);
-            Assert.AreEqual(expected.StripLineEndings(), actual.StripLineEndings());
+            Assert.AreEqual(expected.Strip(), actual.Strip());
         }
 
         [Test]
@@ -90,7 +90,7 @@ Third paragraph";
 
             string actual = XmlTextHelper.NormalizeIndentation(input);
 
-            Assert.AreEqual(expected.StripLineEndings(), actual.StripLineEndings());
+            Assert.AreEqual(expected.Strip(), actual.Strip());
         }
 
         [Test]
@@ -117,7 +117,7 @@ I'm a line affecting the leading whitespace
 
             string actual = XmlTextHelper.NormalizeIndentation(input);
 
-            Assert.AreEqual(expected.StripLineEndings(), actual.StripLineEndings());
+            Assert.AreEqual(expected.Strip(), actual.Strip());
         }
 
         [Test]
@@ -146,7 +146,7 @@ Another line of text
 
             string actual = XmlTextHelper.NormalizeIndentation(input);
 
-            Assert.AreEqual(expected.StripLineEndings(), actual.StripLineEndings());
+            Assert.AreEqual(expected.Strip(), actual.Strip());
         }
 
         /// <summary>
@@ -178,7 +178,7 @@ Another line of text
 
             string actual = XmlTextHelper.NormalizeIndentation(input);
 
-            Assert.AreEqual(expected.StripLineEndings(), actual.StripLineEndings());
+            Assert.AreEqual(expected.Strip(), actual.Strip());
         }
 
         /// <summary>
@@ -210,7 +210,7 @@ Another line of text
 
             string actual = XmlTextHelper.NormalizeIndentation(input);
 
-            Assert.AreEqual(expected.StripLineEndings(), actual.StripLineEndings());
+            Assert.AreEqual(expected.Strip(), actual.Strip());
         }
 
         /// <summary>
@@ -234,7 +234,7 @@ Another line of text
 
             string actual = XmlTextHelper.NormalizeIndentation(input);
 
-            Assert.AreEqual(expected.StripLineEndings(), actual.StripLineEndings());
+            Assert.AreEqual(expected.Strip(), actual.Strip());
         }
 
         /// <summary>
@@ -258,7 +258,7 @@ Another line of text
 
             string actual = XmlTextHelper.NormalizeIndentation(input);
 
-            Assert.AreEqual(expected.StripLineEndings(), actual.StripLineEndings());
+            Assert.AreEqual(expected.Strip(), actual.Strip());
         }
 
         [Test]
@@ -304,7 +304,7 @@ Here's an example of posting a new `TestModel` to the test endpoint.
 
             string actual = XmlTextHelper.NormalizeIndentation(input);
 
-            Assert.AreEqual(expected.StripLineEndings(), actual.StripLineEndings());
+            Assert.AreEqual(expected.Strip(), actual.Strip());
         }
 
         /// <summary>
@@ -344,7 +344,7 @@ Here's an example of posting a new `TestModel` to the test endpoint.
 
             string actual = XmlTextHelper.NormalizeIndentation(input);
 
-            Assert.AreEqual(expectedButUndesired.StripLineEndings(), actual.StripLineEndings());
+            Assert.AreEqual(expectedButUndesired.Strip(), actual.Strip());
         }
 
          /// <summary>
@@ -388,16 +388,7 @@ The above is a sample code block";
 
             string actual = XmlTextHelper.NormalizeIndentation(input);
 
-            Assert.AreEqual(expectedButUndesired.StripLineEndings(), actual.StripLineEndings());
-        }
-    }
-
-    internal static class StringExtensions
-    {
-        internal static string StripLineEndings(this string value)
-        {
-            if (string.IsNullOrEmpty(value)) return value;
-            return value.Replace("\n", "").Replace("\r", "");
+            Assert.AreEqual(expectedButUndesired.Strip(), actual.Strip());
         }
     }
 }

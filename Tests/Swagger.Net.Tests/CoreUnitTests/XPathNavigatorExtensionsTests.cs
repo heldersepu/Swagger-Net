@@ -67,14 +67,5 @@ namespace Swagger.Net.Tests.CoreUnitTests
             Assert.AreEqual(expected, content);
         }
 
-    }
-
-    internal static class StringExtensions
-    {
-        internal static string Strip(this string value)
-        {
-            if (string.IsNullOrEmpty(value)) return value;
-            return value.Replace("\n", "").Replace("\r", "").Replace(" ", "");
-        }
-    }
+    }    
 }

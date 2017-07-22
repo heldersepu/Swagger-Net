@@ -102,6 +102,7 @@
     <Compile Include="CoreUnitTests\SwaggerDocsConfigTests.cs" />
     <Compile Include="CoreUnitTests\SwaggerEnabledConfigurationTests.cs" />
     <Compile Include="CoreUnitTests\XPathNavigatorExtensionsTests.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="HttpMessageHandlerTestBase.cs" />
     <Compile Include="Owin\BaseInMemoryOwinSwaggerTest.cs" />
     <Compile Include="Owin\InMemoryOwinTest.cs" />
