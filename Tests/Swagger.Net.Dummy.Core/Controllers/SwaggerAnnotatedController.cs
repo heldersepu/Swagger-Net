@@ -3,6 +3,7 @@ using Swagger.Net.Dummy.SwaggerExtensions;
 using System;
 using System.Collections.Generic;
 using System.Net;
+using System.Net.Http;
 using System.Web.Http;
 
 namespace Swagger.Net.Dummy.Controllers
@@ -26,6 +27,12 @@ namespace Swagger.Net.Dummy.Controllers
 
         [SwaggerOperationFilter(typeof(AddGetMessageExamples))]
         public Message GetById(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        [SwaggerResponse(200, MediaType = "image/png")]
+        public HttpResponseMessage Patch()
         {
             throw new NotImplementedException();
         }
