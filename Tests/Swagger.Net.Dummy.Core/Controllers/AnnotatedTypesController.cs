@@ -37,5 +37,7 @@ namespace Swagger.Net.Dummy.Controllers
 
         [StringLength(500, MinimumLength = 10)]
         public string Note { get; set; }
+
+        public Guid guid { get; set; }
     }
 }

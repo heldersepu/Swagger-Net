@@ -189,6 +189,12 @@ namespace Swagger.Net.Tests.Swagger
                                 maxLength = 500,
                                 minLength = 10,
                                 type = "string"
+                            },
+                            guid = new
+                            {
+                                format = "uuid",
+                                type = "string",
+                                example = "00000000-0000-0000-0000-000000000000"
                             }
                         },
                         xml = JObject.Parse( "{ \"name\": \"Payment\" }" )
