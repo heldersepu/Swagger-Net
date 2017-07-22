@@ -19,8 +19,7 @@ Once you have a Web API that can describe itself in Swagger, you've opened the t
 
 
 
-## [Getting Started](https://github.com/domaindrivendev/Swashbuckle/wiki/1-Getting-Started) ##
-## [Troubleshooting](https://github.com/domaindrivendev/Swashbuckle/wiki/2-Troubleshooting) ##
-## [Customizing the swagger-ui](https://github.com/domaindrivendev/Swashbuckle/wiki/3-Customizing-the-swagger-ui) ##
-## [Transitioning to Swashbuckle 5.0](https://github.com/domaindrivendev/Swashbuckle/wiki/4-Transition-to-Swashbuckle-5.0) ##
-## [Troubleshooting and FAQ's](https://github.com/domaindrivendev/Swashbuckle/wiki/5-Troubleshooting-and-FAQ's) ##
+## [Getting Started](https://github.com/heldersepu/Swagger-Net/wiki/1-Getting-Started) ##
+## [Troubleshooting](https://github.com/heldersepu/Swagger-Net/wiki/2-Troubleshooting) ##
+## [Customizing the swagger-ui](https://github.com/heldersepu/Swagger-Net/wiki/3-Customizing-the-swagger-ui) ##
+## [Troubleshooting and FAQ's](https://github.com/heldersepu/Swagger-Net/wiki/4-Troubleshooting-and-FAQ's) ##
