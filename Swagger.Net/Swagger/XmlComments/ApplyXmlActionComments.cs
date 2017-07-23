@@ -70,7 +70,11 @@ namespace Swagger.Net.XmlComments
 
                 var paramNode = methodNode.SelectSingleNode(string.Format(ParamXPath, actionParameter.Name));
                 if (paramNode != null)
-                    parameter.description = paramNode.ExtractContent();
+                {
+                    var desc = paramNode.ExtractContent();
+                    if (!string.IsNullOrEmpty(desc))
+                        parameter.description = desc;
+                }
             }
         }
 
