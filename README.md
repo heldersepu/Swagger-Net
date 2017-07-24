@@ -7,6 +7,8 @@ In addition to its Swagger generator, Swagger-Net also contains an embedded vers
 
 **Swagger-Net Features:**
 
+* Latest and greatest of all dependencies
+* High UnitTest CodeCoverage (99%)
 * Auto-generated [Swagger 2.0](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md)
 * Seamless integration of swagger-ui (3.x)
 * Reflection-based Schema generation for describing API types
