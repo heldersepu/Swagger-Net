@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Linq;
 using NUnit.Framework;
+using Swagger.Net.Dummy;
 using Swagger.Net.Dummy.Controllers;
 using Swagger.Net.Dummy.SwaggerExtensions;
 using Swagger.Net.Dummy.Types;
@@ -365,6 +366,7 @@ namespace Swagger.Net.Tests.Swagger
             {
                 c.MapType<Guid>(() => new Schema { type = "string", format = "guid" }); // map format to guid instead of uuid
                 c.SchemaFilter<ApplySchemaVendorExtensions>();
+
             });
 
             var swagger = GetContent<JObject>(TEMP_URI.DOCS);
@@ -948,6 +950,7 @@ namespace Swagger.Net.Tests.Swagger
             SetUpHandler(c =>
             {
                 c.SchemaFilter<RecursiveCallSchemaFilter>();
+                c.ModelFilter<ModFilter>();
             });
 
             var swagger = GetContent<JObject>(TEMP_URI.DOCS);

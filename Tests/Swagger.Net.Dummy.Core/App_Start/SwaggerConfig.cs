@@ -131,6 +131,7 @@ namespace Swagger.Net.Dummy
                         // specific type, you can wire up one or more Schema filters.
                         //
                         c.SchemaFilter<ApplySchemaVendorExtensions>();
+                        c.ModelFilter<ModFilter>();
 
                         // In a Swagger 2.0 document, complex types are typically declared globally and referenced by unique
                         // Schema Id. By default, Swagger.Net does NOT use the full type name in Schema Ids. In most cases, this
@@ -285,6 +286,13 @@ namespace Swagger.Net.Dummy
             return (versionConstraint == null)
                 ? false
                 : versionConstraint.Pattern.Split('|').Contains(targetApiVersion);
+        }
+    }
+
+    public class ModFilter : IModelFilter
+    {
+        public void Apply(Schema model, ModelFilterContext context)
+        {
         }
     }
 }

@@ -24,7 +24,7 @@ namespace Swagger.Net.Application
 
             writer.WriteStartObject();
 
-            foreach (var jsonProp in jsonContract.Properties) 
+            foreach (var jsonProp in jsonContract.Properties)
             {
                 var propValue = jsonProp.ValueProvider.GetValue(value);
                 if (propValue == null && serializer.NullValueHandling == NullValueHandling.Ignore)
@@ -33,7 +33,7 @@ namespace Swagger.Net.Application
                 if (jsonProp.PropertyName == "vendorExtensions")
                 {
                     var vendorExtensions = (IDictionary<string, object>)propValue;
-                    if (vendorExtensions.Any()) 
+                    if (vendorExtensions.Any())
                     {
                         foreach (var entry in vendorExtensions)
                         {

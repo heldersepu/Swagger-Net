@@ -1,7 +1,6 @@
 ﻿using NUnit.Framework;
 using Swagger.Net.Application;
-using Swagger.Net.Swagger;
-using System;
+using Swagger.Net.Dummy;
 
 namespace Swagger.Net.Tests.CoreUnitTests
 {
@@ -34,14 +33,6 @@ namespace Swagger.Net.Tests.CoreUnitTests
         {
             var sc = new SwaggerDocsConfig();
             Assert.DoesNotThrow(() => sc.ModelFilter<ModFilter>());
-        }
-
-        private class ModFilter : IModelFilter
-        {
-            public void Apply(Schema model, ModelFilterContext context)
-            {
-                throw new NotImplementedException();
-            }
         }
     }
 }

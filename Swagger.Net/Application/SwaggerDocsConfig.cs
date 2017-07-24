@@ -280,7 +280,7 @@ namespace Swagger.Net.Application
             _customProviderFactory = customProviderFactory;
         }
 
-        internal ISwaggerProvider GetSwaggerProvider(HttpRequestMessage swaggerRequest)
+        public ISwaggerProvider GetSwaggerProvider(HttpRequestMessage swaggerRequest)
         {
             var httpConfig = swaggerRequest.GetConfiguration();
 
