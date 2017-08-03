@@ -2,7 +2,6 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using NUnit.Framework;
-using Swagger.Net.Swagger;
 using System;
 using System.Collections.Generic;
 
@@ -20,7 +19,7 @@ namespace Swagger.Net.Tests.CoreUnitTests
                     new Dictionary<Type, Func<Schema>>(),
                     new List<ISchemaFilter>(),
                     new List<IModelFilter>(),
-                    true, null, true, true, true);
+                    true, null, true, true, true, true);
                 return schemaRegistry.CreateInlineSchema(typeof(object));
             }
         }

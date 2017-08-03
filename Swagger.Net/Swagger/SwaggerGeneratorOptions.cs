@@ -23,6 +23,7 @@ namespace Swagger.Net
             bool describeAllEnumsAsStrings = false,
             bool describeStringEnumsInCamelCase = false,
             bool applyFiltersToAllSchemas = false,
+            bool ignoreIsSpecifiedMembers = false,
             IEnumerable<IOperationFilter> operationFilters = null,
             IEnumerable<IDocumentFilter> documentFilters = null,
             Func<IEnumerable<ApiDescription>, ApiDescription> conflictingActionsResolver = null
@@ -43,6 +44,7 @@ namespace Swagger.Net
             DescribeAllEnumsAsStrings = describeAllEnumsAsStrings;
             DescribeStringEnumsInCamelCase = describeStringEnumsInCamelCase;
             ApplyFiltersToAllSchemas = applyFiltersToAllSchemas;
+            IgnoreIsSpecifiedMembers = ignoreIsSpecifiedMembers;
             OperationFilters = operationFilters ?? new List<IOperationFilter>();
             DocumentFilters = documentFilters ?? new List<IDocumentFilter>();
             ConflictingActionsResolver = conflictingActionsResolver ?? DefaultConflictingActionsResolver;
@@ -77,6 +79,8 @@ namespace Swagger.Net
         public bool DescribeStringEnumsInCamelCase { get; private set; }
 
         public bool ApplyFiltersToAllSchemas { get; private set; }
+
+        public bool IgnoreIsSpecifiedMembers { get; private set; }
 
         public IEnumerable<IOperationFilter> OperationFilters { get; private set; }
 

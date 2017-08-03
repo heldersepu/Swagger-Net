@@ -37,7 +37,8 @@ namespace Swagger.Net
                 _options.SchemaIdSelector,
                 _options.DescribeAllEnumsAsStrings,
                 _options.DescribeStringEnumsInCamelCase,
-                _options.ApplyFiltersToAllSchemas);
+                _options.ApplyFiltersToAllSchemas,
+                _options.IgnoreIsSpecifiedMembers);
 
             Info info;
             _apiVersions.TryGetValue(apiVersion, out info);

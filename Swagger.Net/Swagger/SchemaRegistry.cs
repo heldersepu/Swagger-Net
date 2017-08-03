@@ -38,7 +38,8 @@ namespace Swagger.Net
             Func<Type, string> schemaIdSelector,
             bool describeAllEnumsAsStrings,
             bool describeStringEnumsInCamelCase,
-            bool applyFiltersToAllSchemas)
+            bool applyFiltersToAllSchemas,
+            bool ignoreIsSpecifiedMembers)
         {
             _jsonSerializerSettings = jsonSerializerSettings;
             _customSchemaMappings = customSchemaMappings;
@@ -50,7 +51,10 @@ namespace Swagger.Net
             _describeStringEnumsInCamelCase = describeStringEnumsInCamelCase;
             _applyFiltersToAllSchemas = applyFiltersToAllSchemas;
 
-            _contractResolver = jsonSerializerSettings.ContractResolver ?? new DefaultContractResolver();
+            _contractResolver = jsonSerializerSettings.ContractResolver ?? new DefaultContractResolver
+            {
+                //IgnoreIsSpecifiedMembers = ignoreIsSpecifiedMembers
+            };
             _workItems = new Dictionary<Type, WorkItem>();
             Definitions = new Dictionary<string, Schema>();
         }

@@ -35,6 +35,7 @@ namespace Swagger.Net.Application
         private bool _describeAllEnumsAsStrings;
         private bool _describeStringEnumsInCamelCase;
         private bool _applyFiltersToAllSchemas = true;
+        private bool _ignoreIsSpecifiedMembers = false;
         private readonly IList<Func<IOperationFilter>> _operationFilters;
         private readonly IList<Func<IDocumentFilter>> _documentFilters;
         private readonly IList<Func<XPathDocument>> _xmlDocFactories;
@@ -191,6 +192,11 @@ namespace Swagger.Net.Application
             _describeStringEnumsInCamelCase = camelCase;
         }
 
+        public void IgnoreIsSpecifiedMembers()
+        {
+            _ignoreIsSpecifiedMembers = true;
+        }
+
         public void IgnoreObsoleteProperties()
         {
             _ignoreObsoleteProperties = true;
@@ -315,6 +321,7 @@ namespace Swagger.Net.Application
                 describeAllEnumsAsStrings: _describeAllEnumsAsStrings,
                 describeStringEnumsInCamelCase: _describeStringEnumsInCamelCase,
                 applyFiltersToAllSchemas: _applyFiltersToAllSchemas,
+                ignoreIsSpecifiedMembers: _ignoreIsSpecifiedMembers,
                 operationFilters: operationFilters,
                 documentFilters: _documentFilters.Select(factory => factory()).ToList(),
                 conflictingActionsResolver: _conflictingActionsResolver
