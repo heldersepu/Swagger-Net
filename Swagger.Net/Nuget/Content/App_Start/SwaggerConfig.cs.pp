@@ -276,7 +276,7 @@ namespace $rootnamespace$
                     });
         }
 
-		public static bool ResolveVersionSupportByRouteConstraint(ApiDescription apiDesc, string targetApiVersion)
+        public static bool ResolveVersionSupportByRouteConstraint(ApiDescription apiDesc, string targetApiVersion)
         {
             return (apiDesc.Route.RouteTemplate.ToLower().Contains(targetApiVersion.ToLower()));
         }
