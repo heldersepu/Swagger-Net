@@ -134,6 +134,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Nuget\Content\App_Start\SwaggerConfig.cs.pp" />
+    <None Include="Nuget\Tools\Init.ps1" />
     <None Include="packages.config" />
     <None Include="Swagger-Net.snk" />
   </ItemGroup>
