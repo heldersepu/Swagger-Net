@@ -7,19 +7,20 @@ try
 }
 catch
 {
-    Write-Host "App_Start not found!  " + $_.Exception -ForegroundColor Red
+    Write-Host "App_Start not found!"
 }
 
 
 try
 {
     $SwaggerConfig = $project.ProjectItems.Item("SwaggerConfig.cs").FileNames(1)
+	Write-Host $SwaggerConfig
     $project.ProjectItems.Item("SwaggerConfig.cs").Remove()
     Remove-Item $SwaggerConfig
 }
 catch
 {
-    Write-Host "Error deleting SwaggerConfig file: " + $_.Exception -ForegroundColor Red
+    Write-Host "Error deleting SwaggerConfig file: " + $_.Exception
 }
 
 
