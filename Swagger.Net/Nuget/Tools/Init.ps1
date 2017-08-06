@@ -1,26 +1,25 @@
 ﻿param($installPath, $toolsPath, $package, $project)
 
-$ProjectDir = "C:\Code\SwashbuckleTest\Swagger_Test\"
-$SwaggerConfigFile = Join-Path $ProjectDir "SwaggerConfig.cs"
-$AppStartDir = Join-Path $ProjectDir "App_Start\"
-
-$ValidPath = Test-Path $AppStartDir -IsValid
-If ($ValidPath -eq $True)
-{
-    $AppSwaggerConfig = Join-Path $AppStartDir "SwaggerConfig.cs"
-    $ValidFile = Test-Path $AppSwaggerConfig -IsValid
-    If ($ValidFile -eq $True)
-    {
-        Remove-Item $SwaggerConfigFile
-    }
-    Else
-    {
-        Move-Item $SwaggerConfigFile $AppStartDir
-    }
+try {
+    $AppStartDir = $project.ProjectItems.Item("App_Start").FileNames(1)
+    MoveConfigFile $AppStartDir
 }
-Else
-{
-    Remove-Item $SwaggerConfigFile
+catch {
+    $project.ProjectItems.Item("SwaggerConfig.cs").Remove()
 }
 
-Write-Host $project.ProjectItems.Item("SwaggerConfig.cs").FileNames(1)
+function MoveConfigFile($AppStartDir)
+{
+    $ValidPath = Test-Path $AppStartDir -IsValid
+    If ($ValidPath -eq $True)
+    {
+        $AppSwaggerConfig = Join-Path $AppStartDir "SwaggerConfig.cs"
+        $ValidFile = Test-Path $AppSwaggerConfig -IsValid
+        If ($ValidFile -eq $False)
+        {
+            $project.ProjectItems.Item("SwaggerConfig.cs").SaveAs($AppSwaggerConfig)
+
+        }
+    }
+    $project.ProjectItems.Item("SwaggerConfig.cs").Remove()
+}
