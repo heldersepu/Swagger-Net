@@ -23,4 +23,4 @@ Else
     Remove-Item $SwaggerConfigFile
 }
 
-Write-Host $project.ProjectItems(1).FileNames(1)
+Write-Host $project.ProjectItems.Item("SwaggerConfig.cs").FileNames(1)
