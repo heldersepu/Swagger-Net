@@ -1,12 +1,27 @@
 ﻿param($installPath, $toolsPath, $package, $project)
 
-try {
+try
+{
     $AppStartDir = $project.ProjectItems.Item("App_Start").FileNames(1)
     MoveConfigFile $AppStartDir
 }
-catch {
-    $project.ProjectItems.Item("SwaggerConfig.cs").Remove()
+catch
+{
+    Write-Host "App_Start not found!  " + $_.Exception -ForegroundColor Red
 }
+
+
+try
+{
+    $SwaggerConfig = $project.ProjectItems.Item("SwaggerConfig.cs").FileNames(1)
+    $project.ProjectItems.Item("SwaggerConfig.cs").Remove()
+    Remove-Item $SwaggerConfig
+}
+catch
+{
+    Write-Host "Error deleting SwaggerConfig file: " + $_.Exception -ForegroundColor Red
+}
+
 
 function MoveConfigFile($AppStartDir)
 {
@@ -18,8 +33,6 @@ function MoveConfigFile($AppStartDir)
         If ($ValidFile -eq $False)
         {
             $project.ProjectItems.Item("SwaggerConfig.cs").SaveAs($AppSwaggerConfig)
-
         }
     }
-    $project.ProjectItems.Item("SwaggerConfig.cs").Remove()
 }
