@@ -1,6 +1,20 @@
 ﻿param($installPath, $toolsPath, $package, $project)
 $SwaggerConfig = $project.ProjectItems.Item("SwaggerConfig.cs").FileNames(1)
 
+function MoveConfigFile($AppStartDir)
+{
+    $ValidPath = Test-Path $AppStartDir -IsValid
+    If ($ValidPath -eq $True)
+    {
+        $AppSwaggerConfig = Join-Path $AppStartDir "SwaggerConfig.cs"
+        $ValidFile = Test-Path $AppSwaggerConfig -IsValid
+        If ($ValidFile -eq $False)
+        {
+            $project.ProjectItems.Item("SwaggerConfig.cs").SaveAs($AppSwaggerConfig)
+        }
+    }
+}
+
 try
 {
     $AppStartDir = $project.ProjectItems.Item("App_Start").FileNames(1)
@@ -23,16 +37,4 @@ catch
 }
 
 
-function MoveConfigFile($AppStartDir)
-{
-    $ValidPath = Test-Path $AppStartDir -IsValid
-    If ($ValidPath -eq $True)
-    {
-        $AppSwaggerConfig = Join-Path $AppStartDir "SwaggerConfig.cs"
-        $ValidFile = Test-Path $AppSwaggerConfig -IsValid
-        If ($ValidFile -eq $False)
-        {
-            $project.ProjectItems.Item("SwaggerConfig.cs").SaveAs($AppSwaggerConfig)
-        }
-    }
-}
+
