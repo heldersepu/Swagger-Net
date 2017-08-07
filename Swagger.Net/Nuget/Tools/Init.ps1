@@ -8,7 +8,7 @@ try
 }
 catch
 {
-    Write-Host "App_Start not found!"
+    Write-Host "App_Start not found! " + $_.Exception
 }
 
 
