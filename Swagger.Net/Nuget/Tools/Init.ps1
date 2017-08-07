@@ -22,7 +22,7 @@ try
 }
 catch
 {
-    Write-Host "App_Start not found! " + $_.Exception
+    Write-Host "App_Start not found! "
 }
 
 
