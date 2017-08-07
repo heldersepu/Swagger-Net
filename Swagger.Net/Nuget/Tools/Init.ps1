@@ -1,4 +1,5 @@
 ﻿param($installPath, $toolsPath, $package, $project)
+$SwaggerConfig = $project.ProjectItems.Item("SwaggerConfig.cs").FileNames(1)
 
 try
 {
@@ -13,8 +14,6 @@ catch
 
 try
 {
-    $SwaggerConfig = $project.ProjectItems.Item("SwaggerConfig.cs").FileNames(1)
-	Write-Host $SwaggerConfig
     $project.ProjectItems.Item("SwaggerConfig.cs").Remove()
     Remove-Item $SwaggerConfig
 }
