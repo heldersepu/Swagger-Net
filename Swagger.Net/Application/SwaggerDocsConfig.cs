@@ -245,24 +245,17 @@ namespace Swagger.Net.Application
             }
         }
 
-        public void IncludeAllXmlComments(Assembly thisAssembly, string directory)
+        public void IncludeAllXmlComments(Assembly assembly, string directory)
         {
-            if (thisAssembly != null)
+            if (assembly != null)
             {
-                foreach (var name in thisAssembly.GetManifestResourceNames())
+                foreach (var name in assembly.GetManifestResourceNames().Where(x => x.ToUpper().EndsWith(".XML")))
                 {
-                    if (name.ToUpper().EndsWith(".XML"))
-                    {
-                        IncludeXmlComments(
-                            () => new XPathDocument(
-                                thisAssembly.GetManifestResourceStream(name)
-                            )
-                        );
-                    }
+                    IncludeXmlComments(() => new XPathDocument(assembly.GetManifestResourceStream(name)));
                 }
             }
 
-            if (!String.IsNullOrEmpty(directory))
+            if (!string.IsNullOrEmpty(directory))
             {
                 foreach (var name in Directory.GetFiles(directory, "*.XML", SearchOption.AllDirectories))
                 {
