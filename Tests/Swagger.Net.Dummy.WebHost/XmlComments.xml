@@ -4,6 +4,31 @@
         <name>Swagger.Net.Dummy.Core</name>
     </assembly>
     <members>
+        <member name="M:Swagger.Net.Dummy.Controllers.BaseChildController.Get">
+            <summary>
+            Get some ...
+            </summary>
+        </member>
+        <member name="M:Swagger.Net.Dummy.Controllers.BaseController`1.Get(`0)">
+            <summary>
+            Get a record by the given key.
+            </summary>
+        </member>
+        <member name="M:Swagger.Net.Dummy.Controllers.BaseController`1.Post(System.String)">
+            <summary>
+            Post a record.
+            </summary>
+        </member>
+        <member name="M:Swagger.Net.Dummy.Controllers.BaseController`1.Put(`0,System.String)">
+            <summary>
+            Put a record by the given key.
+            </summary>
+        </member>
+        <member name="M:Swagger.Net.Dummy.Controllers.BaseController`1.Delete(System.Int64)">
+            <summary>
+            Delete a record by the given key.
+            </summary>
+        </member>
         <member name="P:Swagger.Net.Dummy.Controllers.Payment.ExpMonth">
             <summary>Credit card expiration Month</summary>
             <example>6</example>
