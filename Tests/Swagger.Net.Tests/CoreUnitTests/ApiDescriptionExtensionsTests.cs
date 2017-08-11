@@ -1,6 +1,5 @@
 ﻿using Moq;
 using NUnit.Framework;
-using Swagger.Net.Swagger;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Web.Http.Controllers;
