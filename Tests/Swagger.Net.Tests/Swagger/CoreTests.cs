@@ -144,6 +144,38 @@ namespace Swagger.Net.Tests.Swagger
                     {
                         "/customers/{id}", new
                         {
+                            get = new
+                            {
+                                tags = new [] { "Customers" },
+                                operationId = "Customers_Get",
+                                consumes = new object [] { },
+                                produces = new []{ "application/json", "text/json", "application/xml", "text/xml" },
+                                parameters = new object []
+                                {
+                                    new
+                                    {
+                                        name = "id",
+                                        @in = "path",
+                                        required = true,
+                                        type = "integer",
+                                        format = "int32",
+                                        @default = 8
+                                    }
+                                },
+                                responses = new Dictionary<string, object>
+                                {
+                                    {
+                                        "200", new
+                                        {
+                                            description = "OK",
+                                            schema = new
+                                            {
+                                                type = "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
                             put = new
                             {
                                 tags = new [] { "Customers" },
