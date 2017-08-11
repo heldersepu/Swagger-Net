@@ -5,7 +5,7 @@ namespace Swagger.Net.Dummy.Controllers
 {
     public class CustomersController : ApiController
     {
-        public int Create(Customer customer)
+        public int Create(Customer customer, int adminLevel = 0)
         {
             throw new NotImplementedException();
         }
