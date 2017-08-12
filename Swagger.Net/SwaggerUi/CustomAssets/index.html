@@ -118,6 +118,7 @@
 </script>
 <script>
     var multiUrls = null;
+    var rootUrl = swaggerNetConfig.rootUrl
     if (swaggerNetConfig.discoveryPaths.length > 1) {
         multiUrls = [];
         swaggerNetConfig.discoveryPaths.forEach(function (path) {
@@ -127,10 +128,13 @@
             });
         });
     }
+    if (swaggerNetConfig.discoveryPaths[0]) {
+        rootUrl += "/" + swaggerNetConfig.discoveryPaths[0];
+    }
     window.onload = function () {
         // Build a system
         const ui = SwaggerUIBundle({
-            url: swaggerNetConfig.rootUrl + "/" + swaggerNetConfig.discoveryPaths[0],
+            url: rootUrl,
             urls: multiUrls,
             deepLinking: true,
             dom_id: '#swagger-ui',

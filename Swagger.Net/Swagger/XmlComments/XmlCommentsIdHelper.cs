@@ -81,14 +81,28 @@ namespace Swagger.Net.XmlComments
         private static void AppendMethodName(MethodInfo methodInfo, StringBuilder builder)
         {
             builder.Append(methodInfo.Name);
+            var declaringType = methodInfo.DeclaringType;
+            if (declaringType.IsGenericType)
+            {
+                methodInfo = declaringType.GetGenericTypeDefinition().GetMethod(methodInfo.Name);
+            }
 
             var parameters = methodInfo.GetParameters();
             if (parameters.Length == 0) return;
 
             builder.Append("(");
+            int generic = 0;
             foreach (var param in parameters)
             {
-                AppendFullTypeName(param.ParameterType, builder, true);
+                if (param.ParameterType.IsGenericParameter)
+                {
+                    builder.Append($"`{generic}");
+                    generic++;
+                }
+                else
+                {
+                    AppendFullTypeName(param.ParameterType, builder, true);
+                }
                 builder.Append(",");
             }
             builder.Replace(",", ")", builder.Length - 1, 1);

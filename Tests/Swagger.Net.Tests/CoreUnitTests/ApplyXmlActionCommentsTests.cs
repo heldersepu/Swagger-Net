@@ -1,6 +1,5 @@
 ﻿using Moq;
 using NUnit.Framework;
-using Swagger.Net.Swagger;
 using Swagger.Net.XmlComments;
 using System;
 using System.IO;

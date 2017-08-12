@@ -105,7 +105,7 @@ namespace Swagger.Net.Tests.Swagger
                                 operationId = "Customers_Create",
                                 consumes = new []{ "application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded" },
                                 produces = new []{ "application/json", "text/json", "application/xml", "text/xml" },
-                                parameters = new []
+                                parameters = new object []
                                 {
                                     new
                                     {
@@ -113,6 +113,15 @@ namespace Swagger.Net.Tests.Swagger
                                         @in = "body",
                                         required = true,
                                         schema = JObject.Parse("{ $ref: \"#/definitions/Customer\" }")
+                                    },
+                                    new
+                                    {
+                                        name = "adminLevel",
+                                        @in = "query",
+                                        required = false,
+                                        type = "integer",
+                                        format = "int32",
+                                        @default = 0
                                     }
                                 },
                                 responses = new Dictionary<string, object>
@@ -135,6 +144,38 @@ namespace Swagger.Net.Tests.Swagger
                     {
                         "/customers/{id}", new
                         {
+                            get = new
+                            {
+                                tags = new [] { "Customers" },
+                                operationId = "Customers_Get",
+                                consumes = new object [] { },
+                                produces = new []{ "application/json", "text/json", "application/xml", "text/xml" },
+                                parameters = new object []
+                                {
+                                    new
+                                    {
+                                        name = "id",
+                                        @in = "path",
+                                        required = true,
+                                        type = "integer",
+                                        format = "int32",
+                                        @default = 8
+                                    }
+                                },
+                                responses = new Dictionary<string, object>
+                                {
+                                    {
+                                        "200", new
+                                        {
+                                            description = "OK",
+                                            schema = new
+                                            {
+                                                type = "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            },
                             put = new
                             {
                                 tags = new [] { "Customers" },

@@ -2,7 +2,6 @@
 using NUnit.Framework;
 using Swagger.Net.Dummy.Controllers;
 using Swagger.Net.Dummy.SwaggerExtensions;
-using Swagger.Net.Swagger;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -20,6 +19,7 @@ namespace Swagger.Net.Tests.Swagger
         {
             SetUpAttributeRoutesFrom(typeof(XmlAnnotatedController).Assembly);
             SetUpDefaultRouteFor<XmlAnnotatedController>();
+            SetUpDefaultRouteFor<BaseChildController>();
             SetUpHandler();
         }
 
@@ -35,6 +35,28 @@ namespace Swagger.Net.Tests.Swagger
 
             Assert.IsNotNull(postOp["description"]);
             Assert.AreEqual("Create an {Swagger.Net.Dummy.Controllers.Account} to access restricted resources", postOp["description"].ToString());
+        }
+
+        [Test]
+        public void It_documents_operations_from_inherited_action()
+        {
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
+
+            var postOp = swagger["paths"]["/basechild"]["post"];
+
+            Assert.IsNotNull(postOp["summary"]);
+            Assert.AreEqual("Post a record.", postOp["summary"].ToString());
+        }
+
+        [Test]
+        public void It_documents_operations_from_inherited_action_with_generic_parameter()
+        {
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
+
+            var postOp = swagger["paths"]["/basechild/{id}"]["put"];
+
+            Assert.IsNotNull(postOp["summary"]);
+            Assert.AreEqual("Put a record by the given key.", postOp["summary"].ToString());
         }
 
         [Test]
