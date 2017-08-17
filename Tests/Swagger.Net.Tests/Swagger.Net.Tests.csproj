@@ -98,6 +98,7 @@
     <Compile Include="CoreUnitTests\RedirectHandlerTests.cs" />
     <Compile Include="CoreUnitTests\SchemaExtensionsTests.cs" />
     <Compile Include="CoreUnitTests\SchemaRegistryTests.cs" />
+    <Compile Include="CoreUnitTests\ModelFilterContextTests.cs" />
     <Compile Include="CoreUnitTests\StringExtensionsTests.cs" />
     <Compile Include="CoreUnitTests\SwaggerDocsConfigTests.cs" />
     <Compile Include="CoreUnitTests\SwaggerEnabledConfigurationTests.cs" />
