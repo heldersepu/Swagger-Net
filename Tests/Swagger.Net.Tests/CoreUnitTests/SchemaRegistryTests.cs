@@ -10,6 +10,16 @@ namespace Swagger.Net.Tests.CoreUnitTests
     [TestFixture]
     class SchemaRegistryTests
     {
+        [Test]
+        public void CreateDictionarySchema_Null()
+        {
+            var mockContract = new Mock<JsonDictionaryContract>(typeof(Dictionary<int,int>));
+            //mockContract.Setup(x => x.DictionaryKeyType).Returns((Type)null);
+            var mockJsonSerializer = new Mock<JsonSerializerSettings>();
+
+            var schema = new SchemaRegistry(mockJsonSerializer.Object, null, null, null, true, null, true, true, true, true);
+            Assert.Throws<NullReferenceException>(() => schema.CreateDictionarySchema(mockContract.Object));
+        }
 
         [Test]
         public void CreateDefinitionSchema_Null()
@@ -35,4 +45,6 @@ namespace Swagger.Net.Tests.CoreUnitTests
             Assert.IsNotNull(schema.CreateDefinitionSchema(contract));
         }
     }
+
+
 }
