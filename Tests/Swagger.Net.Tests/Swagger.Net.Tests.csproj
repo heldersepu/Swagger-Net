@@ -95,6 +95,7 @@
     <Compile Include="CoreUnitTests\ApplyXmlTypeCommentsTests.cs" />
     <Compile Include="CoreUnitTests\EmbeddedAssetProviderTests.cs" />
     <Compile Include="CoreUnitTests\HttpRouteDirectionConstraintTests.cs" />
+    <Compile Include="CoreUnitTests\JsonPropertyExtensionsTests.cs" />
     <Compile Include="CoreUnitTests\RedirectHandlerTests.cs" />
     <Compile Include="CoreUnitTests\SchemaExtensionsTests.cs" />
     <Compile Include="CoreUnitTests\SchemaRegistryTests.cs" />
