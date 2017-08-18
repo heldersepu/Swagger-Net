@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
+using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 using System.Web.Http.Routing.Constraints;
 
-using WebActivatorEx;
 using $rootnamespace$;
 using Swagger.Net.Application;
 using Swagger.Net;
