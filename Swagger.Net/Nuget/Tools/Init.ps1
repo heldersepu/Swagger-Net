@@ -4,12 +4,12 @@ $SwaggerConfig = $project.ProjectItems.Item("SwaggerConfig.cs").FileNames(1)
 function MoveConfigFile($AppStartDir)
 {
     Write-Host $AppStartDir
-	$ValidPath = Test-Path $AppStartDir -IsValid
+	$ValidPath = Test-Path $AppStartDir
     If ($ValidPath -eq $True)
     {
         $AppSwaggerConfig = Join-Path $AppStartDir "SwaggerConfig.cs"
 		Write-Host $AppSwaggerConfig
-        $ValidFile = Test-Path $AppSwaggerConfig -IsValid
+        $ValidFile = Test-Path $AppSwaggerConfig
         If ($ValidFile -eq $False)
         {
 			$project.ProjectItems.Item("SwaggerConfig.cs").SaveAs($AppSwaggerConfig)
