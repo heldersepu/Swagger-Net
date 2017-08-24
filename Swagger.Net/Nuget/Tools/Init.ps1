@@ -26,6 +26,7 @@ try
 catch
 {
     Write-Host "App_Start not found! "
+	Write-Host $_.Exception
 }
 
 
@@ -36,7 +37,8 @@ try
 }
 catch
 {
-    Write-Host "Error deleting SwaggerConfig file: " + $_.Exception
+    Write-Host "Error deleting SwaggerConfig file! "
+	Write-Host $_.Exception
 }
 
 
