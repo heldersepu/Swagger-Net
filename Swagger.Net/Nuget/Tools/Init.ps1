@@ -12,7 +12,9 @@ function MoveConfigFile($AppStartDir)
         $ValidFile = Test-Path $AppSwaggerConfig
         If ($ValidFile -eq $False)
         {
-			$project.ProjectItems.Item("SwaggerConfig.cs").SaveAs($AppSwaggerConfig)
+			$item = $project.ProjectItems.Item("SwaggerConfig.cs")
+			$item.Open('{7651A701-06E5-11D1-8EBD-00A0C90F26EA}')
+			$item.SaveAs($AppSwaggerConfig)
 			Write-Host "SwaggerConfig Saved! "
         }
     }
