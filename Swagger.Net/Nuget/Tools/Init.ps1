@@ -35,6 +35,15 @@ catch
 try
 {
     $project.ProjectItems.Item("SwaggerConfig.cs").Remove()
+}
+catch
+{
+    Write-Host "Error removing SwaggerConfig file! "
+	Write-Host $_.Exception
+}
+
+try
+{
     Remove-Item $SwaggerConfig
 }
 catch
@@ -42,6 +51,5 @@ catch
     Write-Host "Error deleting SwaggerConfig file! "
 	Write-Host $_.Exception
 }
-
 
 
