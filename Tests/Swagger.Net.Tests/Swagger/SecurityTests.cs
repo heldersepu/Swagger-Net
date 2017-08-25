@@ -47,10 +47,7 @@ namespace Swagger.Net.Tests.SwaggerFilters
         {
             SetUpHandler(c =>
                 {
-                    c.ApiKey("apiKey")
-                        .Description("API Key Authentication")
-                        .Name("apiKey")
-                        .In("header");
+                    c.ApiKey("apiKey", "header", "API Key Authentication");
                 });
 
             var swagger = GetContent<JObject>(TEMP_URI.DOCS);

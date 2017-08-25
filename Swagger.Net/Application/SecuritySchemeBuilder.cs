@@ -34,22 +34,11 @@ namespace Swagger.Net.Application
         private string _name;
         private string _in;
 
-        public ApiKeySchemeBuilder Description(string description)
+        public ApiKeySchemeBuilder(string name, string @in, string description)
         {
             _description = description;
-            return this;
-        }
-
-        public ApiKeySchemeBuilder Name(string name)
-        {
             _name = name;
-            return this;
-        }
-
-        public ApiKeySchemeBuilder In(string @in)
-        {
             _in = @in;
-            return this;
         }
 
         internal override SecurityScheme Build()

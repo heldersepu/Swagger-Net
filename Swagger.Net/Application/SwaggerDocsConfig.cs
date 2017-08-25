@@ -41,6 +41,7 @@ namespace Swagger.Net.Application
         private readonly IList<Func<XPathDocument>> _xmlDocFactories;
         private Func<IEnumerable<ApiDescription>, ApiDescription> _conflictingActionsResolver;
         private Func<HttpRequestMessage, string> _rootUrlResolver;
+        private ApiKeySchemeBuilder _apiKeySchemeBuilder = null;
 
         private Func<ISwaggerProvider, ISwaggerProvider> _customProviderFactory;
 
@@ -99,12 +100,14 @@ namespace Swagger.Net.Application
             return schemeBuilder;
         }
 
-        public ApiKeySchemeBuilder ApiKey(string name)
+        public ApiKeySchemeBuilder ApiKey(string name, string @in, string description)
         {
-            var schemeBuilder = new ApiKeySchemeBuilder();
-            _securitySchemeBuilders[name] = schemeBuilder;
-            return schemeBuilder;
+            _apiKeySchemeBuilder = new ApiKeySchemeBuilder(name, @in, description);
+            _securitySchemeBuilders[name] = _apiKeySchemeBuilder;
+            return _apiKeySchemeBuilder;
         }
+
+        internal ApiKeySchemeBuilder apiKeyScheme { get { return _apiKeySchemeBuilder; } }
 
         public OAuth2SchemeBuilder OAuth2(string name)
         {
@@ -334,6 +337,11 @@ namespace Swagger.Net.Application
         internal string GetRootUrl(HttpRequestMessage swaggerRequest)
         {
             return _rootUrlResolver(swaggerRequest);
+        }
+
+        internal IEnumerable<string> DiscoveryPaths(string route)
+        {
+            return GetApiVersions().Select(version => route.Replace("{apiVersion}", version));
         }
 
         internal string GetAccessControlAllowOrigin()

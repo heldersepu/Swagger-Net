@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using Swagger.Net.Application;
-using System.Collections.Generic;
 using System.Web.Http;
 
 namespace Swagger.Net.Tests.CoreUnitTests
@@ -13,9 +12,7 @@ namespace Swagger.Net.Tests.CoreUnitTests
             get
             {
                 return new SwaggerEnabledConfiguration(
-                    new HttpConfiguration(),
-                    null,
-                    new List<string>()
+                    new HttpConfiguration(), new SwaggerDocsConfig(), ""
                 );
             }
         }

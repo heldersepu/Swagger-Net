@@ -35,10 +35,7 @@ namespace Swagger.Net.Application
                 handler: new SwaggerDocsHandler(config)
             );
 
-            return new SwaggerEnabledConfiguration(
-                httpConfig,
-                config.GetRootUrl,
-                config.GetApiVersions().Select(version => routeTemplate.Replace("{apiVersion}", version)));
+            return new SwaggerEnabledConfiguration(httpConfig, config, routeTemplate);
         }
 
         internal static JsonSerializerSettings SerializerSettingsOrDefault(this HttpConfiguration httpConfig)
@@ -56,17 +53,14 @@ namespace Swagger.Net.Application
         private static readonly string DefaultRouteTemplate = "swagger/ui/{*assetPath}";
 
         private readonly HttpConfiguration _httpConfig;
-        private readonly Func<HttpRequestMessage, string> _rootUrlResolver;
-        private readonly IEnumerable<string> _discoveryPaths;
+        private readonly SwaggerDocsConfig _config;
+        private readonly string _route;
 
-        public SwaggerEnabledConfiguration(
-            HttpConfiguration httpConfig,
-            Func<HttpRequestMessage, string> rootUrlResolver,
-            IEnumerable<string> discoveryPaths)
+        public SwaggerEnabledConfiguration(HttpConfiguration httpConfig, SwaggerDocsConfig config, string route)
         {
             _httpConfig = httpConfig;
-            _rootUrlResolver = rootUrlResolver;
-            _discoveryPaths = discoveryPaths;
+            _config = config;
+            _route = route;
         }
 
         public void EnableSwaggerUi(Action<SwaggerUiConfig> configure = null)
@@ -76,8 +70,17 @@ namespace Swagger.Net.Application
 
         public void EnableSwaggerUi(string routeTemplate, Action<SwaggerUiConfig> configure = null)
         {
-            var config = new SwaggerUiConfig(_discoveryPaths, _rootUrlResolver);
-            if (configure != null) configure(config);
+            SecurityScheme secScheme = null;
+            var config = new SwaggerUiConfig(_config.DiscoveryPaths(_route), _config.GetRootUrl);
+            if (configure != null)
+            {
+                if (_config.apiKeyScheme != null)
+                {
+                    secScheme = _config.apiKeyScheme.Build();
+                    config.ApiKeySupport(secScheme.name, secScheme.@in);
+                }
+                configure(config);
+            }
 
             _httpConfig.Routes.MapHttpRoute(
                 name: "swagger_ui" + routeTemplate,
@@ -94,7 +97,7 @@ namespace Swagger.Net.Application
                     routeTemplate: "swagger",
                     defaults: null,
                     constraints: new { uriResolution = new HttpRouteDirectionConstraint(HttpRouteDirection.UriResolution) },
-                    handler: new RedirectHandler(_rootUrlResolver, "swagger/ui/index"));
+                    handler: new RedirectHandler(_config.GetRootUrl, "swagger/ui/index"));
             }
         }
     }
