@@ -107,7 +107,7 @@ namespace Swagger.Net.Application
             return _apiKeySchemeBuilder;
         }
 
-        internal ApiKeySchemeBuilder apiKeyScheme { get { return _apiKeySchemeBuilder; } }
+        internal ApiKeySchemeBuilder ApiKeyScheme { get { return _apiKeySchemeBuilder; } }
 
         public OAuth2SchemeBuilder OAuth2(string name)
         {
@@ -299,6 +299,12 @@ namespace Swagger.Net.Application
                 var xmlDoc = xmlDocFactory();
                 modelFilters.Insert(0, new ApplyXmlTypeComments(xmlDoc));
                 operationFilters.Insert(0, new ApplyXmlActionComments(xmlDoc));
+            }
+
+            if (ApiKeyScheme != null)
+            {
+                //TODO : worki in progress
+                operationFilters.Add(new ApplyXmlActionComments(ApiKeyScheme.Build().name));
             }
 
             var options = new SwaggerGeneratorOptions(

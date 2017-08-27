@@ -74,9 +74,9 @@ namespace Swagger.Net.Application
             var config = new SwaggerUiConfig(_config.DiscoveryPaths(_route), _config.GetRootUrl);
             if (configure != null)
             {
-                if (_config.apiKeyScheme != null)
+                if (_config.ApiKeyScheme != null)
                 {
-                    secScheme = _config.apiKeyScheme.Build();
+                    secScheme = _config.ApiKeyScheme.Build();
                     config.ApiKeySupport(secScheme.name, secScheme.@in);
                 }
                 configure(config);
