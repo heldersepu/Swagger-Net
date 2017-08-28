@@ -100,9 +100,10 @@ namespace Swagger.Net.Application
             return schemeBuilder;
         }
 
-        public ApiKeySchemeBuilder ApiKey(string name, string @in, string description)
+        public ApiKeySchemeBuilder ApiKey(string name, string @in, string description, Type type = null)
         {
-            _apiKeySchemeBuilder = new ApiKeySchemeBuilder(name, @in, description);
+            if (type == null) type = typeof(AuthorizeAttribute);
+            _apiKeySchemeBuilder = new ApiKeySchemeBuilder(name, @in, description, type);
             _securitySchemeBuilders[name] = _apiKeySchemeBuilder;
             return _apiKeySchemeBuilder;
         }
@@ -303,8 +304,7 @@ namespace Swagger.Net.Application
 
             if (ApiKeyScheme != null)
             {
-                //TODO : worki in progress
-                operationFilters.Add(new ApplyXmlActionComments(ApiKeyScheme.Build().name));
+                operationFilters.Add(new ApplySwaggerOperationApiKey(ApiKeyScheme.name, ApiKeyScheme.type));
             }
 
             var options = new SwaggerGeneratorOptions(

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web.Http;
 
 namespace Swagger.Net.Application
 {
@@ -30,15 +31,17 @@ namespace Swagger.Net.Application
 
     public class ApiKeySchemeBuilder : SecuritySchemeBuilder
     {
-        private string _description;
-        private string _name;
-        private string _in;
+        public string description;
+        public string name;
+        public string @in;
+        public Type type;
 
-        public ApiKeySchemeBuilder(string name, string @in, string description)
+        public ApiKeySchemeBuilder(string name, string @in, string description, Type type)
         {
-            _description = description;
-            _name = name;
-            _in = @in;
+            this.description = description;
+            this.name = name;
+            this.@in = @in;
+            this.type = type;
         }
 
         internal override SecurityScheme Build()
@@ -46,9 +49,9 @@ namespace Swagger.Net.Application
             return new SecurityScheme
             {
                 type = "apiKey",
-                description = _description,
-                name = _name,
-                @in = _in
+                description = description,
+                name = name,
+                @in = @in
             };
         }
     }

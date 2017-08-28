@@ -2,6 +2,8 @@
 using NUnit.Framework;
 using Swagger.Net.Dummy.Controllers;
 using Swagger.Net.Tests.Swagger;
+using System.Collections.Generic;
+using System.Web.Http.Description;
 
 namespace Swagger.Net.Tests.SwaggerFilters
 {
@@ -67,6 +69,31 @@ namespace Swagger.Net.Tests.SwaggerFilters
         }
 
         [Test]
+        public void It_exposes_config_to_define_an_api_key_auth_scheme_for_the_api_dups()
+        {
+            SetUpHandler(c =>
+            {
+                c.ApiKey("apiKey", "header", "API Key Authentication");
+                c.OperationFilter<AssignApiKeySecurityRequirements>();
+            });
+
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
+            var securityDefinitions = swagger["securityDefinitions"];
+            var expected = JObject.FromObject(new
+            {
+                apiKey = new
+                {
+                    type = "apiKey",
+                    description = "API Key Authentication",
+                    name = "apiKey",
+                    @in = "header",
+                }
+            });
+
+            Assert.AreEqual(expected.ToString(), securityDefinitions.ToString());
+        }
+
+        [Test]
         public void It_exposes_config_to_define_oauth2_flows_for_the_api()
         {
             SetUpHandler(c =>
@@ -103,6 +130,21 @@ namespace Swagger.Net.Tests.SwaggerFilters
                 });
 
             Assert.AreEqual(expected.ToString(), securityDefinitions.ToString());
+        }
+    }
+
+    public class AssignApiKeySecurityRequirements : IOperationFilter
+    {
+        public void Apply(Operation o, SchemaRegistry s, ApiDescription a)
+        {
+            if (o.security == null)
+                o.security = new List<IDictionary<string, IEnumerable<string>>>();
+
+            var SecRequirements = new Dictionary<string, IEnumerable<string>>
+                {
+                    { "apiKey", new List<string>() }
+                };
+            o.security.Add(SecRequirements);
         }
     }
 }
