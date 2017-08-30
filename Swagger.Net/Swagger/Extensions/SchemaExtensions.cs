@@ -36,6 +36,19 @@ namespace Swagger.Net
                     schema.maxLength = length.MaximumLength;
                     schema.minLength = length.MinimumLength;
                 }
+                else
+                {
+                    var maxLength = attribute as MaxLengthAttribute;
+                    if (maxLength != null)
+                    {
+                        schema.maxLength = maxLength.Length;
+                    }
+                    var minLength = attribute as MinLengthAttribute;
+                    if (minLength != null)
+                    {
+                        schema.minLength = minLength.Length;
+                    }
+                }
             }
 
             if (!jsonProperty.Writable)

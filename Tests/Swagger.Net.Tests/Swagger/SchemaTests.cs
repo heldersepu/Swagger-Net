@@ -196,6 +196,12 @@ namespace Swagger.Net.Tests.Swagger
                                 format = "uuid",
                                 type = "string",
                                 example = "00000000-0000-0000-0000-000000000000"
+                            },
+                            Detail = new
+                            {
+                                maxLength = 100,
+                                minLength = 2,
+                                type = "string"
                             }
                         },
                         xml = JObject.Parse( "{ \"name\": \"Payment\" }" )
