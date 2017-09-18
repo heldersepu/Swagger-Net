@@ -5,7 +5,7 @@ namespace Swagger.Net.Dummy.Controllers
 {
     public class SerializableController : ApiController
     {
-        public CountingLock Get(CountingLock cl)
+        public CountingLock Get([FromUri] CountingLock cl)
         {
            return cl;
         }
