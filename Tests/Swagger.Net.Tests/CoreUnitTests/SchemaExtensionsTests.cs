@@ -16,10 +16,7 @@ namespace Swagger.Net.Tests.CoreUnitTests
             {
                 var schemaRegistry =  new SchemaRegistry(
                     new JsonSerializerSettings(),
-                    new Dictionary<Type, Func<Schema>>(),
-                    new List<ISchemaFilter>(),
-                    new List<IModelFilter>(),
-                    true, null, true, true, true, true);
+                    new SwaggerGeneratorOptions());
                 return schemaRegistry.CreateInlineSchema(typeof(object));
             }
         }

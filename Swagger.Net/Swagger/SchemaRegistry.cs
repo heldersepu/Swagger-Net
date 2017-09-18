@@ -10,15 +10,7 @@ namespace Swagger.Net
     public class SchemaRegistry
     {
         private readonly JsonSerializerSettings _jsonSerializerSettings;
-        private readonly IDictionary<Type, Func<Schema>> _customSchemaMappings;
-        private readonly IEnumerable<ISchemaFilter> _schemaFilters;
-        private readonly IEnumerable<IModelFilter> _modelFilters;
-        private readonly Func<Type, string> _schemaIdSelector;
-        private readonly bool _ignoreObsoleteProperties;
-        private readonly bool _describeAllEnumsAsStrings;
-        private readonly bool _describeStringEnumsInCamelCase;
-        private readonly bool _applyFiltersToAllSchemas;
-
+        private readonly SwaggerGeneratorOptions _options;
         private readonly IContractResolver _contractResolver;
 
         private IDictionary<Type, WorkItem> _workItems;
@@ -29,27 +21,10 @@ namespace Swagger.Net
             public Schema Schema;
         }
 
-        public SchemaRegistry(
-            JsonSerializerSettings jsonSerializerSettings,
-            IDictionary<Type, Func<Schema>> customSchemaMappings,
-            IEnumerable<ISchemaFilter> schemaFilters,
-            IEnumerable<IModelFilter> modelFilters,
-            bool ignoreObsoleteProperties,
-            Func<Type, string> schemaIdSelector,
-            bool describeAllEnumsAsStrings,
-            bool describeStringEnumsInCamelCase,
-            bool applyFiltersToAllSchemas,
-            bool ignoreIsSpecifiedMembers)
+        public SchemaRegistry(JsonSerializerSettings jsonSerializerSettings, SwaggerGeneratorOptions options)
         {
             _jsonSerializerSettings = jsonSerializerSettings;
-            _customSchemaMappings = customSchemaMappings;
-            _schemaFilters = schemaFilters;
-            _modelFilters = modelFilters;
-            _schemaIdSelector = schemaIdSelector;
-            _ignoreObsoleteProperties = ignoreObsoleteProperties;
-            _describeAllEnumsAsStrings = describeAllEnumsAsStrings;
-            _describeStringEnumsInCamelCase = describeStringEnumsInCamelCase;
-            _applyFiltersToAllSchemas = applyFiltersToAllSchemas;
+            _options = options;
 
             _contractResolver = jsonSerializerSettings.ContractResolver ?? new DefaultContractResolver
             {
@@ -84,8 +59,8 @@ namespace Swagger.Net
         {
             var jsonContract = _contractResolver.ResolveContract(type);
 
-            if (_customSchemaMappings.ContainsKey(type))
-                return FilterSchema(_customSchemaMappings[type](), jsonContract);
+            if (_options.CustomSchemaMappings.ContainsKey(type))
+                return FilterSchema(_options.CustomSchemaMappings[type](), jsonContract);
 
             if (jsonContract is JsonPrimitiveContract)
                 return FilterSchema(CreatePrimitiveSchema((JsonPrimitiveContract)jsonContract), jsonContract);
@@ -174,9 +149,9 @@ namespace Swagger.Net
             var stringEnumConverter = primitiveContract.Converter as StringEnumConverter
                 ?? _jsonSerializerSettings.Converters.OfType<StringEnumConverter>().FirstOrDefault();
 
-            if (_describeAllEnumsAsStrings || stringEnumConverter != null)
+            if (_options.DescribeAllEnumsAsStrings || stringEnumConverter != null)
             {
-                var camelCase = _describeStringEnumsInCamelCase
+                var camelCase = _options.DescribeStringEnumsInCamelCase
                     || (stringEnumConverter != null && stringEnumConverter.CamelCaseText);
 
                 return new Schema
@@ -241,7 +216,7 @@ namespace Swagger.Net
         {
             var properties = jsonContract.Properties
                 .Where(p => !p.Ignored)
-                .Where(p => !(_ignoreObsoleteProperties && p.IsObsolete()))
+                .Where(p => !(_options.IgnoreObsoleteProperties && p.IsObsolete()))
                 .ToDictionary(
                     prop => prop.PropertyName,
                     prop => CreateInlineSchema(prop.PropertyType).WithValidationProperties(prop)
@@ -268,7 +243,7 @@ namespace Swagger.Net
         {
             if (!_workItems.ContainsKey(type))
             {
-                var schemaId = _schemaIdSelector(type);
+                var schemaId = _options.SchemaIdSelector(type);
                 if (_workItems.Any(entry => entry.Value.SchemaId == schemaId))
                 {
                     var conflictingType = _workItems.First(entry => entry.Value.SchemaId == schemaId).Key;
@@ -286,20 +261,20 @@ namespace Swagger.Net
 
         private Schema FilterSchema(Schema schema, JsonContract jsonContract)
         {
-            if (schema.type == "object" || _applyFiltersToAllSchemas)
+            if (schema.type == "object" || _options.ApplyFiltersToAllSchemas)
             {
                 var jsonObjectContract = jsonContract as JsonObjectContract;
                 if (jsonObjectContract != null)
                 {
                     // NOTE: In next major version, _modelFilters will completely replace _schemaFilters
                     var modelFilterContext = new ModelFilterContext(jsonObjectContract.UnderlyingType, jsonObjectContract, this);
-                    foreach (var filter in _modelFilters)
+                    foreach (var filter in _options.ModelFilters)
                     {
                         filter.Apply(schema, modelFilterContext);
                     }
                 }
 
-                foreach (var filter in _schemaFilters)
+                foreach (var filter in _options.SchemaFilters)
                 {
                     filter.Apply(schema, this, jsonContract.UnderlyingType);
                 }

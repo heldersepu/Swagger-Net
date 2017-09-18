@@ -28,17 +28,7 @@ namespace Swagger.Net
 
         public SwaggerDocument GetSwagger(string rootUrl, string apiVersion)
         {
-            var schemaRegistry = new SchemaRegistry(
-                _jsonSerializerSettings,
-                _options.CustomSchemaMappings,
-                _options.SchemaFilters,
-                _options.ModelFilters,
-                _options.IgnoreObsoleteProperties,
-                _options.SchemaIdSelector,
-                _options.DescribeAllEnumsAsStrings,
-                _options.DescribeStringEnumsInCamelCase,
-                _options.ApplyFiltersToAllSchemas,
-                _options.IgnoreIsSpecifiedMembers);
+            var schemaRegistry = new SchemaRegistry(_jsonSerializerSettings, _options);
 
             Info info;
             _apiVersions.TryGetValue(apiVersion, out info);
