@@ -27,7 +27,7 @@ namespace Swagger.Net.Tests.Swagger
             Assert.IsNotNull(path);
 
             Assert.IsNotNull(path["post"]["summary"]);
-            //Assert.IsNotNull(path["get"]["summary"]);
+            Assert.IsNotNull(path["get"]["summary"]);
         }
     }
 }

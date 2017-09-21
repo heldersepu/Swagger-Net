@@ -36,7 +36,7 @@ namespace Swagger.Net.XmlComments
                 navigator = _xmlDoc.CreateNavigator();
             }
 
-            var commentId = XmlCommentsIdHelper.GetCommentIdForMethod(reflectedActionDescriptor.MethodInfo);
+            var commentId = reflectedActionDescriptor.MethodInfo.GetCommentIdForMethod();
             var methodNode = navigator.SelectSingleNode(string.Format(MemberXPath, commentId));
             if (methodNode == null) return;
 

@@ -27,7 +27,7 @@ namespace Swagger.Net.XmlComments
                 navigator = _xmlDoc.CreateNavigator();
             }
 
-            var commentId = XmlCommentsIdHelper.GetCommentIdForType(context.SystemType);
+            var commentId = context.SystemType.GetCommentIdForType();
             var typeNode = navigator.SelectSingleNode(string.Format(MemberXPath, commentId));
 
             if (typeNode != null)
@@ -57,7 +57,7 @@ namespace Swagger.Net.XmlComments
         {
             if (propertyInfo == null) return;
 
-            var commentId = XmlCommentsIdHelper.GetCommentIdForProperty(propertyInfo);
+            var commentId = propertyInfo.GetCommentIdForProperty();
             var propertyNode = navigator.SelectSingleNode(string.Format(MemberXPath, commentId));
             if (propertyNode == null) return;
 

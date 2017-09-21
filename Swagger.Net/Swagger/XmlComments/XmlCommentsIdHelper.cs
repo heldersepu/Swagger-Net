@@ -4,9 +4,9 @@ using System.Text;
 
 namespace Swagger.Net.XmlComments
 {
-    public class XmlCommentsIdHelper
+    public static class XmlCommentsIdHelper
     {
-        public static string GetCommentIdForMethod(MethodInfo methodInfo)
+        public static string GetCommentIdForMethod(this MethodInfo methodInfo)
         {
             var builder = new StringBuilder("M:");
             AppendFullTypeName(methodInfo.DeclaringType, builder);
@@ -16,7 +16,7 @@ namespace Swagger.Net.XmlComments
             return builder.ToString();
         }
 
-        public static string GetCommentIdForType(Type type)
+        public static string GetCommentIdForType(this Type type)
         {
             var builder = new StringBuilder("T:");
             AppendFullTypeName(type, builder, expandGenericArgs: false);
@@ -24,7 +24,7 @@ namespace Swagger.Net.XmlComments
             return builder.ToString();
         }
 
-        public static string GetCommentIdForProperty(PropertyInfo propertyInfo)
+        public static string GetCommentIdForProperty(this PropertyInfo propertyInfo)
         {
             var builder = new StringBuilder("P:");
             AppendFullTypeName(propertyInfo.DeclaringType, builder);
@@ -62,17 +62,26 @@ namespace Swagger.Net.XmlComments
         {
             if (type.IsGenericType)
             {
-                var genericArgsBuilder = new StringBuilder("{");
-
-                var genericArgs = type.GetGenericArguments();
-                foreach (var argType in genericArgs)
+                string full = builder.ToString();
+                int argPos = full.IndexOf('(');
+                if (argPos > 0)
                 {
-                    AppendFullTypeName(argType, genericArgsBuilder, true);
-                    genericArgsBuilder.Append(",");
-                }
-                genericArgsBuilder.Replace(",", "}", genericArgsBuilder.Length - 1, 1);
+                    var genericArgsBuilder = new StringBuilder("{");
 
-                builder.Replace(string.Format("`{0}", genericArgs.Length), genericArgsBuilder.ToString());
+                    var genericArgs = type.GetGenericArguments();
+                    foreach (var argType in genericArgs)
+                    {
+                        AppendFullTypeName(argType, genericArgsBuilder, true);
+                        genericArgsBuilder.Append(",");
+                    }
+                    genericArgsBuilder.Replace(",", "}", genericArgsBuilder.Length - 1, 1);
+
+                    string oldValue = string.Format("`{0}", genericArgs.Length);
+                    string newValue = genericArgsBuilder.ToString();
+                    string args = full.Substring(argPos);
+                    builder.Clear();
+                    builder.Append(full.Substring(0, argPos) + args.Replace(oldValue, newValue));
+                }
             }
             else if (type.IsArray)
                 ExpandGenericArgsIfAny(type.GetElementType(), builder);
