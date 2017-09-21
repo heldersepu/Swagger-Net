@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\CachingSwaggerProvider.cs" />
+    <Compile Include="Controllers\BlobController.cs" />
     <Compile Include="Controllers\SerializableController.cs" />
     <Compile Include="Controllers\BaseChildController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
