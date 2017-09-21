@@ -76,11 +76,11 @@ namespace Swagger.Net.XmlComments
                     }
                     genericArgsBuilder.Replace(",", "}", genericArgsBuilder.Length - 1, 1);
 
-                    string oldValue = string.Format("`{0}", genericArgs.Length);
-                    string newValue = genericArgsBuilder.ToString();
-                    string args = full.Substring(argPos);
                     builder.Clear();
-                    builder.Append(full.Substring(0, argPos) + args.Replace(oldValue, newValue));
+                    builder.Append(full.Substring(0, argPos));
+                    string newValue = genericArgsBuilder.ToString();
+                    string oldValue = string.Format("`{0}", genericArgs.Length);
+                    builder.Append(full.Substring(argPos).Replace(oldValue, newValue));
                 }
             }
             else if (type.IsArray)
