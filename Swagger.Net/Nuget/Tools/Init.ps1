@@ -1,4 +1,5 @@
 ﻿param($installPath, $toolsPath, $package, $project)
+If ($project -eq $null) { return }
 $SwaggerConfig = $project.ProjectItems.Item("SwaggerConfig.cs").FileNames(1)
 
 function MoveConfigFile($AppStartDir)
