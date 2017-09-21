@@ -124,6 +124,7 @@
     <Compile Include="Swagger\SecurityTests.cs" />
     <Compile Include="Swagger\SwaggerTestBase.cs" />
     <Compile Include="Swagger\TypeExtensionsTests.cs" />
+    <Compile Include="Swagger\XmlComments2Tests.cs" />
     <Compile Include="Swagger\XmlCommentsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Swagger\XmlTextHelperTests.cs" />

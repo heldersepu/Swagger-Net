@@ -4,6 +4,12 @@
         <name>Swagger.Net.Dummy.Core</name>
     </assembly>
     <members>
+        <member name="M:Swagger.Net.Dummy.Controllers.Blob`1.Get(System.Nullable{System.Int32})">
+            <summary>GET</summary>
+        </member>
+        <member name="M:Swagger.Net.Dummy.Controllers.Blob`1.Post(System.Int32)">
+            <summary>POST</summary>
+        </member>
         <member name="M:Swagger.Net.Dummy.Controllers.BaseChildController.Get">
             <summary>
             Get some ...
