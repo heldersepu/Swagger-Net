@@ -69,9 +69,12 @@ namespace Swagger.Net.XmlComments
                     var genericArgsBuilder = new StringBuilder("{");
 
                     var genericArgs = type.GetGenericArguments();
-                    foreach (var argType in genericArgs)
+                    for (int i = 0; i < genericArgs.Length; i++)
                     {
-                        AppendFullTypeName(argType, genericArgsBuilder, true);
+                        if (type.BaseType != null && type.BaseType.Name == "Enum")
+                            genericArgsBuilder.Append($"`{i}");
+                        else
+                            AppendFullTypeName(genericArgs[i], genericArgsBuilder, true);
                         genericArgsBuilder.Append(",");
                     }
                     genericArgsBuilder.Replace(",", "}", genericArgsBuilder.Length - 1, 1);
