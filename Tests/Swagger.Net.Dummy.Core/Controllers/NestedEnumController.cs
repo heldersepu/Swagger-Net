@@ -6,6 +6,11 @@ namespace Swagger.Net.Dummy.Controllers
     {
         public enum Giorno { Lunedi, Martedi, Venerdi }
 
+        /// <summary>NestedEnum test</summary>
+        public string Get(Giorno? value)
+        {
+            return "Enum parameter";
+        }
 
         /// <summary>NestedEnum test</summary>
         public string Put(Giorno value)

@@ -64,14 +64,15 @@ namespace Swagger.Net.XmlComments
             {
                 string full = builder.ToString();
                 int argPos = full.IndexOf('(');
-                if (argPos > 0)
+                if (argPos > 0 || type.IsEnum)
                 {
+                    argPos = Math.Max(argPos, 0);
                     var genericArgsBuilder = new StringBuilder("{");
 
                     var genericArgs = type.GetGenericArguments();
                     for (int i = 0; i < genericArgs.Length; i++)
                     {
-                        if (type.BaseType != null && type.BaseType.Name == "Enum")
+                        if (type.IsEnum)
                             genericArgsBuilder.Append($"`{i}");
                         else
                             AppendFullTypeName(genericArgs[i], genericArgsBuilder, true);

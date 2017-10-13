@@ -4,6 +4,9 @@
         <name>Swagger.Net.Dummy.Core</name>
     </assembly>
     <members>
+        <member name="M:Swagger.Net.Dummy.Controllers.NestedEnum`1.Get(System.Nullable{Swagger.Net.Dummy.Controllers.NestedEnum{`0}.Giorno})">
+            <summary>NestedEnum test</summary>
+        </member>
         <member name="M:Swagger.Net.Dummy.Controllers.NestedEnum`1.Put(Swagger.Net.Dummy.Controllers.NestedEnum{`0}.Giorno)">
             <summary>NestedEnum test</summary>
         </member>

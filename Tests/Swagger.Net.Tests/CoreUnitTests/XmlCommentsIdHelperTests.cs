@@ -42,6 +42,14 @@ namespace Swagger.Net.Tests.CoreUnitTests
         }
 
         [Test]
+        public void Method_from_NestedEnum_action_get()
+        {
+            var methodInfo = typeof(NestedEnumController).GetMethod("Get");
+            var comment = methodInfo.GetCommentIdForMethod();
+            Assert.AreEqual(CTRLR + "NestedEnum`1.Get(System.Nullable{Swagger.Net.Dummy.Controllers.NestedEnum{`0}.Giorno})", comment);
+        }
+
+        [Test]
         public void Method_from_NestedEnum_action_put()
         {
             var methodInfo = typeof(NestedEnumController).GetMethod("Put");
