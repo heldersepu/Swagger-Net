@@ -16,6 +16,9 @@
         <member name="M:Swagger.Net.Dummy.Controllers.Blob`1.Post(System.Int32)">
             <summary>POST</summary>
         </member>
+        <member name="M:Swagger.Net.Dummy.Controllers.Blob`1.Put(Swagger.Net.Dummy.Controllers.AnotherFoo{`0})">
+            <summary>PUT</summary>
+        </member>
         <member name="M:Swagger.Net.Dummy.Controllers.BaseChildController.Get">
             <summary>
             Get some ...
