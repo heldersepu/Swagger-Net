@@ -72,7 +72,7 @@ namespace Swagger.Net.XmlComments
                     var genericArgs = type.GetGenericArguments();
                     for (int i = 0; i < genericArgs.Length; i++)
                     {
-                        if (type.IsEnum)
+                        if (type.IsEnum || (type.IsClass && genericArgs[i].FullName == null))
                             genericArgsBuilder.Append($"`{i}");
                         else
                             AppendFullTypeName(genericArgs[i], genericArgsBuilder, true);

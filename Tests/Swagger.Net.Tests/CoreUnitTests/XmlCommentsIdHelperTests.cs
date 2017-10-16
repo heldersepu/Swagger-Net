@@ -42,6 +42,14 @@ namespace Swagger.Net.Tests.CoreUnitTests
         }
 
         [Test]
+        public void Method_from_generic_action_put()
+        {
+            var methodInfo = typeof(BlobController).GetMethod("Put");
+            var comment = methodInfo.GetCommentIdForMethod();
+            Assert.AreEqual(CTRLR + "Blob`1.Put(Swagger.Net.Dummy.Controllers.AnotherFoo{`0})", comment);
+        }
+
+        [Test]
         public void Method_from_NestedEnum_action_get()
         {
             var methodInfo = typeof(NestedEnumController).GetMethod("Get");
