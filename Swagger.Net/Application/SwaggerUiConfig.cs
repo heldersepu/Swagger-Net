@@ -163,7 +163,7 @@ namespace Swagger.Net.Application
                 _templateParams["%(OAuth2AdditionalQueryStringParams)"] = JsonConvert.SerializeObject(additionalQueryStringParams);
         }
 
-        internal void ApiKeySupport(string name, string apiKeyIn) {
+        public void ApiKeySupport(string name, string apiKeyIn) {
             _templateParams["%(ApiKeyName)"] = name;
             _templateParams["%(ApiKeyIn)"] = apiKeyIn;
         }

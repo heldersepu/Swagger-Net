@@ -28,5 +28,15 @@ namespace Swagger.Net.Tests.CoreUnitTests
         {
             Assert.DoesNotThrow(() => swag.EnableSwaggerUi("test", null));
         }
+
+        [Test]
+        public void EnableSwaggerUi_NullApiKeyScheme()
+        {
+            var httpConfig = new HttpConfiguration();
+            var config = new SwaggerDocsConfig();
+            config.ApiKey("test", "1", "");
+            var s = new SwaggerEnabledConfiguration(httpConfig, config, "");
+            Assert.DoesNotThrow(() => s.EnableSwaggerUi("test", c => { }));
+        }
     }
 }
