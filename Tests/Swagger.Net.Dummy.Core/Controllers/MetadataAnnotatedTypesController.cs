@@ -15,6 +15,11 @@ namespace Swagger.Net.Dummy.Controllers
 
             throw new NotImplementedException();
         }
+
+        public string Get([RegularExpression("^[3-6]?\\d{12,15}$")]string CardNum)
+        {
+            return CardNum;
+        }
     }
 
     public class PaymentMetadata

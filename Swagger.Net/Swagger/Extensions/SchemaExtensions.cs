@@ -76,7 +76,8 @@ namespace Swagger.Net
             partialSchema.exclusiveMinimum = schema.exclusiveMinimum;
             partialSchema.maxLength = schema.maxLength;
             partialSchema.minLength = schema.minLength;
-            partialSchema.pattern = schema.pattern;
+            if (schema.pattern != null)
+                partialSchema.pattern = schema.pattern;
             partialSchema.maxItems = schema.maxItems;
             partialSchema.minItems = schema.minItems;
             partialSchema.uniqueItems = schema.uniqueItems;

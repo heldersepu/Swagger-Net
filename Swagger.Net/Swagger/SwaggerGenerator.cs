@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net.Http;
 using System.Web.Http.Description;
@@ -216,6 +217,16 @@ namespace Swagger.Net
                 parameter.type = "string";
                 parameter.required = true;
                 return parameter;
+            }
+            else
+            {
+                var rxAttrib = paramDesc.ParameterDescriptor
+                    .GetCustomAttributes<RegularExpressionAttribute>()
+                    .FirstOrDefault();
+                if (rxAttrib != null)
+                {
+                    parameter.pattern = rxAttrib.Pattern;
+                }
             }
 
             parameter.required = location == "path" || !paramDesc.ParameterDescriptor.IsOptional;

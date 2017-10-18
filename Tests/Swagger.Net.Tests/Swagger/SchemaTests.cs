@@ -100,6 +100,11 @@ namespace Swagger.Net.Tests.Swagger
             SetUpDefaultRouteFor<MetadataAnnotatedTypesController>();
 
             var swagger = GetContent<JObject>(TEMP_URI.DOCS);
+            var get = swagger["paths"]["/metadataannotatedtypes"]["get"];
+            Assert.IsNotNull(get);
+            var param = get["parameters"].First();
+            Assert.IsNotNull(param["pattern"]);
+
             var definitions = swagger["definitions"];
             Assert.IsNotNull(definitions);
 
