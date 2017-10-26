@@ -360,6 +360,7 @@ namespace Swagger.Net.Tests.Swagger
         {
             public void Apply(SwaggerDocument swaggerDoc, SchemaRegistry schemaRegistry, IApiExplorer apiExplorer)
             {
+                schemaRegistry.GetOrRegister(typeof(MonthEnum));
                 schemaRegistry.GetOrRegister(typeof(SubAccount));
                 schemaRegistry.GetOrRegister(typeof(Moq.MockSequence));
             }
