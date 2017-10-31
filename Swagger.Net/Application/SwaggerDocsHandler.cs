@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using System;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
@@ -12,6 +13,7 @@ namespace Swagger.Net.Application
     public class SwaggerDocsHandler : HttpMessageHandler
     {
         private static SwaggerDocument swaggerDoc = null;
+        private static DateTimeOffset? lastModified = null;
         private readonly SwaggerDocsConfig _config;
 
         public SwaggerDocsHandler(SwaggerDocsConfig config)
@@ -29,6 +31,7 @@ namespace Swagger.Net.Application
                 {
                     response.Headers.Add("Access-Control-Allow-Origin", accessControlAllowOrigin);
                 }
+                response.Content.Headers.LastModified = lastModified;
                 return TaskFor(response);
             }
             catch (UnknownApiVersion ex)
@@ -46,6 +49,7 @@ namespace Swagger.Net.Application
                 var apiVersion = request.GetRouteData().Values["apiVersion"].ToString();
 
                 swaggerDoc = swaggerProvider.GetSwagger(rootUrl, apiVersion.ToUpper());
+                lastModified = DateTimeOffset.UtcNow;
             }
             return ContentFor(request, swaggerDoc);
         }
@@ -55,7 +59,9 @@ namespace Swagger.Net.Application
             var negotiator = request.GetConfiguration().Services.GetContentNegotiator();
             var result = negotiator.Negotiate(typeof(SwaggerDocument), request, GetSupportedSwaggerFormatters());
 
-            return new ObjectContent(typeof(SwaggerDocument), swaggerDoc, result.Formatter, result.MediaType);
+            var content = new ObjectContent(typeof(SwaggerDocument), swaggerDoc, result.Formatter, result.MediaType);
+            content.Headers.LastModified = lastModified;
+            return content;
         }
 
         private IEnumerable<MediaTypeFormatter> GetSupportedSwaggerFormatters()
