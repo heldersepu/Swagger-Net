@@ -25,13 +25,16 @@ namespace Swagger.Net.Application
         {
             try
             {
+                if (request.Headers.IfModifiedSince != null && lastModified <= request.Headers.IfModifiedSince)
+                {
+                    return TaskFor(request.CreateResponse(HttpStatusCode.NotModified));
+                }
                 var response = new HttpResponseMessage { Content = GetContent(request) };
                 string accessControlAllowOrigin = _config.GetAccessControlAllowOrigin();
                 if (!string.IsNullOrEmpty(accessControlAllowOrigin))
                 {
                     response.Headers.Add("Access-Control-Allow-Origin", accessControlAllowOrigin);
                 }
-                response.Content.Headers.LastModified = lastModified;
                 return TaskFor(response);
             }
             catch (UnknownApiVersion ex)
