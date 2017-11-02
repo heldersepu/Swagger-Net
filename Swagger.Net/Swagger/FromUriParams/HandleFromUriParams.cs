@@ -54,37 +54,40 @@ namespace Swagger.Net.FromUriParams
             SchemaRegistry schemaRegistry,
             IList<Parameter> operationParams)
         {
-            foreach (var entry in sourceSchema.properties)
+            if (sourceSchema.properties != null)
             {
-                var propertySchema = entry.Value;
-                if (propertySchema.readOnly == true) continue;
-
-                var required = (sourceRequired == true)
-                    && sourceSchema.required != null && sourceSchema.required.Contains(entry.Key); 
-
-                if (propertySchema.@ref != null)
+                foreach (var entry in sourceSchema.properties)
                 {
-                    var schema = schemaRegistry.Definitions[propertySchema.@ref.Replace("#/definitions/", "")];
-                    ExtractAndAddQueryParams(
-                        schema,
-                        sourceQualifier + entry.Key.ToCamelCase() + ".",
-                        required,
-                        schemaRegistry,
-                        operationParams);
-                }
-                else
-                {
-                    var param = new Parameter
+                    var propertySchema = entry.Value;
+                    if (propertySchema.readOnly == true) continue;
+
+                    var required = (sourceRequired == true)
+                        && sourceSchema.required != null && sourceSchema.required.Contains(entry.Key);
+
+                    if (propertySchema.@ref != null)
                     {
-                        name =  sourceQualifier + entry.Key.ToCamelCase(),
-                        @in = "query",
-                        required = required,
-                        description = entry.Value.description
-                    };
-                    param.PopulateFrom(entry.Value);
-                    if (param.type == "array")
-                        param.collectionFormat = "multi";
-                    operationParams.Add(param);
+                        var schema = schemaRegistry.Definitions[propertySchema.@ref.Replace("#/definitions/", "")];
+                        ExtractAndAddQueryParams(
+                            schema,
+                            sourceQualifier + entry.Key.ToCamelCase() + ".",
+                            required,
+                            schemaRegistry,
+                            operationParams);
+                    }
+                    else
+                    {
+                        var param = new Parameter
+                        {
+                            name = sourceQualifier + entry.Key.ToCamelCase(),
+                            @in = "query",
+                            required = required,
+                            description = entry.Value.description
+                        };
+                        param.PopulateFrom(entry.Value);
+                        if (param.type == "array")
+                            param.collectionFormat = "multi";
+                        operationParams.Add(param);
+                    }
                 }
             }
         }
