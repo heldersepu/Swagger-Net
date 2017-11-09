@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Json;
 
 namespace Swagger.Net.SwaggerUi
 {
@@ -20,14 +21,31 @@ namespace Swagger.Net.SwaggerUi
 
         public Asset GetAsset(string rootUrl, string path)
         {
-            if (!_pathToAssetMap.ContainsKey(path))
-                throw new AssetNotFound(String.Format("Mapping not found - {0}", path));
+            if (path == "index/ext")
+            {
+                return GetAssetMap();
+            }
+            else
+            {
+                if (!_pathToAssetMap.ContainsKey(path))
+                    throw new AssetNotFound(String.Format("Mapping not found - {0}", path));
 
-            var resourceDescriptor = _pathToAssetMap[path];
-            return new Asset(
-                GetEmbeddedResourceStreamFor(resourceDescriptor, rootUrl),
-                InferMediaTypeFrom(resourceDescriptor.Name)
-            );
+                var resourceDescriptor = _pathToAssetMap[path];
+                return new Asset(
+                    GetEmbeddedResourceStreamFor(resourceDescriptor, rootUrl),
+                    InferMediaTypeFrom(resourceDescriptor.Name)
+                );
+            }
+        }
+
+        private Asset GetAssetMap()
+        {
+            var paths = _pathToAssetMap.Select(x => x.Key).ToList();
+            var ser = new DataContractJsonSerializer(paths.GetType());
+            var stream = new MemoryStream();
+            ser.WriteObject(stream, paths);
+            stream.Position = 0;
+            return new Asset(stream, "application/json");
         }
 
         public Stream GetEmbeddedResourceStreamFor(EmbeddedAssetDescriptor resourceDescriptor, string rootUrl)
@@ -74,6 +92,8 @@ namespace Swagger.Net.SwaggerUi
                     return "application/font-sfnt"; // formerly "font/truetype"
                 case "svg":
                     return "image/svg+xml";
+                case "json":
+                    return "application/json";
                 default:
                     return "text/html";
             }
