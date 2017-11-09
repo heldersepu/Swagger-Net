@@ -151,7 +151,7 @@ namespace Swagger.Net.Dummy
                         // enum type. Swagger.Net will honor this change out-of-the-box. However, if you use a different
                         // approach to serialize enums as strings, you can also force Swagger.Net to describe them as strings.
                         //
-                        c.DescribeAllEnumsAsStrings();
+                        c.DescribeAllEnumsAsStrings(camelCase: false);
 
                         // Similar to Schema filters, Swagger.Net also supports Operation and Document filters:
                         //

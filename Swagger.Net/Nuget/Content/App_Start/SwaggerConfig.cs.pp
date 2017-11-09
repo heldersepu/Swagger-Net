@@ -150,12 +150,12 @@ namespace $rootnamespace$
                         // Obsolete attribute
                         //c.IgnoreObsoleteProperties();
 
-                        // In accordance with the built in JsonSerializer, Swagger-Net will, by default, describe enums as integers.
+                        // In accordance with the built in JsonSerializer, if disabled Swagger-Net will describe enums as integers.
                         // You can change the serializer behavior by configuring the StringToEnumConverter globally or for a given
                         // enum type. Swagger-Net will honor this change out-of-the-box. However, if you use a different
                         // approach to serialize enums as strings, you can also force Swagger-Net to describe them as strings.
                         //
-                        //c.DescribeAllEnumsAsStrings();
+                        c.DescribeAllEnumsAsStrings(camelCase: false);
 
                         // Similar to Schema filters, Swagger-Net also supports Operation and Document filters:
                         //
