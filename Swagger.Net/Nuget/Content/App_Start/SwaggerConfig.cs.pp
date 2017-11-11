@@ -226,6 +226,10 @@ namespace $rootnamespace$
                         //
                         //c.DocExpansion(DocExpansion.List);
 
+                        // Use this option to control the expansion depth for models.
+                        //
+                        //c.DefaultModelExpandDepth(0);
+
                         // Limit the number of operations shown to a smaller value
                         //
                         c.UImaxDisplayedTags(100);
@@ -282,31 +286,31 @@ namespace $rootnamespace$
             }
         }
 
-		public class AssignOAuth2SecurityRequirements : IOperationFilter
-		{
-			public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
-			{
-				// Correspond each "Authorize" role to an oauth2 scope
-				var scopes = apiDescription.ActionDescriptor.GetFilterPipeline()
-					.Select(filterInfo => filterInfo.Instance)
-					.OfType<AuthorizeAttribute>()
-					.SelectMany(attr => attr.Roles.Split(','))
-					.Distinct();
+        public class AssignOAuth2SecurityRequirements : IOperationFilter
+        {
+            public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
+            {
+                // Correspond each "Authorize" role to an oauth2 scope
+                var scopes = apiDescription.ActionDescriptor.GetFilterPipeline()
+                    .Select(filterInfo => filterInfo.Instance)
+                    .OfType<AuthorizeAttribute>()
+                    .SelectMany(attr => attr.Roles.Split(','))
+                    .Distinct();
 
-				if (scopes.Any())
-				{
-					if (operation.security == null)
-						operation.security = new List<IDictionary<string, IEnumerable<string>>>();
+                if (scopes.Any())
+                {
+                    if (operation.security == null)
+                        operation.security = new List<IDictionary<string, IEnumerable<string>>>();
 
-					var oAuthRequirements = new Dictionary<string, IEnumerable<string>>
-					{
-						{ "oauth2", scopes }
-					};
+                    var oAuthRequirements = new Dictionary<string, IEnumerable<string>>
+                    {
+                        { "oauth2", scopes }
+                    };
 
-					operation.security.Add(oAuthRequirements);
-				}
-			}
-		}
+                    operation.security.Add(oAuthRequirements);
+                }
+            }
+        }
 
         private class ApplySchemaVendorExtensions : ISchemaFilter
         {

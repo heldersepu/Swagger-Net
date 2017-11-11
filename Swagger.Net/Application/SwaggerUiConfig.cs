@@ -29,6 +29,7 @@ namespace Swagger.Net.Application
                 { "%(ValidatorUrl)", "" },
                 { "%(CustomScripts)", "" },
                 { "%(DocExpansion)", "none" },
+                { "%(DefaultModelExpandDepth)", "0" },
                 { "%(UImaxDisplayedTags)", "100" },
                 { "%(UIfilter)", "''" },
                 { "%(SupportedSubmitMethods)", "get|put|post|delete|options|head|patch" },
@@ -106,6 +107,11 @@ namespace Swagger.Net.Application
         public void DocExpansion(DocExpansion docExpansion)
         {
             _templateParams["%(DocExpansion)"] = docExpansion.ToString().ToLower();
+        }
+
+        public void DefaultModelExpandDepth(int modelExpansion)
+        {
+            _templateParams["%(DefaultModelExpandDepth)"] = modelExpansion.ToString();
         }
 
         public void UImaxDisplayedTags(int maxDisplayedTags)

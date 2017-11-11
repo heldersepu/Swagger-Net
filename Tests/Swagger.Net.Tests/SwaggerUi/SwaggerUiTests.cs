@@ -81,6 +81,7 @@ namespace Swagger.Net.Tests.SwaggerUi
             SetUpHandler(c =>
                 {
                     c.DocExpansion(DocExpansion.Full);
+                    c.DefaultModelExpandDepth(1);
                     c.BooleanValues(new[] { "1", "0" });
                     c.SupportedSubmitMethods("GET", "HEAD");
                     c.EnableOAuth2Support("test-client-id", "test-realm", "Swagger UI");
