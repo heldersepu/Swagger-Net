@@ -226,6 +226,12 @@ namespace $rootnamespace$
                         //
                         //c.DocExpansion(DocExpansion.List);
 
+                        // Controls how models are shown when the API is first rendered. (The user can always switch
+                        // the rendering for a given model by clicking the 'Model' and 'Example Value' links.) It can be
+                        // set to 'model' or 'example', and the default is 'example'.
+                        //
+                        //c.DefaultModelRendering(DefaultModelRender.Model);
+
                         // Use this option to control the expansion depth for models.
                         //
                         //c.DefaultModelExpandDepth(0);
