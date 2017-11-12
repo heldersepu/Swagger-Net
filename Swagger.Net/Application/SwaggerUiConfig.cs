@@ -29,7 +29,7 @@ namespace Swagger.Net.Application
                 { "%(ValidatorUrl)", "" },
                 { "%(CustomScripts)", "" },
                 { "%(DocExpansion)", "none" },
-                { "%(DefaultModelRendering)", "model" },
+                { "%(DefaultModelRendering)", "example" },
                 { "%(DefaultModelExpandDepth)", "0" },
                 { "%(UImaxDisplayedTags)", "100" },
                 { "%(UIfilter)", "''" },
