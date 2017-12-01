@@ -43,7 +43,14 @@ namespace Swagger.Net.Dummy.Controllers
         {
             throw new NotImplementedException();
         }
+
+        public void Delete(Message2 message)
+        {
+            throw new NotImplementedException();
+        }
     }
+
+    public class Message2: Message { }
 
     [SwaggerSchemaFilter(typeof(AddMessageDefault))]
     public class Message

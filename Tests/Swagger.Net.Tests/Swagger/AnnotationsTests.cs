@@ -123,17 +123,36 @@ namespace Swagger.Net.Tests.Swagger
             Assert.AreEqual("[\"image/png\"]", patchResponses.ToString().Strip());
         }
 
+        private dynamic DefaultObj
+        {
+            get
+            {
+                return new
+                {
+                    title = "A message",
+                    content = "Some content"
+                };
+            }
+        }
+
         [Test]
         public void It_supports_per_type_filters_via_swagger_schema_filter_attribute()
         {
             var swagger = GetContent<JObject>(TEMP_URI.DOCS);
 
             var messageExamples = swagger["definitions"]["Message"]["default"];
-            var expected = JObject.FromObject(new
-            {
-                title = "A message",
-                content = "Some content"
-            });
+            var expected = JObject.FromObject(DefaultObj);
+
+            Assert.AreEqual(expected.ToString(), messageExamples.ToString());
+        }
+
+        [Test]
+        public void It_supports_inherited_per_type_filters_via_swagger_schema_filter_attribute()
+        {
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
+
+            var messageExamples = swagger["definitions"]["Message2"]["default"];
+            var expected = JObject.FromObject(DefaultObj);
 
             Assert.AreEqual(expected.ToString(), messageExamples.ToString());
         }
@@ -146,7 +165,7 @@ namespace Swagger.Net.Tests.Swagger
             var responseExamples = swagger["paths"]["/swaggerannotated/{id}"]["get"]["responses"]["200"]["examples"];
             var expected = JObject.FromObject(new Dictionary<string, object>()
             {
-                { "application/json", new { title = "A message", content = "Some content" } }
+                { "application/json", DefaultObj }
             });
 
             Assert.AreEqual(expected.ToString(), responseExamples.ToString());

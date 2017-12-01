@@ -4,7 +4,7 @@
     {
         public void Apply(Schema schema, SchemaRegistry schemaRegistry, System.Type type)
         {
-            schema.@default = new { title = "A message", content = "Some content" };
+            schema.example = schema.@default = new { title = "A message", content = "Some content" };
         }
     }
 }
