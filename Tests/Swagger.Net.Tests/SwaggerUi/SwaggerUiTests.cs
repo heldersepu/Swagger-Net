@@ -94,7 +94,7 @@ namespace Swagger.Net.Tests.SwaggerUi
             StringAssert.Contains("docExpansion: 'full'", content);
             StringAssert.Contains("booleanValues: arrayFrom('1|0')", content);
             StringAssert.Contains("supportedSubmitMethods: arrayFrom('get|head')", content);
-            StringAssert.Contains("showExtensions: 'true'", content);
+            StringAssert.Contains("showExtensions: ('true' == 'true')", content);
         }
 
         [Test]
