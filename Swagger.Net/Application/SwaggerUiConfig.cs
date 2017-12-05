@@ -33,6 +33,7 @@ namespace Swagger.Net.Application
                 { "%(DefaultModelExpandDepth)", "0" },
                 { "%(UImaxDisplayedTags)", "100" },
                 { "%(UIfilter)", "''" },
+                { "%(ShowExtensions)", "false" },
                 { "%(SupportedSubmitMethods)", "get|put|post|delete|options|head|patch" },
                 { "%(OAuth2Enabled)", "false" },
                 { "%(OAuth2ClientId)", "" },
@@ -128,6 +129,11 @@ namespace Swagger.Net.Application
         public void UIfilter(string filter)
         {
             _templateParams["%(UIfilter)"] = filter;
+        }
+
+        public void ShowExtensions(bool value)
+        {
+            _templateParams["%(ShowExtensions)"] = value.ToString().ToLower();
         }
 
         public void SupportedSubmitMethods(params string[] methods)

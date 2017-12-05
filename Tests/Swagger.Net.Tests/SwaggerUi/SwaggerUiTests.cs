@@ -84,6 +84,7 @@ namespace Swagger.Net.Tests.SwaggerUi
                     c.DefaultModelRendering(DefaultModelRender.Model);
                     c.DefaultModelExpandDepth(1);
                     c.BooleanValues(new[] { "1", "0" });
+                    c.ShowExtensions(true);
                     c.SupportedSubmitMethods("GET", "HEAD");
                     c.EnableOAuth2Support("test-client-id", "test-realm", "Swagger UI");
                 });
@@ -93,6 +94,7 @@ namespace Swagger.Net.Tests.SwaggerUi
             StringAssert.Contains("docExpansion: 'full'", content);
             StringAssert.Contains("booleanValues: arrayFrom('1|0')", content);
             StringAssert.Contains("supportedSubmitMethods: arrayFrom('get|head')", content);
+            StringAssert.Contains("showExtensions: ('true' == 'true')", content);
         }
 
         [Test]
