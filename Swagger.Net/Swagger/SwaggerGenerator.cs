@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json;
+using Swagger.Net.Swagger.Extensions;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net.Http;
@@ -216,30 +218,24 @@ namespace Swagger.Net
             {
                 parameter.type = "string";
                 parameter.required = true;
-                return parameter;
             }
             else
             {
-                var rxAttrib = paramDesc.ParameterDescriptor
-                    .GetCustomAttributes<RegularExpressionAttribute>()
-                    .FirstOrDefault();
-                if (rxAttrib != null)
-                {
-                    parameter.pattern = rxAttrib.Pattern;
-                }
+                parameter.pattern = paramDesc.GetRegularExpressionAttribute()?.Pattern;
+                parameter.required = location == "path" || !paramDesc.ParameterDescriptor.IsOptional;
+                parameter.description = paramDesc.Documentation;
+                if (parameter.description == null)
+                    parameter.description = paramDesc.GetDescriptionAttribute()?.Description;
+
+                var schema = schemaRegistry.GetOrRegister(paramDesc.ParameterDescriptor.ParameterType);
+                if (parameter.@in == "body")
+                    parameter.schema = schema;
+                else
+                    parameter.PopulateFrom(schema);
+
+                if (paramDesc.ParameterDescriptor.DefaultValue != null)
+                    parameter.@default = paramDesc.ParameterDescriptor.DefaultValue;
             }
-
-            parameter.required = location == "path" || !paramDesc.ParameterDescriptor.IsOptional;
-            parameter.description = paramDesc.Documentation;
-
-            var schema = schemaRegistry.GetOrRegister(paramDesc.ParameterDescriptor.ParameterType);
-            if (parameter.@in == "body")
-                parameter.schema = schema;
-            else
-                parameter.PopulateFrom(schema);
-
-            if (paramDesc.ParameterDescriptor.DefaultValue != null)
-                parameter.@default = paramDesc.ParameterDescriptor.DefaultValue;
             return parameter;
         }
     }

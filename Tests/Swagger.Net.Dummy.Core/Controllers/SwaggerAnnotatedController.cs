@@ -2,6 +2,7 @@
 using Swagger.Net.Dummy.SwaggerExtensions;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -39,7 +40,7 @@ namespace Swagger.Net.Dummy.Controllers
 
         [HttpPut]
         [SwaggerOperation("UpdateMessage", Tags = new[] { "messages" }, Schemes = new[] { "ws" })]
-        public void Put(int id, Message message)
+        public void Put([Description("param description")]int id, Message message)
         {
             throw new NotImplementedException();
         }
@@ -55,6 +56,7 @@ namespace Swagger.Net.Dummy.Controllers
     [SwaggerSchemaFilter(typeof(AddMessageDefault))]
     public class Message
     {
+        [Description("param model description")]
         public string Title { get; set; }
         public string Content { get; set; }
     }

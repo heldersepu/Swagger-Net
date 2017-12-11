@@ -213,8 +213,8 @@ namespace $rootnamespace$
                         // for example 0 and 1.
                         //
                         //c.BooleanValues(new[] { "0", "1" });
-						
-                        // Controls the display of vendor extension (x-) fields and values for Operations, Parameters, and Schema. 
+
+                        // Controls the display of vendor extension (x-) fields and values for Operations, Parameters, and Schema.
                         // The default is false.
                         //
                         //c.ShowExtensions(false);
