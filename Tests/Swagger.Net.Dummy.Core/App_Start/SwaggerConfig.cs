@@ -238,11 +238,11 @@ namespace Swagger.Net.Dummy
                         //
                         c.DefaultModelRendering(DefaultModelRender.Example);
 
-                        // Use this option to control the expansion depth for model in the response.
+                        // Use this option to control the expansion depth for the model on the model-example section.
                         //
                         c.DefaultModelExpandDepth(0);
 
-                        // Use this option to control the expansion depth for models.
+                        // The default expansion depth for models (set to -1 completely hide the models).
                         //
                         c.DefaultModelsExpandDepth(0);
 

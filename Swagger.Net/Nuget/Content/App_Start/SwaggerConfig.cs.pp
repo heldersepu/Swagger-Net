@@ -237,9 +237,13 @@ namespace $rootnamespace$
                         //
                         //c.DefaultModelRendering(DefaultModelRender.Model);
 
-                        // Use this option to control the expansion depth for models.
+                        // Use this option to control the expansion depth for the model on the model-example section.
                         //
                         //c.DefaultModelExpandDepth(0);
+
+                        // The default expansion depth for models (set to -1 completely hide the models).
+                        //
+                        //c.DefaultModelsExpandDepth(0);
 
                         // Limit the number of operations shown to a smaller value
                         //
