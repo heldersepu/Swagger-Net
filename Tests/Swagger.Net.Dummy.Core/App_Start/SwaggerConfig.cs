@@ -215,7 +215,7 @@ namespace Swagger.Net.Dummy
                         //
                         c.BooleanValues(new[] { "0", "1" });
 
-                        // Controls the display of vendor extension (x-) fields and values for Operations, Parameters, and Schema. 
+                        // Controls the display of vendor extension (x-) fields and values for Operations, Parameters, and Schema.
                         // The default is false.
                         //
                         //c.ShowExtensions(false);
@@ -231,6 +231,21 @@ namespace Swagger.Net.Dummy
                         // or "Full" (fully expanded: shows operations and their details).
                         //
                         c.DocExpansion(DocExpansion.List);
+
+                        // Controls how models are shown when the API is first rendered. (The user can always switch
+                        // the rendering for a given model by clicking the 'Model' and 'Example Value' links.) It can be
+                        // set to 'model' or 'example', and the default is 'example'.
+                        //
+                        c.DefaultModelRendering(DefaultModelRender.Example);
+
+                        // Use this option to control the expansion depth for model in the response.
+                        //
+                        c.DefaultModelExpandDepth(0);
+
+                        // Use this option to control the expansion depth for models.
+                        //
+                        c.DefaultModelsExpandDepth(0);
+
 
                         // Limit the number of operations shown to a smaller value
                         //

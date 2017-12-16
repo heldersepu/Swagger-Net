@@ -30,6 +30,7 @@ namespace Swagger.Net.Application
                 { "%(CustomScripts)", "" },
                 { "%(DocExpansion)", "none" },
                 { "%(DefaultModelRendering)", "example" },
+                { "%(DefaultModelsExpandDepth)", "0" },
                 { "%(DefaultModelExpandDepth)", "0" },
                 { "%(UImaxDisplayedTags)", "100" },
                 { "%(UIfilter)", "''" },
@@ -114,6 +115,11 @@ namespace Swagger.Net.Application
         public void DefaultModelRendering(DefaultModelRender defaultModelRendering)
         {
             _templateParams["%(DefaultModelRendering)"] = defaultModelRendering.ToString().ToLower();
+        }
+
+        public void DefaultModelsExpandDepth(int modelsExpansion)
+        {
+            _templateParams["%(DefaultModelsExpandDepth)"] = modelsExpansion.ToString();
         }
 
         public void DefaultModelExpandDepth(int modelExpansion)
