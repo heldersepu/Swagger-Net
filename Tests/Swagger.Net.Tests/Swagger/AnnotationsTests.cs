@@ -170,5 +170,14 @@ namespace Swagger.Net.Tests.Swagger
 
             Assert.AreEqual(expected.ToString(), responseExamples.ToString());
         }
+
+        [Test]
+        public void It_has_parameter_descriptions()
+        {
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
+            var description = (string)swagger["paths"]["/swaggerannotated/{id}"]["put"]["parameters"][0]["description"];
+
+            Assert.AreEqual("param description", description);
+        }
     }
 }

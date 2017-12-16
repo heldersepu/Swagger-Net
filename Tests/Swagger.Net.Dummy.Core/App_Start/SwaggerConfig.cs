@@ -215,6 +215,11 @@ namespace Swagger.Net.Dummy
                         //
                         c.BooleanValues(new[] { "0", "1" });
 
+                        // Controls the display of vendor extension (x-) fields and values for Operations, Parameters, and Schema. 
+                        // The default is false.
+                        //
+                        //c.ShowExtensions(false);
+
                         // By default, swagger-ui will validate specs against swagger.io's online validator and display the result
                         // in a badge at the bottom of the page. Use these options to set a different validator URL or to disable the
                         // feature entirely.
