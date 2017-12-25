@@ -1,6 +1,8 @@
 ﻿using Newtonsoft.Json.Serialization;
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using Swagger.Net.Swagger.Annotations;
 
 namespace Swagger.Net
 {
@@ -51,6 +53,17 @@ namespace Swagger.Net
             if (!jsonProperty.Writable)
                 schema.readOnly = true;
 
+            return schema;
+        }
+
+        public static Schema WithDescriptionProperty(this Schema schema, JsonProperty jsonProperty)
+        {
+            var propInfo = jsonProperty.PropertyInfo();
+            if (propInfo == null)
+                return schema;
+
+            var attrib = propInfo.GetCustomAttributes(false).OfType<SwaggerDescriptionAttribute>().FirstOrDefault();
+            schema.description = attrib?.Description;
             return schema;
         }
 
