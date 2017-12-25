@@ -7,6 +7,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net.Http;
 using System.Web.Http.Description;
+using System.Reflection;
+using Swagger.Net.Swagger.Annotations;
 
 namespace Swagger.Net
 {
@@ -52,7 +54,8 @@ namespace Swagger.Net
 
             var controllers = apiDescriptions
                 .GroupBy(x => x.ActionDescriptor.ControllerDescriptor)
-                .Select(x => new {
+                .Select(x => new
+                {
                     name = x.Key.ControllerName,
                     context = new ModelFilterContext(x.Key.ControllerType, null, null)
                 });
@@ -151,6 +154,9 @@ namespace Swagger.Net
                 })
                  .ToList();
 
+            var description = apiDesc.ActionDescriptor.GetCustomAttributes<SwaggerDescriptionAttribute>()
+                .FirstOrDefault();
+
             var responses = new Dictionary<string, Response>();
             var responseType = apiDesc.ResponseType();
             if (responseType == null || responseType == typeof(void))
@@ -162,6 +168,8 @@ namespace Swagger.Net
             {
                 tags = new[] { _options.GroupingKeySelector(apiDesc) },
                 operationId = this.GetUniqueFriendlyId(apiDesc, operationNames),
+                description = description?.Description,
+                summary = description?.Summary,
                 produces = apiDesc.Produces().ToList(),
                 consumes = apiDesc.Consumes().ToList(),
                 parameters = parameters.Any() ? parameters : null, // parameters can be null but not empty
@@ -208,10 +216,11 @@ namespace Swagger.Net
 
         private Parameter CreateParameter(string location, ApiParameterDescription paramDesc, SchemaRegistry schemaRegistry)
         {
+            
             var parameter = new Parameter
             {
                 @in = location,
-                name = paramDesc.Name
+                name = paramDesc.Name,
             };
 
             if (paramDesc.ParameterDescriptor == null)

@@ -2,6 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web.Http.Description;
+using Swagger.Net.Swagger.Annotations;
 
 namespace Swagger.Net.Swagger.Extensions
 {
@@ -12,9 +13,9 @@ namespace Swagger.Net.Swagger.Extensions
             return paramDesc.ParameterDescriptor.GetCustomAttributes<RegularExpressionAttribute>().FirstOrDefault();
         }
 
-        public static DescriptionAttribute GetDescriptionAttribute(this ApiParameterDescription paramDesc)
+        public static SwaggerDescriptionAttribute GetDescriptionAttribute(this ApiParameterDescription paramDesc)
         {
-            return paramDesc.ParameterDescriptor.GetCustomAttributes<DescriptionAttribute>().FirstOrDefault();
+            return paramDesc.ParameterDescriptor.GetCustomAttributes<SwaggerDescriptionAttribute>().FirstOrDefault();
         }
     }
 }

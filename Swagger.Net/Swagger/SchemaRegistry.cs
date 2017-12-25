@@ -36,7 +36,7 @@ namespace Swagger.Net
 
         public Schema GetOrRegister(Type type, string typeName = null)
         {
-            var schema = CreateInlineSchema(type, typeName );
+            var schema = CreateInlineSchema(type, typeName);
 
             // Iterate outstanding work items (i.e. referenced types) and generate the corresponding definition
             while (_workItems.Any(entry => entry.Value.Schema == null && !entry.Value.InProgress))
@@ -205,21 +205,23 @@ namespace Swagger.Net
                 type = "array",
                 items = CreateInlineSchema(itemType)
             };
-            if( itemType.Namespace != "System" && itemType.Namespace != "Enum" )
+            if (itemType.Namespace != "System" && itemType.Namespace != "Enum")
             {
                 s.xml = new Xml { name = typeName ?? itemType.Name, wrapped = isWrapped };
             }
             return s;
         }
 
-        public Schema CreateObjectSchema(JsonObjectContract jsonContract, bool addXmlName = false )
+        public Schema CreateObjectSchema(JsonObjectContract jsonContract, bool addXmlName = false)
         {
             var properties = jsonContract.Properties
                 .Where(p => !p.Ignored)
                 .Where(p => !(_options.IgnoreObsoleteProperties && p.IsObsolete()))
                 .ToDictionary(
                     prop => prop.PropertyName,
-                    prop => CreateInlineSchema(prop.PropertyType).WithValidationProperties(prop)
+                    prop => CreateInlineSchema(prop.PropertyType)
+                        .WithValidationProperties(prop)
+                        .WithDescriptionProperty(prop)
                 );
 
             var required = jsonContract.Properties.Where(prop => prop.IsRequired())
@@ -232,7 +234,7 @@ namespace Swagger.Net
                 properties = properties,
                 type = "object"
             };
-            if( addXmlName )
+            if (addXmlName)
             {
                 s.xml = new Xml { name = jsonContract.UnderlyingType.Name };
             }
