@@ -90,6 +90,7 @@
     <Compile Include="Controllers\PolymorphicTypesController.cs" />
     <Compile Include="Controllers\AttributeRoutesController.cs" />
     <Compile Include="Controllers\TestBindingController.cs" />
+    <Compile Include="Controllers\ArraysTestController.cs" />
     <Compile Include="Controllers\TwoDimensionalArraysController.cs" />
     <Compile Include="Controllers\NestedTypesController.cs" />
     <Compile Include="Controllers\ObsoleteActionsController.cs" />
@@ -115,6 +116,7 @@
     <Compile Include="SwaggerExtensions\RecursiveCallSchemaFilter.cs" />
     <Compile Include="SwaggerExtensions\SupportFlaggedEnums.cs" />
     <Compile Include="SwaggerExtensions\UpdateFileDownloadOperations.cs" />
+    <Compile Include="Types\Location.cs" />
     <Compile Include="Types\PrimitiveEnum.cs" />
   </ItemGroup>
   <ItemGroup>

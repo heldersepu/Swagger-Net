@@ -115,6 +115,7 @@
     <Compile Include="SwaggerUi\SwaggerUiTests.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Swagger\SchemaArraysTests.cs" />
     <Compile Include="Swagger\SerializableTests.cs" />
     <Compile Include="Swagger\DefaultRootUrlResolverTests.cs" />
     <Compile Include="Swagger\FromUriParamsTests.cs" />
