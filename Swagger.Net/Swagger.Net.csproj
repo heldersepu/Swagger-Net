@@ -129,7 +129,6 @@
   <ItemGroup>
     <EmbeddedResource Include="SwaggerUi\CustomAssets\typography.css" />
     <EmbeddedResource Include="SwaggerUi\CustomAssets\index.html" />
-    <EmbeddedResource Include="SwaggerUi\CustomAssets\screen.css" />
     <Content Include="Swagger.Net.nuspec">
       <SubType>Designer</SubType>
     </Content>

@@ -53,7 +53,6 @@ namespace Swagger.Net.Application
 
             // Use some custom versions to support config and extensionless paths
             CustomAsset("index", "Swagger.Net.SwaggerUi.CustomAssets.index.html", isTemplate: true);
-            CustomAsset("css/screen-css", "Swagger.Net.SwaggerUi.CustomAssets.screen.css");
             CustomAsset("css/typography-css", "Swagger.Net.SwaggerUi.CustomAssets.typography.css");
         }
 
