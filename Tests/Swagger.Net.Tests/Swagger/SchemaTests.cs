@@ -134,6 +134,7 @@ namespace Swagger.Net.Tests.Swagger
                             type = "integer",
                         },
                         Note = new {
+                            @default = "HelloWorld",
                             maxLength = 500,
                             minLength = 10,
                             type = "string"
