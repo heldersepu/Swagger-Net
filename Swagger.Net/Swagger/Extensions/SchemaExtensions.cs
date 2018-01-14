@@ -1,13 +1,55 @@
 ﻿using Newtonsoft.Json.Serialization;
+using Swagger.Net.Swagger.Annotations;
 using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using Swagger.Net.Swagger.Annotations;
 
 namespace Swagger.Net
 {
     public static class SchemaExtensions
     {
+        public static void AddDefault(this Schema schema, object attribute)
+        {
+            if (attribute is DefaultValueAttribute defAttrib)
+                schema.@default = defAttrib.Value;
+        }
+
+        public static void AddPattern(this Schema schema, object attribute)
+        {
+            if (attribute is RegularExpressionAttribute regex)
+                schema.pattern = regex.Pattern;
+        }
+
+        public static void AddRange(this Schema schema, object attribute)
+        {
+            if (attribute is RangeAttribute range)
+            {
+                if (Int32.TryParse(range.Maximum.ToString(), out int maximum))
+                    schema.maximum = maximum;
+
+                if (Int32.TryParse(range.Minimum.ToString(), out int minimum))
+                    schema.minimum = minimum;
+            }
+        }
+
+        public static void AddLength(this Schema schema, object attribute)
+        {
+            if (attribute is StringLengthAttribute length)
+            {
+                schema.maxLength = length.MaximumLength;
+                schema.minLength = length.MinimumLength;
+            }
+            else
+            {
+                if (attribute is MaxLengthAttribute maxLength)
+                    schema.maxLength = maxLength.Length;
+
+                if (attribute is MinLengthAttribute minLength)
+                    schema.minLength = minLength.Length;
+            }
+        }
+
         public static Schema WithValidationProperties(this Schema schema, JsonProperty jsonProperty)
         {
             var propInfo = jsonProperty.PropertyInfo();
@@ -16,38 +58,10 @@ namespace Swagger.Net
 
             foreach (var attribute in propInfo.GetCustomAttributes(false))
             {
-                var regex = attribute as RegularExpressionAttribute;
-                if (regex != null)
-                    schema.pattern = regex.Pattern;
-
-                var range = attribute as RangeAttribute;
-                if (range != null)
-                {
-                    int maximum;
-                    if (Int32.TryParse(range.Maximum.ToString(), out maximum))
-                        schema.maximum = maximum;
-
-                    int minimum;
-                    if (Int32.TryParse(range.Minimum.ToString(), out minimum))
-                        schema.minimum = minimum;
-                }
-
-                var length = attribute as StringLengthAttribute;
-                if (length != null)
-                {
-                    schema.maxLength = length.MaximumLength;
-                    schema.minLength = length.MinimumLength;
-                }
-                else
-                {
-                    var maxLength = attribute as MaxLengthAttribute;
-                    if (maxLength != null)
-                        schema.maxLength = maxLength.Length;
-
-                    var minLength = attribute as MinLengthAttribute;
-                    if (minLength != null)
-                        schema.minLength = minLength.Length;
-                }
+                schema.AddDefault(attribute);
+                schema.AddPattern(attribute);
+                schema.AddRange(attribute);
+                schema.AddLength(attribute);
             }
 
             if (!jsonProperty.Writable)
