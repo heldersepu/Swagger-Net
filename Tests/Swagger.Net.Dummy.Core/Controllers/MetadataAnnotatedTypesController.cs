@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
 using System.Net.Http;
@@ -36,6 +37,7 @@ namespace Swagger.Net.Dummy.Controllers
         [Required, Range(14, 99)]
         public int ExpYear { get; set; }
 
+        [DefaultValue("HelloWorld")]
         [StringLength(500, MinimumLength = 10)]
         public string Note { get; set; }
     }
