@@ -56,6 +56,25 @@ namespace Swagger.Net
                 .Distinct(new TagNameEqualityComparer())
                 .ToList();
 
+            var controllers = apiDescriptions
+                .GroupBy(x => x.ActionDescriptor.ControllerDescriptor)
+                .Select(x => new
+                {
+                    name = x.Key.ControllerName,
+                    context = new ModelFilterContext(x.Key.ControllerType, null, null)
+                });
+
+            foreach (var filter in _options.ModelFilters)
+            {
+                foreach (var c in controllers)
+                {
+                    var model = new Schema();
+                    filter.Apply(model, c.context);
+                    if (!string.IsNullOrEmpty(model.description))
+                        tags.Where(t => t.name.Equals(c.name)).First().description = model.description;
+                }
+            }
+
             var rootUri = new Uri(rootUrl);
             var port = (!rootUri.IsDefaultPort) ? ":" + rootUri.Port : string.Empty;
 
@@ -203,7 +222,6 @@ namespace Swagger.Net
 
         private Parameter CreateParameter(string location, ApiParameterDescription paramDesc, SchemaRegistry schemaRegistry)
         {
-            
             var parameter = new Parameter
             {
                 @in = location,
