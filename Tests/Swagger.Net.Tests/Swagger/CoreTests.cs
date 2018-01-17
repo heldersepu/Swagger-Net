@@ -504,18 +504,35 @@ namespace Swagger.Net.Tests.Swagger
         }
 
         [Test]
-        public void It_exposes_config_to_customize_the_ordering_of_action_groups()
+        public void It_sorts_controllers_alphabetically_as_default()
         {
             SetUpDefaultRoutesFor(new[] { typeof(ProductsController), typeof(CustomersController) });
+
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
+            var tags = swagger["tags"]
+                .Value<JArray>()
+                .Children<JObject>()
+                .SelectMany(j => j.Properties())
+                .Select(p => p.Value.ToString());
+
+            CollectionAssert.AreEqual(new[] { "Customers", "Products" }, tags);
+        }
+
+        [Test]
+        public void It_exposes_config_to_customize_the_ordering_of_action_groups()
+        {
+            SetUpDefaultRoutesFor(new[] { typeof(CustomersController), typeof(ProductsController) });
             SetUpHandler(c => c.OrderActionGroupsBy(new DescendingAlphabeticComparer()));
 
             var swagger = GetContent<JObject>(TEMP_URI.DOCS);
-            var paths = swagger["paths"].Value<JObject>()
-                .Properties()
-                .Select(prop => prop.Name);
+            var tags = swagger["tags"]
+                .Value<JArray>()
+                .Children<JObject>()
+                .SelectMany(j => j.Properties())
+                .Select(p => p.Value.ToString());
 
-            CollectionAssert.AreEqual(new[] { "/products", "/products/{id}", "/customers", "/customers/{id}" }, paths);
-       }
+            CollectionAssert.AreEqual(new[] { "Products", "Customers" }, tags);
+        }
 
         [Test]
         public void It_exposes_config_to_post_modify_the_document()

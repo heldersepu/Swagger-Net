@@ -97,6 +97,7 @@
     <Compile Include="Application\SwaggerDocsConfig.cs" />
     <Compile Include="Application\HttpConfigurationExtensions.cs" />
     <Compile Include="Swagger\Annotations\ApplySwaggerResponseAttributes.cs" />
+    <Compile Include="Swagger\Comparers\TagNameEqualityComparer.cs" />
     <Compile Include="Swagger\Extensions\ApiParameterDescriptionExtensions.cs" />
     <Compile Include="Swagger\XmlComments\XmlCommentsIdHelper.cs" />
     <Compile Include="Swagger\IModelFilter.cs" />
