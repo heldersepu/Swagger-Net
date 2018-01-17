@@ -42,42 +42,29 @@ namespace Swagger.Net
 
             HashSet<string> operationNames = new HashSet<string>();
             var apiDescriptions = GetApiDescriptionsFor(apiVersion)
-                .Where(apiDesc => !(_options.IgnoreObsoleteActions && apiDesc.IsObsolete()));
+                .Where(apiDesc => !(_options.IgnoreObsoleteActions && apiDesc.IsObsolete()))
+                .ToList();
 
             var paths = apiDescriptions
                 .OrderBy(_options.GroupingKeySelector, _options.GroupingKeyComparer)
                 .GroupBy(apiDesc => apiDesc.RelativePathSansQueryString())
                 .ToDictionary(group => "/" + group.Key, group => CreatePathItem(group, schemaRegistry, operationNames));
 
+            var tags = apiDescriptions
+                .OrderBy(_options.GroupingKeySelector, _options.GroupingKeyComparer)
+                .Select(a => new Tag {description = a.Documentation, name = _options.GroupingKeySelector(a) })
+                .Distinct(new TagNameEqualityComparer())
+                .ToList();
+
             var rootUri = new Uri(rootUrl);
             var port = (!rootUri.IsDefaultPort) ? ":" + rootUri.Port : string.Empty;
-
-            var controllers = apiDescriptions
-                .GroupBy(x => x.ActionDescriptor.ControllerDescriptor)
-                .Select(x => new
-                {
-                    name = x.Key.ControllerName,
-                    context = new ModelFilterContext(x.Key.ControllerType, null, null)
-                });
-
-            var tags = new List<Tag>();
-            foreach (var filter in _options.ModelFilters)
-            {
-                foreach (var c in controllers)
-                {
-                    var model = new Schema();
-                    filter.Apply(model, c.context);
-                    if (!string.IsNullOrEmpty(model.description) && !tags.Any(t => t.name.Equals(c.name)))
-                        tags.Add(new Tag() { name = c.name, description = model.description });
-                }
-            }
 
             var swaggerDoc = new SwaggerDocument
             {
                 info = info,
                 host = rootUri.Host + port,
                 basePath = (rootUri.AbsolutePath != "/") ? rootUri.AbsolutePath : null,
-                tags = (tags.Count > 0) ? tags : null,
+                tags = tags,
                 schemes = (_options.Schemes != null) ? _options.Schemes.ToList() : new[] { rootUri.Scheme }.ToList(),
                 paths = paths,
                 definitions = schemaRegistry.Definitions,
