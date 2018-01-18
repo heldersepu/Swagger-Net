@@ -1,14 +1,11 @@
 ﻿using Newtonsoft.Json;
+using Swagger.Net.Swagger.Annotations;
 using Swagger.Net.Swagger.Extensions;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net.Http;
 using System.Web.Http.Description;
-using System.Reflection;
-using Swagger.Net.Swagger.Annotations;
 
 namespace Swagger.Net
 {
