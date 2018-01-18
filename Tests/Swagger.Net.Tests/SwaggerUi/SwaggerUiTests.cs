@@ -232,15 +232,6 @@ namespace Swagger.Net.Tests.SwaggerUi
         }
 
         [Test]
-        public void It_exposes_param_for_url()
-        {
-            var content = GetContentAsString(TEMP_URI.INDEX + "?url=http://test.co/swagger.json");
-
-            StringAssert.Contains("rootUrl: 'http://test.co'", content);
-            StringAssert.Contains("discoveryPaths: arrayFrom('/swagger.json')", content);
-        }
-
-        [Test]
         public void It_exposes_config_for_UImaxDisplayedTags()
         {
             SetUpHandler(c => { c.UImaxDisplayedTags(2); });
