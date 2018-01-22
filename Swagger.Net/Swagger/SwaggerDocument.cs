@@ -156,6 +156,8 @@ namespace Swagger.Net
         public bool? required;
 
         public Schema schema;
+
+        public object example;
     }
 
     public class Schema
