@@ -1,12 +1,12 @@
 ﻿using System.Linq;
 using System.Web.Http.Description;
 
-namespace Swagger.Net.Swagger.Annotations
+namespace Swagger.Net.Annotations
 {
     /// <summary>
-    /// Apply a SwaggerExampleOperationFilter
+    /// Apply a ApplySwaggerExampleAttribute
     /// </summary>
-    public class SwaggerExampleOperationFilter : IOperationFilter
+    public class ApplySwaggerExampleAttribute : IOperationFilter
     {
         public void Apply(Operation operation, SchemaRegistry schemaRegistry, ApiDescription apiDescription)
         {

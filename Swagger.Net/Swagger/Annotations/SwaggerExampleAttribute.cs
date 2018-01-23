@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Swagger.Net.Swagger.Annotations
+namespace Swagger.Net.Annotations
 {
     /// <summary>
     /// Allows you to add an example value for a parameter

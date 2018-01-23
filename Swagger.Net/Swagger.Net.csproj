@@ -71,6 +71,8 @@
     <Compile Include="Swagger\Annotations\ApplySwaggerOperationFilterAttributes.cs" />
     <Compile Include="Swagger\Annotations\ApplySwaggerOperationApiKey.cs" />
     <Compile Include="Swagger\Annotations\SwaggerDescriptionAttribute.cs" />
+    <Compile Include="Swagger\Annotations\SwaggerExampleAttribute.cs" />
+    <Compile Include="Swagger\Annotations\ApplySwaggerExampleAttribute.cs" />
     <Compile Include="Swagger\Annotations\SwaggerOperationAttribute.cs" />
     <Compile Include="Swagger\Annotations\SwaggerSchemaFilterAttribute.cs" />
     <Compile Include="Swagger\Annotations\SwaggerOperationFilterAttribute.cs" />

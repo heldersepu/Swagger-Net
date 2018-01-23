@@ -11,9 +11,7 @@ namespace Swagger.Net.Tests.SwaggerUi
     [TestFixture]
     public class SwaggerUiTests : HttpMessageHandlerTestBase<SwaggerUiHandler>
     {
-        public SwaggerUiTests()
-            : base("swagger/ui/{*assetPath}")
-        { }
+        public SwaggerUiTests() : base("swagger/ui/{*assetPath}") { }
 
         [SetUp]
         public void SetUp()
