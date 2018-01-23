@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Swagger.Net.Annotations;
+using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Net;
@@ -17,6 +18,7 @@ namespace Swagger.Net.Dummy.Controllers
             throw new NotImplementedException();
         }
 
+        [SwaggerExample("CardNum", "4012888888881881")]
         public string Get([RegularExpression("^[3-6]?\\d{12,15}$")]string CardNum)
         {
             return CardNum;
