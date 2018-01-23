@@ -104,7 +104,7 @@ namespace Swagger.Net.Tests.Swagger
             Assert.IsNotNull(get);
             var param = get["parameters"].First();
             Assert.IsNotNull(param["pattern"]);
-            Assert.IsNotNull(param["example"]);
+            Assert.IsNotNull(param["x-example"]);
 
             var definitions = swagger["definitions"];
             Assert.IsNotNull(definitions);

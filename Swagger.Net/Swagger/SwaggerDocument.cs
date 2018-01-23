@@ -157,6 +157,7 @@ namespace Swagger.Net
 
         public Schema schema;
 
+        [JsonProperty("x-example")]
         public object example;
     }
 
