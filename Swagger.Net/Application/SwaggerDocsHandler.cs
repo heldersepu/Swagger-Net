@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Concurrent;
 using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Net;
@@ -12,8 +13,7 @@ namespace Swagger.Net.Application
 {
     public class SwaggerDocsHandler : HttpMessageHandler
     {
-        private static SwaggerDocument swaggerDoc = null;
-        private static DateTimeOffset? lastModified = null;
+        private static readonly ConcurrentDictionary<string, GeneratedSwaggerDocument> SwaggerDocs = new ConcurrentDictionary<string, GeneratedSwaggerDocument>();
         private readonly SwaggerDocsConfig _config;
 
         public SwaggerDocsHandler(SwaggerDocsConfig config)
@@ -25,45 +25,82 @@ namespace Swagger.Net.Application
         {
             try
             {
-                if (request.Headers.IfModifiedSince != null && lastModified <= request.Headers.IfModifiedSince)
+                var apiVersion = GetRequestApiVersion(request);
+                SwaggerDocs.TryGetValue(apiVersion, out var generatedSwagger);
+
+                if (request.Headers.IfModifiedSince != null && generatedSwagger?.LastModified <= request.Headers.IfModifiedSince)
                 {
-                    return TaskFor(request.CreateResponse(HttpStatusCode.NotModified));
+                    return Task.FromResult(request.CreateResponse(HttpStatusCode.NotModified));
                 }
+
                 var response = new HttpResponseMessage { Content = GetContent(request) };
                 string accessControlAllowOrigin = _config.GetAccessControlAllowOrigin();
                 if (!string.IsNullOrEmpty(accessControlAllowOrigin))
                 {
                     response.Headers.Add("Access-Control-Allow-Origin", accessControlAllowOrigin);
                 }
-                return TaskFor(response);
+
+                return Task.FromResult(response);
             }
             catch (UnknownApiVersion ex)
             {
-                return TaskFor(request.CreateErrorResponse(HttpStatusCode.NotFound, ex));
+                return Task.FromResult(request.CreateErrorResponse(HttpStatusCode.NotFound, ex));
             }
+        }
+
+        private static string GetRequestApiVersion(HttpRequestMessage request)
+        {
+            var apiVersion = request.GetRouteData().Values["apiVersion"].ToString();
+            return apiVersion;
         }
 
         private HttpContent GetContent(HttpRequestMessage request)
         {
-            if (_config.NoCachingSwaggerDoc() || swaggerDoc == null)
-            {
-                var swaggerProvider = _config.GetSwaggerProvider(request);
-                var rootUrl = _config.GetRootUrl(request);
-                var apiVersion = request.GetRouteData().Values["apiVersion"].ToString();
+            var apiVersion = GetRequestApiVersion(request);
 
-                swaggerDoc = swaggerProvider.GetSwagger(rootUrl, apiVersion.ToUpper());
-                lastModified = DateTimeOffset.UtcNow;
+            GeneratedSwaggerDocument swaggerDoc;
+            if (_config.NoCachingSwaggerDoc())
+            {
+                // always force a regeneration
+                swaggerDoc = SwaggerDocs
+                    .AddOrUpdate(
+                        apiVersion,
+                        _ => Generate(request, apiVersion),
+                        (_, __) => Generate(request, apiVersion));
             }
+            else
+            {
+                // generate or return the cached copy
+                swaggerDoc = SwaggerDocs
+                    .GetOrAdd(
+                        apiVersion,
+                        _ => Generate(request, apiVersion));
+            }
+
             return ContentFor(request, swaggerDoc);
         }
 
-        private HttpContent ContentFor(HttpRequestMessage request, SwaggerDocument swaggerDoc)
+        private GeneratedSwaggerDocument Generate(HttpRequestMessage request, string apiVersion)
+        {
+            var swaggerProvider = _config.GetSwaggerProvider(request);
+            var rootUrl = _config.GetRootUrl(request);
+
+            var swaggerDoc = swaggerProvider.GetSwagger(rootUrl, apiVersion.ToUpper());
+
+            return new GeneratedSwaggerDocument
+            {
+                SwaggerDocument = swaggerDoc,
+                LastModified = DateTimeOffset.UtcNow
+            };
+        }
+
+        private HttpContent ContentFor(HttpRequestMessage request, GeneratedSwaggerDocument swaggerDoc)
         {
             var negotiator = request.GetConfiguration().Services.GetContentNegotiator();
             var result = negotiator.Negotiate(typeof(SwaggerDocument), request, GetSupportedSwaggerFormatters());
 
-            var content = new ObjectContent(typeof(SwaggerDocument), swaggerDoc, result.Formatter, result.MediaType);
-            content.Headers.LastModified = lastModified;
+            var content = new ObjectContent(typeof(SwaggerDocument), swaggerDoc.SwaggerDocument, result.Formatter, result.MediaType);
+            content.Headers.LastModified = swaggerDoc.LastModified;
             return content;
         }
 
@@ -78,16 +115,16 @@ namespace Swagger.Net.Application
                     Converters = new[] { new VendorExtensionsConverter() }
                 }
             };
-            // NOTE: The custom converter would not be neccessary in Newtonsoft.Json >= 5.0.5 as JsonExtensionData
+            // NOTE: The custom converter would not be necessary in Newtonsoft.Json >= 5.0.5 as JsonExtensionData
             // provides similar functionality. But, need to stick with older version for WebApi 5.0.0 compatibility
             return new[] { jsonFormatter };
         }
 
-        private Task<HttpResponseMessage> TaskFor(HttpResponseMessage response)
+        private class GeneratedSwaggerDocument
         {
-            var tsc = new TaskCompletionSource<HttpResponseMessage>();
-            tsc.SetResult(response);
-            return tsc.Task;
+            public SwaggerDocument SwaggerDocument { get; set; }
+
+            public DateTimeOffset LastModified { get; set; }
         }
     }
 }

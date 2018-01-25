@@ -560,8 +560,9 @@ namespace Swagger.Net.Tests.Swagger
             Assert.IsNotNull(postDefaultResponse);
         }
 
-        [Test]
-        public void It_exposes_config_to_describe_multiple_api_versions()
+        [TestCase(true)]
+        [TestCase(false)]
+        public void It_exposes_config_to_describe_multiple_api_versions(bool enableCaching)
         {
             SetUpAttributeRoutesFrom(typeof(MultipleApiVersionsController).Assembly);
             SetUpHandler(c =>
@@ -571,8 +572,13 @@ namespace Swagger.Net.Tests.Swagger
                         (vc) =>
                         {
                             vc.Version("v2", "Test API V2");
-                            vc.Version("v1", "Test API V1");
+                            vc.Version("v1", "Test API");
                         });
+
+                    if (enableCaching)
+                    {
+                        c.AllowCachingSwaggerDoc();
+                    }
                 });
 
             // 2.0
@@ -591,7 +597,7 @@ namespace Swagger.Net.Tests.Swagger
             expected = JObject.FromObject(new
                 {
                     version = "v1",
-                    title = "Test API V1",
+                    title = "Test API",
                 });
             Assert.AreEqual(expected.ToString().ToUpper(), info.ToString().ToUpper());
         }
