@@ -143,6 +143,12 @@ namespace Swagger.Net.Dummy.Controllers
         /// <example>TestPassword</example>
         public string Password { get; set; }
 
+        /// <summary>
+        /// Just a note
+        /// </summary>
+        /// <example>HelloWorld</example>
+        public string Note;
+
         public AccountPreferences Preferences { get; set; }
 
         public class AccountPreferences

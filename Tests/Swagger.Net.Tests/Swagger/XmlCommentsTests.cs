@@ -138,6 +138,10 @@ namespace Swagger.Net.Tests.Swagger
             var passwordProperty = swagger["definitions"]["Account"]["properties"]["Password"];
             Assert.IsNotNull(passwordProperty["description"]);
             Assert.AreEqual("For authentication", passwordProperty["description"].ToString());
+
+            var noteProperty = swagger["definitions"]["Account"]["properties"]["Note"];
+            Assert.IsNotNull(noteProperty["description"]);
+            Assert.AreEqual("Just a note", noteProperty["description"].ToString());
         }
 
         [Test]
@@ -145,17 +149,21 @@ namespace Swagger.Net.Tests.Swagger
         {
             var swagger = GetContent<JObject>(TEMP_URI.DOCS);
 
-            var passwordAccountId = swagger[ "definitions" ][ "Account" ][ "properties" ][ "AccountID" ];
-            Assert.IsNotNull( passwordAccountId[ "example" ] );
-            Assert.AreEqual( "78312", passwordAccountId[ "example" ].ToString() );
+            var passwordAccountId = swagger["definitions"]["Account"]["properties"]["AccountID"];
+            Assert.IsNotNull(passwordAccountId["example"]);
+            Assert.AreEqual("78312", passwordAccountId["example"].ToString());
 
-            var usernameProperty = swagger[ "definitions" ][ "Account" ][ "properties" ][ "Username" ];
-            Assert.IsNotNull( usernameProperty[ "example" ] );
-            Assert.AreEqual( "TestUser", usernameProperty[ "example" ].ToString() );
+            var usernameProperty = swagger["definitions"]["Account"]["properties"]["Username"];
+            Assert.IsNotNull(usernameProperty["example"]);
+            Assert.AreEqual("TestUser", usernameProperty["example"].ToString());
 
-            var passwordProperty = swagger[ "definitions" ][ "Account" ][ "properties" ][ "Password" ];
-            Assert.IsNotNull( passwordProperty[ "example" ] );
-            Assert.AreEqual( "TestPassword", passwordProperty[ "example" ].ToString() );
+            var passwordProperty = swagger["definitions"]["Account"]["properties"]["Password"];
+            Assert.IsNotNull(passwordProperty["example"]);
+            Assert.AreEqual("TestPassword", passwordProperty["example"].ToString());
+
+            var noteProperty = swagger["definitions"]["Account"]["properties"]["Note"];
+            Assert.IsNotNull(noteProperty["example"]);
+            Assert.AreEqual("HelloWorld", noteProperty["example"].ToString());
         }
 
         [Test]
@@ -271,7 +279,8 @@ namespace Swagger.Net.Tests.Swagger
         {
             var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var valueProperty = swagger["definitions"]["Reward[String]"]["properties"]["value"];
-            Assert.IsNull(valueProperty["description"]);
+            Assert.IsNotNull(valueProperty["description"]);
+            Assert.AreEqual("The monetary value of the reward", valueProperty["description"].ToString());
         }
 
         [Test]

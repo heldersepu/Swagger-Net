@@ -16,7 +16,7 @@ namespace Swagger.Net.XmlComments
             return builder.ToString();
         }
 
-        public static string GetCommentIdForType(this Type type)
+        public static string GetCommentId(this Type type)
         {
             var builder = new StringBuilder("T:");
             AppendFullTypeName(type, builder, expandGenericArgs: false);
@@ -24,13 +24,21 @@ namespace Swagger.Net.XmlComments
             return builder.ToString();
         }
 
-        public static string GetCommentIdForProperty(this PropertyInfo propertyInfo)
+        public static string GetCommentId(this PropertyInfo propertyInfo)
         {
             var builder = new StringBuilder("P:");
             AppendFullTypeName(propertyInfo.DeclaringType, builder);
             builder.Append(".");
-            AppendPropertyName(propertyInfo, builder);
+            builder.Append(propertyInfo.Name);
+            return builder.ToString();
+        }
 
+        public static string GetCommentId(this FieldInfo fieldInfo)
+        {
+            var builder = new StringBuilder("F:");
+            AppendFullTypeName(fieldInfo.DeclaringType, builder);
+            builder.Append(".");
+            builder.Append(fieldInfo.Name);
             return builder.ToString();
         }
 
@@ -119,11 +127,6 @@ namespace Swagger.Net.XmlComments
                 builder.Append(",");
             }
             builder.Replace(",", ")", builder.Length - 1, 1);
-        }
-
-        private static void AppendPropertyName(PropertyInfo propertyInfo, StringBuilder builder)
-        {
-            builder.Append(propertyInfo.Name);
         }
     }
 }

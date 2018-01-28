@@ -9,25 +9,22 @@ namespace Swagger.Net.XmlComments
         private const string SummaryTag = "summary";
         private const string ExampleTag = "example";
 
-        private readonly XPathDocument _xmlDoc;
+        private readonly XPathNavigator navigator;
 
         public ApplyXmlTypeComments(string filePath)
             : this(new XPathDocument(filePath)) { }
 
         public ApplyXmlTypeComments(XPathDocument xmlDoc)
         {
-            _xmlDoc = xmlDoc;
+            lock (xmlDoc) 
+            {
+                navigator = xmlDoc.CreateNavigator();
+            }
         }
 
         public void Apply(Schema model, ModelFilterContext context)
-        {
-            XPathNavigator navigator;
-            lock (_xmlDoc)
-            {
-                navigator = _xmlDoc.CreateNavigator();
-            }
-
-            var commentId = context.SystemType.GetCommentIdForType();
+        {            
+            var commentId = context.SystemType.GetCommentId();
             var typeNode = navigator.SelectSingleNode(string.Format(MemberXPath, commentId));
 
             if (typeNode != null)
@@ -43,21 +40,37 @@ namespace Swagger.Net.XmlComments
 
             if (model.properties != null)
             {
-                foreach (var entry in model.properties)
-                {
-                    var jsonProperty = context.JsonObjectContract.Properties[entry.Key];
-                    if (jsonProperty == null) continue;
+                ApplyPropertyComments(model, context);
+            }
+        }
 
-                    ApplyPropertyComments(navigator, entry.Value, jsonProperty.PropertyInfo());
+        private void ApplyPropertyComments(Schema model, ModelFilterContext context)
+        {
+            foreach (var entry in model.properties)
+            {
+                var jsonProperty = context.JsonObjectContract.Properties[entry.Key];
+                if (jsonProperty == null) continue;
+
+                var propertyInfo = jsonProperty.PropertyInfo();
+                if (propertyInfo != null)
+                {
+                    var propCommentId = propertyInfo.GetCommentId();
+                    ApplyComments(navigator, entry.Value, propCommentId);
+                }
+                else
+                {
+                    var fieldInfo = jsonProperty.FieldInfo();
+                    if (fieldInfo != null)
+                    {
+                        var propCommentId = fieldInfo.GetCommentId();
+                        ApplyComments(navigator, entry.Value, propCommentId);
+                    }
                 }
             }
         }
 
-        private static void ApplyPropertyComments(XPathNavigator navigator, Schema propertySchema, PropertyInfo propertyInfo)
+        private void ApplyComments(XPathNavigator navigator, Schema propertySchema, string commentId)
         {
-            if (propertyInfo == null) return;
-
-            var commentId = propertyInfo.GetCommentIdForProperty();
             var propertyNode = navigator.SelectSingleNode(string.Format(MemberXPath, commentId));
             if (propertyNode == null) return;
 
@@ -67,8 +80,8 @@ namespace Swagger.Net.XmlComments
                 propertySchema.description = propSummaryNode.ExtractContent();
             }
 
-            var propExampleNode = propertyNode.SelectSingleNode( ExampleTag );
-            if( propExampleNode != null )
+            var propExampleNode = propertyNode.SelectSingleNode(ExampleTag);
+            if (propExampleNode != null)
             {
                 propertySchema.example = propExampleNode.ExtractContent();
             }
