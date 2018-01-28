@@ -144,6 +144,12 @@
             </summary>
             <example>TestPassword</example>
         </member>
+        <member name="F:Swagger.Net.Dummy.Controllers.Account.Note">
+            <summary>
+            Just a note
+            </summary>
+            <example>HelloWorld</example>
+        </member>
         <member name="P:Swagger.Net.Dummy.Controllers.Account.AccountPreferences.DisplayName">
             <summary>
             Provide a display name to use instead of Username when signed in
