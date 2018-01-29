@@ -10,5 +10,13 @@ namespace Swagger.Net.Dummy.Controllers
         {
             throw new NotImplementedException();
         }
+
+        [Route("post/one")]
+        [Route("post/two")]
+        [Route("post/abc")]
+        public void Post(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

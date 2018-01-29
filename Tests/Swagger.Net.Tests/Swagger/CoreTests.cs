@@ -669,6 +669,16 @@ namespace Swagger.Net.Tests.Swagger
         }
 
         [Test]
+        public void It_handles_multiple_attribute_routes()
+        {
+            SetUpAttributeRoutesFrom(typeof(AttributeRoutesController).Assembly);
+
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
+            foreach (var v in new string[] { "one", "two", "abc" })
+                Assert.IsNotNull(swagger["paths"][$"/post/{v}"]);
+        }
+
+        [Test]
         public void It_handles_overloaded_attribute_routes()
         {
             SetUpAttributeRoutesFrom(typeof(OverloadedAttributeRoutesController).Assembly);
