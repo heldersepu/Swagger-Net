@@ -66,6 +66,7 @@ namespace Swagger.Net.Application
 
             SchemaFilter<ApplySwaggerSchemaFilterAttributes>();
 
+            //TODO: Can we improve performance by consolidating the OperationFilters?
             OperationFilter<HandleFromUriParams>();
             OperationFilter<ApplySwaggerOperationAttributes>();
             OperationFilter<ApplySwaggerResponseAttributes>();
