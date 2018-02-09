@@ -205,6 +205,10 @@ namespace Swagger.Net
                 type = "array",
                 items = CreateInlineSchema(itemType)
             };
+            if (arrayContract.CreatedType.Name.StartsWith("HashSet"))
+            {
+                s.uniqueItems = true;
+            }
             if (itemType.Namespace != "System" && itemType.Namespace != "Enum")
             {
                 s.xml = new Xml { name = typeName ?? itemType.Name, wrapped = isWrapped };

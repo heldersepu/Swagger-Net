@@ -33,36 +33,36 @@ namespace Swagger.Net.Tests.Swagger
             Assert.IsNotNull(definitions);
 
             var expected = JObject.FromObject(new
+            {
+                Product = new
                 {
-                    Product = new
+                    properties = new
                     {
-                        properties = new
+                        Id = new
                         {
-                            Id = new
-                            {
-                                readOnly = true,
-                                type = "integer",
-                                format = "int32",
-                            },
-                            Type = new
-                            {
-                                type = "integer",
-                                format = "int32",
-                                @enum = new[] { 2, 4 },
-                            },
-                            Description = new
-                            {
-                                type = "string"
-                            },
-                            UnitPrice = new
-                            {
-                                type = "number",
-                                format = "double",
-                            }
+                            readOnly = true,
+                            type = "integer",
+                            format = "int32",
                         },
-                        xml = JObject.Parse( "{ \"name\": \"Product\" }" ),
-                        type = "object"
-                    }
+                        Type = new
+                        {
+                            type = "integer",
+                            format = "int32",
+                            @enum = new[] { 2, 4 },
+                        },
+                        Description = new
+                        {
+                            type = "string"
+                        },
+                        UnitPrice = new
+                        {
+                            type = "number",
+                            format = "double",
+                        }
+                    },
+                    xml = JObject.Parse("{ \"name\": \"Product\" }"),
+                    type = "object"
+                }
             });
             Assert.AreEqual(expected.ToString(), definitions.ToString());
         }
@@ -96,7 +96,8 @@ namespace Swagger.Net.Tests.Swagger
         }
 
         [Test]
-        public void It_provides_validation_properties_for_metadata_annotated_types() {
+        public void It_provides_validation_properties_for_metadata_annotated_types()
+        {
             SetUpDefaultRouteFor<MetadataAnnotatedTypesController>();
 
             var swagger = GetContent<JObject>(TEMP_URI.DOCS);
@@ -109,38 +110,46 @@ namespace Swagger.Net.Tests.Swagger
             var definitions = swagger["definitions"];
             Assert.IsNotNull(definitions);
 
-            var expected = JObject.FromObject(new {
-                PaymentWithMetadata = new {
+            var expected = JObject.FromObject(new
+            {
+                PaymentWithMetadata = new
+                {
                     required = new string[] { "Amount", "CardNumber", "ExpMonth", "ExpYear" },
-                    properties = new {
-                        Amount = new {
+                    properties = new
+                    {
+                        Amount = new
+                        {
                             type = "number",
                             format = "double",
                         },
-                        CardNumber = new {
+                        CardNumber = new
+                        {
                             type = "string",
                             pattern = "^[3-6]?\\d{12,15}$",
                         },
-                        ExpMonth = new {
+                        ExpMonth = new
+                        {
                             type = "integer",
                             format = "int32",
                             maximum = 12,
                             minimum = 1,
                         },
-                        ExpYear = new {
+                        ExpYear = new
+                        {
                             type = "integer",
                             format = "int32",
                             maximum = 99,
                             minimum = 14,
                         },
-                        Note = new {
+                        Note = new
+                        {
                             type = "string",
                             @default = "HelloWorld",
                             maxLength = 500,
                             minLength = 10,
                         }
                     },
-                    xml = JObject.Parse( "{ \"name\": \"PaymentWithMetadata\" }" ),
+                    xml = JObject.Parse("{ \"name\": \"PaymentWithMetadata\" }"),
                     type = "object",
                 }
             });
@@ -157,62 +166,62 @@ namespace Swagger.Net.Tests.Swagger
             Assert.IsNotNull(definitions);
 
             var expected = JObject.FromObject(new
+            {
+                Payment = new
                 {
-                    Payment = new
+                    required = new string[] { "Amount", "CardNumber", "ExpMonth", "ExpYear" },
+                    properties = new
                     {
-                        required = new string[] { "Amount", "CardNumber", "ExpMonth", "ExpYear" },
-                        properties = new
+                        Amount = new
                         {
-                            Amount = new
-                            {
-                                type = "number",
-                                format = "double",
-                            },
-                            CardNumber = new
-                            {
-                                type = "string",
-                                pattern = "^[3-6]?\\d{12,15}$",
-                            },
-                            ExpMonth = new
-                            {
-                                description = "Credit card expiration Month",
-                                example = "6",
-                                type = "integer",
-                                format = "int32",
-                                maximum = 12,
-                                minimum = 1,
-                            },
-                            ExpYear = new
-                            {
-                                description = "Credit card expiration Year",
-                                example = "96",
-                                type = "integer",
-                                format = "int32",
-                                maximum = 99,
-                                minimum = 14,
-                            },
-                            Note = new
-                            {
-                                type = "string",
-                                maxLength = 500,
-                                minLength = 10,
-                            },
-                            guid = new
-                            {
-                                example = "00000000-0000-0000-0000-000000000000",
-                                type = "string",
-                                format = "uuid",
-                            },
-                            Detail = new
-                            {
-                                type = "string",
-                                maxLength = 100,
-                                minLength = 2,
-                            }
+                            type = "number",
+                            format = "double",
                         },
-                        xml = JObject.Parse( "{ \"name\": \"Payment\" }" ),
-                        type = "object"
-                    }
+                        CardNumber = new
+                        {
+                            type = "string",
+                            pattern = "^[3-6]?\\d{12,15}$",
+                        },
+                        ExpMonth = new
+                        {
+                            description = "Credit card expiration Month",
+                            example = "6",
+                            type = "integer",
+                            format = "int32",
+                            maximum = 12,
+                            minimum = 1,
+                        },
+                        ExpYear = new
+                        {
+                            description = "Credit card expiration Year",
+                            example = "96",
+                            type = "integer",
+                            format = "int32",
+                            maximum = 99,
+                            minimum = 14,
+                        },
+                        Note = new
+                        {
+                            type = "string",
+                            maxLength = 500,
+                            minLength = 10,
+                        },
+                        guid = new
+                        {
+                            example = "00000000-0000-0000-0000-000000000000",
+                            type = "string",
+                            format = "uuid",
+                        },
+                        Detail = new
+                        {
+                            type = "string",
+                            maxLength = 100,
+                            minLength = 2,
+                        }
+                    },
+                    xml = JObject.Parse("{ \"name\": \"Payment\" }"),
+                    type = "object"
+                }
             });
             Assert.AreEqual(expected.ToString(), definitions.ToString());
         }
@@ -227,40 +236,40 @@ namespace Swagger.Net.Tests.Swagger
             Assert.IsNotNull(definitions);
 
             var expected = JObject.FromObject(new
+            {
+                Elephant = new
                 {
-                    Elephant = new
+                    properties = new
                     {
-                        properties = new
+                        TrunkLength = new
                         {
-                            TrunkLength = new
-                            {
-                                type = "integer",
-                                format = "int32"
-                            },
-                            HairColor = new
-                            {
-                                type = "string"
-                            },
-                            Type = new
-                            {
-                                type = "string"
-                            }
+                            type = "integer",
+                            format = "int32"
                         },
-                        xml = JObject.Parse( "{ \"name\": \"Elephant\" }" ),
-                        type = "object"
+                        HairColor = new
+                        {
+                            type = "string"
+                        },
+                        Type = new
+                        {
+                            type = "string"
+                        }
                     },
-                    Animal = new
+                    xml = JObject.Parse("{ \"name\": \"Elephant\" }"),
+                    type = "object"
+                },
+                Animal = new
+                {
+                    properties = new
                     {
-                        properties = new
+                        Type = new
                         {
-                            Type = new
-                            {
-                                type = "string"
-                            }
-                        },
-                        xml = JObject.Parse( "{ \"name\": \"Animal\" }" ),
-                        type = "object"
-                    }
+                            type = "string"
+                        }
+                    },
+                    xml = JObject.Parse("{ \"name\": \"Animal\" }"),
+                    type = "object"
+                }
             });
             Assert.AreEqual(expected.ToString(), definitions.ToString());
         }
@@ -274,20 +283,20 @@ namespace Swagger.Net.Tests.Swagger
             var definitions = swagger["definitions"];
 
             var expected = JObject.FromObject(new
+            {
+                Lookup = new
                 {
-                    Lookup = new
+                    properties = new
                     {
-                        properties = new
+                        TotalEntries = new
                         {
-                            TotalEntries = new
-                            {
-                                type = "integer",
-                                format = "int32"
-                            }
-                        },
-                        xml = JObject.Parse( "{ \"name\": \"Lookup\" }" ),
-                        type = "object"
-                    }
+                            type = "integer",
+                            format = "int32"
+                        }
+                    },
+                    xml = JObject.Parse("{ \"name\": \"Lookup\" }"),
+                    type = "object"
+                }
             });
             Assert.AreEqual(expected.ToString(), definitions.ToString());
         }
@@ -303,24 +312,24 @@ namespace Swagger.Net.Tests.Swagger
             Assert.IsNotNull(definitions);
 
             var expected = JObject.FromObject(new
+            {
+                JsonRequest = new
                 {
-                    JsonRequest = new
+                    properties = new
                     {
-                        properties = new
+                        foobar = new
                         {
-                            foobar = new
-                            {
-                                type = "string"
-                            },
-                            Category = new
-                            {
-                                type = "string",
-                                @enum = new[] { "A", "B" }
-                            }
+                            type = "string"
                         },
-                        xml = JObject.Parse( "{ \"name\": \"JsonRequest\" }" ),
-                        type = "object"
-                    }
+                        Category = new
+                        {
+                            type = "string",
+                            @enum = new[] { "A", "B" }
+                        }
+                    },
+                    xml = JObject.Parse("{ \"name\": \"JsonRequest\" }"),
+                    type = "object"
+                }
             });
             Assert.AreEqual(expected.ToString(), definitions.ToString());
         }
@@ -348,26 +357,26 @@ namespace Swagger.Net.Tests.Swagger
         {
             SetUpDefaultRouteFor<ProductsController>();
             SetUpHandler(c => c.MapType<ProductType>(() => new Schema
-                {
-                    type = "integer",
-                    format = "int32",
-                    maximum = 2,
-                    minimum = 1
-                }));
+            {
+                type = "integer",
+                format = "int32",
+                maximum = 2,
+                minimum = 1
+            }));
 
             var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var parameter = swagger["paths"]["/products"]["get"]["parameters"][0];
 
             var expected = JObject.FromObject(new
-                {
-                    name = "type",
-                    @in = "query",
-                    required = true,
-                    type = "integer",
-                    format = "int32",
-                    maximum = 2,
-                    minimum = 1
-                });
+            {
+                name = "type",
+                @in = "query",
+                required = true,
+                type = "integer",
+                format = "int32",
+                maximum = 2,
+                minimum = 1
+            });
             Assert.AreEqual(expected.ToString(), parameter.ToString());
         }
 
@@ -610,7 +619,7 @@ namespace Swagger.Net.Tests.Swagger
                         items = expectedParameterItems,
                         type = "array"
                     }
-                } );
+                });
             Assert.AreEqual(expectedParameter.ToString(), parameter.ToString());
 
             var expectedResponseItems = new Dictionary<string, object>();
@@ -637,50 +646,51 @@ namespace Swagger.Net.Tests.Swagger
             Assert.AreEqual(expectedResponse.ToString(), response.ToString());
         }
 
-        [TestCase( "EchoEnum", typeof( PrimitiveEnum ), "integer", "int32", "Swagger.Net.Dummy.Types.PrimitiveEnum", false )]
-        [TestCase( "EchoEnum", typeof( PrimitiveEnum ), "string", null, "Swagger.Net.Dummy.Types.PrimitiveEnum", false )]
-        public void It_exposes_config_to_post_modify_schemas_for_primitive_enum_arrays( string action, Type dotNetType, string type, string format, string xtypeDotNet, bool xnullable )
+        [TestCase("EchoEnum", typeof(PrimitiveEnum), "integer", "int32", "Swagger.Net.Dummy.Types.PrimitiveEnum", false)]
+        [TestCase("EchoEnum", typeof(PrimitiveEnum), "string", null, "Swagger.Net.Dummy.Types.PrimitiveEnum", false)]
+        public void It_exposes_config_to_post_modify_schemas_for_primitive_enum_arrays(string action, Type dotNetType, string type, string format, string xtypeDotNet, bool xnullable)
         {
-            var underlyingDotNetType = Nullable.GetUnderlyingType( dotNetType ) ?? dotNetType;
-            SetUpCustomRouteFor<PrimitiveArrayTypesController>( "PrimitiveArrayTypes/{action}" );
-            SetUpHandler( c => {
-                if( underlyingDotNetType.IsEnum && type == "string" )
+            var underlyingDotNetType = Nullable.GetUnderlyingType(dotNetType) ?? dotNetType;
+            SetUpCustomRouteFor<PrimitiveArrayTypesController>("PrimitiveArrayTypes/{action}");
+            SetUpHandler(c =>
+            {
+                if (underlyingDotNetType.IsEnum && type == "string")
                 {
                     c.DescribeAllEnumsAsStrings();
                 }
                 c.SchemaFilter<ApplySchemaVendorExtensions>();
-            } );
+            });
 
-            var swagger = GetContent<JObject>( "http://tempuri.org/swagger/docs/v1" );
-            var operation = swagger[ "paths" ][ "/PrimitiveArrayTypes/" + action ][ "post" ];
-            var parameter = operation[ "parameters" ][ 0 ];
-            var response = operation[ "responses" ][ "200" ][ "schema" ];
+            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
+            var operation = swagger["paths"]["/PrimitiveArrayTypes/" + action]["post"];
+            var parameter = operation["parameters"][0];
+            var response = operation["responses"]["200"]["schema"];
 
-            var method = typeof( PrimitiveArrayTypesController ).GetMethod( action );
-            Assert.AreEqual( dotNetType.MakeArrayType(), method.GetParameters()[ 0 ].ParameterType );
-            Assert.AreEqual( dotNetType.MakeArrayType(), method.ReturnType );
+            var method = typeof(PrimitiveArrayTypesController).GetMethod(action);
+            Assert.AreEqual(dotNetType.MakeArrayType(), method.GetParameters()[0].ParameterType);
+            Assert.AreEqual(dotNetType.MakeArrayType(), method.ReturnType);
 
             var expectedParameterItems = new Dictionary<string, object>();
             expectedParameterItems.Add("type", type);
-            if ( format != null )
+            if (format != null)
             {
-                expectedParameterItems.Add( "format", format );
+                expectedParameterItems.Add("format", format);
             }
-            if( underlyingDotNetType.IsEnum )
+            if (underlyingDotNetType.IsEnum)
             {
-                expectedParameterItems.Add( "enum", type == "string" ? underlyingDotNetType.GetEnumNames() : underlyingDotNetType.GetEnumValues() );
+                expectedParameterItems.Add("enum", type == "string" ? underlyingDotNetType.GetEnumNames() : underlyingDotNetType.GetEnumValues());
             }
-            expectedParameterItems.Add( "x-type-dotnet", xtypeDotNet );
-            expectedParameterItems.Add( "x-nullable", xnullable );
-            var expectedParameter = ( format == "byte" ) // Special case
-                ? JObject.FromObject( new
+            expectedParameterItems.Add("x-type-dotnet", xtypeDotNet);
+            expectedParameterItems.Add("x-nullable", xnullable);
+            var expectedParameter = (format == "byte") // Special case
+                ? JObject.FromObject(new
                 {
                     name = "value",
                     @in = "body",
                     required = true,
                     schema = expectedParameterItems
-                } )
-                : JObject.FromObject( new
+                })
+                : JObject.FromObject(new
                 {
                     name = "value",
                     @in = "body",
@@ -691,24 +701,24 @@ namespace Swagger.Net.Tests.Swagger
                         xml = JObject.Parse("{ \"name\": \"PrimitiveEnum\", \"wrapped\": true }"),
                         type = "array"
                     }
-                } );
+                });
             Assert.AreEqual(expectedParameter.ToString(), parameter.ToString());
 
             var expectedResponseItems = new Dictionary<string, object>();
             expectedResponseItems.Add("type", type);
-            if ( format != null )
+            if (format != null)
             {
-                expectedResponseItems.Add( "format", format );
+                expectedResponseItems.Add("format", format);
             }
-            if( underlyingDotNetType.IsEnum )
+            if (underlyingDotNetType.IsEnum)
             {
-                expectedResponseItems.Add( "enum", type == "string" ? underlyingDotNetType.GetEnumNames() : underlyingDotNetType.GetEnumValues() );
+                expectedResponseItems.Add("enum", type == "string" ? underlyingDotNetType.GetEnumNames() : underlyingDotNetType.GetEnumValues());
             }
-            expectedResponseItems.Add( "x-type-dotnet", xtypeDotNet );
-            expectedResponseItems.Add( "x-nullable", xnullable );
-            var expectedResponse = ( format == "byte" ) // Special case
-                ? JObject.FromObject( expectedResponseItems )
-                : JObject.FromObject( new
+            expectedResponseItems.Add("x-type-dotnet", xtypeDotNet);
+            expectedResponseItems.Add("x-nullable", xnullable);
+            var expectedResponse = (format == "byte") // Special case
+                ? JObject.FromObject(expectedResponseItems)
+                : JObject.FromObject(new
                 {
                     items = expectedResponseItems,
                     xml = JObject.Parse("{ \"name\": \"PrimitiveEnum\", \"wrapped\": true }"),
@@ -783,39 +793,39 @@ namespace Swagger.Net.Tests.Swagger
             Assert.IsNotNull(definitions);
 
             var expected = JObject.FromObject(new
+            {
+                Order = new
                 {
-                    Order = new
+                    properties = new
                     {
-                        properties = new
+                        LineItems = new
                         {
-                            LineItems = new
-                            {
-                                items = JObject.Parse("{ $ref: \"#/definitions/LineItem\" }"),
-                                xml = JObject.Parse( "{ \"name\": \"LineItem\", \"wrapped\": true }" ),
-                                type = "array"
-                            }
-                        },
-                        xml = JObject.Parse( "{ \"name\": \"Order\" }" ),
-                        type = "object"
+                            items = JObject.Parse("{ $ref: \"#/definitions/LineItem\" }"),
+                            xml = JObject.Parse("{ \"name\": \"LineItem\", \"wrapped\": true }"),
+                            type = "array"
+                        }
                     },
-                    LineItem = new
+                    xml = JObject.Parse("{ \"name\": \"Order\" }"),
+                    type = "object"
+                },
+                LineItem = new
+                {
+                    properties = new
                     {
-                        properties = new
+                        ProductId = new
                         {
-                            ProductId = new
-                            {
-                                type = "integer",
-                                format = "int32"
-                            },
-                            Quantity = new
-                            {
-                                type = "integer",
-                                format = "int32"
-                            }
+                            type = "integer",
+                            format = "int32"
                         },
-                        xml = JObject.Parse( "{ \"name\": \"LineItem\" }" ),
-                        type = "object"
-                    }
+                        Quantity = new
+                        {
+                            type = "integer",
+                            format = "int32"
+                        }
+                    },
+                    xml = JObject.Parse("{ \"name\": \"LineItem\" }"),
+                    type = "object"
+                }
             });
             Assert.AreEqual(expected.ToString(), definitions.ToString());
         }
@@ -831,36 +841,36 @@ namespace Swagger.Net.Tests.Swagger
             Assert.IsNotNull(definitions);
 
             var expected = JObject.FromObject(new
+            {
+                Component = new
                 {
-                    Component = new
+                    properties = new
                     {
-                        properties = new
+                        Name = new
                         {
-                            Name = new
-                            {
-                                type = "string"
-                            },
-                            SubComponents = new
-                            {
-                                items = JObject.Parse("{ $ref: \"#/definitions/Component\" }"),
-                                xml = JObject.Parse( "{ \"name\": \"Component\", \"wrapped\": true }" ),
-                                type = "array"
-                            }
+                            type = "string"
                         },
-                        xml = JObject.Parse( "{ \"name\": \"Component\" }" ),
-                        type = "object",
+                        SubComponents = new
+                        {
+                            items = JObject.Parse("{ $ref: \"#/definitions/Component\" }"),
+                            xml = JObject.Parse("{ \"name\": \"Component\", \"wrapped\": true }"),
+                            type = "array"
+                        }
                     },
-                    // Breaks current swagger-ui
-                    //ListOfSelf = new
-                    //{
-                    //    type = "array",
-                    //    items = JObject.Parse("{ $ref: \"ListOfSelf\" }")
-                    //},
-                    DictionaryOfSelf = new
-                    {
-                        additionalProperties = JObject.Parse("{ $ref: \"#/definitions/DictionaryOfSelf\" }"),
-                        type = "object"
-                    }
+                    xml = JObject.Parse("{ \"name\": \"Component\" }"),
+                    type = "object",
+                },
+                // Breaks current swagger-ui
+                //ListOfSelf = new
+                //{
+                //    type = "array",
+                //    items = JObject.Parse("{ $ref: \"ListOfSelf\" }")
+                //},
+                DictionaryOfSelf = new
+                {
+                    additionalProperties = JObject.Parse("{ $ref: \"#/definitions/DictionaryOfSelf\" }"),
+                    type = "object"
+                }
             });
             Assert.AreEqual(expected.ToString(), definitions.ToString());
         }
@@ -874,17 +884,41 @@ namespace Swagger.Net.Tests.Swagger
             var schema = swagger["paths"]["/twodimensionalarrays"]["post"]["parameters"][0]["schema"];
 
             var expected = JObject.FromObject(new
+            {
+                items = new
                 {
                     items = new
                     {
-                        items = new
-                        {
-                            type = "integer",
-                            format = "int32"
-                        },
-                        type = "array",
+                        type = "integer",
+                        format = "int32"
                     },
-                    type = "array"
+                    type = "array",
+                },
+                type = "array"
+            });
+            Assert.AreEqual(expected.ToString(), schema.ToString());
+        }
+
+        [Test]
+        public void It_handles_HashSet_arrays()
+        {
+            SetUpDefaultRouteFor<TwoDimensionalArraysController>();
+
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
+            var schema = swagger["paths"]["/twodimensionalarrays"]["get"]["parameters"][0];
+
+            var expected = JObject.FromObject(new
+            {
+                name = "matrix",
+                @in = "query",
+                required = true,
+                items = new
+                {
+                    type = "string"
+                },
+                collectionFormat = "multi",
+                type = "array",
+                uniqueItems = true
             });
             Assert.AreEqual(expected.ToString(), schema.ToString());
         }
