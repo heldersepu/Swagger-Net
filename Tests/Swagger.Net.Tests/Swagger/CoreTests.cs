@@ -132,8 +132,8 @@ namespace Swagger.Net.Tests.Swagger
                                             description = "OK",
                                             schema = new
                                             {
-                                                format = "int32",
-                                                type = "integer"
+                                                type = "integer",
+                                                format = "int32"
                                             }
                                         }
                                     }
@@ -268,9 +268,9 @@ namespace Swagger.Net.Tests.Swagger
                                             description = "OK",
                                             schema = new
                                             {
-                                                type = "array",
                                                 items = JObject.Parse("{ $ref: \"#/definitions/Product\" }"),
-                                                xml = JObject.Parse( "{ \"name\": \"Product\", \"wrapped\": true }" )
+                                                xml = JObject.Parse( "{ \"name\": \"Product\", \"wrapped\": true }" ),
+                                                type = "array"
                                             }
                                         }
                                     }
@@ -300,8 +300,8 @@ namespace Swagger.Net.Tests.Swagger
                                             description = "OK",
                                             schema = new
                                             {
-                                                format = "int32",
-                                                type = "integer"
+                                                type = "integer",
+                                                format = "int32"
                                             }
                                         }
                                     }
@@ -321,8 +321,8 @@ namespace Swagger.Net.Tests.Swagger
                                             description = "OK",
                                             schema = new
                                             {
-                                                format = "int32",
-                                                type = "integer"
+                                                type = "integer",
+                                                format = "int32"
                                             }
                                         }
                                     }
@@ -342,8 +342,8 @@ namespace Swagger.Net.Tests.Swagger
                                             description = "OK",
                                             schema = new
                                             {
-                                                format = "int32",
-                                                type = "integer"
+                                                type = "integer",
+                                                format = "int32"
                                             }
                                         }
                                     }

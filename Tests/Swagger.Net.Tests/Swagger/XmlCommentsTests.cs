@@ -88,8 +88,8 @@ namespace Swagger.Net.Tests.Swagger
                             description = "{account} created",
                             schema = new
                             {
-                                format = "int32",
-                                type = "integer"
+                                type = "integer",
+                                format = "int32"
                             }
                         }
                     },

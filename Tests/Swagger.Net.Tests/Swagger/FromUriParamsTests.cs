@@ -31,12 +31,12 @@ namespace Swagger.Net.Tests.Swagger
                     name = "currencies",
                     @in = "query",
                     required = true,
-                    type = "array",
                     items = new
                     {
                         type = "string"
                     },
-                    collectionFormat = "multi"
+                    collectionFormat = "multi",
+                    type = "array",
                 }
             });
 
@@ -120,13 +120,13 @@ namespace Swagger.Net.Tests.Swagger
                     name = "search.transactionIds",
                     @in = "query",
                     required = false,
-                    type = "array",
                     items = new
                     {
                         type = "integer",
-                        format = "int32"
+                        format = "int32",
                     },
-                    collectionFormat = "multi"
+                    collectionFormat = "multi",
+                    type = "array",
                 }
             });
 

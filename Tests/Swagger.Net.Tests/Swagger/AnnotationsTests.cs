@@ -63,8 +63,8 @@ namespace Swagger.Net.Tests.Swagger
                             description = "Created",
                             schema = new
                             {
-                                format = "int32",
-                                type = "integer"
+                                type = "integer",
+                                format = "int32"
                             }
                         }
                     },
@@ -74,11 +74,11 @@ namespace Swagger.Net.Tests.Swagger
                             description = "Invalid message",
                             schema = new
                             {
-                                type = "object",
                                 additionalProperties = new
                                 {
                                     type = "object"
-                                }
+                                },
+                                type = "object"
                             }
                         }
                     }
@@ -99,9 +99,9 @@ namespace Swagger.Net.Tests.Swagger
                             description = "OK",
                             schema = new
                             {
-                                type = "array",
                                 items = JObject.Parse("{ $ref: \"#/definitions/Message\" }"),
-                                xml = JObject.Parse( "{ \"name\": \"Messages\", \"wrapped\": true }" )
+                                xml = JObject.Parse( "{ \"name\": \"Messages\", \"wrapped\": true }" ),
+                                type = "array"
                             }
                         }
                     },
