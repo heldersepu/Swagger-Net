@@ -161,50 +161,20 @@ namespace Swagger.Net
         public object example;
     }
 
-    public class Schema
+    public class Schema : BaseSchema
     {
         [JsonProperty("$ref")]
         public string @ref;
 
-        public string format;
-
         public string title;
 
         public string description;
-
-        public object @default;
-
-        public int? multipleOf;
-
-        public int? maximum;
-
-        public bool? exclusiveMaximum;
-
-        public int? minimum;
-
-        public bool? exclusiveMinimum;
-
-        public int? maxLength;
-
-        public int? minLength;
-
-        public string pattern;
-
-        public int? maxItems;
-
-        public int? minItems;
-
-        public bool? uniqueItems;
 
         public int? maxProperties;
 
         public int? minProperties;
 
         public IList<string> required;
-
-        public IList<object> @enum;
-
-        public string type;
 
         public Schema items;
 
@@ -224,46 +194,13 @@ namespace Swagger.Net
 
         public object example;
 
-        public Dictionary<string, object> vendorExtensions = new Dictionary<string, object>();
     }
 
-    public class PartialSchema
+    public class PartialSchema : BaseSchema
     {
-        public string type;
-
-        public string format;
-
         public PartialSchema items;
 
         public string collectionFormat;
-
-        public object @default;
-
-        public int? maximum;
-
-        public bool? exclusiveMaximum;
-
-        public int? minimum;
-
-        public bool? exclusiveMinimum;
-
-        public int? maxLength;
-
-        public int? minLength;
-
-        public string pattern;
-
-        public int? maxItems;
-
-        public int? minItems;
-
-        public bool? uniqueItems;
-
-        public IList<object> @enum;
-
-        public int? multipleOf;
-
-        public Dictionary<string, object> vendorExtensions = new Dictionary<string, object>();
     }
 
     public class Response
@@ -314,6 +251,41 @@ namespace Swagger.Net
         public string tokenUrl;
 
         public IDictionary<string, string> scopes;
+
+        public Dictionary<string, object> vendorExtensions = new Dictionary<string, object>();
+    }
+
+    public abstract class BaseSchema
+    {
+        public string type;
+
+        public string format;
+
+        public object @default;
+
+        public int? multipleOf;
+
+        public int? maximum;
+
+        public bool? exclusiveMaximum;
+
+        public int? minimum;
+
+        public bool? exclusiveMinimum;
+
+        public int? maxLength;
+
+        public int? minLength;
+
+        public string pattern;
+
+        public int? maxItems;
+
+        public int? minItems;
+
+        public bool? uniqueItems;
+
+        public IList<object> @enum;
 
         public Dictionary<string, object> vendorExtensions = new Dictionary<string, object>();
     }
