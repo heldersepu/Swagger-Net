@@ -220,16 +220,6 @@ namespace Swagger.Net.Tests.SwaggerUi
         }
 
         [Test]
-        public void It_exposes_config_for_UIfilter_param()
-        {
-            SetUpHandler(c => { c.UIfilter("null"); });
-
-            var content = GetContentAsString(TEMP_URI.INDEX + "?filter=Xml");
-
-            StringAssert.Contains("filter: 'Xml'", content);
-        }
-
-        [Test]
         public void It_exposes_config_for_UImaxDisplayedTags()
         {
             SetUpHandler(c => { c.UImaxDisplayedTags(2); });
