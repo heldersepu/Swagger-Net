@@ -34,7 +34,7 @@ namespace Swagger.Net.Application
                 { "%(DefaultModelExpandDepth)", "0" },
                 { "%(UImaxDisplayedTags)", "100" },
                 { "%(UIfilter)", "''" },
-                { "%(ShowExtensions)", "false" },
+                { "%(ShowExtensions)", "true" },
                 { "%(SupportedSubmitMethods)", "get|put|post|delete|options|head|patch" },
                 { "%(OAuth2Enabled)", "false" },
                 { "%(OAuth2ClientId)", "" },
