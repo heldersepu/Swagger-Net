@@ -213,6 +213,8 @@ namespace Swagger.Net
                 return "path";
             else if (paramDesc.Source == ApiParameterSource.FromBody && apiDesc.HttpMethod != HttpMethod.Get)
                 return "body";
+            else if (paramDesc.Source == ApiParameterSource.Unknown)
+                return "header";
             else
                 return "query";
         }
