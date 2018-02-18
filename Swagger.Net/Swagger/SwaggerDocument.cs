@@ -48,6 +48,9 @@ namespace Swagger.Net
 
         public string termsOfService;
 
+        [JsonProperty("x-swagger-net-version")]
+        public string swaggerNetVersion;
+
         public Contact contact;
 
         public License license;

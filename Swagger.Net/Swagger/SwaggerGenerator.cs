@@ -36,6 +36,7 @@ namespace Swagger.Net
             _apiVersions.TryGetValue(apiVersion, out info);
             if (info == null)
                 throw new UnknownApiVersion(apiVersion);
+            info.swaggerNetVersion = Assemb.Version;
 
             HashSet<string> operationNames = new HashSet<string>();
             var apiDescriptions = GetApiDescriptionsFor(apiVersion)
