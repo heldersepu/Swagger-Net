@@ -16,7 +16,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyFileVersion(Assemb.Version)]
 [assembly: AssemblyInformationalVersion(Assemb.Version)]
 
-internal struct Assemb
+public struct Assemb
 {
     public const string Title = @"Swagger.Net.Core";
     public const string Version = @"8.3.10.004";
