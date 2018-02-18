@@ -48,13 +48,14 @@ namespace Swagger.Net.Tests.Swagger
         {
             var swagger = GetContent<JObject>(TEMP_URI.DOCS);
 
-            var info = swagger["info"];
+            var info = JObject.FromObject(swagger["info"].ToObject<Info>());
             Assert.IsNotNull(info);
 
-            var expected = JObject.FromObject(new
+            var expected = JObject.FromObject(new Info
             {
                 version = "v1",
                 title = "Test API",
+                swaggerNetVersion = Assemb.Version
             });
             Assert.AreEqual(expected.ToString().ToUpper(), info.ToString().ToUpper());
         }
@@ -421,22 +422,23 @@ namespace Swagger.Net.Tests.Swagger
 
             var swagger = GetContent<JObject>(TEMP_URI.DOCS);
 
-            var info = swagger["info"];
+            var info = JObject.FromObject(swagger["info"].ToObject<Info>());
             Assert.IsNotNull(info);
 
-            var expected = JObject.FromObject(new
+            var expected = JObject.FromObject(new Info
             {
                 version = "v1",
                 title = "Test API",
                 description = "A test API",
                 termsOfService = "Test terms",
-                contact = new
+                swaggerNetVersion = Assemb.Version,
+                contact = new Contact
                 {
                     name = "Joe Test",
                     url = "http://tempuri.org/contact",
                     email = "joe.test@tempuri.org"
                 },
-                license = new
+                license = new License
                 {
                     name = "Test License",
                     url = "http://tempuri.org/license"
@@ -583,22 +585,23 @@ namespace Swagger.Net.Tests.Swagger
 
             // 2.0
             var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v2");
-            var info = swagger["info"];
-            var expected = JObject.FromObject(new
+            var info = JObject.FromObject(swagger["info"].ToObject<Info>());
+            var expected = JObject.FromObject(new Info
             {
                 version = "v2",
                 title = "Test API V2",
+                swaggerNetVersion = Assemb.Version
             });
             Assert.AreEqual(expected.ToString().ToUpper(), info.ToString().ToUpper());
 
             // 1.0
             swagger = GetContent<JObject>(TEMP_URI.DOCS);
-            info = swagger["info"];
-            expected = JObject.FromObject(new
+            info = JObject.FromObject(swagger["info"].ToObject<Info>());
+            expected = JObject.FromObject(new Info
             {
                 version = "v1",
                 title = "Test API",
-                swaggerNetVersion = .Assemb.Version
+                swaggerNetVersion = Assemb.Version
             });
             Assert.AreEqual(expected.ToString().ToUpper(), info.ToString().ToUpper());
         }
