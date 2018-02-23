@@ -28,7 +28,7 @@ namespace Swagger.Net
 
             _contractResolver = jsonSerializerSettings.ContractResolver ?? new DefaultContractResolver
             {
-                //IgnoreIsSpecifiedMembers = ignoreIsSpecifiedMembers
+                IgnoreIsSpecifiedMembers = options.IgnoreIsSpecifiedMembers
             };
             _workItems = new Dictionary<Type, WorkItem>();
             Definitions = new Dictionary<string, Schema>();
