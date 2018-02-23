@@ -17,8 +17,17 @@ namespace Swagger.Net.Tests.CoreUnitTests
             //mockContract.Setup(x => x.DictionaryKeyType).Returns((Type)null);
             var mockJsonSerializer = new Mock<JsonSerializerSettings>();
 
-            var schema = new SchemaRegistry(mockJsonSerializer.Object, null);
-            Assert.Throws<NullReferenceException>(() => schema.CreateDictionarySchema(mockContract.Object));
+            bool hasError = false;
+            try
+            {
+                var schema = new SchemaRegistry(mockJsonSerializer.Object, null);
+                schema.CreateDictionarySchema(mockContract.Object);
+            }
+            catch 
+            {
+                hasError = true;
+            }
+            Assert.IsTrue(hasError);
         }
 
         [Test]
