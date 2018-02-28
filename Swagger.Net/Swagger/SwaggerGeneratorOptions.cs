@@ -26,8 +26,8 @@ namespace Swagger.Net
             bool ignoreIsSpecifiedMembers = false,
             IEnumerable<IOperationFilter> operationFilters = null,
             IEnumerable<IDocumentFilter> documentFilters = null,
-            Func<IEnumerable<ApiDescription>, ApiDescription> conflictingActionsResolver = null
-            )
+            Func<IEnumerable<ApiDescription>, ApiDescription> conflictingActionsResolver = null,
+            Func<ApiDescription, string> operationIdResolver = null)
         {
             VersionSupportResolver = versionSupportResolver;
             Schemes = schemes;
@@ -48,6 +48,7 @@ namespace Swagger.Net
             OperationFilters = operationFilters ?? new List<IOperationFilter>();
             DocumentFilters = documentFilters ?? new List<IDocumentFilter>();
             ConflictingActionsResolver = conflictingActionsResolver ?? DefaultConflictingActionsResolver;
+            OperationIdResolver = operationIdResolver;
         }
 
         public Func<ApiDescription, string, bool> VersionSupportResolver { get; private set; }
@@ -81,6 +82,8 @@ namespace Swagger.Net
         public bool ApplyFiltersToAllSchemas { get; private set; }
 
         public bool IgnoreIsSpecifiedMembers { get; private set; }
+
+        public Func<ApiDescription, string> OperationIdResolver {get; }
 
         public IEnumerable<IOperationFilter> OperationFilters { get; private set; }
 
