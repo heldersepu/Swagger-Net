@@ -42,6 +42,7 @@ namespace Swagger.Net.Application
         private Func<IEnumerable<ApiDescription>, ApiDescription> _conflictingActionsResolver;
         private Func<HttpRequestMessage, string> _rootUrlResolver;
         private ApiKeySchemeBuilder _apiKeySchemeBuilder = null;
+        private Func<ApiDescription, string> _operationIdResolver = null;
 
         private Func<ISwaggerProvider, ISwaggerProvider> _customProviderFactory;
 
@@ -275,6 +276,11 @@ namespace Swagger.Net.Application
             _conflictingActionsResolver = conflictingActionsResolver;
         }
 
+        public void OperationIdResolver(Func<ApiDescription, string> operationIdResolver)
+        {
+            _operationIdResolver = operationIdResolver;
+        }
+
         public void RootUrl(Func<HttpRequestMessage, string> rootUrlResolver)
         {
             _rootUrlResolver = rootUrlResolver;
@@ -328,7 +334,8 @@ namespace Swagger.Net.Application
                 ignoreIsSpecifiedMembers: _ignoreIsSpecifiedMembers,
                 operationFilters: operationFilters,
                 documentFilters: _documentFilters.Select(factory => factory()).ToList(),
-                conflictingActionsResolver: _conflictingActionsResolver
+                conflictingActionsResolver: _conflictingActionsResolver,
+                operationIdResolver: _operationIdResolver
             );
 
             var defaultProvider = new SwaggerGenerator(

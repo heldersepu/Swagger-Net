@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Text.RegularExpressions;
 using System.Web.Http;
 
 namespace Swagger.Net.Tests.Swagger
@@ -604,6 +605,27 @@ namespace Swagger.Net.Tests.Swagger
                 swaggerNetVersion = Assemb.Version
             });
             Assert.AreEqual(expected.ToString().ToUpper(), info.ToString().ToUpper());
+        }
+
+        [Test]
+        public void It_exposes_config_to_override_operation_id_generation()
+        {
+            SetUpDefaultRouteFor<ProductsController>();
+            SetUpHandler(c =>
+            {
+                c.OperationIdResolver(d =>
+                {
+                    var routeClean = Regex.Replace(d.Route.RouteTemplate, "[\\W]", "_");
+                    return $"{d.HttpMethod.ToString()}_{routeClean}";
+                });
+            });
+
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
+            var getProductsOperationId = swagger["paths"]["/products"]["get"]["operationId"];
+            var postProductOperationId = swagger["paths"]["/products"]["post"]["operationId"];
+
+            Assert.AreEqual("GET_products__id_", getProductsOperationId.Value<string>());
+            Assert.AreEqual("POST_products__id_", postProductOperationId.Value<string>());
         }
 
         [Test]

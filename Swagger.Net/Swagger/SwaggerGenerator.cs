@@ -50,7 +50,7 @@ namespace Swagger.Net
 
             var tags = apiDescriptions
                 .OrderBy(_options.GroupingKeySelector, _options.GroupingKeyComparer)
-                .Select(a => new Tag {description = a.Documentation, name = _options.GroupingKeySelector(a) })
+                .Select(a => new Tag { description = a.Documentation, name = _options.GroupingKeySelector(a) })
                 .Distinct(new TagNameEqualityComparer())
                 .ToList();
 
@@ -171,7 +171,7 @@ namespace Swagger.Net
             var operation = new Operation
             {
                 tags = new[] { _options.GroupingKeySelector(apiDesc) },
-                operationId = this.GetUniqueFriendlyId(apiDesc, operationNames),
+                operationId = this.GetUniqueOperationId(apiDesc, operationNames),
                 description = description?.Description,
                 summary = description?.Summary,
                 produces = apiDesc.Produces().ToList(),
@@ -189,23 +189,32 @@ namespace Swagger.Net
             return operation;
         }
 
-        public string GetUniqueFriendlyId(ApiDescription apiDesc, HashSet<string> operationNames)
+        public string GetUniqueOperationId(ApiDescription apiDesc, HashSet<string> operationNames)
         {
-            string friendlyId = apiDesc.FriendlyId();
-
-            if (operationNames.Contains(friendlyId))
+            string operationId;
+            if (_options.OperationIdResolver != null)
             {
-                friendlyId = apiDesc.FriendlyId2();
+                operationId = _options.OperationIdResolver(apiDesc);
+            }
+            else
+            {
+                // default behaviour
+                operationId = apiDesc.FriendlyId();
+                if (operationNames.Contains(operationId))
+                {
+                    operationId = apiDesc.FriendlyId2();
+                }
+
+                var nextFriendlyIdPostfix = 1;
+                while (operationNames.Contains(operationId))
+                {
+                    operationId = $"{apiDesc.FriendlyId2()}_{nextFriendlyIdPostfix}";
+                    nextFriendlyIdPostfix++;
+                }
             }
 
-            int nextFriendlyIdPostfix = 1;
-            while (operationNames.Contains(friendlyId))
-            {
-                friendlyId = string.Format("{0}_{1}", apiDesc.FriendlyId2(), nextFriendlyIdPostfix);
-                nextFriendlyIdPostfix++;
-            }
-            operationNames.Add(friendlyId);
-            return friendlyId;
+            operationNames.Add(operationId);
+            return operationId;
         }
 
         private string GetParameterLocation(ApiDescription apiDesc, ApiParameterDescription paramDesc)

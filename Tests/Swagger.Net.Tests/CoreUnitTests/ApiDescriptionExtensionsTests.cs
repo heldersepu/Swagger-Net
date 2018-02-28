@@ -47,7 +47,7 @@ namespace Swagger.Net.Tests.CoreUnitTests
 
             var operationNames = new HashSet<string> { friendlyId, friendlyId2 };
             var swaggerGenerator = new SwaggerGenerator(null, null, null);
-            string uniqueFriendlyId = swaggerGenerator.GetUniqueFriendlyId(apiDesc, operationNames);
+            string uniqueFriendlyId = swaggerGenerator.GetUniqueOperationId(apiDesc, operationNames);
             Assert.AreNotEqual(friendlyId2, uniqueFriendlyId);
         }
     }
