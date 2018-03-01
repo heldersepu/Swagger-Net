@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
+using System.Collections.Generic;
 using System.Web.Http.Description;
 
 namespace Swagger.Net.Annotations
@@ -22,9 +23,12 @@ namespace Swagger.Net.Annotations
                 operation.responses[statusCode] = new Response
                 {
                     description = attr.Description ?? InferDescriptionFrom(statusCode),
-                    schema = (attr.Type != null) ? schemaRegistry.GetOrRegister(attr.Type, attr.TypeName) : null,
-                    examples = attr.Examples
+                    schema = (attr.Type != null) ? schemaRegistry.GetOrRegister(attr.Type, attr.TypeName) : null
                 };
+                if (attr.MediaType != null && attr.Examples != null)
+                {
+                    operation.responses[statusCode].examples = new Dictionary<string, object> { { attr.MediaType, attr.Examples } };
+                }
             }
 
             var mediaTypes = responseAttributes

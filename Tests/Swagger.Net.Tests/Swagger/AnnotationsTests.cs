@@ -66,7 +66,7 @@ namespace Swagger.Net.Tests.Swagger
                                 type = "integer",
                                 format = "int32"
                             },
-                            examples = 123
+                            examples = new {text = 123}
                         }
                     },
                     {

@@ -1,12 +1,11 @@
 ﻿using Swagger.Net.Annotations;
 using Swagger.Net.Dummy.SwaggerExtensions;
+using Swagger.Net.Swagger.Annotations;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using Swagger.Net.Swagger.Annotations;
 
 namespace Swagger.Net.Dummy.Controllers
 {
@@ -14,7 +13,7 @@ namespace Swagger.Net.Dummy.Controllers
     public class SwaggerAnnotatedController : ApiController
     {
         [SwaggerResponseRemoveDefaults]
-        [SwaggerResponse(HttpStatusCode.Created, Type = typeof(int), Examples = 123)]
+        [SwaggerResponse(HttpStatusCode.Created, Type = typeof(int), MediaType = "text", Examples = 123)]
         [SwaggerResponse(HttpStatusCode.BadRequest, "Invalid message", typeof(HttpError))]
         public int Create(Message message)
         {
