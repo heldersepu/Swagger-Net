@@ -131,15 +131,15 @@ namespace Swagger.Net.Tests.Swagger
                         {
                             type = "integer",
                             format = "int32",
-                            maximum = 12,
-                            minimum = 1,
+                            maximum = 12.0,
+                            minimum = 1.0,
                         },
                         ExpYear = new
                         {
                             type = "integer",
                             format = "int32",
-                            maximum = 99,
-                            minimum = 14,
+                            maximum = 99.0,
+                            minimum = 14.0,
                         },
                         Note = new
                         {
@@ -188,8 +188,8 @@ namespace Swagger.Net.Tests.Swagger
                             example = "6",
                             type = "integer",
                             format = "int32",
-                            maximum = 12,
-                            minimum = 1,
+                            maximum = 12.0,
+                            minimum = 1.0,
                         },
                         ExpYear = new
                         {
@@ -197,8 +197,8 @@ namespace Swagger.Net.Tests.Swagger
                             example = "96",
                             type = "integer",
                             format = "int32",
-                            maximum = 99,
-                            minimum = 14,
+                            maximum = 99.0,
+                            minimum = 14.0,
                         },
                         Note = new
                         {
@@ -374,8 +374,8 @@ namespace Swagger.Net.Tests.Swagger
                 required = true,
                 type = "integer",
                 format = "int32",
-                maximum = 2,
-                minimum = 1
+                maximum = 2.0,
+                minimum = 1.0
             });
             Assert.AreEqual(expected.ToString(), parameter.ToString());
         }
@@ -942,7 +942,9 @@ namespace Swagger.Net.Tests.Swagger
                                 Id = new
                                 {
                                     type = "number",
-                                    format = "double"
+                                    format = "double",
+                                    maximum = 9.9,
+                                    minimum = 1.1
                                 },
                                 Name = new
                                 {

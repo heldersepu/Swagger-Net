@@ -268,11 +268,11 @@ namespace Swagger.Net
 
         public int? multipleOf;
 
-        public int? maximum;
+        public double? maximum;
 
         public bool? exclusiveMaximum;
 
-        public int? minimum;
+        public double? minimum;
 
         public bool? exclusiveMinimum;
 

@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json.Serialization;
 using Swagger.Net.Swagger.Annotations;
-using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -25,10 +24,10 @@ namespace Swagger.Net
         {
             if (attribute is RangeAttribute range)
             {
-                if (Int32.TryParse(range.Maximum.ToString(), out int maximum))
+                if (double.TryParse(range.Maximum.ToString(), out double maximum))
                     schema.maximum = maximum;
 
-                if (Int32.TryParse(range.Minimum.ToString(), out int minimum))
+                if (double.TryParse(range.Minimum.ToString(), out double minimum))
                     schema.minimum = minimum;
             }
         }
