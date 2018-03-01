@@ -14,7 +14,7 @@ namespace Swagger.Net.Dummy.Controllers
     public class SwaggerAnnotatedController : ApiController
     {
         [SwaggerResponseRemoveDefaults]
-        [SwaggerResponse(HttpStatusCode.Created, Type = typeof(int))]
+        [SwaggerResponse(HttpStatusCode.Created, Type = typeof(int), Examples = 123)]
         [SwaggerResponse(HttpStatusCode.BadRequest, "Invalid message", typeof(HttpError))]
         public int Create(Message message)
         {

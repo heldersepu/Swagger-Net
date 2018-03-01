@@ -11,13 +11,14 @@ namespace Swagger.Net.Annotations
             StatusCode = (int)statusCode;
         }
 
-        public SwaggerResponseAttribute(HttpStatusCode statusCode, string description = null, Type type = null, string typeName = null, string mediaType = null)
+        public SwaggerResponseAttribute(HttpStatusCode statusCode, string description = null, Type type = null, string typeName = null, string mediaType = null, object examples = null)
             : this(statusCode)
         {
             Description = description;
             Type = type;
             TypeName = typeName;
             MediaType = mediaType;
+            Examples = examples;
         }
 
         public SwaggerResponseAttribute(int statusCode)
@@ -25,13 +26,14 @@ namespace Swagger.Net.Annotations
             StatusCode = statusCode;
         }
 
-        public SwaggerResponseAttribute(int statusCode, string description = null, Type type = null, string typeName = null, string mediaType = null)
+        public SwaggerResponseAttribute(int statusCode, string description = null, Type type = null, string typeName = null, string mediaType = null, object examples = null)
             : this(statusCode)
         {
             Description = description;
             Type = type;
             TypeName = typeName;
             MediaType = mediaType;
+            Examples = examples;
         }
 
         public int StatusCode { get; private set; }
@@ -43,5 +45,7 @@ namespace Swagger.Net.Annotations
         public string TypeName { get; set; }
 
         public string MediaType { get; set; }
+
+        public object Examples { get; set; }
     }
 }
