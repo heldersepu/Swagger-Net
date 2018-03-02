@@ -11,7 +11,7 @@ namespace Swagger.Net.Dummy.Controllers
             throw new NotImplementedException();
         }
 
-        [Obsolete]
+        [Obsolete("OBSOLETE_DELETE")]
         public void Delete(int id)
         {
             throw new NotImplementedException();

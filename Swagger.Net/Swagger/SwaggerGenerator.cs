@@ -178,8 +178,19 @@ namespace Swagger.Net
                 consumes = apiDesc.Consumes().ToList(),
                 parameters = parameters.Any() ? parameters : null, // parameters can be null but not empty
                 responses = responses,
-                deprecated = apiDesc.IsObsolete() ? true : (bool?)null
             };
+            if (apiDesc.IsObsolete())
+            {
+                operation.deprecated = true;
+                var message = apiDesc.ObsoleteMessage();
+                if (!string.IsNullOrEmpty(message))
+                {
+                    if (operation.summary == null)
+                        operation.summary = message;
+                    else if (operation.description == null)
+                        operation.description = message;
+                }
+            }
 
             foreach (var filter in _options.OperationFilters)
             {

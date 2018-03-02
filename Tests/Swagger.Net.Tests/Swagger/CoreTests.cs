@@ -402,6 +402,7 @@ namespace Swagger.Net.Tests.Swagger
 
             Assert.IsNull(putOp["deprecated"]);
             Assert.IsTrue((bool)deleteOp["deprecated"]);
+            Assert.AreEqual("OBSOLETE_DELETE", deleteOp["summary"].ToString());
         }
 
         [Test]

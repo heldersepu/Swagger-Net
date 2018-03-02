@@ -93,6 +93,11 @@ namespace Swagger.Net
             return apiDescription.ActionDescriptor.GetCustomAttributes<ObsoleteAttribute>().Any();
         }
 
+        public static string ObsoleteMessage(this ApiDescription apiDescription)
+        {
+            return apiDescription.ActionDescriptor.GetCustomAttributes<ObsoleteAttribute>().FirstOrDefault()?.Message;
+        }
+
         public static IEnumerable<TAttribute> GetControllerAndActionAttributes<TAttribute>(this ApiDescription apiDesc)
             where TAttribute : class
         {
