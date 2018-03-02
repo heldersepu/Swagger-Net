@@ -52,15 +52,29 @@ namespace Swagger.Net
         public static Schema WithValidationProperties(this Schema schema, JsonProperty jsonProperty)
         {
             var propInfo = jsonProperty.PropertyInfo();
-            if (propInfo == null)
+            var fieldInfo = jsonProperty.FieldInfo();
+            if (propInfo == null && fieldInfo == null)
                 return schema;
 
-            foreach (var attribute in propInfo.GetCustomAttributes(false))
+            if (propInfo != null)
             {
-                schema.AddDefault(attribute);
-                schema.AddPattern(attribute);
-                schema.AddRange(attribute);
-                schema.AddLength(attribute);
+                foreach (var attribute in propInfo.GetCustomAttributes(false))
+                {
+                    schema.AddDefault(attribute);
+                    schema.AddPattern(attribute);
+                    schema.AddRange(attribute);
+                    schema.AddLength(attribute);
+                }
+            }
+            if (fieldInfo != null)
+            {
+                foreach (var attribute in fieldInfo.GetCustomAttributes(false))
+                {
+                    schema.AddDefault(attribute);
+                    schema.AddPattern(attribute);
+                    schema.AddRange(attribute);
+                    schema.AddLength(attribute);
+                }
             }
 
             if (!jsonProperty.Writable)

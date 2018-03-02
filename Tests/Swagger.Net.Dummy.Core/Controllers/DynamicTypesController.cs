@@ -46,7 +46,7 @@ namespace Swagger.Net.Dummy.Controllers
     public class DynamicObjectSubType : DynamicObject
     {
         [Range(1.1, 9.9)]
-        public double Id { get; set; }
+        public double Id;
 
         public string Name { get; set; }
     }
