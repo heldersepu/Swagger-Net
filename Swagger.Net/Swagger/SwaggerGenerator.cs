@@ -69,7 +69,11 @@ namespace Swagger.Net
                     var model = new Schema();
                     filter.Apply(model, c.context);
                     if (!string.IsNullOrEmpty(model.description))
-                        tags.Where(t => t.name.Equals(c.name)).First().description = model.description;
+                    {
+                        var ftags = tags.Where(t => t.name.Equals(c.name));
+                        if (ftags != null && ftags.Count() > 0)
+                            ftags.First().description = model.description;
+                    }
                 }
             }
 

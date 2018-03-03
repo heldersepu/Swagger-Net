@@ -508,6 +508,31 @@ namespace Swagger.Net.Tests.Swagger
         }
 
         [Test]
+        public void It_groups_actions_by_HttpMethod()
+        {
+            SetUpDefaultRoutesFor(new[] {
+                typeof(BlobController),
+                typeof(ProductsController),
+                typeof(CustomersController),
+                typeof(XmlAnnotatedController),
+                typeof(AnnotatedTypesController),
+                typeof(SwaggerAnnotatedController)
+            });
+            SetUpHandler(c => {
+                c.GroupActionsBy(apiDesc => apiDesc.HttpMethod.ToString());
+                c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+            });
+
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
+            var tags = swagger["tags"];
+            Assert.IsNotNull(tags);
+            var tag_names = tags.Select(x => x["name"].ToString()).ToArray();
+            Assert.IsTrue(tag_names.Contains("GET"));
+            Assert.IsTrue(tag_names.Contains("PUT"));
+            Assert.IsTrue(tag_names.Contains("POST"));
+        }
+
+        [Test]
         public void It_sorts_controllers_alphabetically_as_default()
         {
             SetUpDefaultRoutesFor(new[] { typeof(ProductsController), typeof(CustomersController) });
