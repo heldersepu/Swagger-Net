@@ -153,7 +153,7 @@
             filter: swaggerNetConfig.filter,
             showExtensions: swaggerNetConfig.showExtensions,
             validatorUrl: swaggerNetConfig.validatorUrl,
-            oauth2RedirectUrl: window.location.href.replace('index', 'oauth2-redirect-html').split('#')[0],
+            oauth2RedirectUrl: (window.location.origin + window.location.pathname).replace('/index', '/oauth2-redirect-html').split('#')[0],
             onComplete: function (swaggerApi, swaggerUi) {
                 window.swaggerApi = swaggerApi;
                 swaggerNetConfig.customScripts.forEach(function (script) {
