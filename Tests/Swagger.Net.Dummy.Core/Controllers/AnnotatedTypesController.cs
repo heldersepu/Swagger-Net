@@ -43,5 +43,8 @@ namespace Swagger.Net.Dummy.Controllers
         [MinLength(2)]
         [MaxLength(100)]
         public string Detail { get; set; }
+
+        [Required, Range(1.1, 32.9)]
+        public double Tax { get; set; }
     }
 }
