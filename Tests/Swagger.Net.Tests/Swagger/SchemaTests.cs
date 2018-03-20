@@ -114,7 +114,7 @@ namespace Swagger.Net.Tests.Swagger
             {
                 PaymentWithMetadata = new
                 {
-                    required = new string[] { "Amount", "CardNumber", "ExpMonth", "ExpYear" },
+                    required = new[] { "Amount", "CardNumber", "ExpMonth", "ExpYear" },
                     properties = new
                     {
                         Amount = new
@@ -131,15 +131,15 @@ namespace Swagger.Net.Tests.Swagger
                         {
                             type = "integer",
                             format = "int32",
-                            maximum = 12.0,
-                            minimum = 1.0,
+                            maximum = 12,
+                            minimum = 1,
                         },
                         ExpYear = new
                         {
                             type = "integer",
                             format = "int32",
-                            maximum = 99.0,
-                            minimum = 14.0,
+                            maximum = 99,
+                            minimum = 14,
                         },
                         Note = new
                         {
@@ -169,7 +169,7 @@ namespace Swagger.Net.Tests.Swagger
             {
                 Payment = new
                 {
-                    required = new string[] { "Amount", "CardNumber", "ExpMonth", "ExpYear" },
+                    required = new[] { "Amount", "CardNumber", "ExpMonth", "ExpYear", "Tax" },
                     properties = new
                     {
                         Amount = new
@@ -188,8 +188,8 @@ namespace Swagger.Net.Tests.Swagger
                             example = "6",
                             type = "integer",
                             format = "int32",
-                            maximum = 12.0,
-                            minimum = 1.0,
+                            maximum = 12,
+                            minimum = 1,
                         },
                         ExpYear = new
                         {
@@ -197,8 +197,8 @@ namespace Swagger.Net.Tests.Swagger
                             example = "96",
                             type = "integer",
                             format = "int32",
-                            maximum = 99.0,
-                            minimum = 14.0,
+                            maximum = 99,
+                            minimum = 14,
                         },
                         Note = new
                         {
@@ -217,6 +217,13 @@ namespace Swagger.Net.Tests.Swagger
                             type = "string",
                             maxLength = 100,
                             minLength = 2,
+                        },
+                        Tax = new
+                        {
+                            type = "number",
+                            format = "double",
+                            maximum = 32.9,
+                            minimum = 1.1,
                         }
                     },
                     xml = JObject.Parse("{ \"name\": \"Payment\" }"),
@@ -374,8 +381,8 @@ namespace Swagger.Net.Tests.Swagger
                 required = true,
                 type = "integer",
                 format = "int32",
-                maximum = 2.0,
-                minimum = 1.0
+                maximum = 2,
+                minimum = 1
             });
             Assert.AreEqual(expected.ToString(), parameter.ToString());
         }
