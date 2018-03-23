@@ -239,7 +239,14 @@ namespace Swagger.Net.Application
         public void IncludeXmlComments(string filePath)
         {
             if (File.Exists(filePath))
-                _xmlDocFactories.Add(() => new XPathDocument(filePath));
+            {
+                try
+                {
+                    var xPath = new XPathDocument(filePath);
+                    _xmlDocFactories.Add(() => xPath);
+                }
+                catch {}
+            }
             else
                 throw new FileNotFoundException("XML Comment file not found!");
         }
@@ -258,7 +265,12 @@ namespace Swagger.Net.Application
             {
                 foreach (var name in assembly.GetManifestResourceNames().Where(x => x.ToUpper().EndsWith(".XML")))
                 {
-                    IncludeXmlComments(() => new XPathDocument(assembly.GetManifestResourceStream(name)));
+                    try
+                    {
+                        var xPath = new XPathDocument(assembly.GetManifestResourceStream(name));
+                        IncludeXmlComments(() => xPath);
+                    }
+                    catch {}
                 }
             }
 
