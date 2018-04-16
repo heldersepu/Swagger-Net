@@ -42,9 +42,7 @@ namespace Swagger.Net.Application
                 { "%(OAuth2Realm)", "" },
                 { "%(OAuth2AppName)", "" },
                 { "%(OAuth2ScopeSeparator)", " " },
-                { "%(OAuth2AdditionalQueryStringParams)", "{}" },
-                { "%(ApiKeyName)", "api_key" },
-                { "%(ApiKeyIn)", "query" }
+                { "%(OAuth2AdditionalQueryStringParams)", "{}" }
             };
             _rootUrlResolver = rootUrlResolver;
 
@@ -184,11 +182,6 @@ namespace Swagger.Net.Application
 
             if (additionalQueryStringParams != null)
                 _templateParams["%(OAuth2AdditionalQueryStringParams)"] = JsonConvert.SerializeObject(additionalQueryStringParams);
-        }
-
-        public void ApiKeySupport(string name, string apiKeyIn) {
-            _templateParams["%(ApiKeyName)"] = name;
-            _templateParams["%(ApiKeyIn)"] = apiKeyIn;
         }
 
         internal IAssetProvider GetSwaggerUiProvider()

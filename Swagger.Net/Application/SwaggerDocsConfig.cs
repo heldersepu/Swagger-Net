@@ -41,7 +41,6 @@ namespace Swagger.Net.Application
         private readonly IList<Func<XPathDocument>> _xmlDocFactories;
         private Func<IEnumerable<ApiDescription>, ApiDescription> _conflictingActionsResolver;
         private Func<HttpRequestMessage, string> _rootUrlResolver;
-        private ApiKeySchemeBuilder _apiKeySchemeBuilder = null;
         private Func<ApiDescription, string> _operationIdResolver = null;
 
         private Func<ISwaggerProvider, ISwaggerProvider> _customProviderFactory;
@@ -106,12 +105,10 @@ namespace Swagger.Net.Application
         public ApiKeySchemeBuilder ApiKey(string name, string @in, string description, Type type = null)
         {
             if (type == null) type = typeof(AuthorizeAttribute);
-            _apiKeySchemeBuilder = new ApiKeySchemeBuilder(name, @in, description, type);
-            _securitySchemeBuilders[name] = _apiKeySchemeBuilder;
-            return _apiKeySchemeBuilder;
+            var apiKeyScheme = new ApiKeySchemeBuilder(name, @in, description, type);
+            _securitySchemeBuilders[name] = apiKeyScheme;
+            return apiKeyScheme;
         }
-
-        internal ApiKeySchemeBuilder ApiKeyScheme { get { return _apiKeySchemeBuilder; } }
 
         public OAuth2SchemeBuilder OAuth2(string name)
         {
@@ -322,9 +319,10 @@ namespace Swagger.Net.Application
                 operationFilters.Insert(0, new ApplyXmlActionComments(xmlDoc));
             }
 
-            if (ApiKeyScheme != null)
+            foreach (var s in _securitySchemeBuilders.Where(x => x.Value.GetType() == typeof(ApiKeySchemeBuilder)))
             {
-                operationFilters.Add(new ApplySwaggerOperationApiKey(ApiKeyScheme.name, ApiKeyScheme.type));
+                var apiKeySch = (ApiKeySchemeBuilder)s.Value;
+                operationFilters.Add(new ApplySwaggerOperationApiKey(apiKeySch.name, apiKeySch.type));
             }
 
             var options = new SwaggerGeneratorOptions(

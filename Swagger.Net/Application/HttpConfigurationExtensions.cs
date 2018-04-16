@@ -70,17 +70,8 @@ namespace Swagger.Net.Application
 
         public void EnableSwaggerUi(string routeTemplate, Action<SwaggerUiConfig> configure = null)
         {
-            SecurityScheme secScheme = null;
             var config = new SwaggerUiConfig(_config.DiscoveryPaths(_route), _config.GetRootUrl);
-            if (configure != null)
-            {
-                if (_config.ApiKeyScheme != null)
-                {
-                    secScheme = _config.ApiKeyScheme.Build();
-                    config.ApiKeySupport(secScheme.name, secScheme.@in);
-                }
-                configure(config);
-            }
+            configure?.Invoke(config);
 
             _httpConfig.Routes.MapHttpRoute(
                 name: "swagger_ui" + routeTemplate,
