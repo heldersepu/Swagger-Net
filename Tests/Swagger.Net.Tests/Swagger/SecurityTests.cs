@@ -77,6 +77,35 @@ namespace Swagger.Net.Tests.SwaggerFilters
         }
 
         [Test]
+        public void It_exposes_config_to_define_an_api_key_and_basic_auth_schemes()
+        {
+            SetUpHandler(c =>
+            {
+                c.ApiKey("apiKey", "header", "API Key Auth");
+                c.BasicAuth("BasicAuth");
+            });
+
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
+            var securityDefinitions = swagger["securityDefinitions"];
+            var expected = JObject.FromObject(new
+            {
+                apiKey = new
+                {
+                    type = "apiKey",
+                    description = "API Key Auth",
+                    name = "apiKey",
+                    @in = "header",
+                },
+                BasicAuth = new
+                {
+                    type = "basic"
+                }
+            });
+
+            Assert.AreEqual(expected.ToString(), securityDefinitions.ToString());
+        }
+
+        [Test]
         public void It_exposes_config_to_define_an_api_key_auth_scheme_for_the_api_dups()
         {
             SetUpHandler(c =>
