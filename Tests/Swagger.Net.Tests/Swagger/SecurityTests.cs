@@ -50,20 +50,28 @@ namespace Swagger.Net.Tests.SwaggerFilters
             SetUpHandler(c =>
                 {
                     c.ApiKey("apiKey", "header", "API Key Authentication");
+                    c.ApiKey("appId", "header", "APP ID Authentication");
                 });
 
             var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var securityDefinitions = swagger["securityDefinitions"];
             var expected = JObject.FromObject(new
+            {
+                apiKey = new
                 {
-                    apiKey = new
-                    {
-                        type = "apiKey",
-                        description = "API Key Authentication",
-                        name = "apiKey",
-                        @in = "header",
-                    }
-                });
+                    type = "apiKey",
+                    description = "API Key Authentication",
+                    name = "apiKey",
+                    @in = "header",
+                },
+                appId = new
+                {
+                    type = "apiKey",
+                    description = "APP ID Authentication",
+                    name = "appId",
+                    @in = "header",
+                }
+            });
 
             Assert.AreEqual(expected.ToString(), securityDefinitions.ToString());
         }
