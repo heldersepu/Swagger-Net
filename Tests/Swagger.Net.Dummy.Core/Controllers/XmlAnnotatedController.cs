@@ -39,7 +39,7 @@ namespace Swagger.Net.Dummy.Controllers
         /// <param name="keywords">List of search keywords</param>
         /// <returns></returns>
         [HttpGet]
-        public IEnumerable<Account> Search(IEnumerable<string> keywords)
+        public IEnumerable<Account> Search([FromUri] IEnumerable<string> keywords)
         {
             throw new NotImplementedException();
         }

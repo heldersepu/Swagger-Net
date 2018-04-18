@@ -6,7 +6,7 @@ namespace Swagger.Net.Dummy.Controllers
 {
     public class TwoDimensionalArraysController : ApiController
     {
-        public int Get(HashSet<string> matrix)
+        public int Get([FromUri] HashSet<string> matrix)
         {
             throw new NotImplementedException();
         }
