@@ -236,7 +236,7 @@ namespace Swagger.Net
         {
             if (apiDesc.RelativePathSansQueryString().Contains("{" + paramDesc.Name + "}"))
                 return "path";
-            else if (paramDesc.Source == ApiParameterSource.FromBody && apiDesc.HttpMethod != HttpMethod.Get)
+            else if (paramDesc.Source == ApiParameterSource.FromBody)
                 return "body";
             else if (paramDesc.Source == ApiParameterSource.Unknown)
                 return "header";
