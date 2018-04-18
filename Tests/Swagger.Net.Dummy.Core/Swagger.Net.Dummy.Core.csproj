@@ -61,7 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\CachingSwaggerProvider.cs" />
-    <Compile Include="Controllers\FromBodyParamsContoller.cs" />
+    <Compile Include="Controllers\FromHeaderParamsController.cs" />
+    <Compile Include="Controllers\FromBodyParamsController.cs" />
     <Compile Include="Controllers\NestedEnumController.cs" />
     <Compile Include="Controllers\BlobController.cs" />
     <Compile Include="Controllers\SerializableController.cs" />
@@ -73,7 +74,7 @@
     <Compile Include="Controllers\DataContractAnnotatedTypesController.cs" />
     <Compile Include="Controllers\FileDownloadController.cs" />
     <Compile Include="Controllers\FileUploadController.cs" />
-    <Compile Include="Controllers\FromUriParamsContoller.cs" />
+    <Compile Include="Controllers\FromUriParamsController.cs" />
     <Compile Include="Controllers\ConflictingActionsController.cs" />
     <Compile Include="Controllers\IndexerTypesController.cs" />
     <Compile Include="Controllers\MultipleApiVersionsController.cs" />
