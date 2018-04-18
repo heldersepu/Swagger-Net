@@ -1,22 +1,22 @@
 ﻿using System.Reflection;
 using System.Runtime.InteropServices;
 
-[assembly: AssemblyTitle(Assemb.Title)]
+[assembly: AssemblyTitle(SwaggerAssemb.Title)]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct(Assemb.Title)]
+[assembly: AssemblyProduct(SwaggerAssemb.Title)]
 [assembly: AssemblyCopyright("CopyLeft ©  2018")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
 [assembly: Guid("6a5ef762-7172-4bfb-98d2-076c3987fb7c")]
 
-[assembly: AssemblyVersion(Assemb.Version)]
-[assembly: AssemblyFileVersion(Assemb.Version)]
-[assembly: AssemblyInformationalVersion(Assemb.Version)]
+[assembly: AssemblyVersion(SwaggerAssemb.Version)]
+[assembly: AssemblyFileVersion(SwaggerAssemb.Version)]
+[assembly: AssemblyInformationalVersion(SwaggerAssemb.Version)]
 
-public struct Assemb
+public struct SwaggerAssemb
 {
     public const string Title = @"Swagger.Net.Core";
     public const string Version = @"8.3.13.405";

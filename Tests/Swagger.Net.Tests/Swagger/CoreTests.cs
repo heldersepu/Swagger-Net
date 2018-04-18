@@ -56,7 +56,7 @@ namespace Swagger.Net.Tests.Swagger
             {
                 version = "v1",
                 title = "Test API",
-                swaggerNetVersion = Assemb.Version
+                swaggerNetVersion = SwaggerAssemb.Version
             });
             Assert.AreEqual(expected.ToString().ToUpper(), info.ToString().ToUpper());
         }
@@ -433,7 +433,7 @@ namespace Swagger.Net.Tests.Swagger
                 title = "Test API",
                 description = "A test API",
                 termsOfService = "Test terms",
-                swaggerNetVersion = Assemb.Version,
+                swaggerNetVersion = SwaggerAssemb.Version,
                 contact = new Contact
                 {
                     name = "Joe Test",
@@ -617,7 +617,7 @@ namespace Swagger.Net.Tests.Swagger
             {
                 version = "v2",
                 title = "Test API V2",
-                swaggerNetVersion = Assemb.Version
+                swaggerNetVersion = SwaggerAssemb.Version
             });
             Assert.AreEqual(expected.ToString().ToUpper(), info.ToString().ToUpper());
 
@@ -628,7 +628,7 @@ namespace Swagger.Net.Tests.Swagger
             {
                 version = "v1",
                 title = "Test API",
-                swaggerNetVersion = Assemb.Version
+                swaggerNetVersion = SwaggerAssemb.Version
             });
             Assert.AreEqual(expected.ToString().ToUpper(), info.ToString().ToUpper());
         }
