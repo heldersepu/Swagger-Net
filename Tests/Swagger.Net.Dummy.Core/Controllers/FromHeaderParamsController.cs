@@ -9,5 +9,11 @@ namespace Swagger.Net.Dummy.Controllers
         {
             return test;
         }
+
+        [HttpPost]
+        public string Post([FromHeader(Name = "abctest")] string test)
+        {
+            return test;
+        }
     }
 }
