@@ -388,6 +388,29 @@ namespace Swagger.Net.Tests.Swagger
         }
 
         [Test]
+        public void It_exposes_correct_default_string_for_enum()
+        {
+            SetUpCustomRouteFor<PrimitiveTypesController>("PrimitiveTypes/{action}");
+            SetUpHandler(c => { c.DescribeAllEnumsAsStrings(); });
+
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
+            var path = swagger["paths"]["/PrimitiveTypes/EchoEnumDef"];
+            var param = path["post"]["parameters"][0];
+            Assert.AreEqual("RedFish", param["default"].ToString());
+        }
+
+        [Test]
+        public void It_exposes_correct_default_int_for_enum()
+        {
+            SetUpCustomRouteFor<PrimitiveTypesController>("PrimitiveTypes/{action}");
+
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
+            var path = swagger["paths"]["/PrimitiveTypes/EchoEnumDef"];
+            var param = path["post"]["parameters"][0];
+            Assert.AreEqual("2", param["default"].ToString());
+        }
+
+        [Test]
         public void It_exposes_config_to_post_modify_schemas_for_mapped_types()
         {
             SetUpCustomRouteFor<PrimitiveTypesController>("PrimitiveTypes/{action}");

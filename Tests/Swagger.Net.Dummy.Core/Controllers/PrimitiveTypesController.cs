@@ -91,6 +91,11 @@ namespace Swagger.Net.Dummy.Controllers
             return value;
         }
 
+        public PrimitiveEnum EchoEnumDef(PrimitiveEnum value = PrimitiveEnum.RedFish)
+        {
+            return value;
+        }
+
         public char EchoChar(char value)
         {
             return value;
