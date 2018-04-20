@@ -272,7 +272,10 @@ namespace Swagger.Net
                     parameter.PopulateFrom(schema);
 
                 if (paramDesc.ParameterDescriptor.DefaultValue != null)
-                    parameter.@default = paramDesc.ParameterDescriptor.DefaultValue;
+                    if (parameter.@enum != null && parameter.@enum.Count > 0 && _options.DescribeAllEnumsAsStrings)
+                        parameter.@default = paramDesc.ParameterDescriptor.DefaultValue.ToString();
+                    else
+                        parameter.@default = paramDesc.ParameterDescriptor.DefaultValue;
             }
             return parameter;
         }
