@@ -19,6 +19,5 @@ using System.Runtime.InteropServices;
 public struct SwaggerAssemb
 {
     public const string Title = @"Swagger.Net.Core";
-    public const string Version = @"8.3.13.502";
+    public const string Version = @"8.3.13.503";
 }
-
