@@ -74,6 +74,16 @@ namespace Swagger.Net.Tests.SwaggerUi
         }
 
         [Test]
+        public void It_exposes_config_to_set_the_csstheme()
+        {
+            string customCss = string.Format("TEST_{0}", Guid.NewGuid());
+            SetUpHandler(c => { c.CssTheme(customCss); });
+
+            var content = GetContentAsString(TEMP_URI.INDEX);
+            StringAssert.Contains(customCss, content);
+        }
+
+        [Test]
         public void It_exposes_config_for_swagger_ui_settings()
         {
             SetUpHandler(c =>

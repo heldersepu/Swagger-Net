@@ -22,6 +22,14 @@ namespace Swagger.Net.Application
             var rootUrl = _config.GetRootUrl(request);
             var assetPath = request.GetRouteData().Values["assetPath"].ToString();
 
+            foreach (var query in request.GetQueryNameValuePairs())
+            {
+                switch (query.Key)
+                {
+                    case "cssTheme": _config.CssTheme(query.Value); break;
+                }
+            }
+
             try
             {
                 var webAsset = swaggerUiProvider.GetAsset(rootUrl, assetPath.TrimEnd('/'));

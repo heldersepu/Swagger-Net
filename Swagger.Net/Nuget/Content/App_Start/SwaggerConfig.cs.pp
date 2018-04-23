@@ -200,6 +200,18 @@ namespace $rootnamespace$
                         //
                         //c.DocumentTitle("My Swagger UI");
 
+                        // Use the "CssTheme" to add a theme to your UI.
+                        // Options are:
+                        //    theme-feeling-blue-css
+                        //    theme-flattop-css
+                        //    theme-material-css
+                        //    theme-monokai-css
+                        //    theme-muted-css
+                        //    theme-newspaper-css
+                        //    theme-outline-css
+                        //
+                        //c.CssTheme("");
+
                         // Use the "InjectStylesheet" option to enrich the UI with one or more additional CSS stylesheets.
                         // The file must be included in your project as an "Embedded Resource", and then the resource's
                         // "Logical Name" is passed to the method as shown below.

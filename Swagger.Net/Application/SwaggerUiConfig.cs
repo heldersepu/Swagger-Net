@@ -22,6 +22,7 @@ namespace Swagger.Net.Application
             _templateParams = new Dictionary<string, string>
             {
                 { "%(DocumentTitle)", "Swagger UI" },
+                { "%(CssTheme)", "" },
                 { "%(StylesheetIncludes)", "" },
                 { "%(DiscoveryUrlSelector)", "false" },
                 { "%(DiscoveryPaths)", String.Join("|", discoveryPaths) },
@@ -73,6 +74,11 @@ namespace Swagger.Net.Application
         public void DocumentTitle(string title)
         {
             _templateParams["%(DocumentTitle)"] = title;
+        }
+
+        public void CssTheme(string theme)
+        {
+            _templateParams["%(CssTheme)"] = $"<link rel='stylesheet' type='text/css' href='./{theme.Replace(".", "-")}'>";
         }
 
         public void SetDiscoveryPath(string path)
