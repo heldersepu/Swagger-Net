@@ -1,3 +1,6 @@
 [submodule "swagger-ui"]
 	path = swagger-ui
 	url = https://github.com/swagger-api/swagger-ui.git
+[submodule "swagger-ui-themes"]
+	path = swagger-ui-themes
+	url = https://github.com/ostranme/swagger-ui-themes
