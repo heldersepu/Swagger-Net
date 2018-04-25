@@ -776,6 +776,41 @@ namespace Swagger.Net.Tests.Swagger
         }
 
         [Test]
+        public void It_exposes_config_to_ignore_all_int_enum_constants_that_are_obsolete()
+        {
+            SetUpDefaultRouteFor<ObsoleteEnumsController>();
+            SetUpHandler(c =>
+            {
+                c.IgnoreObsoleteEnumConstants();
+            });
+
+
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
+            var @enum = swagger["paths"]["/obsoleteenums"]["get"]["parameters"][0]["enum"];
+            var expectedEnum = JArray.FromObject(new int[] { 2 });
+
+            Assert.AreEqual(expectedEnum.ToString(), @enum.ToString());
+        }
+
+        [Test]
+        public void It_exposes_config_to_ignore_all_string_enum_constants_that_are_obsolete()
+        {
+            SetUpDefaultRouteFor<ObsoleteEnumsController>();
+            SetUpHandler(c =>
+            {
+                c.DescribeAllEnumsAsStrings();
+                c.IgnoreObsoleteEnumConstants();
+            });
+
+
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
+            var @enum = swagger["paths"]["/obsoleteenums"]["get"]["parameters"][0]["enum"];
+            var expectedEnum = JArray.FromObject(new string[] { "Green" });
+
+            Assert.AreEqual(expectedEnum.ToString(), @enum.ToString());
+        }
+
+        [Test]
         public void It_exposes_config_to_workaround_multiple_types_with_the_same_class_name()
         {
             SetUpDefaultRouteFor<ConflictingTypesController>();

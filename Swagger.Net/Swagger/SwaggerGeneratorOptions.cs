@@ -22,6 +22,7 @@ namespace Swagger.Net
             Func<Type, string> schemaIdSelector = null,
             bool describeAllEnumsAsStrings = false,
             bool describeStringEnumsInCamelCase = false,
+            bool ignoreObsoleteEnumConstants = false,
             bool applyFiltersToAllSchemas = false,
             bool ignoreIsSpecifiedMembers = false,
             IEnumerable<IOperationFilter> operationFilters = null,
@@ -43,6 +44,7 @@ namespace Swagger.Net
             SchemaIdSelector = schemaIdSelector ?? DefaultSchemaIdSelector;
             DescribeAllEnumsAsStrings = describeAllEnumsAsStrings;
             DescribeStringEnumsInCamelCase = describeStringEnumsInCamelCase;
+            IgnoreObsoleteEnumConstants = ignoreObsoleteEnumConstants;
             ApplyFiltersToAllSchemas = applyFiltersToAllSchemas;
             IgnoreIsSpecifiedMembers = ignoreIsSpecifiedMembers;
             OperationFilters = operationFilters ?? new List<IOperationFilter>();
@@ -79,11 +81,14 @@ namespace Swagger.Net
 
         public bool DescribeStringEnumsInCamelCase { get; private set; }
 
+        public bool IgnoreObsoleteEnumConstants { get; private set; }
+
+
         public bool ApplyFiltersToAllSchemas { get; private set; }
 
         public bool IgnoreIsSpecifiedMembers { get; private set; }
 
-        public Func<ApiDescription, string> OperationIdResolver {get; }
+        public Func<ApiDescription, string> OperationIdResolver { get; }
 
         public IEnumerable<IOperationFilter> OperationFilters { get; private set; }
 

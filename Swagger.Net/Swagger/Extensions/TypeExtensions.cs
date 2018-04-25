@@ -38,9 +38,10 @@ namespace Swagger.Net
             return (chopIndex == -1) ? fullName : fullName.Substring(0, chopIndex);
         }
 
-        public static string[] GetEnumNamesForSerialization(this Type enumType)
+        public static string[] GetEnumNamesForSerialization(this Type enumType, bool excludeObsolete = false)
         {
             return enumType.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static)
+                .Where(fieldInfo => !excludeObsolete || !fieldInfo.GetCustomAttributes<ObsoleteAttribute>().Any())
                 .Select(fieldInfo =>
                 {
                     var memberAttribute = fieldInfo.GetCustomAttributes(false).OfType<EnumMemberAttribute>().FirstOrDefault();
@@ -48,6 +49,14 @@ namespace Swagger.Net
                         ? fieldInfo.Name
                         : memberAttribute.Value;
                 })
+                .ToArray();
+        }
+
+        public static object[] GetEnumValuesForSerialization(this Type enumType, bool excludeObsolete = false)
+        {
+            return enumType.GetFields(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static)
+                .Where(fieldInfo => !excludeObsolete || !fieldInfo.GetCustomAttributes<ObsoleteAttribute>().Any())
+                .Select(fieldInfo => fieldInfo.GetRawConstantValue())
                 .ToArray();
         }
     }
