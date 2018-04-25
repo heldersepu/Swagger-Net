@@ -34,6 +34,7 @@ namespace Swagger.Net.Application
         private bool _ignoreObsoleteProperties;
         private bool _describeAllEnumsAsStrings;
         private bool _describeStringEnumsInCamelCase;
+        private bool _ignoreObsoleteEnumConstants;
         private bool _applyFiltersToAllSchemas = true;
         private bool _ignoreIsSpecifiedMembers = false;
         private readonly IList<Func<IOperationFilter>> _operationFilters;
@@ -59,6 +60,7 @@ namespace Swagger.Net.Application
             _ignoreObsoleteProperties = false;
             _describeAllEnumsAsStrings = false;
             _describeStringEnumsInCamelCase = false;
+            _ignoreObsoleteEnumConstants = false;
             _operationFilters = new List<Func<IOperationFilter>>();
             _documentFilters = new List<Func<IDocumentFilter>>();
             _xmlDocFactories = new List<Func<XPathDocument>>();
@@ -194,6 +196,11 @@ namespace Swagger.Net.Application
         {
             _describeAllEnumsAsStrings = true;
             _describeStringEnumsInCamelCase = camelCase;
+        }
+
+        public void IgnoreObsoleteEnumConstants()
+        {
+            _ignoreObsoleteEnumConstants = true;
         }
 
         public void IgnoreIsSpecifiedMembers()
@@ -340,6 +347,7 @@ namespace Swagger.Net.Application
                 schemaIdSelector: _schemaIdSelector,
                 describeAllEnumsAsStrings: _describeAllEnumsAsStrings,
                 describeStringEnumsInCamelCase: _describeStringEnumsInCamelCase,
+                ignoreObsoleteEnumConstants: _ignoreObsoleteEnumConstants,
                 applyFiltersToAllSchemas: _applyFiltersToAllSchemas,
                 ignoreIsSpecifiedMembers: _ignoreIsSpecifiedMembers,
                 operationFilters: operationFilters,

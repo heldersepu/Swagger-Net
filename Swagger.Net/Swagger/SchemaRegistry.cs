@@ -154,12 +154,14 @@ namespace Swagger.Net
                 var camelCase = _options.DescribeStringEnumsInCamelCase
                     || (stringEnumConverter != null && stringEnumConverter.CamelCaseText);
 
+                var enumValues = type.GetEnumNamesForSerialization(_options.IgnoreObsoleteEnumConstants);
+
                 return new Schema
                 {
                     type = "string",
                     @enum = camelCase
-                        ? type.GetEnumNamesForSerialization().Select(name => name.ToCamelCase()).ToArray()
-                        : type.GetEnumNamesForSerialization()
+                        ? enumValues.Select(name => name.ToCamelCase()).ToArray()
+                        : enumValues
                 };
             }
 
@@ -167,7 +169,7 @@ namespace Swagger.Net
             {
                 type = "integer",
                 format = "int32",
-                @enum = type.GetEnumValues().Cast<object>().ToArray()
+                @enum = type.GetEnumValuesForSerialization(_options.IgnoreObsoleteEnumConstants)
             };
         }
 

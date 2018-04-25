@@ -37,6 +37,20 @@ namespace Swagger.Net.Swagger
         }
 
         [Test]
+        public void GetEnumNamesForSerialization_ExcludesObsoleteAttributes()
+        {
+            var enumNames = typeof(EnumWithObsoleteAttributes).GetEnumNamesForSerialization(excludeObsolete: true);
+            CollectionAssert.AreEqual(new[] { "Value3" }, enumNames);
+        }
+
+        [Test]
+        public void GetEnumValuesForSerialization_ExcludesObsoleteAttributes()
+        {
+            var enumValues = typeof(EnumWithObsoleteAttributes).GetEnumValuesForSerialization(excludeObsolete: true);
+            CollectionAssert.AreEqual(new[] { 2 }, enumValues);
+        }
+
+        [Test]
         public void FullNameSansTypeParameters_Test()
         {
             var mock = new Mock<Type>();
@@ -56,6 +70,17 @@ namespace Swagger.Net.Swagger
 
             [EnumMember(Value = "value-2")]
             Value2 = 1
+        }
+
+        public enum EnumWithObsoleteAttributes
+        {
+            [Obsolete]
+            Value1 = 0,
+
+            [Obsolete]
+            Value2 = 1,
+
+            Value3 = 2
         }
     }
 }
