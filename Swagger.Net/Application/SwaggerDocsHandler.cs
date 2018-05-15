@@ -85,7 +85,7 @@ namespace Swagger.Net.Application
             var swaggerProvider = _config.GetSwaggerProvider(request);
             var rootUrl = _config.GetRootUrl(request);
 
-            var swaggerDoc = swaggerProvider.GetSwagger(rootUrl, apiVersion.ToUpper());
+            var swaggerDoc = swaggerProvider.GetSwagger(rootUrl, apiVersion);
 
             return new GeneratedSwaggerDocument
             {
