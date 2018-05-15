@@ -14,7 +14,6 @@ namespace Swagger.Net.Application
 
         public InfoBuilder Version(string version, string title)
         {
-            version = version.ToUpper();
             var infoBuilder = new InfoBuilder(version, title);
             _versionInfos[version] = infoBuilder;
             return infoBuilder;
