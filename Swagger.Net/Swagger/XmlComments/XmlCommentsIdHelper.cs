@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using System.Text;
 
@@ -112,13 +113,12 @@ namespace Swagger.Net.XmlComments
             if (parameters.Length == 0) return;
 
             builder.Append("(");
-            int generic = 0;
+            var paramPos = GetTypeParameterPositions(declaringType);
             foreach (var param in parameters)
             {
                 if (param.ParameterType.IsGenericParameter)
                 {
-                    builder.Append($"`{generic}");
-                    generic++;
+                    builder.Append($"`{paramPos[param.ParameterType.Name]}");
                 }
                 else
                 {
@@ -127,6 +127,17 @@ namespace Swagger.Net.XmlComments
                 builder.Append(",");
             }
             builder.Replace(",", ")", builder.Length - 1, 1);
+        }
+
+        private static IDictionary<string, int> GetTypeParameterPositions(Type type)
+        {
+            var result = new Dictionary<string, int>();
+            if (!type.IsGenericType)
+                return result;
+            var genericTypeDefinition = type.GetGenericTypeDefinition();
+            foreach (var genericArgument in genericTypeDefinition.GetGenericArguments())
+                result.Add(genericArgument.Name, genericArgument.GenericParameterPosition);
+            return result;
         }
     }
 }

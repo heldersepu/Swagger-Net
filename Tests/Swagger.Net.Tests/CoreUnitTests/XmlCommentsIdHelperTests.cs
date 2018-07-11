@@ -46,7 +46,7 @@ namespace Swagger.Net.Tests.CoreUnitTests
         {
             var methodInfo = typeof(BlobController).GetMethod("Patch");
             var comment = methodInfo.GetCommentIdForMethod();
-            Assert.AreEqual(CTRLR + "Blob`2.Post(`1,`0)", comment);
+            Assert.AreEqual(CTRLR + "Blob`2.Patch(`1,`0)", comment);
         }
 
         [Test]
