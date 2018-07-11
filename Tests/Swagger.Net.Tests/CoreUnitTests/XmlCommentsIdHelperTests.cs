@@ -30,7 +30,7 @@ namespace Swagger.Net.Tests.CoreUnitTests
         {
             var methodInfo = typeof(BlobController).GetMethod("Post");
             var comment = methodInfo.GetCommentIdForMethod();
-            Assert.AreEqual(CTRLR + "Blob`2.Post(System.Int32)", comment);
+            Assert.AreEqual(CTRLR + "Blob`3.Post(System.Int32)", comment);
         }
 
         [Test]
@@ -38,7 +38,7 @@ namespace Swagger.Net.Tests.CoreUnitTests
         {
             var methodInfo = typeof(BlobController).GetMethod("Get");
             var comment = methodInfo.GetCommentIdForMethod();
-            Assert.AreEqual(CTRLR + "Blob`2.Get(System.Nullable{System.Int32})", comment);
+            Assert.AreEqual(CTRLR + "Blob`3.Get(System.Nullable{System.Int32})", comment);
         }
 
         [Test]
@@ -46,7 +46,7 @@ namespace Swagger.Net.Tests.CoreUnitTests
         {
             var methodInfo = typeof(BlobController).GetMethod("Patch");
             var comment = methodInfo.GetCommentIdForMethod();
-            Assert.AreEqual(CTRLR + "Blob`2.Patch(`1,`0)", comment);
+            Assert.AreEqual(CTRLR + "Blob`3.Patch(Swagger.Net.Dummy.Controllers.AnotherFoo{`1},System.Collections.Generic.IEnumerable{`2})", comment);
         }
 
         [Test]
@@ -54,7 +54,7 @@ namespace Swagger.Net.Tests.CoreUnitTests
         {
             var methodInfo = typeof(BlobController).GetMethod("Put");
             var comment = methodInfo.GetCommentIdForMethod();
-            Assert.AreEqual(CTRLR + "Blob`2.Put(Swagger.Net.Dummy.Controllers.AnotherFoo{`0})", comment);
+            Assert.AreEqual(CTRLR + "Blob`3.Put(Swagger.Net.Dummy.Controllers.AnotherFoo{`0})", comment);
         }
 
         [Test]

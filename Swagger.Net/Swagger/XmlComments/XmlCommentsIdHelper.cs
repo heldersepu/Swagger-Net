@@ -43,66 +43,74 @@ namespace Swagger.Net.XmlComments
             return builder.ToString();
         }
 
-        private static void AppendFullTypeName(Type type, StringBuilder builder, bool expandGenericArgs = false)
+        private static void AppendFullTypeName(Type type, StringBuilder builder, bool expandGenericArgs = false, IDictionary<string, int> genericParametersPositions = null)
         {
             if (type.Namespace != null)
             {
                 builder.Append(type.Namespace);
                 builder.Append(".");
             }
-            AppendTypeName(type, builder, expandGenericArgs);
+            AppendTypeName(type, builder, expandGenericArgs, genericParametersPositions);
         }
 
-        private static void AppendTypeName(Type type, StringBuilder builder, bool expandGenericArgs)
+        public static string GetNameWithoutGenericArity(Type t)
+        {
+            string name = t.Name;
+            int index = name.IndexOf('`');
+            return index == -1 ? name : name.Substring(0, index);
+        }
+
+        private static void AppendTypeName(Type type, StringBuilder builder, bool expandGenericArgs, IDictionary<string, int> genericParametersPositions = null)
         {
             if (type.IsNested)
             {
-                AppendTypeName(type.DeclaringType, builder, false);
+                AppendTypeName(type.DeclaringType, builder, true, genericParametersPositions);
                 builder.Append(".");
             }
 
-            builder.Append(type.Name);
+            if ((type.IsGenericType && expandGenericArgs) || type.IsArray)
+            {
+                var nonGenericName = GetNameWithoutGenericArity(type);
+                builder.Append(nonGenericName);
+                if (type.IsEnum)
+                    return;
+            }
+            else
+                builder.Append(type.Name);
 
             if (expandGenericArgs)
-                ExpandGenericArgsIfAny(type, builder);
+                ExpandGenericArgsIfAny(type, builder, genericParametersPositions);
+            if (type.IsArray)
+                builder.Append("[]");
         }
 
-        public static void ExpandGenericArgsIfAny(Type type, StringBuilder builder)
+        public static void ExpandGenericArgsIfAny(Type type, StringBuilder builder, IDictionary<string, int> genericParametersPositions = null)
         {
             if (type.IsGenericType)
             {
-                string full = builder.ToString();
-                int argPos = full.IndexOf('(');
-                if (argPos > 0 || type.IsEnum)
+                var genericArgs = type.GetGenericArguments();
+                builder.Append("{");
+                for (int i = 0; i < genericArgs.Length; i++)
                 {
-                    argPos = Math.Max(argPos, 0);
-                    var genericArgsBuilder = new StringBuilder("{");
-
-                    var genericArgs = type.GetGenericArguments();
-                    for (int i = 0; i < genericArgs.Length; i++)
-                    {
-                        if (type.IsEnum || (type.IsClass && genericArgs[i].FullName == null))
-                            genericArgsBuilder.Append($"`{i}");
+                    if (type.IsEnum || ((type.IsClass || type.IsInterface) && genericArgs[i].FullName == null))
+                        if (genericParametersPositions == null)
+                            builder.Append($"`{i}");
                         else
-                            AppendFullTypeName(genericArgs[i], genericArgsBuilder, true);
-                        genericArgsBuilder.Append(",");
-                    }
-                    genericArgsBuilder.Replace(",", "}", genericArgsBuilder.Length - 1, 1);
-
-                    builder.Clear();
-                    builder.Append(full.Substring(0, argPos));
-                    string newValue = genericArgsBuilder.ToString();
-                    string oldValue = string.Format("`{0}", genericArgs.Length);
-                    builder.Append(full.Substring(argPos).Replace(oldValue, newValue));
+                            builder.Append($"`{genericParametersPositions[genericArgs[i].Name]}");
+                    else
+                        AppendFullTypeName(genericArgs[i], builder, true, genericParametersPositions);
+                    builder.Append(",");
                 }
+                builder.Replace(",", "}", builder.Length - 1, 1);
             }
             else if (type.IsArray)
-                ExpandGenericArgsIfAny(type.GetElementType(), builder);
+                ExpandGenericArgsIfAny(type.GetElementType(), builder, genericParametersPositions);
         }
 
         private static void AppendMethodName(MethodInfo methodInfo, StringBuilder builder)
         {
-            builder.Append(methodInfo.Name);
+            var methodName = methodInfo.Name;
+            builder.Append(methodName);
             var declaringType = methodInfo.DeclaringType;
             if (declaringType.IsGenericType)
             {
@@ -113,16 +121,20 @@ namespace Swagger.Net.XmlComments
             if (parameters.Length == 0) return;
 
             builder.Append("(");
-            var paramPos = GetTypeParameterPositions(declaringType);
+            var genericParametersPositions = GetTypeParameterPositions(declaringType);
+            var generic = 0;
             foreach (var param in parameters)
             {
                 if (param.ParameterType.IsGenericParameter)
                 {
-                    builder.Append($"`{paramPos[param.ParameterType.Name]}");
+                    if (genericParametersPositions == null)
+                        builder.Append($"`{generic++}");
+                    else
+                        builder.Append($"`{genericParametersPositions[param.ParameterType.Name]}");
                 }
                 else
                 {
-                    AppendFullTypeName(param.ParameterType, builder, true);
+                    AppendFullTypeName(param.ParameterType, builder, true, genericParametersPositions);
                 }
                 builder.Append(",");
             }
