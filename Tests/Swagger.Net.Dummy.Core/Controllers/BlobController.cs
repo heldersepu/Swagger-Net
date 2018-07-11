@@ -14,9 +14,21 @@ namespace Swagger.Net.Dummy.Controllers
         public int Put(AnotherFoo<T> x) { return 0; }
     }
 
+    public abstract class Blob<T, TSecond, TThird> : Blob<T>
+    {
+        /// <summary>PATCH</summary>
+        public int Patch(AnotherFoo<TThird> x, T y) { return 0; }
+    }
+
     public class Foo { }
+
+    public class FooBar { }
+
+    public class Bar { }
 
     public class AnotherFoo<TV> { }
 
     public class BlobController : Blob<Foo> { }
+
+    public class BlobControllerThree : Blob<Foo, FooBar, Bar> { }
 }

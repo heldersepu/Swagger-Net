@@ -19,6 +19,9 @@
         <member name="M:Swagger.Net.Dummy.Controllers.Blob`1.Put(Swagger.Net.Dummy.Controllers.AnotherFoo{`0})">
             <summary>PUT</summary>
         </member>
+        <member name="M:Swagger.Net.Dummy.Controllers.Blob`3.Patch(Swagger.Net.Dummy.Controllers.AnotherFoo{`2},`0)">
+            <summary>PATCH</summary>
+        </member>
         <member name="M:Swagger.Net.Dummy.Controllers.BaseChildController.Get">
             <summary>
             Get some ...
