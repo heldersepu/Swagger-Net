@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct(SwaggerAssemb.Title)]
-[assembly: AssemblyCopyright("CopyLeft ©  2018")]
+[assembly: AssemblyCopyright("CopyLeft ©  9999")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]
@@ -19,5 +19,5 @@ using System.Runtime.InteropServices;
 public struct SwaggerAssemb
 {
     public const string Title = @"Swagger.Net.Core";
-    public const string Version = @"8.3.17.102";
+    public const string Version = @"8.3.17.302";
 }
