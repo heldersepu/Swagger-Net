@@ -10,14 +10,17 @@
         <member name="M:Swagger.Net.Dummy.Controllers.NestedEnum`1.Put(Swagger.Net.Dummy.Controllers.NestedEnum{`0}.Giorno)">
             <summary>NestedEnum test</summary>
         </member>
-        <member name="M:Swagger.Net.Dummy.Controllers.Blob`1.Get(System.Nullable{System.Int32})">
+        <member name="M:Swagger.Net.Dummy.Controllers.Blob`2.Get(System.Nullable{System.Int32})">
             <summary>GET</summary>
         </member>
-        <member name="M:Swagger.Net.Dummy.Controllers.Blob`1.Post(System.Int32)">
+        <member name="M:Swagger.Net.Dummy.Controllers.Blob`2.Post(System.Int32)">
             <summary>POST</summary>
         </member>
-        <member name="M:Swagger.Net.Dummy.Controllers.Blob`1.Put(Swagger.Net.Dummy.Controllers.AnotherFoo{`0})">
+        <member name="M:Swagger.Net.Dummy.Controllers.Blob`2.Put(Swagger.Net.Dummy.Controllers.AnotherFoo{`0})">
             <summary>PUT</summary>
+        </member>
+        <member name="M:Swagger.Net.Dummy.Controllers.Blob`2.Patch(`1,`0)">
+            <summary>PATCH</summary>
         </member>
         <member name="M:Swagger.Net.Dummy.Controllers.BaseChildController.Get">
             <summary>
