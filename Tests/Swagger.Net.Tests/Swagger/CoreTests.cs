@@ -634,6 +634,21 @@ namespace Swagger.Net.Tests.Swagger
         }
 
         [Test]
+        public void It_exposes_config_to_override_root_url()
+        {
+            SetUpDefaultRouteFor<ProductsController>();
+            SetUpHandler(c =>
+            {
+                c.RootUrl(req => { return "http://localhost:8080/myapi"; });
+            });
+
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
+
+            Assert.AreEqual(swagger["host"].ToString(), "localhost:8080");
+            Assert.AreEqual(swagger["basePath"].ToString(), "/myapi");
+        }
+
+        [Test]
         public void It_exposes_config_to_override_operation_id_generation()
         {
             SetUpDefaultRouteFor<ProductsController>();
