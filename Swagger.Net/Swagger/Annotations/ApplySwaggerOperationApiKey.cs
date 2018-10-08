@@ -20,7 +20,7 @@ namespace Swagger.Net.Annotations
         {
             var scopes = a.ActionDescriptor.GetFilterPipeline()
                         .Select(filterInfo => filterInfo.Instance)
-                        .Where(x => x.GetType() == _type)
+                        .Where(x =>_type.IsInstanceOfType(x))
                         .Distinct();
 
             if (scopes.Any())
