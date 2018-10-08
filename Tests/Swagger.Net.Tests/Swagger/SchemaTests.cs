@@ -1098,27 +1098,7 @@ namespace Swagger.Net.Tests.Swagger
 
             Assert.IsNotNull(swagger.definitions["ComplexObject1"].required);
         }
-
-        [Test]
-        public void foo()
-        {
-            SetUpDefaultRouteFor<ProtectedResourcesController>();
-            SetUpDefaultRouteFor<ProtectedWithCustomAttributeResourcesController>();
-
-            SetUpHandler(c =>
-            {
-                c.ApiKey("apiKey", "header", "API Key Authentication");
-            });
-
-            var swagger = GetContent<SwaggerDocument>(TEMP_URI.DOCS);
-
-            var paths = swagger.paths.ToArray();
-
-            Assert.IsNotNull(paths[0].Value.get.security);
-            Assert.IsNotNull(paths[1].Value.get.security);
-
-        }
-
+        
         [Test]
         public void It_marks_required_fields_as_required()
         {
