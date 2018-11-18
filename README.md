@@ -12,7 +12,7 @@ In addition to its Swagger generator, Swagger-Net also contains an embedded vers
 * Auto-generated [Swagger 2.0](https://github.com/swagger-api/swagger-spec/blob/master/versions/2.0.md)
 * Seamless integration of swagger-ui (3.x)
 * Reflection-based Schema generation for describing API types
-* Extensibility hooks for customizing the generated Swagger doc and the swagger-ui
+* Extensibility hooks for customizing the generated Swagger doc and swagger-ui
 * Out-of-the-box support for Xml comments
 
 And that's not all ...
