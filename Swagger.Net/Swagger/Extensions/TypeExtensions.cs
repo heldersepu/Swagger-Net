@@ -22,7 +22,7 @@ namespace Swagger.Net
 
                 return new StringBuilder(typeName)
                     .Replace(string.Format("`{0}", genericArgumentIds.Count()), string.Empty)
-                    .Append(string.Format("[{0}]", string.Join(",", genericArgumentIds).TrimEnd(',')))
+                    .Append(string.Format("Of{0}", string.Join("And", genericArgumentIds)))
                     .ToString();
             }
 

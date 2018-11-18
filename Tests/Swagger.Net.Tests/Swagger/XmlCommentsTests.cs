@@ -265,7 +265,7 @@ namespace Swagger.Net.Tests.Swagger
         {
             var swagger = GetContent<JObject>(TEMP_URI.DOCS);
 
-            var genericTypeSchema = swagger["definitions"]["Reward[String]"];
+            var genericTypeSchema = swagger["definitions"]["RewardOfString"];
             Assert.NotNull(genericTypeSchema["description"]);
             Assert.AreEqual("A redeemable reward", genericTypeSchema["description"].ToString());
 
@@ -278,7 +278,7 @@ namespace Swagger.Net.Tests.Swagger
         public void It_does_not_error_on_types_with_public_fields()
         {
             var swagger = GetContent<JObject>(TEMP_URI.DOCS);
-            var valueProperty = swagger["definitions"]["Reward[String]"]["properties"]["value"];
+            var valueProperty = swagger["definitions"]["RewardOfString"]["properties"]["value"];
             Assert.IsNotNull(valueProperty["description"]);
             Assert.AreEqual("The monetary value of the reward", valueProperty["description"].ToString());
         }

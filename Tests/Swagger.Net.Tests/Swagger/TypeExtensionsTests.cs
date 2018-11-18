@@ -9,8 +9,8 @@ namespace Swagger.Net.Swagger
     public class TypeExtensionsTests
     {
         [TestCase(typeof(DateTime), "DateTime")]
-        [TestCase(typeof(IEnumerable<string>), "IEnumerable[String]")]
-        [TestCase(typeof(IDictionary<string, decimal>), "IDictionary[String,Decimal]")]
+        [TestCase(typeof(IEnumerable<string>), "IEnumerableOfString")]
+        [TestCase(typeof(IDictionary<string, decimal>), "IDictionaryOfStringAndDecimal")]
         public void FriendlyId_ReturnsNonQualifiedFriendlyId_IfFullyQualifiedFlagIsUnset(
             Type systemType,
             string expectedReturnValue)
@@ -19,8 +19,8 @@ namespace Swagger.Net.Swagger
         }
 
         [TestCase(typeof(DateTime), "System.DateTime")]
-        [TestCase(typeof(IEnumerable<string>), "System.Collections.Generic.IEnumerable[System.String]")]
-        [TestCase(typeof(IDictionary<string, decimal>), "System.Collections.Generic.IDictionary[System.String,System.Decimal]")]
+        [TestCase(typeof(IEnumerable<string>), "System.Collections.Generic.IEnumerableOfSystem.String")]
+        [TestCase(typeof(IDictionary<string, decimal>), "System.Collections.Generic.IDictionaryOfSystem.StringAndSystem.Decimal")]
         [TestCase(typeof(TypeExtensionsTests.InnerType), "Swagger.Net.Swagger.TypeExtensionsTests.InnerType")]
         public void FriendlyId_ReturnsFullQualifiedFriendlyId_IfFullyQualifiedFlagIsSet(
             Type systemType,
