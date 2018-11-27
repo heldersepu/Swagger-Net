@@ -19,7 +19,7 @@ And that's not all ...
 
 Once you have a Web API that can describe itself in Swagger, you've opened the treasure chest of Swagger-based tools including a client generator that can be targeted to a wide range of popular platforms. See [swagger-codegen](https://github.com/swagger-api/swagger-codegen) for more details.
 
-
+___
 
 ## [Getting Started](https://github.com/heldersepu/Swagger-Net/wiki/1-Getting-Started) ##
 ## [Troubleshooting](https://github.com/heldersepu/Swagger-Net/wiki/2-Troubleshooting) ##
