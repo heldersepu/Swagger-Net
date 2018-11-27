@@ -21,8 +21,6 @@ Once you have a Web API that can describe itself in Swagger, you've opened the t
 
 
 
-
-
 ## [Getting Started](https://github.com/heldersepu/Swagger-Net/wiki/1-Getting-Started) ##
 ## [Troubleshooting](https://github.com/heldersepu/Swagger-Net/wiki/2-Troubleshooting) ##
 ## [Customizing the swagger-ui](https://github.com/heldersepu/Swagger-Net/wiki/3-Customizing-the-swagger-ui) ##
