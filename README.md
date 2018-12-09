@@ -23,5 +23,6 @@ ___
 
 ## [Getting Started](https://github.com/heldersepu/Swagger-Net/wiki/1-Getting-Started) ##
 ## [Troubleshooting](https://github.com/heldersepu/Swagger-Net/wiki/2-Troubleshooting) ##
+## [Authorization Schemes](https://github.com/heldersepu/Swagger-Net/wiki/2-Troubleshooting#describing-securityauthorization-schemes)
 ## [Customizing the swagger-ui](https://github.com/heldersepu/Swagger-Net/wiki/3-Customizing-the-swagger-ui) ##
 ## [Troubleshooting and FAQ's](https://github.com/heldersepu/Swagger-Net/wiki/4-Troubleshooting-and-FAQ's) ##
