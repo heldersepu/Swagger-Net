@@ -124,6 +124,9 @@
   <ItemGroup>
     <EmbeddedResource Include="SwaggerUi\CustomAssets\typography.css" />
     <EmbeddedResource Include="SwaggerUi\CustomAssets\index.html" />
+    <Content Include="..\LICENSE.TXT">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Swagger.Net.nuspec">
       <SubType>Designer</SubType>
     </Content>
