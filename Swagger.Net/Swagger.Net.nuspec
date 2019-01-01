@@ -23,5 +23,6 @@
   <files>
     <file src="Nuget\Content\App_Start\SwaggerConfig.cs.pp" target="Content" />
     <file src="Nuget\Tools\Init.ps1" target="Tools\Init.ps1" />
+    <file src="..\LICENSE.TXT" target="" />
   </files>
 </package>
