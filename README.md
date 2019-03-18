@@ -17,7 +17,7 @@ In addition to its Swagger generator, Swagger-Net also contains an embedded vers
 
 And that's not all ...
 
-Once you have a Web API that can describe itself in Swagger, you've opened the treasure chest of Swagger-based tools including a client generator that can be targeted to a wide range of popular platforms. See [swagger-codegen](https://github.com/swagger-api/swagger-codegen) for more details.
+Once your Web API can describe itself, you've opened the treasure chest of Swagger-based tools including a client generator that can be targeted to a wide range of popular platforms. See [swagger-codegen](https://github.com/swagger-api/swagger-codegen) for more details.
 
 ___
 
