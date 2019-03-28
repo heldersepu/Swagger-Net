@@ -694,6 +694,14 @@ namespace Swagger.Net.Tests.Swagger
         }
 
         [Test]
+        public void It_handles_latest()
+        {
+            SetUpDefaultRouteFor<ProductsController>();
+            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/latest");
+            Assert.IsNotNull(swagger);
+        }
+
+        [Test]
         public void It_handles_additional_route_parameters()
         {
             // i.e. route params that are not included in the action signature
