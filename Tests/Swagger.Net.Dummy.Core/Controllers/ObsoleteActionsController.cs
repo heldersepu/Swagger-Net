@@ -25,6 +25,13 @@ namespace Swagger.Net.Dummy.Controllers
             throw new NotImplementedException();
         }
 
+        [SwaggerDescription("abc", "def")]
+        [Obsolete("OBSOLETE_POST")]
+        public void Patch(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         [Obsolete()]
         public void Get(int id)
         {
