@@ -782,6 +782,7 @@ namespace Swagger.Net.Tests.Swagger
             SetUpHandler(c =>
             {
                 c.IgnoreObsoleteEnumConstants();
+                c.IgnoreIsSpecifiedMembers();
             });
 
 
