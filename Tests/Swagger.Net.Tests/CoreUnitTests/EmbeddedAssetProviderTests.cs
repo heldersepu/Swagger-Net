@@ -45,6 +45,7 @@ namespace Swagger.Net.Tests.CoreUnitTests
         [TestCase("file.otf", "application/font-sfnt")]
         [TestCase("file.ttf", "application/font-sfnt")]
         [TestCase("file.svg", "image/svg+xml")]
+        [TestCase("file.json", "application/json")]
         [TestCase("file.unkown", "text/html")]
         public void InferMediaTypeFrom(string file, string mediaType)
         {
