@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Swagger.Net.Swagger.Annotations;
+using System;
 using System.Web.Http;
 
 namespace Swagger.Net.Dummy.Controllers
@@ -13,6 +14,19 @@ namespace Swagger.Net.Dummy.Controllers
 
         [Obsolete("OBSOLETE_DELETE")]
         public void Delete(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        [SwaggerDescription(summary: "abc")]
+        [Obsolete("OBSOLETE_POST")]
+        public void Post(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        [Obsolete()]
+        public void Get(int id)
         {
             throw new NotImplementedException();
         }
