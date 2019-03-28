@@ -35,5 +35,14 @@ namespace Swagger.Net.Tests.CoreUnitTests
             Schema nullSchema = null;
             Assert.DoesNotThrow(() => partSchema.PopulateFrom(nullSchema));
         }
+
+        [Test]
+        public void PopulateFrom_Simple()
+        {
+            var partSchema = new PartialSchema();
+            var schema = new Schema { pattern = "abc" };
+            partSchema.PopulateFrom(schema);
+            Assert.AreEqual(schema.pattern, partSchema.pattern);
+        }
     }
 }
