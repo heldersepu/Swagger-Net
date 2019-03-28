@@ -105,6 +105,7 @@
     <Compile Include="CoreUnitTests\SchemaRegistryTests.cs" />
     <Compile Include="CoreUnitTests\ModelFilterContextTests.cs" />
     <Compile Include="CoreUnitTests\StringExtensionsTests.cs" />
+    <Compile Include="CoreUnitTests\VendorExtensionsConverterTest.cs" />
     <Compile Include="CoreUnitTests\SwaggerDocsConfigTests.cs" />
     <Compile Include="CoreUnitTests\SwaggerEnabledConfigurationTests.cs" />
     <Compile Include="CoreUnitTests\XmlCommentsIdHelperTests.cs" />
