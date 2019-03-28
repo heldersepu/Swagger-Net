@@ -17,6 +17,15 @@ namespace Swagger.Net.Tests.CoreUnitTests
         }
 
         [Test]
+        public void GetAsset_notnull()
+        {
+            var prov = new EmbeddedAssetProvider(
+                new Dictionary<string, EmbeddedAssetDescriptor>(),
+                new Dictionary<string, string>());
+            Assert.IsNotNull(prov.GetAsset("", "index/ext"));
+        }
+
+        [Test]
         public void GetEmbeddedResourceStreamFor_null()
         {
             var prov = new EmbeddedAssetProvider(
