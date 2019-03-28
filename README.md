@@ -1,6 +1,9 @@
 Swagger-Net
 =========
 
+[![AppVeyor](https://img.shields.io/appveyor/ci/heldersepu/swagger-net.svg)](https://ci.appveyor.com/project/heldersepu/swagger-net)
+[![codecov](https://codecov.io/gh/heldersepu/Swagger-Net/branch/master/graph/badge.svg)](https://codecov.io/gh/heldersepu/Swagger-Net)
+
 Seamlessly add [Swagger](http://swagger.io/) to WebApi projects! Combines ApiExplorer and Swagger/swagger-ui(3.x) to provide a rich discovery, documentation and playground experience to your API consumers.
 
 In addition to its Swagger generator, Swagger-Net also contains an embedded version of [swagger-ui](https://github.com/swagger-api/swagger-ui) which it will automatically serve up once Swagger-Net is installed. This means you can complement your API with a slick discovery UI to assist consumers with their integration efforts. 
