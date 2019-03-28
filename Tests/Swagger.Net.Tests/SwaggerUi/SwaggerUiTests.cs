@@ -98,8 +98,10 @@ namespace Swagger.Net.Tests.SwaggerUi
         {
             SetUpHandler(c =>
                 {
+                    c.SetDiscoveryPath("DiscoPath");
                     c.DocExpansion(DocExpansion.Full);
                     c.DefaultModelRendering(DefaultModelRender.Model);
+                    c.DefaultModelsExpandDepth(1);
                     c.DefaultModelExpandDepth(1);
                     c.BooleanValues(new[] { "1", "0" });
                     c.ShowExtensions(true);
@@ -110,7 +112,10 @@ namespace Swagger.Net.Tests.SwaggerUi
 
             var content = GetContentAsString(TEMP_URI.INDEX);
 
+            StringAssert.Contains("discoveryPaths: arrayFrom('DiscoPath')", content);
             StringAssert.Contains("docExpansion: 'full'", content);
+            StringAssert.Contains("defaultModelExpandDepth: 1", content);
+            StringAssert.Contains("defaultModelsExpandDepth: 1", content);
             StringAssert.Contains("booleanValues: arrayFrom('1|0')", content);
             StringAssert.Contains("supportedSubmitMethods: arrayFrom('get|head')", content);
             StringAssert.Contains("showExtensions: ('true' == 'true')", content);
