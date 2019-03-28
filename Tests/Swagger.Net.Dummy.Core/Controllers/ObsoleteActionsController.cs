@@ -1,6 +1,7 @@
 ﻿using Swagger.Net.Swagger.Annotations;
 using System;
 using System.Web.Http;
+using System.Web.Http.Description;
 
 namespace Swagger.Net.Dummy.Controllers
 {
@@ -33,7 +34,8 @@ namespace Swagger.Net.Dummy.Controllers
         }
 
         [Obsolete()]
-        public void Get(int id)
+        [ResponseType(typeof(int))]
+        public int Get(int id)
         {
             throw new NotImplementedException();
         }
