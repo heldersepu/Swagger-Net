@@ -1,4 +1,5 @@
 ﻿using Swagger.Net.SwaggerUi;
+using System;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -44,10 +45,7 @@ namespace Swagger.Net.Application
 
         private HttpContent ContentFor(Asset webAsset)
         {
-            int bufferSize = webAsset.Stream.Length > int.MaxValue
-                ? int.MaxValue
-                : (int)webAsset.Stream.Length;
-
+            int bufferSize = (int)Math.Min(int.MaxValue, webAsset.Stream.Length);
             var content = new StreamContent(webAsset.Stream, bufferSize);
             content.Headers.ContentType = new MediaTypeHeaderValue(webAsset.MediaType);
             return content;
