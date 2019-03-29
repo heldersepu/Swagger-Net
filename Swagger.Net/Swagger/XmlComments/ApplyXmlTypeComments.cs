@@ -16,14 +16,14 @@ namespace Swagger.Net.XmlComments
 
         public ApplyXmlTypeComments(XPathDocument xmlDoc)
         {
-            lock (xmlDoc) 
+            lock (xmlDoc)
             {
                 navigator = xmlDoc.CreateNavigator();
             }
         }
 
         public void Apply(Schema model, ModelFilterContext context)
-        {            
+        {
             var commentId = context.SystemType.GetCommentId();
             var typeNode = navigator.SelectSingleNode(string.Format(MemberXPath, commentId));
 
