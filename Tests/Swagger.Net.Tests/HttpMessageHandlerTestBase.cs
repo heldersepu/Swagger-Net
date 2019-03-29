@@ -73,13 +73,14 @@ namespace Swagger.Net.Tests
             Configuration.EnsureInitialized();
         }
 
-        protected HttpResponseMessage Get(string uri)
+        protected HttpResponseMessage Get(string uri, DateTimeOffset? IfModifiedSince = null)
         {
             if (Handler == null)
                 throw new InvalidOperationException("Handler must be set by fixture subclass");
 
             var request = new HttpRequestMessage(HttpMethod.Get, uri);
             request.Properties[HttpPropertyKeys.HttpConfigurationKey] = Configuration;
+            request.Headers.IfModifiedSince = IfModifiedSince;
 
             var route = new HttpRoute(_routeTemplate);
             var routeData = route.GetRouteData("/", request) ?? new HttpRouteData(route);

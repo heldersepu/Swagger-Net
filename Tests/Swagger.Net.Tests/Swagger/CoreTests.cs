@@ -670,6 +670,18 @@ namespace Swagger.Net.Tests.Swagger
         }
 
         [Test]
+        public void It_does_not_crash_with_IfModifiedSince()
+        {
+            SetUpDefaultRouteFor<ProductsController>();
+            SetUpHandler();
+
+            var swagger = Get(TEMP_URI.DOCS);
+            Assert.AreEqual(HttpStatusCode.OK, swagger.StatusCode);
+            swagger = Get(TEMP_URI.DOCS, new DateTimeOffset(DateTime.Now.AddDays(1)));
+            Assert.AreEqual(HttpStatusCode.NotModified, swagger.StatusCode);
+        }
+
+        [Test]
         public void It_exposes_config_to_workaround_multiple_actions_with_same_path_and_method()
         {
             SetUpDefaultRouteFor<ConflictingActionsController>();
