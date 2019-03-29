@@ -675,11 +675,12 @@ namespace Swagger.Net.Tests.Swagger
             SetUpDefaultRouteFor<ProductsController>();
             SetUpHandler();
 
-            var swagger = Get(TEMP_URI.DOCS, new DateTimeOffset(DateTime.Now));
+            const string DOC = "http://tempuri.org/swagger/docs/latest";
+            var swagger = Get(DOC, new DateTimeOffset(DateTime.Now));
             Assert.AreEqual(HttpStatusCode.OK, swagger.StatusCode);
-            swagger = Get(TEMP_URI.DOCS, new DateTimeOffset(DateTime.Now.AddDays(-1)));
+            swagger = Get(DOC, new DateTimeOffset(DateTime.Now.AddYears(-1)));
             Assert.AreEqual(HttpStatusCode.OK, swagger.StatusCode);
-            swagger = Get(TEMP_URI.DOCS, new DateTimeOffset(DateTime.Now.AddDays(1)));
+            swagger = Get(DOC, new DateTimeOffset(DateTime.Now.AddYears(1)));
             Assert.AreEqual(HttpStatusCode.NotModified, swagger.StatusCode);
         }
 
@@ -704,14 +705,6 @@ namespace Swagger.Net.Tests.Swagger
 
             var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/v1");
 
-            Assert.IsNotNull(swagger);
-        }
-
-        [Test]
-        public void It_handles_latest()
-        {
-            SetUpDefaultRouteFor<ProductsController>();
-            var swagger = GetContent<JObject>("http://tempuri.org/swagger/docs/latest");
             Assert.IsNotNull(swagger);
         }
 
