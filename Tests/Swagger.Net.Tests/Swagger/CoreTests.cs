@@ -675,7 +675,7 @@ namespace Swagger.Net.Tests.Swagger
             SetUpDefaultRouteFor<ProductsController>();
             SetUpHandler();
 
-            var swagger = Get(TEMP_URI.DOCS);
+            var swagger = Get(TEMP_URI.DOCS, new DateTimeOffset(DateTime.Now));
             Assert.AreEqual(HttpStatusCode.OK, swagger.StatusCode);
             swagger = Get(TEMP_URI.DOCS, new DateTimeOffset(DateTime.Now.AddDays(-1)));
             Assert.AreEqual(HttpStatusCode.OK, swagger.StatusCode);
