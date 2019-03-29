@@ -94,6 +94,13 @@ namespace Swagger.Net.Tests.SwaggerUi
         }
 
         [Test]
+        public void It_does_not_crash_with_random_param()
+        {
+            SetUpHandler();
+            Assert.DoesNotThrow(() => GetContentAsString(TEMP_URI.INDEX + "?abc=" + Guid.NewGuid()));
+        }
+
+        [Test]
         public void It_exposes_config_for_swagger_ui_settings()
         {
             SetUpHandler(c =>
