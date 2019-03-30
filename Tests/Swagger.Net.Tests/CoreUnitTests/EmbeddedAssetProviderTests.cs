@@ -1,5 +1,6 @@
 ﻿using NUnit.Framework;
 using Swagger.Net.SwaggerUi;
+using System;
 using System.Collections.Generic;
 
 namespace Swagger.Net.Tests.CoreUnitTests
@@ -10,6 +11,13 @@ namespace Swagger.Net.Tests.CoreUnitTests
         [Test]
         public void GetAsset_null()
         {
+            var prov = new EmbeddedAssetProvider(null, null);
+            Assert.Throws<NullReferenceException>(() => prov.GetAsset("", ""));
+        }
+
+        [Test]
+        public void GetAsset_empty()
+        {
             var prov = new EmbeddedAssetProvider(
                 new Dictionary<string, EmbeddedAssetDescriptor>(),
                 new Dictionary<string, string>());
@@ -17,12 +25,32 @@ namespace Swagger.Net.Tests.CoreUnitTests
         }
 
         [Test]
-        public void GetAsset_notnull()
+        public void GetAsset_ext_null()
+        {
+            var prov = new EmbeddedAssetProvider(null, null);
+            Assert.Throws<ArgumentNullException>(() => prov.GetAsset("", "index/ext"));
+        }
+
+        [Test]
+        public void GetAsset_ext_empty()
         {
             var prov = new EmbeddedAssetProvider(
                 new Dictionary<string, EmbeddedAssetDescriptor>(),
                 new Dictionary<string, string>());
-            Assert.IsNotNull(prov.GetAsset("", "index/ext"));
+            var a = prov.GetAsset("", "index/ext");
+            Assert.AreEqual("application/json", a.MediaType);
+            Assert.AreEqual(2, a.Stream.Length);
+        }
+
+        [Test]
+        public void GetAsset_ext_notnull()
+        {
+            var prov = new EmbeddedAssetProvider(
+                new Dictionary<string, EmbeddedAssetDescriptor> { { "a", null } },
+                new Dictionary<string, string>());
+            var a = prov.GetAsset("", "index/ext");
+            Assert.AreEqual("application/json", a.MediaType);
+            Assert.AreEqual(5, a.Stream.Length);
         }
 
         [Test]
