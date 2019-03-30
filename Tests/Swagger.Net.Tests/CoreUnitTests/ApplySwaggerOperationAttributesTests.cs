@@ -11,7 +11,7 @@ namespace Swagger.Net.Tests.CoreUnitTests
     class ApplySwaggerOperationAttributesTests
     {
         [Test]
-        public void GetAsset_null()
+        public void Apply_null()
         {
             var collSwagger = new Collection<SwaggerOperationAttribute>()
             {

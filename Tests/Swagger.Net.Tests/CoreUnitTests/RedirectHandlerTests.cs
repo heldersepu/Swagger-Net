@@ -13,7 +13,7 @@ namespace Swagger.Net.Tests.CoreUnitTests
         }
 
         [Test]
-        public void GetAsset_null()
+        public void SendAsync_null()
         {
             var redirect = new RedirectHandler(GetRootUrl, "swagger");
             Assert.DoesNotThrow(() => redirect.SendAsync(new HttpRequestMessage()));
