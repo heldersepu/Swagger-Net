@@ -10,24 +10,41 @@ namespace Swagger.Net.Tests.CoreUnitTests
     [TestFixture]
     class SchemaRegistryTests
     {
+
+        [Test]
+        public void SchemaRegistry_Null1()
+        {
+            var mock = new Mock<JsonSerializerSettings>();
+            Assert.Throws<NullReferenceException>(() => new SchemaRegistry(mock.Object, null));
+        }
+
+        [Test]
+        public void SchemaRegistry_Null2()
+        {
+            Assert.Throws<NullReferenceException>(() => new SchemaRegistry(null, null));
+        }
+
+        [Test]
+        public void CreateDictionarySchema_Empty()
+        {
+            var mock = new Mock<JsonDictionaryContract>(typeof(Dictionary<int,int>));
+            var mockJsonSerializer = new Mock<JsonSerializerSettings>();
+
+            var opt = new SwaggerGeneratorOptions();
+            var schema = new SchemaRegistry(mockJsonSerializer.Object, opt);
+            Assert.DoesNotThrow(() => schema.CreateDictionarySchema(mock.Object));
+        }
+
         [Test]
         public void CreateDictionarySchema_Null()
         {
-            var mockContract = new Mock<JsonDictionaryContract>(typeof(Dictionary<int,int>));
-            //mockContract.Setup(x => x.DictionaryKeyType).Returns((Type)null);
+            var mock = new Mock<JsonDictionaryContract>(typeof(Dictionary<int, int>));
+            //mock.Setup(x => x.DictionaryKeyType).Returns(null);
             var mockJsonSerializer = new Mock<JsonSerializerSettings>();
 
-            bool hasError = false;
-            try
-            {
-                var schema = new SchemaRegistry(mockJsonSerializer.Object, null);
-                schema.CreateDictionarySchema(mockContract.Object);
-            }
-            catch 
-            {
-                hasError = true;
-            }
-            Assert.IsTrue(hasError);
+            var opt = new SwaggerGeneratorOptions();
+            var schema = new SchemaRegistry(mockJsonSerializer.Object, opt);
+            Assert.DoesNotThrow(() => schema.CreateDictionarySchema(mock.Object));
         }
 
         [Test]
