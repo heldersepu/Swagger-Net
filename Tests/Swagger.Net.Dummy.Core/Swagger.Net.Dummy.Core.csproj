@@ -155,6 +155,9 @@
   <ItemGroup>
     <EmbeddedResource Include="XmlComments.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="bad.xml" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>xcopy "$(TargetDir)XmlComments.xml" "$(SolutionDir)Tests\Swagger.Net.Dummy.WebHost" /Y

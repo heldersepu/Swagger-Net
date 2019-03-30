@@ -45,6 +45,14 @@ namespace Swagger.Net.Tests.Swagger
         }
 
         [Test]
+        public void It_does_not_error_on_bad_xml()
+        {
+            var a = typeof(SwaggerConfig).Assembly;
+            SetUpHandler(c => { c.IncludeAllXmlComments(a, null); });
+            Assert.DoesNotThrow(() => GetContent<JObject>(TEMP_URI.DOCS));
+        }
+
+        [Test]
         public void It_provides_info_version_and_title()
         {
             var swagger = GetContent<JObject>(TEMP_URI.DOCS);

@@ -1,0 +1,8 @@
+﻿// This is not xml format
+
+namespace Swagger.Net.Dummy
+{
+    class bad
+    {
+    }
+}
