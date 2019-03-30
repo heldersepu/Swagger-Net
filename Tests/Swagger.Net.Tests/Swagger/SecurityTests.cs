@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json.Linq;
 using NUnit.Framework;
+using Swagger.Net.Dummy.App_Start;
 using Swagger.Net.Dummy.Controllers;
 using Swagger.Net.Tests.Swagger;
 using System.Collections.Generic;
@@ -10,10 +11,7 @@ namespace Swagger.Net.Tests.SwaggerFilters
     [TestFixture]
     public class SecurityTests : SwaggerTestBase
     {
-        public SecurityTests()
-            : base("swagger/docs/{apiVersion}")
-        {
-        }
+        public SecurityTests() : base("swagger/docs/{apiVersion}") { }
 
         [SetUp]
         public void SetUp()
@@ -25,21 +23,21 @@ namespace Swagger.Net.Tests.SwaggerFilters
         public void It_exposes_config_to_define_a_basic_auth_scheme_for_the_api()
         {
             SetUpHandler(c =>
-                {
-                    c.BasicAuth("basic")
-                        .Description("Basic HTTP Authentication");
-                });
+            {
+                c.BasicAuth("basic").Description("Basic HTTP Auth");
+                c.CustomProvider((d) => new CachingSwaggerProvider(d));
+            });
 
             var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var securityDefinitions = swagger["securityDefinitions"];
             var expected = JObject.FromObject(new
+            {
+                basic = new
                 {
-                    basic = new
-                    {
-                        type = "basic",
-                        description = "Basic HTTP Authentication"
-                    }
-                });
+                    type = "basic",
+                    description = "Basic HTTP Auth"
+                }
+            });
 
             Assert.AreEqual(expected.ToString(), securityDefinitions.ToString());
         }
@@ -48,10 +46,10 @@ namespace Swagger.Net.Tests.SwaggerFilters
         public void It_exposes_config_to_define_an_api_key_auth_scheme_for_the_api()
         {
             SetUpHandler(c =>
-                {
-                    c.ApiKey("apiKey", "header", "API Key Authentication");
-                    c.ApiKey("appId", "header", "APP ID Authentication");
-                });
+            {
+                c.ApiKey("apiKey", "header", "API Key Authentication");
+                c.ApiKey("appId", "header", "APP ID Authentication");
+            });
 
             var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var securityDefinitions = swagger["securityDefinitions"];
@@ -150,21 +148,21 @@ namespace Swagger.Net.Tests.SwaggerFilters
             var swagger = GetContent<JObject>(TEMP_URI.DOCS);
             var securityDefinitions = swagger["securityDefinitions"];
             var expected = JObject.FromObject(new
+            {
+                oauth2 = new
                 {
-                    oauth2 = new
+                    type = "oauth2",
+                    description = "OAuth2 Authorization Code Grant",
+                    flow = "accessCode",
+                    authorizationUrl = "https://tempuri.org/auth",
+                    tokenUrl = "https://tempuri.org/token",
+                    scopes = new
                     {
-                        type = "oauth2",
-                        description = "OAuth2 Authorization Code Grant",
-                        flow = "accessCode",
-                        authorizationUrl = "https://tempuri.org/auth",
-                        tokenUrl = "https://tempuri.org/token",
-                        scopes = new
-                        {
-                            read = "Read access to protected resources",
-                            write = "Write access to protected resources"
-                        },
-                    }
-                });
+                        read = "Read access to protected resources",
+                        write = "Write access to protected resources"
+                    },
+                }
+            });
 
             Assert.AreEqual(expected.ToString(), securityDefinitions.ToString());
         }
