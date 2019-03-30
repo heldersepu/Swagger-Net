@@ -88,7 +88,42 @@ namespace Swagger.Net.Tests.CoreUnitTests
             var schema = new SchemaRegistry(mock.Object, new SwaggerGeneratorOptions());
             Assert.IsNotNull(schema.CreateDefinitionSchema(contract));
         }
+
+        [Test]
+        public void CreateEnumSchema_null()
+        {
+            var mock = new Mock<JsonSerializerSettings>();
+            var opt = new SwaggerGeneratorOptions();
+
+            var schema = new SchemaRegistry(mock.Object, opt);
+            Assert.Throws<NullReferenceException>(() => schema.CreateEnumSchema(null, null));
+        }
+
+        [Test]
+        public void CreateEnumSchema_empty()
+        {
+            var contract = new JsonPrimitiveContract(typeof(int));
+            var mock = new Mock<JsonSerializerSettings>();
+            var opt = new SwaggerGeneratorOptions();
+
+            var schema = new SchemaRegistry(mock.Object, opt);
+            var enu = schema.CreateEnumSchema(contract, typeof(int));
+            Assert.IsNotNull(enu);
+        }
+
+        [Test]
+        public void CreateEnumSchema_camelCase()
+        {
+            var contract = new JsonPrimitiveContract(typeof(int));
+            var mock = new Mock<JsonSerializerSettings>();
+            var opt = new SwaggerGeneratorOptions(
+                describeAllEnumsAsStrings: true,
+                describeStringEnumsInCamelCase: true
+            );
+
+            var schema = new SchemaRegistry(mock.Object, opt);
+            var enu = schema.CreateEnumSchema(contract, typeof(int));
+            Assert.IsNotNull(enu);
+        }
     }
-
-
 }
