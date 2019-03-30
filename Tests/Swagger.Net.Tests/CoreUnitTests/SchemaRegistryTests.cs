@@ -48,6 +48,28 @@ namespace Swagger.Net.Tests.CoreUnitTests
         }
 
         [Test]
+        public void CreateObjectSchema_Null()
+        {
+            var mock = new Mock<JsonSerializerSettings>();
+            var opt = new SwaggerGeneratorOptions();
+            var schema = new SchemaRegistry(mock.Object, opt);
+            Assert.Throws<NullReferenceException>(() => schema.CreateObjectSchema(null));
+        }
+
+        [Test]
+        public void CreateObjectSchema_addXmlName()
+        {
+            var mock = new Mock<JsonSerializerSettings>();
+            var opt = new SwaggerGeneratorOptions();
+            var schema = new SchemaRegistry(mock.Object, opt);
+            var c = new JsonObjectContract(typeof(int));
+            var obj = schema.CreateObjectSchema(c, false);
+            Assert.IsNull(obj.xml);
+            obj = schema.CreateObjectSchema(c, true);
+            Assert.IsNotNull(obj.xml);
+        }
+
+        [Test]
         public void CreateDefinitionSchema_Null()
         {
             var contract = new JsonPrimitiveContract(typeof(int));
