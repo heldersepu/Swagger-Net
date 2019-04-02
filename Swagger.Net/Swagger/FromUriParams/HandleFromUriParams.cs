@@ -47,7 +47,7 @@ namespace Swagger.Net.FromUriParams
             }
         }
 
-        private void ExtractAndAddQueryParams(
+        public void ExtractAndAddQueryParams(
             Schema sourceSchema,
             string sourceQualifier,
             bool? sourceRequired,
