@@ -1,5 +1,6 @@
 ﻿using Moq;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Web.Http.Controllers;
@@ -32,9 +33,16 @@ namespace Swagger.Net.Tests.CoreUnitTests
         }
 
         [Test]
-        public void ResponseType_Test()
+        public void ResponseType_Null()
         {
             Assert.IsNull(apiDescription(null, "POST").ResponseType());
+        }
+
+        [Test]
+        public void ResponseType_Empty()
+        {
+            var ad = new ApiDescription();
+            Assert.Throws<NullReferenceException>(() => ad.ResponseType());
         }
 
         [Test]
