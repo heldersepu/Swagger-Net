@@ -119,17 +119,12 @@ namespace Swagger.Net.XmlComments
 
             builder.Append("(");
             var genericParametersPositions = GetTypeParameterPositions(declaringType);
-            var generic = 0;
             foreach (var param in parameters)
             {
                 if (param.ParameterType.IsGenericParameter)
-
                     builder.Append($"`{genericParametersPositions[param.ParameterType.Name]}");
-
                 else
-
                     AppendFullTypeName(param.ParameterType, builder, true, genericParametersPositions);
-
                 builder.Append(",");
             }
             builder.Replace(",", ")", builder.Length - 1, 1);
