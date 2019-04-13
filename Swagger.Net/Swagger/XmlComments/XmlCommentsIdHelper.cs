@@ -93,10 +93,7 @@ namespace Swagger.Net.XmlComments
                 for (int i = 0; i < genericArgs.Length; i++)
                 {
                     if (type.IsEnum || ((type.IsClass || type.IsInterface) && genericArgs[i].FullName == null))
-                        if (genericParametersPositions == null)
-                            builder.Append($"`{i}");
-                        else
-                            builder.Append($"`{genericParametersPositions[genericArgs[i].Name]}");
+                        builder.Append($"`{genericParametersPositions[genericArgs[i].Name]}");
                     else
                         AppendFullTypeName(genericArgs[i], builder, true, genericParametersPositions);
                     builder.Append(",");
@@ -126,16 +123,13 @@ namespace Swagger.Net.XmlComments
             foreach (var param in parameters)
             {
                 if (param.ParameterType.IsGenericParameter)
-                {
-                    if (genericParametersPositions == null)
-                        builder.Append($"`{generic++}");
-                    else
-                        builder.Append($"`{genericParametersPositions[param.ParameterType.Name]}");
-                }
+
+                    builder.Append($"`{genericParametersPositions[param.ParameterType.Name]}");
+
                 else
-                {
+
                     AppendFullTypeName(param.ParameterType, builder, true, genericParametersPositions);
-                }
+
                 builder.Append(",");
             }
             builder.Replace(",", ")", builder.Length - 1, 1);
