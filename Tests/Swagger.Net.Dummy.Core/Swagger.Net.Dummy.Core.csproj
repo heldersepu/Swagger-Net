@@ -66,6 +66,7 @@
     <Compile Include="App_Start\CachingSwaggerProvider.cs" />
     <Compile Include="Controllers\FromHeaderParamsController.cs" />
     <Compile Include="Controllers\FromBodyParamsController.cs" />
+    <Compile Include="Controllers\NestingClassController.cs" />
     <Compile Include="Controllers\NestedEnumController.cs" />
     <Compile Include="Controllers\BlobController.cs" />
     <Compile Include="Controllers\ObsoleteEnumsController.cs" />
