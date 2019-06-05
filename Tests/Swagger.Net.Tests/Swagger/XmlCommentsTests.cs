@@ -20,6 +20,7 @@ namespace Swagger.Net.Tests.Swagger
             SetUpAttributeRoutesFrom(typeof(XmlAnnotatedController).Assembly);
             SetUpDefaultRouteFor<XmlAnnotatedController>();
             SetUpDefaultRouteFor<BaseChildController>();
+            SetUpDefaultRouteFor<NestingClassController>();
             SetUpHandler();
         }
 
@@ -249,6 +250,15 @@ namespace Swagger.Net.Tests.Swagger
             var displayNameProperty = swagger["definitions"]["AccountPreferences"]["properties"]["DisplayName"];
             Assert.IsNotNull(displayNameProperty["description"]);
             Assert.AreEqual("Provide a display name to use instead of Username when signed in", displayNameProperty["description"].ToString());
+        }
+
+        [Test]
+        public void It_handles_nested_generic_class_properties()
+        {
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
+            var displayNameProperty = swagger["definitions"]["NestedClassOfString"]["properties"]["GenericallyTypedProperty"];
+            Assert.IsNotNull(displayNameProperty["description"]);
+            Assert.AreEqual("Property that is of generic type taken from the class that this class is nested into", displayNameProperty["description"].ToString());
         }
 
         [Test]

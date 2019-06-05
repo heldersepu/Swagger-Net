@@ -64,7 +64,7 @@ namespace Swagger.Net.XmlComments
         {
             if (type.IsNested)
             {
-                AppendTypeName(type.DeclaringType, builder, true, genericParametersPositions);
+                AppendTypeName(type.DeclaringType, builder, genericParametersPositions != null, GetTypeParameterPositions(type.DeclaringType));
                 builder.Append(".");
             }
 

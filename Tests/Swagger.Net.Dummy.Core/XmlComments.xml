@@ -4,6 +4,11 @@
         <name>Swagger.Net.Dummy.Core</name>
     </assembly>
     <members>
+        <member name="P:Swagger.Net.Dummy.Controllers.NestingBaseClassController`1.NestedClass.GenericallyTypedProperty">
+            <summary>
+            Property that is of generic type taken from the class that this class is nested into
+            </summary>
+        </member>
         <member name="M:Swagger.Net.Dummy.Controllers.NestedEnum`1.Get(System.Nullable{Swagger.Net.Dummy.Controllers.NestedEnum{`0}.Giorno})">
             <summary>NestedEnum test</summary>
         </member>
