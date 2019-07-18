@@ -60,6 +60,14 @@
             <summary>Credit card expiration Year</summary>
             <example>96</example>
         </member>
+        <member name="M:Swagger.Net.Dummy.Controllers.SwaggerAnnotatedController.GetById(System.Int32)">
+            <summary>
+            Get message by Id
+            </summary>
+            <param name="id">The id</param>
+            <returns>The message.</returns>
+            <response code="404">Not found</response>
+        </member>
         <member name="T:Swagger.Net.Dummy.Controllers.XmlAnnotatedController">
             <summary>
             XmlAnnotatedController

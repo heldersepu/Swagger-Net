@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Web.Http;
 using System.Web.Http.Controllers;
@@ -105,6 +106,8 @@ namespace Swagger.Net.XmlComments
 
                     operation.responses[statusCode] = response;
                 }
+
+                operation.responses = new SortedDictionary<string, Response>(operation.responses);
             }
         }
 

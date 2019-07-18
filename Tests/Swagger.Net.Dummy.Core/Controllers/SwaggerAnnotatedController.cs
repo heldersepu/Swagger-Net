@@ -26,6 +26,13 @@ namespace Swagger.Net.Dummy.Controllers
             throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Get message by Id
+        /// </summary>
+        /// <param name="id">The id</param>
+        /// <returns>The message.</returns>
+        /// <response code="404">Not found</response>
+        [SwaggerResponse(HttpStatusCode.OK, Type = typeof(Message))]
         [SwaggerOperationFilter(typeof(AddGetMessageExamples))]
         public Message GetById(int id)
         {

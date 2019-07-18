@@ -115,6 +115,36 @@ namespace Swagger.Net.Tests.Swagger
                 });
             Assert.AreEqual(expected.ToString(), getResponses.ToString());
         }
+        [Test]
+        public void It_documents_responses_from_swagger_response_attributes_and_xml_comments()
+        {
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
+            var getResponses = swagger["paths"]["/swaggerannotated/{id}"]["get"]["responses"];
+            var expected = JObject.FromObject(new Dictionary<string, object>()
+                {
+                    {
+                        "200", new
+                        {
+                            description = "OK",
+                            schema = JObject.Parse("{ \"$ref\": \"#/definitions/Message\" }"),
+                            examples = JObject.Parse("{ \"application/json\": { \"title\": \"A message\", \"content\": \"Some content\" } }")
+                        }
+                    },
+                    {
+                        "400", new
+                        {
+                            description = "Bad request"
+                        }
+                    },
+                    {
+                        "404", new
+                        {
+                            description = "Not found"
+                        }
+                    }
+                });
+            Assert.AreEqual(expected.ToString(), getResponses.ToString());
+        }
 
         [Test]
         public void It_documents_responses_from_swagger_response_attributes_patch()
