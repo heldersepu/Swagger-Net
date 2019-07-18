@@ -50,7 +50,7 @@ namespace Swagger.Net.Tests.SwaggerFilters
 
             var swagger = GetContent<SwaggerDocument>(TEMP_URI.DOCS);
 
-            Assert.IsNotNull(swagger.paths["/protectedresources2"].get);
+            Assert.IsNotNull(swagger.paths["/protectedresources2"].get.security);
         }
     }
 }
