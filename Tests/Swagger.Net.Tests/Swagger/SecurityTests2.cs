@@ -39,5 +39,18 @@ namespace Swagger.Net.Tests.SwaggerFilters
 
             Assert.AreEqual(expected.ToString(), securityDefinitions.ToString());
         }
+
+        [Test]
+        public void It_exposes_security_on_action()
+        {
+            SetUpHandler(c =>
+            {
+                c.ApiKey("token", "header", "TokenAuth", typeof(TokenAuthAttribute));
+            });
+
+            var swagger = GetContent<SwaggerDocument>(TEMP_URI.DOCS);
+
+            Assert.IsNotNull(swagger.paths["/protectedresources2"].get);
+        }
     }
 }
