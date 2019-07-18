@@ -1099,7 +1099,7 @@ namespace Swagger.Net.Tests.Swagger
 
             Assert.IsNotNull(swagger.definitions["ComplexObject1"].required);
         }
-        
+
         [Test]
         public void It_marks_required_fields_as_required()
         {
@@ -1138,9 +1138,5 @@ namespace Swagger.Net.Tests.Swagger
             Assert.IsNotNull(paths[1].Value.get.security);
 
         }
-        
-        
     }
-
-
 }
