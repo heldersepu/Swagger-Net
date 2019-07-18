@@ -311,7 +311,7 @@ namespace Swagger.Net.Application
         {
             var httpConfig = swaggerRequest.GetConfiguration();
 
-            var securityDefintitions = _securitySchemeBuilders.Any()
+            var securityDefs = _securitySchemeBuilders.Any()
                 ? _securitySchemeBuilders.ToDictionary(kvp => kvp.Key, kvp => kvp.Value.Build())
                 : null;
 
@@ -335,7 +335,7 @@ namespace Swagger.Net.Application
             var options = new SwaggerGeneratorOptions(
                 versionSupportResolver: _versionSupportResolver,
                 schemes: _schemes,
-                securityDefinitions: securityDefintitions,
+                securityDefinitions: securityDefs,
                 ignoreObsoleteActions: _ignoreObsoleteActions,
                 accessControlAllowOrigin: _accessControlAllowOrigin,
                 groupingKeySelector: _groupingKeySelector,
