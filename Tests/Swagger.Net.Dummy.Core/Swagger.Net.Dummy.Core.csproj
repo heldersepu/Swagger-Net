@@ -70,6 +70,7 @@
     <Compile Include="Controllers\NestedEnumController.cs" />
     <Compile Include="Controllers\BlobController.cs" />
     <Compile Include="Controllers\ObsoleteEnumsController.cs" />
+    <Compile Include="Controllers\ProtectedResources2Controller.cs" />
     <Compile Include="Controllers\SerializableController.cs" />
     <Compile Include="Controllers\BaseChildController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
