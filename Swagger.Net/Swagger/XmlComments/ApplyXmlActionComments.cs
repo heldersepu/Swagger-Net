@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Web.Http;
 using System.Web.Http.Controllers;
@@ -84,21 +85,29 @@ namespace Swagger.Net.XmlComments
 
             if (responseNodes.Count > 0)
             {
-                var successResponse = operation.responses.First().Value;
-                operation.responses.Clear();
+                var successResponse = operation.responses.First();
 
                 while (responseNodes.MoveNext())
                 {
                     var statusCode = responseNodes.Current.GetAttribute("code", "");
+                    var isSuccessCode = statusCode.StartsWith("2");
                     var description = responseNodes.Current.ExtractContent();
 
                     var response = new Response
                     {
                         description = description,
-                        schema = statusCode.StartsWith("2") ? successResponse.schema : null
+                        schema = isSuccessCode ? successResponse.Value.schema : null
                     };
+
+                    if (isSuccessCode)
+                    {
+                        operation.responses.Remove(successResponse);
+                    }
+
                     operation.responses[statusCode] = response;
                 }
+
+                operation.responses = new SortedDictionary<string, Response>(operation.responses);
             }
         }
 
