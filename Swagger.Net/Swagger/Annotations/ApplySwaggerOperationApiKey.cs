@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Web.Http.Controllers;
 using System.Web.Http.Description;
 
 namespace Swagger.Net.Annotations
@@ -18,12 +19,20 @@ namespace Swagger.Net.Annotations
 
         public void Apply(Operation o, SchemaRegistry s, ApiDescription a)
         {
-            var scopes = a.ActionDescriptor.GetFilterPipeline()
+            var addSecurity = a.ActionDescriptor.GetFilterPipeline()
                         .Select(filterInfo => filterInfo.Instance)
-                        .Where(x =>_type.IsInstanceOfType(x))
-                        .Distinct();
+                        .Where(x => _type.IsInstanceOfType(x))
+                        .Distinct().Any();
 
-            if (scopes.Any())
+            if (!addSecurity)
+            {
+                var ad = a.ActionDescriptor as ReflectedHttpActionDescriptor;
+                addSecurity = ad.MethodInfo.CustomAttributes
+                    .Where(x => x.AttributeType.ToString() == _type.ToString())
+                    .Any();
+            }
+
+            if (addSecurity)
             {
                 if (o.security == null)
                     o.security = new List<IDictionary<string, IEnumerable<string>>>();
