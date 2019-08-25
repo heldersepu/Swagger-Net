@@ -124,6 +124,7 @@
     <Compile Include="Swagger\FromHeaderParamsTests.cs" />
     <Compile Include="Swagger\SchemaArraysTests.cs" />
     <Compile Include="Swagger\SchemaTestsWithCustomAuthorizeAttribute.cs" />
+    <Compile Include="Swagger\SecurityTests3.cs" />
     <Compile Include="Swagger\SecurityTests2.cs" />
     <Compile Include="Swagger\SerializableTests.cs" />
     <Compile Include="Swagger\DefaultRootUrlResolverTests.cs" />
