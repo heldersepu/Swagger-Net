@@ -32,6 +32,11 @@ namespace Swagger.Net.Annotations
                     .Any();
             }
 
+            if (!addSecurity)
+            {
+                //a.ActionDescriptor.ControllerDescriptor.GetCustomAttributes<_type>(true)
+            }
+
             if (addSecurity)
             {
                 if (o.security == null)
