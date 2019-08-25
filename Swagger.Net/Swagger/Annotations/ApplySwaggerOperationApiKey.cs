@@ -34,7 +34,9 @@ namespace Swagger.Net.Annotations
 
             if (!addSecurity)
             {
-                //a.ActionDescriptor.ControllerDescriptor.GetCustomAttributes<_type>(true)
+                addSecurity = a.ActionDescriptor.ControllerDescriptor.GetCustomAttributes<object>(true)
+                    .Where(x => x.ToString() == _type.ToString())
+                    .Any();
             }
 
             if (addSecurity)
