@@ -10,7 +10,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Add a Swagger(ui 3.x) to your WebApi projects!</description>
     <summary>Combines ApiExplorer and Swagger/swagger-ui(3.x) to provide documentation and playground to your API.</summary>
-    <icon>https://avatars2.githubusercontent.com/u/7658037</icon>
+    <icon>icon.png</icon>
     <copyright>CopyLeft 2017</copyright>
     <tags>Swagger SwaggerUi Documentation Discovery Help WebApi AspNet AspNetWebApi Docs SelfHost OWIN</tags>
     <dependencies>
@@ -24,5 +24,6 @@
     <file src="Nuget\Content\App_Start\SwaggerConfig.cs.pp" target="Content" />
     <file src="Nuget\Tools\Init.ps1" target="Tools\Init.ps1" />
     <file src="..\LICENSE.TXT" target="" />
+    <file src="..\icon.png" target="" />
   </files>
 </package>
