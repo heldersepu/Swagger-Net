@@ -68,18 +68,18 @@ namespace Swagger.Net
             var dictionaryContract = jsonContract as JsonDictionaryContract;
             if (dictionaryContract != null)
                 return dictionaryContract.IsSelfReferencing()
-                    ? CreateRefSchema(type)
+                    ? CreateRefSchema(type, typeName)
                     : FilterSchema(CreateDictionarySchema(dictionaryContract), jsonContract);
 
             var arrayContract = jsonContract as JsonArrayContract;
             if (arrayContract != null)
                 return arrayContract.IsSelfReferencing()
-                    ? CreateRefSchema(type)
+                    ? CreateRefSchema(type, typeName)
                     : FilterSchema(CreateArraySchema(arrayContract, true, typeName), jsonContract);
 
             var objectContract = jsonContract as JsonObjectContract;
             if (objectContract != null && !objectContract.IsAmbiguous())
-                return CreateRefSchema(type);
+                return CreateRefSchema(type, typeName);
 
             // Fallback to abstract "object"
             return FilterSchema(new Schema { type = "object" }, jsonContract);
@@ -247,11 +247,11 @@ namespace Swagger.Net
             return s;
         }
 
-        private Schema CreateRefSchema(Type type)
+        private Schema CreateRefSchema(Type type, string typeName)
         {
             if (!_workItems.ContainsKey(type))
             {
-                var schemaId = _options.SchemaIdSelector(type);
+                var schemaId = typeName ?? _options.SchemaIdSelector(type);
                 if (_workItems.Any(entry => entry.Value.SchemaId == schemaId))
                 {
                     var conflictingType = _workItems.First(entry => entry.Value.SchemaId == schemaId).Key;

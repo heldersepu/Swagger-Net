@@ -48,6 +48,36 @@ namespace Swagger.Net.Tests.CoreUnitTests
         }
 
         [Test]
+        public void GetOrRegister_withoutTypeName()
+        {
+            string SchemaIdSelector(Type arg) => arg.FullName;
+            var mock = new Mock<JsonSerializerSettings>();
+            var opt = new SwaggerGeneratorOptions(schemaIdSelector: SchemaIdSelector);
+            var schema = new SchemaRegistry(mock.Object, opt);
+            var modelType = new {Property1 = "Property1"}.GetType();
+
+            schema.GetOrRegister(modelType);
+
+            Assert.That(schema.Definitions, Is.Not.Null.And.ContainKey(SchemaIdSelector(modelType)));
+            Assert.That(schema.Definitions[SchemaIdSelector(modelType)].properties, Is.Not.Null.And.ContainKey("Property1"));
+        }
+
+        [Test]
+        public void GetOrRegister_withTypeName()
+        {
+            var mock = new Mock<JsonSerializerSettings>();
+            var opt = new SwaggerGeneratorOptions();
+            var schema = new SchemaRegistry(mock.Object, opt);
+            var model = new {Property1 = "Property1"};
+            const string typeName = "testTypeName";
+
+            schema.GetOrRegister(model.GetType(), typeName);
+
+            Assert.That(schema.Definitions, Is.Not.Null.And.ContainKey(typeName));
+            Assert.That(schema.Definitions[typeName].properties, Is.Not.Null.And.ContainKey("Property1"));
+        }
+
+        [Test]
         public void CreateObjectSchema_Null()
         {
             var mock = new Mock<JsonSerializerSettings>();
