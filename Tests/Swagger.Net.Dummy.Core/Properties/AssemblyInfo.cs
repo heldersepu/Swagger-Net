@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Swaskhbuckle.Dummy.Core")]
-[assembly: AssemblyCopyright("CopyLeft ©  2017")]
+[assembly: AssemblyCopyright("CopyLeft ©  2020")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
