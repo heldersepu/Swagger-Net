@@ -78,6 +78,56 @@ namespace Swagger.Net.Tests.CoreUnitTests
         }
 
         [Test]
+        public void GetOrRegister_registerMultiple_SameType_SameName_RegistersOne()
+        {
+            var mock = new Mock<JsonSerializerSettings>();
+            var opt = new SwaggerGeneratorOptions();
+            var schema = new SchemaRegistry(mock.Object, opt);
+            var model = new {Property1 = "Property1"};
+            const string testType = "testTypeName";
+
+            schema.GetOrRegister(model.GetType(), testType);
+            schema.GetOrRegister(model.GetType(), testType);
+
+            Assert.That(schema.Definitions, Is.Not.Null.And.Count.EqualTo(1));
+            Assert.That(schema.Definitions, Contains.Key(testType));
+            Assert.That(schema.Definitions[testType].properties, Is.Not.Null.And.ContainKey("Property1"));
+        }
+
+        [Test]
+        public void GetOrRegister_registerMultiple_SameType_DifferentName_RegistersTwo()
+        {
+            var mock = new Mock<JsonSerializerSettings>();
+            var opt = new SwaggerGeneratorOptions();
+            var schema = new SchemaRegistry(mock.Object, opt);
+            var model = new {Property1 = "Property1"};
+            const string testType1 = "testTypeName1";
+            const string testType2 = "testTypeName2";
+
+            schema.GetOrRegister(model.GetType(), testType1);
+            schema.GetOrRegister(model.GetType(), testType2);
+
+            Assert.That(schema.Definitions, Is.Not.Null.And.Count.EqualTo(2));
+            Assert.That(schema.Definitions, Contains.Key(testType1).And.ContainKey(testType2));
+            Assert.That(schema.Definitions[testType1].properties, Is.Not.Null.And.ContainKey("Property1"));
+            Assert.That(schema.Definitions[testType2].properties, Is.Not.Null.And.ContainKey("Property1"));
+        }
+
+        [Test]
+        public void GetOrRegister_registerMultiple_DifferentType_SameName_ThrowsError()
+        {
+            var mock = new Mock<JsonSerializerSettings>();
+            var opt = new SwaggerGeneratorOptions();
+            var schema = new SchemaRegistry(mock.Object, opt);
+            var model1 = new {Property1 = "Property1"};
+            var model2 = new {Property2 = "Property2"};
+            const string testType = "testTypeName";
+
+            schema.GetOrRegister(model1.GetType(), testType);
+            Assert.Throws<InvalidOperationException>(() => schema.GetOrRegister(model2.GetType(), testType));
+        }
+
+        [Test]
         public void CreateObjectSchema_Null()
         {
             var mock = new Mock<JsonSerializerSettings>();
