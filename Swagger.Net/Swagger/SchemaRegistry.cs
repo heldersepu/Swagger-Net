@@ -12,12 +12,14 @@ namespace Swagger.Net
         private readonly JsonSerializerSettings _jsonSerializerSettings;
         private readonly SwaggerGeneratorOptions _options;
         private readonly IContractResolver _contractResolver;
+        private readonly ICollection<WorkItem> _workItems;
 
-        private IDictionary<Type, WorkItem> _workItems;
         private class WorkItem
         {
             public string SchemaId;
+            public Type Type;
             public bool InProgress;
+            public bool Done;
             public Schema Schema;
         }
 
@@ -30,7 +32,7 @@ namespace Swagger.Net
             {
                 IgnoreIsSpecifiedMembers = options.IgnoreIsSpecifiedMembers
             };
-            _workItems = new Dictionary<Type, WorkItem>();
+            _workItems = new List<WorkItem>();
             Definitions = new Dictionary<string, Schema>();
         }
 
@@ -38,16 +40,18 @@ namespace Swagger.Net
         {
             var schema = CreateInlineSchema(type, typeName);
 
-            // Iterate outstanding work items (i.e. referenced types) and generate the corresponding definition
-            while (_workItems.Any(entry => entry.Value.Schema == null && !entry.Value.InProgress))
-            {
-                var typeMapping = _workItems.First(entry => entry.Value.Schema == null && !entry.Value.InProgress);
-                var workItem = typeMapping.Value;
+            var workItemToBeProcessed = _workItems.FirstOrDefault(workItem => !workItem.Done && !workItem.InProgress);
 
-                workItem.InProgress = true;
-                workItem.Schema = CreateDefinitionSchema(typeMapping.Key);
-                Definitions.Add(workItem.SchemaId, workItem.Schema);
-                workItem.InProgress = false;
+            // Iterate outstanding work items (i.e. referenced types) and generate the corresponding definition
+            while (workItemToBeProcessed != null)
+            {
+                workItemToBeProcessed.InProgress = true;
+                workItemToBeProcessed.Schema = CreateDefinitionSchema(workItemToBeProcessed.Type);
+                Definitions.Add(workItemToBeProcessed.SchemaId, workItemToBeProcessed.Schema);
+                workItemToBeProcessed.InProgress = false;
+                workItemToBeProcessed.Done = true;
+
+                workItemToBeProcessed = _workItems.FirstOrDefault(workItem => !workItem.Done && !workItem.InProgress);
             }
 
             return schema;
@@ -103,7 +107,7 @@ namespace Swagger.Net
             if (jsonContract is JsonObjectContract)
                 return FilterSchema(CreateObjectSchema((JsonObjectContract)jsonContract, true), jsonContract);
 
-            throw new InvalidOperationException("Unsupported type for Defintitions. Must be Dictionary, Array or Object");
+            throw new InvalidOperationException("Unsupported type for Definitions. Must be Dictionary, Array or Object");
         }
 
         public Schema CreatePrimitiveSchema(JsonPrimitiveContract primitiveContract)
@@ -249,22 +253,26 @@ namespace Swagger.Net
 
         private Schema CreateRefSchema(Type type, string typeName)
         {
-            if (!_workItems.ContainsKey(type))
+            var schemaId = typeName ?? _options.SchemaIdSelector(type);
+
+            var existingWorkItem = _workItems.FirstOrDefault(entry => entry.SchemaId == schemaId);
+
+            if (existingWorkItem == null)
             {
-                var schemaId = typeName ?? _options.SchemaIdSelector(type);
-                if (_workItems.Any(entry => entry.Value.SchemaId == schemaId))
+                _workItems.Add(new WorkItem { SchemaId = schemaId, Type = type });
+            }
+            else
+            {
+                if (existingWorkItem.Type != type)
                 {
-                    var conflictingType = _workItems.First(entry => entry.Value.SchemaId == schemaId).Key;
                     throw new InvalidOperationException(String.Format(
                         "Conflicting schemaIds: Duplicate schemaIds detected for types {0} and {1}. " +
                         "See the config setting - \"UseFullTypeNameInSchemaIds\" for a potential workaround",
-                        type.FullName, conflictingType.FullName));
+                        type.FullName, existingWorkItem.Type.FullName));
                 }
-
-                _workItems.Add(type, new WorkItem { SchemaId = schemaId });
             }
 
-            return new Schema { @ref = "#/definitions/" + _workItems[type].SchemaId };
+            return new Schema { @ref = "#/definitions/" + schemaId };
         }
 
         private Schema FilterSchema(Schema schema, JsonContract jsonContract)
