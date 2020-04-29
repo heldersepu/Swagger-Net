@@ -48,8 +48,7 @@
       <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.12.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
-      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -131,6 +130,7 @@
     <Content Include="Swagger.Net.nuspec">
       <SubType>Designer</SubType>
     </Content>
+    <None Include="app.config" />
     <None Include="Nuget\Content\App_Start\SwaggerConfig.cs.pp" />
     <None Include="Nuget\Tools\Init.ps1" />
     <None Include="packages.config">
