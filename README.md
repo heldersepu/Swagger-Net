@@ -29,3 +29,14 @@ ___
 ## [Authorization Schemes](https://github.com/heldersepu/Swagger-Net/wiki/2-Troubleshooting#describing-securityauthorization-schemes)
 ## [Customizing the swagger-ui](https://github.com/heldersepu/Swagger-Net/wiki/3-Customizing-the-swagger-ui) ##
 ## [Troubleshooting and FAQ's](https://github.com/heldersepu/Swagger-Net/wiki/4-Troubleshooting-and-FAQ's) ##
+
+___
+
+
+## Donation
+
+This project is free and will always be.
+
+If you like it, please support it by making a donation!
+
+[![donate](https://user-images.githubusercontent.com/30294218/61724877-16fa7a80-ad6f-11e9-80de-9771e0b820ae.png)](https://paypal.me/heldersepu)
