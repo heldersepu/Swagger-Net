@@ -1026,6 +1026,19 @@ namespace Swagger.Net.Tests.Swagger
         }
 
         [Test]
+        public void It_handles_range_types()
+        {
+            SetUpDefaultRouteFor<RangeAttribController>();
+
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
+            var parameters = swagger["paths"]["/rangeattrib/{id}"]["get"]["parameters"];
+            Assert.IsNotNull(parameters);
+
+            Assert.AreEqual("id", parameters[0]["name"].ToString());
+            Assert.AreEqual("9", parameters[0]["maximum"].ToString());
+        }
+
+        [Test]
         public void It_handles_nullable_types()
         {
             SetUpDefaultRouteFor<NullableTypesController>();

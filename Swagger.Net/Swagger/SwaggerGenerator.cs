@@ -3,6 +3,8 @@ using Swagger.Net.Swagger.Annotations;
 using Swagger.Net.Swagger.Extensions;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Net.Http;
 using System.Web.Http.Description;
@@ -262,13 +264,19 @@ namespace Swagger.Net
             }
             else
             {
-                parameter.pattern = paramDesc.GetRegularExpressionAttribute()?.Pattern;
                 parameter.required = location == "path" || !paramDesc.ParameterDescriptor.IsOptional;
                 parameter.description = paramDesc.Documentation;
                 if (parameter.description == null)
                     parameter.description = paramDesc.GetDescriptionAttribute()?.Description;
 
                 var schema = schemaRegistry.GetOrRegister(paramDesc.ParameterDescriptor.ParameterType);
+                foreach (var attribute in paramDesc.ParameterDescriptor.GetCustomAttributes<Attribute>())
+                {
+                    schema.AddPattern(attribute);
+                    schema.AddRange(attribute);
+                    schema.AddLength(attribute);
+                }
+
                 if (parameter.@in == "body")
                     parameter.schema = schema;
                 else

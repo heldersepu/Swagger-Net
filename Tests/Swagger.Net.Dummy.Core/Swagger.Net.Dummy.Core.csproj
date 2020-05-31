@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\CachingSwaggerProvider.cs" />
+    <Compile Include="Controllers\RangeAttribController.cs" />
     <Compile Include="Controllers\FromHeaderParamsController.cs" />
     <Compile Include="Controllers\FromBodyParamsController.cs" />
     <Compile Include="Controllers\NestingClassController.cs" />
