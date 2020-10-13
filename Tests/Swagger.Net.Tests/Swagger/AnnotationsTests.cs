@@ -82,23 +82,9 @@ namespace Swagger.Net.Tests.Swagger
                                 type = "object"
                             }
                         }
-                    },
-                    {
-                        "403", new
-                        {
-                            description = "Forbidden",
-                            schema = new
-                            {
-                                additionalProperties = new
-                                {
-                                    type = "object"
-                                },
-                                type = "object"
-                            }
-                        }
                     }
                 });
-            //Assert.AreEqual(expected.ToString(), postResponses.ToString());
+            Assert.AreEqual(expected.ToString(), postResponses.ToString());
         }
 
         [Test]
