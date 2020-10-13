@@ -15,6 +15,7 @@ namespace Swagger.Net.Dummy.Controllers
         [SwaggerResponseRemoveDefaults]
         [SwaggerResponse(HttpStatusCode.Created, Type = typeof(int), MediaType = "text", Examples = 123)]
         [SwaggerResponse(HttpStatusCode.BadRequest, "Invalid message", typeof(HttpError))]
+        [SwaggerResponse(HttpStatusCode.Forbidden, "Forbidden", typeof(void))]
         public int Create(Message message)
         {
             throw new NotImplementedException();
