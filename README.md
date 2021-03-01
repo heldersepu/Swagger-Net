@@ -40,4 +40,3 @@ This project is free and will always be.
 If you like it, please support it by making a donation!
 
 [![donate](https://user-images.githubusercontent.com/30294218/61724877-16fa7a80-ad6f-11e9-80de-9771e0b820ae.png)](https://paypal.me/heldersepu)
-
