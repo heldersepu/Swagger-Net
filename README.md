@@ -2,7 +2,7 @@ Swagger-Net
 =========
 
 [![AppVeyor](https://img.shields.io/appveyor/ci/heldersepu/swagger-net.svg)](https://ci.appveyor.com/project/heldersepu/swagger-net)
-[![codecov](https://codecov.io/gh/heldersepu/Swagger-Net/branch/master/graph/badge.svg)](https://codecov.io/gh/heldersepu/Swagger-Net)
+
 
 Seamlessly add [Swagger](http://swagger.io/) to WebApi projects! Combines ApiExplorer and Swagger/swagger-ui(3.x) to provide a rich discovery, documentation and playground experience to your API consumers.
 
