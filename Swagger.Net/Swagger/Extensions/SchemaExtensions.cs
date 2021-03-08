@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json.Serialization;
+using System;
 using Swagger.Net.Swagger.Annotations;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
@@ -22,7 +23,8 @@ namespace Swagger.Net
 
         public static void AddRange(this Schema schema, object attribute)
         {
-            if (attribute is RangeAttribute range)
+            if (attribute is RangeAttribute range 
+                && (range.OperandType == typeof(Int32) || range.OperandType == typeof(Double)))
             {
                 schema.minimum = range.Minimum;
                 schema.maximum = range.Maximum;
