@@ -33,7 +33,7 @@ ___
 ___
 
 
-## Donations
+## Donate
 
 This project is free and will always be.
 
