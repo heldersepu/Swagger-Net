@@ -3,12 +3,12 @@
 
 cd swagger-ui
 git checkout master
-git pull 
+git pull
 cd ..
 
 cd swagger-ui-themes
 git checkout develop
-git pull 
+git pull
 cd ..
 
 git commit -am "Update Swagger-UI"
