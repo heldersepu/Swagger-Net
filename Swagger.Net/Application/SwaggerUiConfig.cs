@@ -29,6 +29,7 @@ namespace Swagger.Net.Application
                 { "%(BooleanValues)", "true|false" },
                 { "%(ValidatorUrl)", "" },
                 { "%(CustomScripts)", "" },
+                { "%(CustomPlugins)", "" },
                 { "%(DocExpansion)", "none" },
                 { "%(DefaultModelRendering)", "example" },
                 { "%(DefaultModelsExpandDepth)", "0" },
@@ -109,6 +110,16 @@ namespace Swagger.Net.Application
             _templateParams["%(CustomScripts)"] = stringBuilder.ToString();
 
             CustomAsset(path, resourceAssembly, resourceName, isTemplate);
+        }
+        
+        public void InjectPlugin(string pluginName)
+        {
+            var stringBuilder = new StringBuilder(_templateParams["%(CustomPlugins)"]);
+            if (stringBuilder.Length > 0)
+                stringBuilder.Append("|");
+
+            stringBuilder.Append(path);
+            _templateParams["%(CustomPlugins)"] = stringBuilder.ToString();
         }
 
         public void DocExpansion(DocExpansion docExpansion)
