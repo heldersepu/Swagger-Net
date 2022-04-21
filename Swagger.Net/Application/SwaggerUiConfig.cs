@@ -111,14 +111,14 @@ namespace Swagger.Net.Application
 
             CustomAsset(path, resourceAssembly, resourceName, isTemplate);
         }
-        
+
         public void InjectPlugin(string pluginName)
         {
             var stringBuilder = new StringBuilder(_templateParams["%(CustomPlugins)"]);
             if (stringBuilder.Length > 0)
                 stringBuilder.Append("|");
 
-            stringBuilder.Append(path);
+            stringBuilder.Append(pluginName);
             _templateParams["%(CustomPlugins)"] = stringBuilder.ToString();
         }
 
