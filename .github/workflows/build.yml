@@ -16,5 +16,8 @@ jobs:
     - name: Add msbuild to PATH
       uses: microsoft/setup-msbuild@v1.1
 
+    - name: Versions
+      run: msbuild -version
+
     - name: MSBuild
       run: msbuild Swagger.Net.sln
