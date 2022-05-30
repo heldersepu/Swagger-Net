@@ -17,7 +17,9 @@ jobs:
       uses: microsoft/setup-msbuild@v1.1
 
     - name: Versions
-      run: msbuild -version
+      run: |
+        msbuild -version
+        reg query "HKLM\SOFTWARE\Microsoft\Net Framework Setup\NDP" /s
 
     - name: MSBuild
       run: msbuild Swagger.Net.sln
