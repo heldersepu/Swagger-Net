@@ -32,7 +32,7 @@ namespace Swagger.Net.Application
                 { "%(DocExpansion)", "none" },
                 { "%(DisplayRequestDuration)", "true" },
                 { "%(DefaultModelRendering)", "example" },
-                { "%(DefaultModelsExpandDepth)", "0" },s
+                { "%(DefaultModelsExpandDepth)", "0" },
                 { "%(DefaultModelExpandDepth)", "0" },
                 { "%(UImaxDisplayedTags)", "100" },
                 { "%(UIfilter)", "''" },
