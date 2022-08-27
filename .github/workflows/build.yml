@@ -22,4 +22,5 @@ jobs:
         reg query "HKLM\SOFTWARE\Microsoft\Net Framework Setup\NDP" /s
 
     - name: MSBuild
+      if: github.ref == 'disable for now'
       run: msbuild Swagger.Net.sln
