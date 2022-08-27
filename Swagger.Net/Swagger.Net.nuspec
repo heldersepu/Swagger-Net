@@ -16,7 +16,7 @@
     <dependencies>
       <dependency id="Microsoft.AspNet.WebApi.Core" version="5.2.4" />
       <dependency id="Microsoft.AspNet.WebApi.WebHost" version="5.2.4" />
-      <dependency id="Newtonsoft.Json" version="12.0.2" />
+      <dependency id="Newtonsoft.Json" version="13.0.1" />
       <dependency id="FromHeaderAttribute" version="2.0.4" />
     </dependencies>
   </metadata>
