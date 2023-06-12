@@ -89,7 +89,10 @@ namespace Swagger.Net
                 return schema;
 
             var attrib = propInfo.GetCustomAttributes(false).OfType<SwaggerDescriptionAttribute>().FirstOrDefault();
-            schema.description = attrib?.Description;
+            var description = attrib?.Description;
+            if (description != null)
+                schema.description = description;
+
             return schema;
         }
 
