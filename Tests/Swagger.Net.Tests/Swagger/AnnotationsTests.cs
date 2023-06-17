@@ -50,6 +50,18 @@ namespace Swagger.Net.Tests.Swagger
         }
 
         [Test]
+        public void It_exposes_config_to_modify_schema_description()
+        {
+            SetUpHandler(c => c.SchemaFilter<AddDescription>());
+
+            var swagger = GetContent<JObject>(TEMP_URI.DOCS);
+
+            var messageExamples = swagger["definitions"]["Message"]["properties"]["Content"]["description"];
+
+            Assert.AreEqual("Some description", messageExamples.ToString());
+        }
+
+        [Test]
         public void It_documents_responses_from_swagger_response_attributes_post()
         {
             var swagger = GetContent<JObject>(TEMP_URI.DOCS);
