@@ -44,6 +44,7 @@ namespace Swagger.Net.Application
                 { "%(OAuth2Realm)", "" },
                 { "%(OAuth2AppName)", "" },
                 { "%(OAuth2ScopeSeparator)", " " },
+                { "%(UsePkceWithAuthorizationCodeGrant)", "false" },
                 { "%(OAuth2AdditionalQueryStringParams)", "{}" }
             };
             _rootUrlResolver = rootUrlResolver;
@@ -183,6 +184,7 @@ namespace Swagger.Net.Application
             string realm,
             string appName,
             string scopeSeperator = " ",
+            bool usePkce = true,
             Dictionary<string, string> additionalQueryStringParams = null)
         {
             _templateParams["%(OAuth2Enabled)"] = "true";
@@ -191,6 +193,7 @@ namespace Swagger.Net.Application
             _templateParams["%(OAuth2Realm)"] = realm;
             _templateParams["%(OAuth2AppName)"] = appName;
             _templateParams["%(OAuth2ScopeSeparator)"] = scopeSeperator;
+            _templateParams["%(UsePkceWithAuthorizationCodeGrant)"] = usePkce ? "true" : "false";
 
             if (additionalQueryStringParams != null)
                 _templateParams["%(OAuth2AdditionalQueryStringParams)"] = JsonConvert.SerializeObject(additionalQueryStringParams);
