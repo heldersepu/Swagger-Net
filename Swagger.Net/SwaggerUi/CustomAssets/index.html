@@ -80,6 +80,7 @@
         oAuth2Realm: '%(OAuth2Realm)',
         oAuth2AppName: '%(OAuth2AppName)',
         OAuth2ScopeSeparator: '%(OAuth2ScopeSeparator)',
+        usePkceWithAuthorizationCodeGrant: ('%(UsePkceWithAuthorizationCodeGrant)' == 'true'),
         oAuth2AdditionalQueryStringParams: JSON.parse('%(OAuth2AdditionalQueryStringParams)')
     };
 </script>
@@ -134,6 +135,7 @@
                 realm: swaggerNetConfig.oAuth2Realm,
                 appName: swaggerNetConfig.oAuth2AppName,
                 scopeSeparator: swaggerNetConfig.OAuth2ScopeSeparator,
+                usePkceWithAuthorizationCodeGrant: swaggerNetConfig.usePkceWithAuthorizationCodeGrant,
                 additionalQueryStringParams: swaggerNetConfig.oAuth2AdditionalQueryStringParams
             })
         }
