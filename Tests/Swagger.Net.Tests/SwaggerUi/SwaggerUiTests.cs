@@ -140,6 +140,7 @@ namespace Swagger.Net.Tests.SwaggerUi
                         "test-realm",
                         "Swagger UI",
                         " ",
+                        true,
                         new Dictionary<string, string> { { "TestHeader", "TestValue" } });
                 });
 
@@ -151,6 +152,7 @@ namespace Swagger.Net.Tests.SwaggerUi
             StringAssert.Contains("oAuth2Realm: 'test-realm'", content);
             StringAssert.Contains("oAuth2AppName: 'Swagger UI'", content);
             StringAssert.Contains("OAuth2ScopeSeparator: ' '", content);
+            StringAssert.Contains("usePkceWithAuthorizationCodeGrant: ('true' == 'true')", content);
             StringAssert.Contains("oAuth2AdditionalQueryStringParams: JSON.parse('{\"TestHeader\":\"TestValue\"}')", content);
         }
 
