@@ -30,6 +30,7 @@ namespace Swagger.Net.Application
                 { "%(ValidatorUrl)", "" },
                 { "%(CustomScripts)", "" },
                 { "%(DocExpansion)", "none" },
+                { "%(DisplayRequestDuration)", "true" },
                 { "%(DefaultModelRendering)", "example" },
                 { "%(DefaultModelsExpandDepth)", "0" },
                 { "%(DefaultModelExpandDepth)", "0" },
@@ -115,6 +116,11 @@ namespace Swagger.Net.Application
         public void DocExpansion(DocExpansion docExpansion)
         {
             _templateParams["%(DocExpansion)"] = docExpansion.ToString().ToLower();
+        }
+
+        public void DisplayRequestDuration(bool value)
+        {
+            _templateParams["%(DisplayRequestDuration)"] = value.ToString().ToLower();
         }
 
         public void DefaultModelRendering(DefaultModelRender defaultModelRendering)
